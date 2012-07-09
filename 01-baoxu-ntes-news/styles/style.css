@@ -1,0 +1,255 @@
+@charset "utf-8";
+
+/**
+ * Author: Baoxu
+ * Date:   12-6-27
+ * Time:   下午2:33
+ */
+
+
+.t-shadow{
+	-moz-text-shadow: 2px 2px 2px #bbb;
+	-webkit-text-shadow: 2px 2px 2px #bbb;
+	text-shadow: 2px 2px 2px #bbb;
+}
+
+.b-shadow{
+	/* modern web browsers */
+	-moz-box-shadow: 1px 3px 12px #bbb;
+	-webkit-box-shadow: 1px 3px 12px #bbb;
+	box-shadow: 1px 3px 12px #bbb;
+
+	/* 一定要设置background, 不然 ie 会显示在字体上 */
+	background: #fff;
+}
+
+.in-b-shadow{
+	-moz-box-shadow: 5px 5px 5px #999 inset;
+	-webkit-box-shadow: 5px 5px 5px #999 inset;
+	box-shadow: 5px 5px 5px #999 inset;
+}
+
+html{
+	background: #bbb;
+}
+
+.full-width{
+	width: 100%;
+}
+
+#main-container{
+	margin: 5px auto;
+	width: 480px;
+	height: 800px;
+	background: #555 url("../images/bgnoise.gif") repeat;
+}
+
+#cnt-container{
+	height: 738px;
+	overflow: hidden;
+}
+
+.header-bg{
+	height: 60px;
+	background: url("../images/header-bg.png") repeat-x;
+	overflow: hidden;
+}
+
+#logo{
+	height: 33px;
+	width: 65px;
+	margin: 14px 0 0 15px;
+	background: url("../images/logo.png") no-repeat;
+}
+
+.master-title{
+	font-size: 2.3em;
+	color: #F1F2F4;
+	margin: 8px 0 0 5px;
+	font-family: "微软雅黑", "幼圆", "arial", inherit;
+}
+
+.weather{
+	background: url("../images/weather-bg.png") no-repeat;
+	height: 46px;
+	width: 136px;
+	margin: 8px 8px 0 0;
+}
+
+#news-nav{
+	height: 55px;
+	background: url("../images/news-nav-bg.png") repeat-x;
+	z-index: 999;
+	/* modern web browsers */
+	-moz-box-shadow: 0 3px 5px #bbb;
+	-webkit-box-shadow: 0 3px 5px #bbb;
+	box-shadow: 0 3px 5px #bbb;
+}
+
+#news-nav ul{
+	margin: 0 0 0 16px;
+}
+
+#news-nav ul li{
+	width: 72px;
+	display: inline-block;
+	margin: 8px 0;
+}
+
+#news-nav ul li a{
+	width: 72px;
+	height: 39px;
+	text-align: center;
+	display: block;
+	font-family: "微软雅黑", "幼圆", "arial", inherit;
+	font-size: 1.9em;
+}
+
+#news-nav ul .news-nav-not a{
+	color: #6C7071;
+}
+
+#news-nav ul .news-nav-cru a{
+	color: #E5E7E9;
+	background: url("../images/news-nav-cru-bg.png") no-repeat;
+}
+
+#cnt-for-news-nav{
+	overflow: hidden;
+}
+
+#cnt-for-news-nav section:first-child{
+	border-left: none;
+}
+
+#container-of-news-sec{
+	width: 1500px;
+}
+
+#news-hot-pic{
+	height: 255px;
+	z-index: 0;
+}
+
+#news-hot-pic img{
+	border-top: 1px solid #999;
+}
+
+.news-list li{
+	overflow: hidden;
+	width: 480px;
+	border-bottom: #DBD8D5 1px solid;
+	border-top: #FFFFFF 1px solid;
+	padding-bottom: 12px;
+	background-color: #ECEDEE;
+}
+
+.news-list li:first-child{
+	border-top: none;
+}
+
+.news-list li:hover{
+	background: none;
+}
+
+.news-list li img{
+	margin: 16px 0 0 16px;
+}
+
+.news-list li article{
+	width: 350px;
+}
+
+.news-hot-item-title{
+	color: #252526;
+	font-size: 2em;
+	font-family: "微软雅黑", "幼圆", "arial", inherit;
+	margin: 7px 0 0 12px;
+}
+
+.news-hot-item-abstract, .news-hot-item-reply{
+	font-family: "微软雅黑", "幼圆", "arial", inherit;
+	font-size: 1.6em;
+	color: #B3B4B4;
+	-moz-text-shadow: 2px 2px 2px #EEE;
+	-webkit-text-shadow: 2px 2px 2px #EEE;
+	text-shadow: 2px 2px 2px #EEE;
+}
+
+.news-hot-item-abstract{
+	margin: 8px 0 0 12px;
+	line-height: 25px;
+}
+
+.news-hot-item-reply{
+	font-size: 1.5em;
+	width: 100px;
+	text-align: right;
+	margin: -24px 0 0 240px;
+	z-index: 1;
+}
+
+#main-nav{
+	z-index: 999;
+}
+
+#main-nav ul{
+	height: 62px;
+}
+
+#main-nav ul li{
+	display: inline-block;
+	width: 96px;
+	height: 62px;
+	float: left;
+}
+
+#main-nav ul li a{
+	display: block;
+	width: 96px;
+	height: 62px;
+}
+
+.main-nav-hot, .main-nav-topic, .main-nav-2012, .main-nav-pic, .main-nav-weibo, .main-nav-hot-active, .main-nav-topic-active, .main-nav-2012-active, .main-nav-pic-active, .main-nav-weibo-active{
+	background: url("../images/main-nav-bg.png") no-repeat;
+}
+
+.main-nav-hot{
+	background-position: 0 0;
+}
+
+.main-nav-hot-active{
+	background-position: 0 -62px;
+}
+
+.main-nav-topic{
+	background-position: -96px 0;
+}
+
+.main-nav-topic-active{
+	background-position: -96px -62px;
+}
+
+.main-nav-2012{
+	background-position: -192px 0;
+}
+
+.main-nav-2012-active{
+	background-position: -192px -62px;
+}
+
+.main-nav-pic{
+	background-position: -288px 0;
+}
+
+.main-nav-pic-active{
+	background-position: -288px -62px;
+}
+
+.main-nav-weibo{
+	background-position: -384px 0;
+}
+
+.main-nav-weibo-active{
+	background-position: -384px -62px;
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <title>网易新闻-HTML5版</title>
+    <link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
+    <link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
+    <script type = "text/javascript" src = "scripts/global.js"></script>
+    <script type = "text/javascript" src = "scripts/function.js"></script>
+    <script type = "text/javascript" src = "scripts/html5.js"></script>
+    <script type = "text/javascript" src = "scripts/jquery.js"></script>
+    <script type = "text/javascript" src = "scripts/jquery.mousewheel.js"></script>
+</head>
+<body>
+<!--手机界面框架480*800-->
+<div id = "main-container" class = "b-shadow">
+<!--由底部主导航控制的框架-->
+<div id = "cnt-container" class = "full-width">
+    <!--主导航控制下列各个section的显示，section左右滚动-->
+    <section>
+        <!--单个section的头部，用于显示当前位置-->
+        <header class = "header-bg full-width fn-clear">
+            <div id = "logo" class = "fn-left"></div>
+            <h1 class = "master-title fn-left">新闻</h1>
+            <div class = "weather fn-right"></div>
+        </header>
+        <!--Section内部导航-->
+        <nav id = "news-nav" class = "fn-clear full-width">
+            <ul>
+                <li class = "news-nav-cru"><a href = "#">头条</a></li>
+                <li class = "news-nav-not"><a href = "#">体育</a></li>
+                <li class = "news-nav-not"><a href = "#">娱乐</a></li>
+                <li class = "news-nav-not"><a href = "#">财经</a></li>
+                <li class = "news-nav-not"><a href = "#">科技</a></li>
+                <li class = "news-nav-not"><a href = "#">更多</a></li>
+            </ul>
+        </nav>
+        <!--受section内部导航控制显示的内容-->
+        <div id = "cnt-for-news-nav" class = "fn-clear full-width">
+            <div id = "container-of-news-sec" style = "margin-left: 0px">
+                <section id = "news-hot" class = "fn-left">
+                    <!--头条新闻图片-->
+                    <div id = "news-hot-pic"><img src = "images/pic-hot-news.png" /></div>
+                    <!--头条新闻列表-->
+                    <ul class = "news-list">
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title t-shadow">1、中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class = "fn-left">
+                    <ul class = "news-list">
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title t-shadow">2、中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class = "fn-left">
+                    <ul class = "news-list">
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title t-shadow">3、中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href = "#">
+                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
+
+                                <article class = "news-hot-item fn-left">
+                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
+
+                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
+                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
+                                </article>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!--主导航-->
+<nav id = "main-nav">
+    <ul>
+        <li class = "main-nav-hot-active"><a href = "#"></a></li>
+        <li class = "main-nav-topic"><a href = "#"></a></li>
+        <li class = "main-nav-2012"><a></a></li>
+        <li class = "main-nav-pic"><a href = "#"></a></li>
+        <li class = "main-nav-weibo"><a href = "#"></a></li>
+    </ul>
+</nav>
+</div>
+</body>
+</html>
