@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <script type = "text/javascript" src = "function.js"></script>
+    <title>下载歌词</title>
+    <style type="text/css">
+        #result_table{
+            border-top:1px #BBB solid;
+            border-left: 1px #BBB solid;
+            margin: 0 auto;
+        }
+
+        #result_table td{
+            border-bottom:1px #BBB solid;
+            border-right: 1px #BBB solid;
+            margin: 0;
+            padding: 3px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 25px;
+        }
+
+        #result_table thead tr td{
+            font-weight: bold;
+            color: #082B33;
+            background-color: #B5E5EF;
+        }
+
+        #result_table tfoot tr td{
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .success{
+            color: #32510F;
+            background-color: #E2F6C5;
+        }
+
+        .error{
+            color: #7B040F;
+            background-color: #FAD9D9;
+        }
+
+        .warning{
+            color: #796616;
+            background-color: #F5F3BA;
+        }
+    </style>
+</head>
+<body>
+<table id = "result_table" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <td>歌手</td>
+        <td>歌名</td>
+        <td>google搜索</td>
+        <td>获取googleID</td>
+        <td>获取googleLRC页面</td>
+        <td>获取LRC下载链接</td>
+        <td>获取LRC内容流</td>
+        <td>保存lrc文件</td>
+        <td>总体状态</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+</body>
+</html>
