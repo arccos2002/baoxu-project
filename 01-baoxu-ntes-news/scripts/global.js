@@ -49,3 +49,20 @@ function getObjectIndex(targetArray, checkObject){
 	}
 	return -1;
 }
+
+
+//通用函数，根据不同的浏览器获取XmlHttpRequest对象
+function getHTTPObject(){
+	if(typeof XMLHttpRequest == "undefined"){
+		XMLHttpRequest = function(){
+			try{return new ActiveXObject("Msxml2.XMLHTTP.6.0");}
+			catch(e){}
+			try{return new ActiveXObject("Msxml2.XMLHTTP.3.0");}
+			catch(e){}
+			try{return new ActiveXObject("Msxml2.XMLHTTP");}
+			catch(e){}
+			return false;
+		}
+	}
+	return new XMLHttpRequest();
+}

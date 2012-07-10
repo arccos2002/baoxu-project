@@ -80,10 +80,6 @@ html{
 	height: 55px;
 	background: url("../images/news-nav-bg.png") repeat-x;
 	z-index: 999;
-	/* modern web browsers */
-	-moz-box-shadow: 0 3px 5px #bbb;
-	-webkit-box-shadow: 0 3px 5px #bbb;
-	box-shadow: 0 3px 5px #bbb;
 }
 
 #news-nav ul{
@@ -123,12 +119,13 @@ html{
 }
 
 #container-of-news-sec{
-	width: 1500px;
+	width: 3000px;
 }
 
-#news-hot-pic{
+#news-hot-pic,#news-hot-pic img{
 	height: 255px;
 	z-index: 0;
+	width: 480px;
 }
 
 #news-hot-pic img{
@@ -165,6 +162,11 @@ html{
 	font-size: 2em;
 	font-family: "微软雅黑", "幼圆", "arial", inherit;
 	margin: 7px 0 0 12px;
+}
+
+.news-item-img{
+	width: 110px;
+	height: 80px;
 }
 
 .news-hot-item-abstract, .news-hot-item-reply{

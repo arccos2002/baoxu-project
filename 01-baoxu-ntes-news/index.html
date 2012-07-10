@@ -15,212 +15,125 @@
 <body>
 <!--手机界面框架480*800-->
 <div id = "main-container" class = "b-shadow">
-<!--由底部主导航控制的框架-->
-<div id = "cnt-container" class = "full-width">
-    <!--主导航控制下列各个section的显示，section左右滚动-->
-    <section>
-        <!--单个section的头部，用于显示当前位置-->
-        <header class = "header-bg full-width fn-clear">
-            <div id = "logo" class = "fn-left"></div>
-            <h1 class = "master-title fn-left">新闻</h1>
-            <div class = "weather fn-right"></div>
-        </header>
-        <!--Section内部导航-->
-        <nav id = "news-nav" class = "fn-clear full-width">
-            <ul>
-                <li class = "news-nav-cru"><a href = "#">头条</a></li>
-                <li class = "news-nav-not"><a href = "#">体育</a></li>
-                <li class = "news-nav-not"><a href = "#">娱乐</a></li>
-                <li class = "news-nav-not"><a href = "#">财经</a></li>
-                <li class = "news-nav-not"><a href = "#">科技</a></li>
-                <li class = "news-nav-not"><a href = "#">更多</a></li>
-            </ul>
-        </nav>
-        <!--受section内部导航控制显示的内容-->
-        <div id = "cnt-for-news-nav" class = "fn-clear full-width">
-            <div id = "container-of-news-sec" style = "margin-left: 0px">
-                <section id = "news-hot" class = "fn-left">
-                    <!--头条新闻图片-->
-                    <div id = "news-hot-pic"><img src = "images/pic-hot-news.png" /></div>
-                    <!--头条新闻列表-->
-                    <ul class = "news-list">
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title t-shadow">1、中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-                <section class = "fn-left">
-                    <ul class = "news-list">
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title t-shadow">2、中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-                <section class = "fn-left">
-                    <ul class = "news-list">
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title t-shadow">3、中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href = "#">
-                                <img src = "images/pic-hot-news-list.png" class = "b-shadow fn-left" />
-
-                                <article class = "news-hot-item fn-left">
-                                    <h1 class = "news-hot-item-title">中国大熊猫中国大熊猫</h1>
-
-                                    <p class = "news-hot-item-abstract">笑容如烟花般灿烂，心情如清风般舒坦好运如丝雨般连绵。</p>
-                                    <h5 class = "news-hot-item-reply fn-clear">100条跟帖</h5>
-                                </article>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
+    <!--由底部主导航控制的框架-->
+    <div id = "cnt-container" class = "full-width">
+        <!--主导航控制下列各个section的显示，section左右滚动-->
+        <section>
+            <!--单个section的头部，用于显示当前位置-->
+            <header class = "header-bg full-width fn-clear">
+                <div id = "logo" class = "fn-left"></div>
+                <h1 class = "master-title fn-left">新闻</h1>
+                <div class = "weather fn-right"></div>
+            </header>
+            <!--Section内部导航-->
+            <nav id = "news-nav" class = "fn-clear full-width">
+                <ul>
+                    <li class = "news-nav-cru"><a href = "#">头条</a></li>
+                    <li class = "news-nav-not"><a href = "#">体育</a></li>
+                    <li class = "news-nav-not"><a href = "#">娱乐</a></li>
+                    <li class = "news-nav-not"><a href = "#">财经</a></li>
+                    <li class = "news-nav-not"><a href = "#">科技</a></li>
+                    <li class = "news-nav-not"><a href = "#">更多</a></li>
+                </ul>
+            </nav>
+            <!--受section内部导航控制显示的内容-->
+            <div id = "cnt-for-news-nav" class = "fn-clear full-width">
+                <div id = "container-of-news-sec" style = "margin-left: 0px">
+                    <section id = "news-hot" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                    <section id = "news-sport" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                    <section id = "news-enterta" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                    <section id = "news-finan" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                    <section id = "news-tech" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                    <section id = "news-more" class = "fn-left">
+                        <!--模板方式写入-->
+                    </section>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+    <!--主导航-->
+    <nav id = "main-nav">
+        <ul>
+            <li class = "main-nav-hot-active"><a href = "#"></a></li>
+            <li class = "main-nav-topic"><a href = "#"></a></li>
+            <li class = "main-nav-2012"><a></a></li>
+            <li class = "main-nav-pic"><a href = "#"></a></li>
+            <li class = "main-nav-weibo"><a href = "#"></a></li>
+        </ul>
+    </nav>
 </div>
-<!--主导航-->
-<nav id = "main-nav">
-    <ul>
-        <li class = "main-nav-hot-active"><a href = "#"></a></li>
-        <li class = "main-nav-topic"><a href = "#"></a></li>
-        <li class = "main-nav-2012"><a></a></li>
-        <li class = "main-nav-pic"><a href = "#"></a></li>
-        <li class = "main-nav-weibo"><a href = "#"></a></li>
+<!--模板区域-->
+<script id = "tpl-test" type = "text/template">
+    <img src = <%=list[0].imgsrc%> />
+</script>
+<script id = "tpl-news-hot-item" type = "text/template">
+    <!--头条新闻的单条新闻体-->
+    <li>
+        <a href = "<%=newsHotItemUrl%>">
+            <img src = "<%=newsHotItemPic%>" class = "b-shadow fn-left" />
+            <article class = "news-hot-item fn-left">
+                <h1 class = "news-hot-item-title"><%=newsHotItemTitle%></h1>
+
+                <p class = "news-hot-item-abstract"><%=newsHotItemAbstract%></p>
+                <h5 class = "news-hot-item-reply fn-clear"><%=newsHotItemCommentCount%>条跟帖</h5>
+            </article>
+        </a>
+    </li>
+</script>
+<!--新闻模块的首屏20条带头图的模板，适用于头条频道的首屏-->
+<script id = "tpl-news-hot-section" type = "text/template">
+    <!--头条新闻图片-->
+    <div id = "news-hot-pic"><img src = <%=list[0].imgsrc%> /></div>
+    <!--头条新闻列表-->
+    <ul class = "news-list">
+        <%for(var i=1; i
+        <list.length
+        ; i++){%>
+        <li>
+            <a href = <%=list[i].url_3w%> >
+                <img src = <%=list[i].imgsrc%> class = "news-item-img b-shadow fn-left" />
+                <article class = "news-hot-item fn-left">
+                    <h1 class = "news-hot-item-title t-shadow"><%=list[i].title%></h1>
+
+                    <p class = "news-hot-item-abstract"><%=list[i].digest%></p>
+                    <h5 class = "news-hot-item-reply fn-clear"><%=list[i].replyCount%>条跟帖</h5>
+                </article>
+            </a>
+        </li>
+        <%}%>
     </ul>
-</nav>
-</div>
+</script>
+<!--新闻模块不带头图的列表模板，适用与新闻的非头条频道，和头条频道的非首屏-->
+<script id = "tpl-news-other-section" type = "text/template">
+    <!--头条新闻列表-->
+    <ul class = "news-list">
+        <%for(var i=0; i
+        <list.length
+        ; i++){%>
+        <li>
+            <a href = <%=list[i].url_3w%> >
+                <img src = <%=list[i].imgsrc%> class = "news-item-img b-shadow fn-left" />
+                <article class = "news-hot-item fn-left">
+                    <h1 class = "news-hot-item-title t-shadow"><%=list[i].title%></h1>
+
+                    <p class = "news-hot-item-abstract"><%=list[i].digest%></p>
+                    <h5 class = "news-hot-item-reply fn-clear"><%=list[i].replyCount%>条跟帖</h5>
+                </article>
+            </a>
+        </li>
+        <%}%>
+    </ul>
+</script>
+<!--模板区域结束-->
 </body>
 </html>
