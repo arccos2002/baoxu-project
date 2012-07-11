@@ -55,14 +55,32 @@ function getObjectIndex(targetArray, checkObject){
 function getHTTPObject(){
 	if(typeof XMLHttpRequest == "undefined"){
 		XMLHttpRequest = function(){
-			try{return new ActiveXObject("Msxml2.XMLHTTP.6.0");}
-			catch(e){}
-			try{return new ActiveXObject("Msxml2.XMLHTTP.3.0");}
-			catch(e){}
-			try{return new ActiveXObject("Msxml2.XMLHTTP");}
-			catch(e){}
+			try{
+				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
+			}catch(e){
+			}
+			try{
+				return new ActiveXObject("Msxml2.XMLHTTP.3.0");
+			}catch(e){
+			}
+			try{
+				return new ActiveXObject("Msxml2.XMLHTTP");
+			}catch(e){
+			}
 			return false;
 		}
 	}
 	return new XMLHttpRequest();
+}
+
+
+function wheelEvent(obj, handle){
+	this.handle = handle;
+	//兼容火狐和IE
+	window.addEventListener ? obj.addEventListener("DOMMouseScroll", this.wheel, false) : (obj.onmousewheel = this.wheel);
+}
+wheelEvent.prototype.wheel = function(event){
+	var ev = event || window.event;
+	var delta = ev.wheelDelta ? (ev.wheelDelta / 120) : (-ev.detail / 3); // Firefox using `wheelDelta` IE using `detail`
+	eval('delta ? ' + parent.handle + '(delta) : null;');
 }

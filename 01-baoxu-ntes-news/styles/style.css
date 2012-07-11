@@ -114,12 +114,21 @@ html{
 	overflow: hidden;
 }
 
-#cnt-for-news-nav section:first-child{
-	border-left: none;
+.loading{
+	margin: 15px auto;
+	text-align: center;
+}
+
+.loading *{
+	vertical-align: middle;
 }
 
 #container-of-news-sec{
 	width: 3000px;
+}
+
+#container-of-news-sec section{
+	width: 480px;
 }
 
 #news-hot-pic,#news-hot-pic img{
