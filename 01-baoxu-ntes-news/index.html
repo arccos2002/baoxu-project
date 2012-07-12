@@ -38,7 +38,7 @@
             </nav>
             <!--受section内部导航控制显示的内容-->
             <div id = "cnt-for-news-nav" class = "fn-clear full-width">
-                <div id = "container-of-news-sec" style = "margin-left: 0px">
+                <div id = "container-of-news-sec" style = "margin-left: 0px; margin-top: 0px;">
                     <section id = "news-hot" class = "fn-left">
                         <div class="loading full-width">
                             <img src="images/loading.gif"/> <span>加载中…</span>
@@ -47,7 +47,7 @@
                     </section>
                     <section id = "news-sport" class = "fn-left">
                         <div class="loading full-width">
-                            <img src="images/loading.gif"/>加载中…
+                            <img src="images/loading.gif"/> <span>加载中…</span>
                         </div>
                         <!--模板方式写入-->
                     </section>
@@ -99,12 +99,10 @@
 <!--新闻模块的首屏20条带头图的模板，适用于头条频道的首屏-->
 <script id = "tpl-news-hot-section" type = "text/template">
     <!--头条新闻图片-->
-    <div id = "news-hot-pic"><img src = <%=list[0].imgsrc%> /></div>
+    <div id = "news-hot-pic" style="background-image: url(<%=list[0].imgsrc%>);"></div>
     <!--头条新闻列表-->
     <ul class = "news-list">
-        <%for(var i=1; i
-        <list.length
-        ; i++){%>
+        <%for(var i=1; i<list.length; i++){%>
         <li>
             <a href = <%=list[i].url_3w%> >
                 <img src = <%=list[i].imgsrc%> class = "news-item-img b-shadow fn-left" />

@@ -17,7 +17,6 @@ $fetchUrl = $GET_DATA_HOST.$queryString;
 //echo $fetchUrl;
 //$fetchUrl = "http://c.3g.163.com/nc/article/headline/T1295501906343/0-20.html";
 $fetchData = file_get_contents($fetchUrl);
+//$fetchData = iconv("UTF-8", "GBK", $fetchData);
 echo $fetchData;
-
-
 ?>

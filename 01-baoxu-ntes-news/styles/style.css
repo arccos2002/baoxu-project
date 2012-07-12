@@ -111,6 +111,7 @@ html{
 }
 
 #cnt-for-news-nav{
+	height: 620px;
 	overflow: hidden;
 }
 
@@ -131,14 +132,14 @@ html{
 	width: 480px;
 }
 
-#news-hot-pic,#news-hot-pic img{
+#news-hot-pic{
 	height: 255px;
 	z-index: 0;
 	width: 480px;
-}
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 480px 360px;
 
-#news-hot-pic img{
-	border-top: 1px solid #999;
 }
 
 .news-list li{
