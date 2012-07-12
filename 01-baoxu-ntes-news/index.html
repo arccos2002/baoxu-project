@@ -39,10 +39,11 @@
             <!--受section内部导航控制显示的内容-->
             <div id = "cnt-for-news-nav" class = "fn-clear full-width">
                 <div id = "container-of-news-sec" style = "margin-left: 0px; margin-top: 0px;">
-                    <section id = "news-hot" class = "fn-left">
+                    <section id = "news-hot" class = "fn-left" style = "margin-left: 0px; margin-top: 0px;">
                         <div class="loading full-width">
                             <img src="images/loading.gif"/> <span>加载中…</span>
                         </div>
+
                         <!--模板方式写入-->
                     </section>
                     <section id = "news-sport" class = "fn-left">
@@ -60,7 +61,7 @@
                     <section id = "news-tech" class = "fn-left">
                         <!--模板方式写入-->
                     </section>
-                    <section id = "news-more" class = "fn-left">
+                    <section id = "news-mili" class = "fn-left">
                         <!--模板方式写入-->
                     </section>
                 </div>
@@ -116,6 +117,7 @@
         </li>
         <%}%>
     </ul>
+    <div class="load-more full-width"><a id="load-more-btn" href="#" class="t-shadow b-shadow">加载下20条新闻</a></div>
 </script>
 <!--新闻模块不带头图的列表模板，适用与新闻的非头条频道，和头条频道的非首屏-->
 <script id = "tpl-news-other-section" type = "text/template">
@@ -137,6 +139,24 @@
         </li>
         <%}%>
     </ul>
+</script>
+
+<!--新闻模块不带头图的列表模板，适用与新闻的非头条频道，和头条频道的非首屏-->
+<script id = "tpl-news-only-li" type = "text/template">
+    <!--头条新闻列表-->
+        <%for(var i=0; i<list.length; i++){%>
+        <li>
+            <a href = <%=list[i].url_3w%> >
+                <img src = <%=list[i].imgsrc%> class = "news-item-img b-shadow fn-left" />
+                <article class = "news-hot-item fn-left">
+                    <h1 class = "news-hot-item-title t-shadow"><%=list[i].title%></h1>
+
+                    <p class = "news-hot-item-abstract"><%=list[i].digest%></p>
+                    <h5 class = "news-hot-item-reply fn-clear"><%=list[i].replyCount%>条跟帖</h5>
+                </article>
+            </a>
+        </li>
+        <%}%>
 </script>
 <!--模板区域结束-->
 </body>

@@ -6,7 +6,6 @@
  * Time:   下午2:33
  */
 
-
 .t-shadow{
 	-moz-text-shadow: 2px 2px 2px #bbb;
 	-webkit-text-shadow: 2px 2px 2px #bbb;
@@ -15,9 +14,9 @@
 
 .b-shadow{
 	/* modern web browsers */
-	-moz-box-shadow: 1px 3px 12px #bbb;
-	-webkit-box-shadow: 1px 3px 12px #bbb;
-	box-shadow: 1px 3px 12px #bbb;
+	-moz-box-shadow: 1px 3px 3px #bbb;
+	-webkit-box-shadow: 1px 3px 3px #bbb;
+	box-shadow: 1px 3px 3px #bbb;
 
 	/* 一定要设置background, 不然 ie 会显示在字体上 */
 	background: #fff;
@@ -124,8 +123,38 @@ html{
 	vertical-align: middle;
 }
 
+#load-more-btn{ }
+
+.load-more{
+	background: #ECEDEE;
+	height: 65px;
+	padding-top: 18px;
+}
+
+.load-more a{
+	width: 80%;
+	height: 32px;
+	margin: 0 auto;
+	display: block;
+	color: #444;
+	padding: 3px;
+	background: #CCC url(http://simplebits.com/img/glass-btn.png) repeat-x 0 50%;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
+	font-family: "微软雅黑", "幼圆", "arial", inherit;
+	font-size: 1.7em;
+}
+
+.load-more a:hover{
+	background-color: #BBB;
+}
+
 #container-of-news-sec{
 	width: 3000px;
+	height: auto;
+	display: block;
 }
 
 #container-of-news-sec section{
@@ -139,16 +168,17 @@ html{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 480px 360px;
-
 }
+
+.news-list{ }
 
 .news-list li{
 	overflow: hidden;
 	width: 480px;
 	border-bottom: #DBD8D5 1px solid;
 	border-top: #FFFFFF 1px solid;
-	padding-bottom: 12px;
 	background-color: #ECEDEE;
+	padding-bottom: 12px;
 }
 
 .news-list li:first-child{

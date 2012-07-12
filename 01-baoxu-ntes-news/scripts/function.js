@@ -7,53 +7,77 @@
 
 //定义一些常量
 var CROSS_DOMAIN_PROXY = "http://localhost/baoxu-project/01-baoxu-ntes-news/cdr.php?";
+var COLUMN_ID_ELEMENT = [
+	{lolumnName:"头条", ntesID:"T1295501906343", elementID:"news-hot"},
+	{lolumnName:"体育", ntesID:"T1295505916992", elementID:"news-sport"},
+	{lolumnName:"娱乐", ntesID:"T1295506658957", elementID:"news-enterta"},
+	{lolumnName:"财经", ntesID:"T1295505705196", elementID:"news-finan"},
+	{lolumnName:"科技", ntesID:"T1295507084100", elementID:"news-tech"},
+	{lolumnName:"军事", ntesID:"T1295505447897", elementID:"news-mili"}
+];
 
 
 addLoadEvent(test);
 
 function test(){
+	init();
+}
+
+//页面初始化函数
+function init(){
+	//添加导航的点击事件和方法
 	newsNavFun();
-	getHotNewsList("T1295501906343", 0, 20);
-	//activeTemplate();
 	//页面滚动监听函数
 	new wheelEvent(document.getElementById("cnt-for-news-nav"), "handle");
+	//进入时默认加载头条新闻栏目
+	getNewsList(0, 0, 20, "headline");
+
 }
 
 
 //页面滚动处理函数
 function handle(delta){
 	if(delta < 0){
-		moveElementWith("container-of-news-sec", "y", 0, -250, 0.3, 20);
+		moveElementWith("news-hot", "y", 0, -250, 0.3, 20);
 		//alert("向上");
 	}
 	if(delta > 0){
 		//alert("向下");
-		moveElementWith("container-of-news-sec", "y", 0, 250, 0.3, 20);
+		moveElementWith("news-hot", "y", 0, 250, 0.3, 20);
 	}
 }
 
 
 //使用模板生成页面内容并插入页面中
-function activeTemplate(data){
-	var tpl_news_hot_pic_data = data;
-	/*var tpl_news_hot_pic_data = {"list":[
+function activeTemplate(theIndex, data){
+	/*var data = {"list":[
 	 {"url_3w":"http://help.3g.163.com/12/0710/20/8633M35L00963VRO.html", "replyCount":436, "hasImg":1, "digest":"\"湖南临湘最美女交警\"走红网络，回应称做了该做的事。", "url":"http://3g.163.com/ntes/12/0710/20/8633M35L00963VRO.html", "docid":"8633M35L00963VRO", "title":"女交警托倾斜校车让幼儿转移", "order":1, "priority":90, "lmodify":"2012-07-10 21:00:27", "subtitle":"", "imgsrc":"http://img3.cache.netease.com/3g/2012/7/10/201207102101343f08e.jpg", "ptime":"2012-07-10 20:54:51", "TAG":"视频"},
 	 {"url_3w":"http://help.3g.163.com/12/0710/23/863D1O1100963VRO.html", "docid":"863D1O1100963VRO", "title":"调查称城乡老年人收入差异大", "replyCount":90, "priority":72, "lmodify":"2012-07-11 00:10:26", "imgsrc":"http://img4.cache.netease.com/3g/2012/7/10/201207102344081de59.jpg", "subtitle":"", "digest":"农村老人月平均养老金为74元，是城市老年人退休金的5%。", "ptime":"2012-07-10 23:38:30", "TAG":"视频", "url":"http://3g.163.com/ntes/12/0710/23/863D1O1100963VRO.html"},
 	 ]}*/
-	var hotNews = baidu.template("tpl-news-hot-section", tpl_news_hot_pic_data);
-	var normalNews = baidu.template("tpl-news-other-section", tpl_news_hot_pic_data);
-	document.getElementById("news-hot").innerHTML = hotNews;
-	document.getElementById("news-sport").innerHTML = normalNews;
-	document.getElementById("news-enterta").innerHTML = normalNews;
-	document.getElementById("news-finan").innerHTML = normalNews;
-	document.getElementById("news-tech").innerHTML = normalNews;
-	document.getElementById("news-more").innerHTML = normalNews;
+	if(theIndex == 0){
+		var hotNews = baidu.template("tpl-news-hot-section", data);
+		var hotNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+		document.getElementById(hotNewsSectionID).innerHTML = hotNews;
+	}else{
+		var normalNews = baidu.template("tpl-news-other-section", data);
+		var normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+		document.getElementById(normalNewsSectionID).innerHTML = normalNews;
+	}
+
+	//为加载下20条的按钮绑定事件和方法
+	var loadMoreBtn = document.getElementById("load-more-btn");
+	loadMoreBtn.onclick = function(){
+		var nowColumnSectionID = loadMoreBtn.parentNode.parentNode.id;
+		alert(nowColumnSectionID);
+		return false;
+	};
 }
 
 //通过AJAX获取新闻模块头条栏目的数据
-function getHotNewsList(columnID, startItem, endItem){
+function getNewsList(theIndex, startItem, endItem, type){
 	var request = getHTTPObject();
-	var requestUrl = CROSS_DOMAIN_PROXY + "type=headline&id=" + columnID + "&start=" + startItem + "&end=" + endItem;
+	var columnID = COLUMN_ID_ELEMENT[theIndex].ntesID;
+	var requestUrl = CROSS_DOMAIN_PROXY + "type=" + type + "&id=" + columnID + "&start=" + startItem + "&end=" + endItem;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -66,8 +90,8 @@ function getHotNewsList(columnID, startItem, endItem){
 				//转化为标准JSON对象
 				requestResult = JSON.parse(requestResult);
 				//重写刷新页面
-				activeTemplate(requestResult);
-				//return requestResult;
+				activeTemplate(theIndex, requestResult);
+				return true;
 			}
 		};
 		request.send(null);
@@ -93,6 +117,14 @@ function newsNavFun(){
 			//移动内容聚合区，先计算需要移动的目标位置X坐标
 			var moveX = -theIndex * 480;
 			moveElementTo("container-of-news-sec", "x", moveX, 0, 0.3, 1);
+
+			//请求新闻列表
+			if(theIndex == 0){
+				getNewsList(theIndex, 0, 20, "headline");
+			}else{
+				getNewsList(theIndex, 0, 20, "list");
+			}
+
 		}
 	}
 }
@@ -211,12 +243,20 @@ function moveElementWith(elementID, moveType, stepX, stepY, stepDis, stepTime){
 	var elementX = parseInt(elementToMove.style.marginLeft);
 	//获取当前Y轴坐标
 	var elementY = parseInt(elementToMove.style.marginTop);
+	//获取这个元素的高度值
+	var elementH = parseInt(elementToMove.scrollHeight) - 620;
+	//alert(elementH);
 
 	var targetX = elementX + stepX;
 	var targetY = elementY + stepY;
 
-	if(elementY < stepY && elementY > -stepY && stepY > 0){
+	if(elementY > -stepY && stepY > 0){
 		var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + 0 + "," + stepDis + "," + 50 + ")";
+		elementToMove.movement = setTimeout(repeat, stepTime);
+	}
+
+	if(elementY < -elementH && stepY < 0){
+		var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + -elementH + "," + stepDis + "," + 50 + ")";
 		elementToMove.movement = setTimeout(repeat, stepTime);
 	}
 
