@@ -28,77 +28,12 @@ function init(){
 	//添加导航的点击事件和方法
 	newsNavFun();
 	//页面滚动监听函数
-	new wheelEvent(document.getElementById("cnt-for-news-nav"), "handle");
+	new wheelEvent(document.getElementById("cnt-for-news-nav"), "wheelEventHandle");
 	//进入时默认加载头条新闻栏目
-	getNewsList(0, 0, 20, "headline");
+	getNewsList(0, 0, 20, "headline", "loadfirst");
 
 }
 
-
-//页面滚动处理函数
-function handle(delta){
-	if(delta < 0){
-		moveElementWith("news-hot", "y", 0, -250, 0.3, 20);
-		//alert("向上");
-	}
-	if(delta > 0){
-		//alert("向下");
-		moveElementWith("news-hot", "y", 0, 250, 0.3, 20);
-	}
-}
-
-
-//使用模板生成页面内容并插入页面中
-function activeTemplate(theIndex, data){
-	/*var data = {"list":[
-	 {"url_3w":"http://help.3g.163.com/12/0710/20/8633M35L00963VRO.html", "replyCount":436, "hasImg":1, "digest":"\"湖南临湘最美女交警\"走红网络，回应称做了该做的事。", "url":"http://3g.163.com/ntes/12/0710/20/8633M35L00963VRO.html", "docid":"8633M35L00963VRO", "title":"女交警托倾斜校车让幼儿转移", "order":1, "priority":90, "lmodify":"2012-07-10 21:00:27", "subtitle":"", "imgsrc":"http://img3.cache.netease.com/3g/2012/7/10/201207102101343f08e.jpg", "ptime":"2012-07-10 20:54:51", "TAG":"视频"},
-	 {"url_3w":"http://help.3g.163.com/12/0710/23/863D1O1100963VRO.html", "docid":"863D1O1100963VRO", "title":"调查称城乡老年人收入差异大", "replyCount":90, "priority":72, "lmodify":"2012-07-11 00:10:26", "imgsrc":"http://img4.cache.netease.com/3g/2012/7/10/201207102344081de59.jpg", "subtitle":"", "digest":"农村老人月平均养老金为74元，是城市老年人退休金的5%。", "ptime":"2012-07-10 23:38:30", "TAG":"视频", "url":"http://3g.163.com/ntes/12/0710/23/863D1O1100963VRO.html"},
-	 ]}*/
-	if(theIndex == 0){
-		var hotNews = baidu.template("tpl-news-hot-section", data);
-		var hotNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
-		document.getElementById(hotNewsSectionID).innerHTML = hotNews;
-	}else{
-		var normalNews = baidu.template("tpl-news-other-section", data);
-		var normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
-		document.getElementById(normalNewsSectionID).innerHTML = normalNews;
-	}
-
-	//为加载下20条的按钮绑定事件和方法
-	var loadMoreBtn = document.getElementById("load-more-btn");
-	loadMoreBtn.onclick = function(){
-		var nowColumnSectionID = loadMoreBtn.parentNode.parentNode.id;
-		alert(nowColumnSectionID);
-		return false;
-	};
-}
-
-//通过AJAX获取新闻模块头条栏目的数据
-function getNewsList(theIndex, startItem, endItem, type){
-	var request = getHTTPObject();
-	var columnID = COLUMN_ID_ELEMENT[theIndex].ntesID;
-	var requestUrl = CROSS_DOMAIN_PROXY + "type=" + type + "&id=" + columnID + "&start=" + startItem + "&end=" + endItem;
-	if(request){
-		//异步处理
-		request.open("GET", requestUrl, true);
-		request.onreadystatechange = function(){
-			if(request.readyState == 4){
-				//请求成功之后要做的操作
-				var requestResult = request.responseText;
-				//为页面上的模板执行标准化
-				requestResult = requestResult.replace(columnID, "list");
-				//转化为标准JSON对象
-				requestResult = JSON.parse(requestResult);
-				//重写刷新页面
-				activeTemplate(theIndex, requestResult);
-				return true;
-			}
-		};
-		request.send(null);
-	}else{
-		alert("浏览器不支持XMLHttpRequest");
-	}
-}
 
 //新闻页面下栏目导航点击时，切换栏目导航激活背景，将对应的栏目内容移动至可视区域
 function newsNavFun(){
@@ -120,9 +55,9 @@ function newsNavFun(){
 
 			//请求新闻列表
 			if(theIndex == 0){
-				getNewsList(theIndex, 0, 20, "headline");
+				getNewsList(theIndex, 0, 20, "headline", "loadfirst");
 			}else{
-				getNewsList(theIndex, 0, 20, "list");
+				getNewsList(theIndex, 0, 20, "list", "loadfirst");
 			}
 
 		}
@@ -130,137 +65,90 @@ function newsNavFun(){
 }
 
 
-/**
- * 此方法用于移动元素到指定坐标，可以自定义沿X轴或Y轴移动，自定义单步移动距离百分比和单步移动时间
- *
- * @parameter elementID：需要移动的块的ID
- * @parameter moveType：移动的类型，x表示横向移动，y表示纵向移动，xy表示同时横纵向移动
- * @parameter targetX：移动到的目标X轴坐标
- * @parameter targetY：移动到的目标Y轴坐标
- * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
- * @parameter stepTime：每一次timeOut的时间
- *
- * @return true:表示移动完成
- * */
-function moveElementTo(elementID, moveType, targetX, targetY, stepDis, stepTime){
-	var elementToMove = document.getElementById(elementID);
-	var elementX = parseInt(elementToMove.style.marginLeft);
-	var elementY = parseInt(elementToMove.style.marginTop);
-	var dist;
-
-	//如果上一次的点击的移位还没有完成，先清除循环
-	if(elementToMove.movement){
-		clearTimeout(elementToMove.movement);
+//通过AJAX获取新闻模块头条栏目的数据
+function getNewsList(theIndex, startItem, endItem, columnType, loadType){
+	var request = getHTTPObject();
+	var columnID = COLUMN_ID_ELEMENT[theIndex].ntesID;
+	var requestUrl = CROSS_DOMAIN_PROXY + "type=" + columnType + "&id=" + columnID + "&start=" + startItem + "&end=" + endItem;
+	if(request){
+		//异步处理
+		request.open("GET", requestUrl, true);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4){
+				//请求成功之后要做的操作
+				var requestResult = request.responseText;
+				//为页面上的模板执行标准化
+				requestResult = requestResult.replace(columnID, "list");
+				//转化为标准JSON对象
+				requestResult = JSON.parse(requestResult);
+				//重写刷新页面
+				activeTemplate(theIndex, requestResult, loadType);
+				return true;
+			}
+		};
+		request.send(null);
+	}else{
+		alert("浏览器不支持XMLHttpRequest");
 	}
-
-	//如果移动类型参数是x则做横向移动
-	if(moveType == "x"){
-		//移位完成，返回true
-		if(elementX == targetX){
-			return true;
-		}
-
-		if(elementX > targetX){
-			dist = Math.ceil((elementX - targetX) * stepDis);
-			elementX -= dist;
-		}
-
-		if(elementX < targetX){
-			dist = Math.ceil((targetX - elementX) * stepDis);
-			elementX += dist;
-		}
-		//设定单次移动之后的marginLeft值
-		elementToMove.style.marginLeft = elementX + "px";
-	}
-	//移动类型是y做纵向移动
-	if(moveType == "y"){
-		//移位完成，返回true
-		if(elementY == targetY){
-			return true;
-		}
-
-		if(elementY > targetY){
-			dist = Math.ceil((elementY - targetY) * stepDis);
-			elementY -= dist;
-		}
-
-		if(elementY < targetY){
-			dist = Math.ceil((targetY - elementY) * stepDis);
-			elementY += dist;
-		}
-		//设定单次移动之后的marginTop值
-		elementToMove.style.marginTop = elementY + "px";
-	}
-	//移动类型是xy做对角线移动
-	if(moveType == "xy"){
-		//移位完成，返回true
-		if(elementX == targetX && elementY == targetY){
-			return true;
-		}
-		if(elementX > targetX){
-			dist = Math.ceil((elementX - targetX) * stepDis);
-			elementX -= dist;
-		}
-		if(elementY > targetY){
-			dist = Math.ceil((elementY - targetY) * stepDis);
-			elementY -= dist;
-		}
-		if(elementX < targetX){
-			dist = Math.ceil((targetX - elementX) * stepDis);
-			elementX += dist;
-		}
-		if(elementY < targetY){
-			dist = Math.ceil((targetY - elementY) * stepDis);
-			elementY += dist;
-		}
-		//设定单次移动之后的marginLeft值
-		elementToMove.style.marginLeft = elementX + "px";
-		//设定单次移动之后的marginTop值
-		elementToMove.style.marginTop = elementY + "px";
-	}
-
-	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + targetY + "," + stepDis + "," + stepTime + ")";
-	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
 
-/**
- * 此方法用于移动元素到指定坐标，可以自定义沿X轴或Y轴移动，自定义单步移动距离百分比和单步移动时间
- *
- * @parameter elementID：需要移动的块的ID
- * @parameter moveType：移动的类型，x表示横向移动，y表示纵向移动，xy表示同时横纵向移动
- * @parameter stepX：移动到的目标X轴坐标
- * @parameter stepY：移动到的目标Y轴坐标
- * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
- * @parameter stepTime：每一次timeOut的时间
- *
- * @return true:表示移动完成
- * */
-function moveElementWith(elementID, moveType, stepX, stepY, stepDis, stepTime){
-	var elementToMove = document.getElementById(elementID);
-	//获取当前X轴坐标
-	var elementX = parseInt(elementToMove.style.marginLeft);
-	//获取当前Y轴坐标
-	var elementY = parseInt(elementToMove.style.marginTop);
-	//获取这个元素的高度值
-	var elementH = parseInt(elementToMove.scrollHeight) - 620;
-	//alert(elementH);
+//使用模板生成页面内容并插入页面中
+function activeTemplate(theIndex, data, loadType){
+	/*var data = {"list":[
+	 {"url_3w":"http://help.3g.163.com/12/0710/20/8633M35L00963VRO.html", "replyCount":436, "hasImg":1, "digest":"\"湖南临湘最美女交警\"走红网络，回应称做了该做的事。", "url":"http://3g.163.com/ntes/12/0710/20/8633M35L00963VRO.html", "docid":"8633M35L00963VRO", "title":"女交警托倾斜校车让幼儿转移", "order":1, "priority":90, "lmodify":"2012-07-10 21:00:27", "subtitle":"", "imgsrc":"http://img3.cache.netease.com/3g/2012/7/10/201207102101343f08e.jpg", "ptime":"2012-07-10 20:54:51", "TAG":"视频"},
+	 {"url_3w":"http://help.3g.163.com/12/0710/23/863D1O1100963VRO.html", "docid":"863D1O1100963VRO", "title":"调查称城乡老年人收入差异大", "replyCount":90, "priority":72, "lmodify":"2012-07-11 00:10:26", "imgsrc":"http://img4.cache.netease.com/3g/2012/7/10/201207102344081de59.jpg", "subtitle":"", "digest":"农村老人月平均养老金为74元，是城市老年人退休金的5%。", "ptime":"2012-07-10 23:38:30", "TAG":"视频", "url":"http://3g.163.com/ntes/12/0710/23/863D1O1100963VRO.html"},
+	 ]}*/
 
-	var targetX = elementX + stepX;
-	var targetY = elementY + stepY;
+	var hotNews;
+	var hotNewsSectionID;
 
-	if(elementY > -stepY && stepY > 0){
-		var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + 0 + "," + stepDis + "," + 50 + ")";
-		elementToMove.movement = setTimeout(repeat, stepTime);
+	var normalNews;
+	var normalNewsSectionID;
+
+	if(loadType == "loadfirst"){
+		if(theIndex == 0){
+			hotNews = baidu.template("tpl-news-hot-section", data);
+			hotNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+			document.getElementById(hotNewsSectionID).innerHTML = hotNews;
+		}else{
+			normalNews = baidu.template("tpl-news-other-section", data);
+			normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+			document.getElementById(normalNewsSectionID).innerHTML = normalNews;
+		}
+	}else if(loadType == "loadmore"){
+		normalNews = baidu.template("tpl-news-other-section", data);
+		normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+		document.getElementById(normalNewsSectionID).innerHTML += normalNews;
 	}
 
-	if(elementY < -elementH && stepY < 0){
-		var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + -elementH + "," + stepDis + "," + 50 + ")";
-		elementToMove.movement = setTimeout(repeat, stepTime);
-	}
 
-	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + moveType + "'," + targetX + "," + targetY + "," + stepDis + "," + stepTime + ")";
-	elementToMove.movement = setTimeout(repeat, stepTime);
+	//为加载下20条的按钮绑定事件和方法
+	var loadMoreBtn = document.getElementById("load-more-btn");
+	loadMoreBtn.onclick = function(){
+		//加载下20条之前，需要知道这个页面上已经有多少条
+		var theNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
+		var allLiOfScetion = document.getElementById(theNewsSectionID).getElementsByTagName("li");
+		var allLiOfSectionCount = allLiOfScetion.length;
+		//因为头条的li是19个，其余的栏目都是20个，为了便于计算，使用加一求余法
+		var loadMoreFlag = (allLiOfSectionCount + 1) % 20;
+		if(loadMoreFlag == 1){
+			getNewsList(theIndex, allLiOfSectionCount + 2, allLiOfSectionCount + 21, "headline", "loadmore");
+		}else if(loadMoreFlag == 0){
+			getNewsList(theIndex, allLiOfSectionCount + 1, allLiOfSectionCount + 20, "list", "loadmore");
+		}
+		return false;
+	};
+}
+
+//页面滚动处理函数
+function wheelEventHandle(delta){
+	if(delta < 0){
+		moveElementWith("news-hot", "y", 0, -250, 0.3, 20);
+		//alert("向上");
+	}
+	if(delta > 0){
+		//alert("向下");
+		moveElementWith("news-hot", "y", 0, 250, 0.3, 20);
+	}
 }
