@@ -115,13 +115,16 @@ html{
 }
 
 .loading{
-	margin: 15px auto;
+	margin: 0px auto;
 	text-align: center;
+	padding-top: 15px;
 }
 
 .loading *{
 	vertical-align: middle;
 }
+
+#load-more-div{ }
 
 #load-more-btn{ }
 

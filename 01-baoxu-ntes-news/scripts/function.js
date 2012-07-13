@@ -16,6 +16,9 @@ var COLUMN_ID_ELEMENT = [
 	{lolumnName:"军事", ntesID:"T1295505447897", elementID:"news-mili"}
 ];
 
+//全局变量
+var NOW_INDEX = 0;
+
 
 addLoadEvent(test);
 
@@ -27,10 +30,8 @@ function test(){
 function init(){
 	//添加导航的点击事件和方法
 	newsNavFun();
-	//页面滚动监听函数
-	new wheelEvent(document.getElementById("cnt-for-news-nav"), "wheelEventHandle");
 	//进入时默认加载头条新闻栏目
-	getNewsList(0, 0, 20, "headline", "loadfirst");
+	getNewsList(NOW_INDEX, 0, 20, "headline", "loadfirst");
 
 }
 
@@ -43,6 +44,7 @@ function newsNavFun(){
 		links[i].onclick = function(){
 			//闭包中无法取得i的真实值，使用getObjectIndex在外部获取当前点击的索引并返回
 			var theIndex = getObjectIndex(links, this);
+			NOW_INDEX = theIndex;
 			//去掉栏目导航的激活样式
 			for(var t = 0 ; t < links.length ; t++){
 				linksLi[t].className = "news-nav-not";
@@ -67,6 +69,10 @@ function newsNavFun(){
 
 //通过AJAX获取新闻模块头条栏目的数据
 function getNewsList(theIndex, startItem, endItem, columnType, loadType){
+
+	//页面滚动监听函数
+	new wheelEvent(document.getElementById("cnt-for-news-nav"), "wheelEventHandle");
+
 	var request = getHTTPObject();
 	var columnID = COLUMN_ID_ELEMENT[theIndex].ntesID;
 	var requestUrl = CROSS_DOMAIN_PROXY + "type=" + columnType + "&id=" + columnID + "&start=" + startItem + "&end=" + endItem;
@@ -106,17 +112,23 @@ function activeTemplate(theIndex, data, loadType){
 	var normalNews;
 	var normalNewsSectionID;
 
+
 	if(loadType == "loadfirst"){
 		if(theIndex == 0){
 			hotNews = baidu.template("tpl-news-hot-section", data);
 			hotNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
 			document.getElementById(hotNewsSectionID).innerHTML = hotNews;
 		}else{
+			var loadMoreDiv = document.getElementById("load-more-div");
+			loadMoreDiv.parentNode.removeChild(loadMoreDiv);
 			normalNews = baidu.template("tpl-news-other-section", data);
 			normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
 			document.getElementById(normalNewsSectionID).innerHTML = normalNews;
 		}
 	}else if(loadType == "loadmore"){
+		var loadMoreDiv = document.getElementById("load-more-div");
+		loadMoreDiv.parentNode.removeChild(loadMoreDiv);
+
 		normalNews = baidu.template("tpl-news-other-section", data);
 		normalNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
 		document.getElementById(normalNewsSectionID).innerHTML += normalNews;
@@ -125,6 +137,7 @@ function activeTemplate(theIndex, data, loadType){
 
 	//为加载下20条的按钮绑定事件和方法
 	var loadMoreBtn = document.getElementById("load-more-btn");
+	var loadMoreDiv = document.getElementById("load-more-div");
 	loadMoreBtn.onclick = function(){
 		//加载下20条之前，需要知道这个页面上已经有多少条
 		var theNewsSectionID = COLUMN_ID_ELEMENT[theIndex].elementID;
@@ -132,9 +145,14 @@ function activeTemplate(theIndex, data, loadType){
 		var allLiOfSectionCount = allLiOfScetion.length;
 		//因为头条的li是19个，其余的栏目都是20个，为了便于计算，使用加一求余法
 		var loadMoreFlag = (allLiOfSectionCount + 1) % 20;
-		if(loadMoreFlag == 1){
+		if(loadMoreFlag == 0){
+			alert(allLiOfSectionCount);
+			loadMoreDiv.innerHTML = "<img src=\"images/loading.gif\"/> <span>加载中…</span>";
+			addClass(loadMoreDiv, "loading");
 			getNewsList(theIndex, allLiOfSectionCount + 2, allLiOfSectionCount + 21, "headline", "loadmore");
-		}else if(loadMoreFlag == 0){
+		}else{
+			loadMoreDiv.innerHTML = "<img src=\"images/loading.gif\"/> <span>加载中…</span>";
+			addClass(loadMoreDiv, "loading");
 			getNewsList(theIndex, allLiOfSectionCount + 1, allLiOfSectionCount + 20, "list", "loadmore");
 		}
 		return false;
@@ -143,12 +161,14 @@ function activeTemplate(theIndex, data, loadType){
 
 //页面滚动处理函数
 function wheelEventHandle(delta){
+	var nowSection = COLUMN_ID_ELEMENT[NOW_INDEX].elementID;
+	//alert(nowSection);
 	if(delta < 0){
-		moveElementWith("news-hot", "y", 0, -250, 0.3, 20);
+		moveElementWith(nowSection, "y", 0, -250, 0.3, 20);
 		//alert("向上");
 	}
 	if(delta > 0){
 		//alert("向下");
-		moveElementWith("news-hot", "y", 0, 250, 0.3, 20);
+		moveElementWith(nowSection, "y", 0, 250, 0.3, 20);
 	}
 }
