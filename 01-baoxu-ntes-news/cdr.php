@@ -10,10 +10,16 @@ $queryStart = $_REQUEST['start'];
 $queryEnd = $_REQUEST['end'];
 
 $queryString = "/nc/article/".$requestType."/".$queryColumnID."/".$queryStart."-".$queryEnd.".html";
+
 //Encode
 //$queryString = urlencode($queryString);
 
-$fetchUrl = $GET_DATA_HOST.$queryString;
+//正式环境用这个
+//$fetchUrl = $GET_DATA_HOST.$queryString;
+
+//测试用的数据抓取路径
+$fetchUrl = "http://localhost/baoxu-project/01-baoxu-ntes-news/testdata/0-20.html";
+
 //echo $fetchUrl;
 //$fetchUrl = "http://c.3g.163.com/nc/article/headline/T1295501906343/0-20.html";
 $fetchData = file_get_contents($fetchUrl);

@@ -24,6 +24,7 @@ addLoadEvent(test);
 
 function test(){
 	init();
+	console.log("heihei");
 }
 
 //页面初始化函数

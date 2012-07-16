@@ -13,7 +13,7 @@
 <body>
 <!--手机界面框架480*800-->
 <div id = "main-container" class = "b-shadow">
-    <!--由底部主导航控制的框架-->
+    <!--由底部主导航控制的内容框架-->
     <div id = "cnt-container" class = "full-width">
         <!--主导航控制下列各个section的显示，section左右滚动-->
         <section>
@@ -90,27 +90,11 @@
     </nav>
 </div>
 <!--模板区域-->
-<script id = "tpl-test" type = "text/template">
-    <img src = <%=list[0].imgsrc%> />
-</script>
-<script id = "tpl-news-hot-item" type = "text/template">
-    <!--头条新闻的单条新闻体-->
-    <li>
-        <a href = "<%=newsHotItemUrl%>">
-            <img src = "<%=newsHotItemPic%>" class = "b-shadow fn-left" />
-            <article class = "news-hot-item fn-left">
-                <h1 class = "news-hot-item-title"><%=newsHotItemTitle%></h1>
-
-                <p class = "news-hot-item-abstract"><%=newsHotItemAbstract%></p>
-                <h5 class = "news-hot-item-reply fn-clear"><%=newsHotItemCommentCount%>条跟帖</h5>
-            </article>
-        </a>
-    </li>
-</script>
 <!--新闻模块的首屏20条带头图的模板，适用于头条频道的首屏-->
 <script id = "tpl-news-hot-section" type = "text/template">
     <!--头条新闻图片-->
-    <div id = "news-hot-pic" style="background-image: url(<%=list[0].imgsrc%>);"></div>
+    <div id = "news-hot-pic" style="background-image: url(<%=list[0].imgsrc%>);"><a href=<%=list[0].url_3w%></a></div>
+	<div id="news-hot-pic-title" class="t-shadow"><a href=<%=list[0].url_3w%>><%=list[0].title%></a></div>
     <!--头条新闻列表-->
     <ul class = "news-list">
         <%for(var i=1; i<list.length; i++){%>
