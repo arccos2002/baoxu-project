@@ -74,16 +74,33 @@ function getHTTPObject(){
 }
 
 
-//鼠标滚轮事件的定义
-function wheelEvent(obj, handle){
-	this.handle = handle;
-	//兼容火狐和IE
-	window.addEventListener ? obj.addEventListener("DOMMouseScroll", this.wheel, false) : (obj.onmousewheel = this.wheel);
-}
-wheelEvent.prototype.wheel = function(event){
-	var ev = event || window.event;
-	var delta = ev.wheelDelta ? (ev.wheelDelta / 120) : (-ev.detail / 3); // Firefox using `wheelDelta` IE using `detail`
-	eval('delta ? ' + parent.wheelEventHandle + '(delta) : null;');
+//colorTable("表格ID","奇数行背景","偶数行背景","鼠标经过背景","点击后背景","经过时字色","经过后字色",开始变色的行号);
+function cbxColorTable(o,a,b,c,d,e,f,g){
+	var t=document.getElementById(o).getElementsByTagName("tr");
+	for(var i=g-1;i<t.length;i++){
+		t[i].style.backgroundColor=(t[i].sectionRowIndex%2==0)?a:b;
+		t[i].onclick=function(){
+			if(this.x!="1"){
+				this.x="1";
+				this.style.backgroundColor=d;
+			}else{
+				this.x="0";
+				this.style.backgroundColor=(this.sectionRowIndex%2==0)?a:b;
+			}
+		}
+		t[i].onmouseover=function(){
+			if(this.x!="1"){
+				this.style.backgroundColor=c;
+				this.style.color=e;
+			}
+		}
+		t[i].onmouseout=function(){
+			if(this.x!="1"){
+				this.style.backgroundColor=(this.sectionRowIndex%2==0)?a:b;
+				this.style.color=f;
+			}
+		}
+	}
 }
 
 

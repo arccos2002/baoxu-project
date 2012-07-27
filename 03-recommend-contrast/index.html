@@ -2,14 +2,62 @@
 <html>
 <head>
     <meta charset = "utf-8" />
-    <title></title>
-    <link type="text/css" rel="stylesheet" href="styles/base.css" />
-    <link type="text/css" rel="stylesheet" href="styles/style.css" />
-    <script type="text/javascript" src="scripts/global.js"></script>
-    <script type="text/javascript" src="scripts/html5.js"></script>
-    <script type="text/javascript" src="scripts/function.js"></script>
+    <title>网易应用中心算法推荐准确度测试</title>
+    <link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
+    <link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
+    <script type = "text/javascript" src = "scripts/global.js"></script>
+    <script type = "text/javascript" src = "scripts/html5.js"></script>
+    <script type = "text/javascript" src = "scripts/baiduTemplate.js"></script>
+    <script type = "text/javascript" src = "scripts/function.js"></script>
 </head>
 <body>
+<table id = "main-table">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>装过</td>
+        <td>推荐</td>
+        <td>请表态</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>12345</td>
+        <td><a href = "#">test&nbsp;<img src="images/external.png" /></a></td>
+        <td><a href = "#">test</a></td>
+        <td><a href = "#" class = "no">不准</a> <a href = "#" class = "fuck">没感觉</a> <a href = "#" class = "yes">很准</a>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
 
+<!--模板区域-->
+<script id = "tpl-software-list-item" type = "text/template">
+    <%for(var i = 0; i<software.length;i++){%>
+    <tr>
+        <td><%=i+1%></td>
+        <td><a target = "_blank" href = <%=software[i].installed_url%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
+        <td><a target = "_blank" href = <%=software[i].recommend_url%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
+        <td><a href = "#" class = "no" title = "不准">不准</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
+                href = "#" class = "yes" title = "很准">很准</a>
+        </td>
+    </tr>
+    <%}%>
+</script>
+
+<script id = "tpl-result-yes" type = "text/template">
+    <a class = "yes" title = "你觉得很准">很准</a>
+</script>
+
+<script id = "tpl-result-fuck" type = "text/template">
+    <a class = "fuck" title = "你认为没感觉">没感觉</a>
+</script>
+
+<script id = "tpl-result-no" type = "text/template">
+    <a class = "no" title = "你觉得很不准">不准</a>
+</script>
+
+<!--模板区域结束-->
 </body>
 </html>
