@@ -15,7 +15,7 @@
 #main-table td{
 	border-bottom: 1px #DDD solid;
 	border-right: 1px #DDD solid;
-	height: 25px;
+	height: 30px;
 }
 
 #main-table thead tr td{
@@ -44,7 +44,7 @@
 
 #main-table tbody tr td:last-child a{
 	padding: 0 0 0 18px;
-	display: block;
+	/*display: block;*/
 	float: left;
 	margin: 0 12px 0 0;
 	color: #000;
@@ -62,6 +62,21 @@
 	background: url("../images/emoticon_grin.png") left no-repeat;
 }
 
+#main-table tbody tr td a.result{
+	margin-left: 66px;
+	clear: both;
+}
+
+#main-table tbody tr td a.result-error{
+	background: url("../images/error.png") left no-repeat;
+	margin-left: 66px;
+	clear: both;
+}
+
+.result-load{
+	margin-left: 85px;
+	clear: both;
+}
 
 
 
@@ -70,11 +85,11 @@
 }
 
 #main-table td:last-child{
-	width: 180px;
+	width: 200px;
 }
 
 #main-table tbody td:last-child{
-	padding-left: 20px;
+	padding-left: 12px;
 }
 
 #main-table tbody td:first-child{

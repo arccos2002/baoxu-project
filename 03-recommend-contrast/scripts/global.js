@@ -1,6 +1,6 @@
 /**
  * Author: Baoxu
- * Date:   12-7-2
+ * Date:   12-7-26
  * Time:   下午1:56
  */
 
@@ -79,7 +79,7 @@ function cbxColorTable(o,a,b,c,d,e,f,g){
 	var t=document.getElementById(o).getElementsByTagName("tr");
 	for(var i=g-1;i<t.length;i++){
 		t[i].style.backgroundColor=(t[i].sectionRowIndex%2==0)?a:b;
-		t[i].onclick=function(){
+		/*t[i].onclick=function(){
 			if(this.x!="1"){
 				this.x="1";
 				this.style.backgroundColor=d;
@@ -87,7 +87,7 @@ function cbxColorTable(o,a,b,c,d,e,f,g){
 				this.x="0";
 				this.style.backgroundColor=(this.sectionRowIndex%2==0)?a:b;
 			}
-		}
+		}*/
 		t[i].onmouseover=function(){
 			if(this.x!="1"){
 				this.style.backgroundColor=c;

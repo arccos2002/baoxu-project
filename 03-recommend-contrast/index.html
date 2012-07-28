@@ -25,7 +25,7 @@
         <td>12345</td>
         <td><a href = "#">test&nbsp;<img src="images/external.png" /></a></td>
         <td><a href = "#">test</a></td>
-        <td><a href = "#" class = "no">不准</a> <a href = "#" class = "fuck">没感觉</a> <a href = "#" class = "yes">很准</a>
+        <td><a href = "#" class = "no">不靠谱</a> <a href = "#" class = "fuck">没感觉</a> <a href = "#" class = "yes">很靠谱</a>
         </td>
     </tr>
     </tbody>
@@ -36,26 +36,14 @@
 <script id = "tpl-software-list-item" type = "text/template">
     <%for(var i = 0; i<software.length;i++){%>
     <tr>
-        <td><%=i+1%></td>
+        <td><%=software[i].id%></td>
         <td><a target = "_blank" href = <%=software[i].installed_url%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
         <td><a target = "_blank" href = <%=software[i].recommend_url%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
-        <td><a href = "#" class = "no" title = "不准">不准</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
-                href = "#" class = "yes" title = "很准">很准</a>
+        <td><a href = "#" class = "no" title = "不准">不靠谱</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
+                href = "#" class = "yes" title = "很准">很靠谱</a>
         </td>
     </tr>
     <%}%>
-</script>
-
-<script id = "tpl-result-yes" type = "text/template">
-    <a class = "yes" title = "你觉得很准">很准</a>
-</script>
-
-<script id = "tpl-result-fuck" type = "text/template">
-    <a class = "fuck" title = "你认为没感觉">没感觉</a>
-</script>
-
-<script id = "tpl-result-no" type = "text/template">
-    <a class = "no" title = "你觉得很不准">不准</a>
 </script>
 
 <!--模板区域结束-->
