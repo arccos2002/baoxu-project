@@ -90,6 +90,7 @@ function refactorJson($thePassport,$userName){
     	$softArrayItem["installed_url"]=$row['installed_url'];
     	$softArrayItem["recommend"]=$row['recommend'];
     	$softArrayItem["recommend_url"]=$row['recommend_url'];
+    	$softArrayItem["attitude"]=$row['attitude'];
 
     	array_push($softArray,$softArrayItem);
 

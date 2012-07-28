@@ -22,11 +22,12 @@
     </thead>
     <tbody>
     <tr>
-        <td>12345</td>
+        <!--<td>12345</td>
         <td><a href = "#">test&nbsp;<img src="images/external.png" /></a></td>
         <td><a href = "#">test</a></td>
         <td><a href = "#" class = "no">不靠谱</a> <a href = "#" class = "fuck">没感觉</a> <a href = "#" class = "yes">很靠谱</a>
-        </td>
+        </td>-->
+	    <td colspan="4"><img src="images/loading.gif" /></td>
     </tr>
     </tbody>
     <tfoot></tfoot>
@@ -39,9 +40,24 @@
         <td><%=software[i].id%></td>
         <td><a target = "_blank" href = <%=software[i].installed_url%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
         <td><a target = "_blank" href = <%=software[i].recommend_url%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
-        <td><a href = "#" class = "no" title = "不准">不靠谱</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
-                href = "#" class = "yes" title = "很准">很靠谱</a>
-        </td>
+
+	    <%switch(software[i].attitude){
+	    case "1":%>
+		    <td><i class = "no result" title = "不准">不靠谱</i></td>
+		    <%break;
+	    case "2":%>
+		    <td><i class = "fuck result" title = "没感觉">没感觉</i></td>
+		    <%break;
+	    case "3":%>
+		    <td><i class = "yes result" title = "很准">很靠谱</i></td>
+		    <%break;
+	    default:%>
+	    <td><a href = "#" class = "no" title = "不准">不靠谱</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
+			    href = "#" class = "yes" title = "很准">很靠谱</a>
+	    </td>
+	    <%}%>
+
+
     </tr>
     <%}%>
 </script>

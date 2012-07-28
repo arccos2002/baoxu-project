@@ -46,7 +46,7 @@ function generatTable(softwareData){
 
 	//填充模板，填充页面内容
 	var createTR = baidu.template("tpl-software-list-item", softwareData);
-	pageTableBody.innerHTML += createTR;
+	pageTableBody.innerHTML = createTR;
 
 	//为表格上色
 	cbxColorTable("main-table", "#FFF", "#FAFAFA", "#DBEAF9", "green", "#000", "#000", 1);
@@ -105,20 +105,20 @@ function postAttitude(nowRecomId,nowAttitude,nowTD){
 					switch(nowAttitude){
 						case 1:
 							//alert("0");
-							nowTD.innerHTML = "<a class = 'no result' title = '你认为很不准'>不靠谱</a>";
+							nowTD.innerHTML = "<i class = 'no result' title = '你认为很不准'>不靠谱</i>";
 							break;
 						case 2:
 							//alert("1");
-							nowTD.innerHTML = "<a class = 'fuck result' title = '你认为没感觉'>没感觉</a>";
+							nowTD.innerHTML = "<i class = 'fuck result' title = '你认为没感觉'>没感觉</i>";
 							break;
 						case 3:
 							//alert("2");
-							nowTD.innerHTML = "<a class = 'yes result' title = '你认为很准'>很靠谱</a>";
+							nowTD.innerHTML = "<i class = 'yes result' title = '你认为很准'>很靠谱</i>";
 							break;
 					}
 				}else{
 					//返回错误
-					nowTD.innerHTML = "<a class = 'no result-error' title = '内部错误'>出错了</a>";
+					nowTD.innerHTML = "<i class = 'no result-error' title = '内部错误'>出错了</i>";
 				}
 				return true;
 			}

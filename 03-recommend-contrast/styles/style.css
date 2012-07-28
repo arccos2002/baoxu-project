@@ -42,7 +42,7 @@
 	border: none;
 }
 
-#main-table tbody tr td:last-child a{
+#main-table tbody tr td:last-child a, i{
 	padding: 0 0 0 18px;
 	/*display: block;*/
 	float: left;
@@ -50,24 +50,24 @@
 	color: #000;
 }
 
-#main-table tbody tr td a.no{
+#main-table tbody tr td a.no, i.no{
 	background: url("../images/emoticon_unhappy.png") left no-repeat;
 }
 
-#main-table tbody tr td a.fuck{
+#main-table tbody tr td a.fuck, i.fuck{
 	background: url("../images/emoticon_surprised.png") left no-repeat;
 }
 
-#main-table tbody tr td a.yes{
+#main-table tbody tr td a.yes, i.yes{
 	background: url("../images/emoticon_grin.png") left no-repeat;
 }
 
-#main-table tbody tr td a.result{
+#main-table tbody tr td a.result, i.result{
 	margin-left: 66px;
 	clear: both;
 }
 
-#main-table tbody tr td a.result-error{
+#main-table tbody tr td a.result-error , i.result-error{
 	background: url("../images/error.png") left no-repeat;
 	margin-left: 66px;
 	clear: both;
