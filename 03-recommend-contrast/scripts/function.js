@@ -11,13 +11,31 @@ addLoadEvent(start);
 
 function start(){
 	//alert("baoxu");
-	getSoftware();
+	login();
 }
 
+//登录处理
+function login(){
+	var start_btn = document.getElementById("start");
+	start_btn.onclick = function(){
+		var user_passport = document.getElementById("passport").value;
+		var user_name = document.getElementById("name").value;
+		//alert(user_passport);
+		if(user_passport){
+			document.getElementById("login").style.display = "none";
+			document.getElementById("main-table").style.display = "";
+			getSoftware(user_passport,user_name);
+		}else{
+			document.getElementById("passport-e").innerHTML="不能为空";
+		}
+	}
+}
+
+
 //异步获取用户信息和用户推荐列表
-function getSoftware(){
+function getSoftware(thePassport,theUserName){
 	var request = getHTTPObject();
-	var requestUrl = REQUEST_HOST + "baoxu-project/03-recommend-contrast/server/cdr.php?passport=chbaoxu@163.com&size=100&username=保需";
+	var requestUrl = REQUEST_HOST + "baoxu-project/03-recommend-contrast/server/cdr.php?passport="+thePassport+"&size=100&username="+theUserName;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -60,10 +78,44 @@ function activeAttitude(){
 	var pageTable = document.getElementById("main-table");
 	var pageTableBody = pageTable.getElementsByTagName("tbody")[0];
 	var pageTableBodyTR = pageTableBody.getElementsByTagName("tr");
-
+	var hoverIcon = document.getElementById("hover-icon");
 	for(var i = 0 ; i < pageTableBodyTR.length ; i++){
-		var pageTableBodyTD = pageTableBodyTR[i].getElementsByTagName("td")[3];
-		var attitudeLink = pageTableBodyTD.getElementsByTagName("a");
+		var pageTableBodyTD = pageTableBodyTR[i].getElementsByTagName("td");
+		//该行第2列已安装软件的链接，鼠标移过时显示icon
+		var installLink = pageTableBodyTD[1].getElementsByTagName("a")[0];
+		installLink.onmouseover = function(event){
+			var mouseX = event.clientX+10;
+			var mouseY = event.clientY+15;
+			var iconUrl = installLink.getAttribute("icon");
+			//alert(mouseX+";"+mouseY);
+			hoverIcon.style.display = "";
+			hoverIcon.style.top = mouseY+"px";
+			hoverIcon.style.left = mouseX+"px";
+			hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
+		}
+		installLink.onmouseout = function(event){
+			hoverIcon.style.display = "none";
+			hoverIcon.getElementsByTagName("img")[0].src = "";
+		}
+
+		//该行第3列推荐软件的链接，鼠标移过时显示icon
+		var recommendLink = pageTableBodyTD[2].getElementsByTagName("a")[0];
+		recommendLink.onmouseover = function(event){
+			var mouseX = event.clientX+10;
+			var mouseY = event.clientY+15;
+			var iconUrl = installLink.getAttribute("icon");
+			//alert(mouseX+";"+mouseY);
+			hoverIcon.style.display = "";
+			hoverIcon.style.top = mouseY+"px";
+			hoverIcon.style.left = mouseX+"px";
+			hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
+		}
+		recommendLink.onmouseout = function(event){
+			hoverIcon.style.display = "none";
+			hoverIcon.getElementsByTagName("img")[0].src = "";
+		}
+
+		var attitudeLink = pageTableBodyTD[3].getElementsByTagName("a");
 		for(var t = 0 ; t < attitudeLink.length ; t++){
 			//为按钮添加click事件
 			attitudeLink[t].onclick = function(){

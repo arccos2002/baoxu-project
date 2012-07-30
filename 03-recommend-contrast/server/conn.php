@@ -1,6 +1,6 @@
 <?php
 
-$HOST="192.168.1.104";
+$HOST="localhost";
 $USER="baoxu";
 $PASS="baoxu";
 

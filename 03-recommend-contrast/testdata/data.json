@@ -3,26 +3,34 @@
     "software":[
         {
             "installed":"网易应用中心",
+            "installed_icon":"images/95138542145882842.jpg",
             "installed_url":"http://m.163.com/",
             "recommend":"网易新闻",
-            "recommend_url":"http://news.163.com/"
-        },
-        {
-            "installed":"有道词典",
-            "installed_url":"http://m.163.com/",
-            "recommend":"网易饭饭",
+            "recommend_icon":"images/95138542145882842.jpg",
             "recommend_url":"http://news.163.com/"
         },
         {
             "installed":"网易应用中心",
+            "installed_icon":"images/95138542145882842.jpg",
             "installed_url":"http://m.163.com/",
             "recommend":"网易新闻",
+            "recommend_icon":"images/95138542145882842.jpg",
             "recommend_url":"http://news.163.com/"
         },
         {
-            "installed":"有道词典",
+            "installed":"网易应用中心",
+            "installed_icon":"images/95138542145882842.jpg",
             "installed_url":"http://m.163.com/",
-            "recommend":"网易饭饭",
+            "recommend":"网易新闻",
+            "recommend_icon":"images/95138542145882842.jpg",
+            "recommend_url":"http://news.163.com/"
+        },
+        {
+            "installed":"网易应用中心",
+            "installed_icon":"images/95138542145882842.jpg",
+            "installed_url":"http://m.163.com/",
+            "recommend":"网易新闻",
+            "recommend_icon":"images/95138542145882842.jpg",
             "recommend_url":"http://news.163.com/"
         }
 

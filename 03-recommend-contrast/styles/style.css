@@ -6,6 +6,22 @@
  * Time:   下午3:04
  */
 
+.t-shadow{
+	-moz-text-shadow: 2px 2px 2px #bbb;
+	-webkit-text-shadow: 2px 2px 2px #bbb;
+	text-shadow: 2px 2px 2px #bbb;
+}
+
+.b-shadow{
+	/* modern web browsers */
+	-moz-box-shadow: 1px 3px 3px #bbb;
+	-webkit-box-shadow: 1px 3px 3px #bbb;
+	box-shadow: 1px 3px 3px #bbb;
+
+	/* 一定要设置background, 不然 ie 会显示在字体上 */
+	background: #fff;
+}
+
 #main-table{
 	margin: 5px auto 0 auto;
 	border-top: 1px #DDD solid;
@@ -95,4 +111,59 @@
 #main-table tbody td:first-child{
 	padding: 0;
 	text-align: center;
+}
+
+
+#login{
+	margin: 10% auto 0 auto;
+	border: 1px #DDD solid;
+}
+
+#login td{
+	height: 30px;
+}
+
+#login td:first-child{
+	width:80px;
+	text-align: right;
+	padding-right: 12px;
+}
+
+#login td:last-child{
+	width: 180px;
+}
+
+#login tr:first-child td{
+	padding-top: 5px;
+	height: 70px;
+}
+
+#login tr:last-child td{
+	text-align: center;
+	padding: 10px 0;
+}
+
+#passport-e{
+	color: red;
+}
+
+#hover-icon{
+	height: 174px;
+	width: 174px;
+	border: 1px solid #DDD;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	position: absolute;
+	background: url("../images/loading.gif") no-repeat center #fff;
+}
+
+#hover-icon img{
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	height: 175px;
+	width: 175px;
 }

@@ -62,10 +62,12 @@ function insertData($phpJson,$thePassport,$userName,$theInstCount){
     //将软件推荐数据插入软件表
     for($i=0;$i<count($phpJson->software);$i++){
     	$theInstalled = $phpJson->software[$i]->installed;
+		$theInstalledIcon = $phpJson->software[$i]->installed_icon;
     	$theInstalledUrl = $phpJson->software[$i]->installed_url;
     	$theRecommend = $phpJson->software[$i]->recommend;
+		$theRecommendIcon = $phpJson->software[$i]->recommend_icon;
     	$theRecommendUrl = $phpJson->software[$i]->recommend_url;
-    	$sqlString_2 = "INSERT INTO `recommend_contrast`.`software` (`id` ,`passport`,`installed` ,`installed_url`,`recommend`,`recommend_url`) VALUES (NULL ,'$thePassport','$theInstalled','$theInstalledUrl','$theRecommend', '$theRecommendUrl');";
+    	$sqlString_2 = "INSERT INTO `recommend_contrast`.`software` (`id` ,`passport`,`installed` ,`installed_icon`,`installed_url`,`recommend`,`recommend_icon`,`recommend_url`) VALUES (NULL ,'$thePassport','$theInstalled','$theInstalledIcon','$theInstalledUrl','$theRecommend','$theRecommendIcon','$theRecommendUrl');";
         $sqlResult_2 = mysql_query($sqlString_2);
         //如果插入失败，返回error
         if(!$sqlResult_2){
@@ -87,8 +89,10 @@ function refactorJson($thePassport,$userName){
     	$softArrayItem = array();
     	$softArrayItem["id"]=$row['id'];
     	$softArrayItem["installed"]=$row['installed'];
+		$softArrayItem["installed_icon"]=$row['installed_icon'];
     	$softArrayItem["installed_url"]=$row['installed_url'];
     	$softArrayItem["recommend"]=$row['recommend'];
+		$softArrayItem["recommend_icon"]=$row['recommend_icon'];
     	$softArrayItem["recommend_url"]=$row['recommend_url'];
     	$softArrayItem["attitude"]=$row['attitude'];
 

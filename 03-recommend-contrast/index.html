@@ -11,7 +11,20 @@
     <script type = "text/javascript" src = "scripts/function.js"></script>
 </head>
 <body>
-<table id = "main-table">
+<table id="login">
+    <tr>
+        <td>网易通行证</td>
+        <td><input id="passport" type="text" />*<br/><span id="passport-e"></span></td>
+    </tr>
+    <tr>
+        <td>姓名/昵称</td>
+        <td><input id="name" type="text" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input id="start" type="button" value="开始测试" /></td>
+    </tr>
+</table>
+<table id = "main-table" style="display: none">
     <thead>
     <tr>
         <td>ID</td>
@@ -22,24 +35,21 @@
     </thead>
     <tbody>
     <tr>
-        <!--<td>12345</td>
-        <td><a href = "#">test&nbsp;<img src="images/external.png" /></a></td>
-        <td><a href = "#">test</a></td>
-        <td><a href = "#" class = "no">不靠谱</a> <a href = "#" class = "fuck">没感觉</a> <a href = "#" class = "yes">很靠谱</a>
-        </td>-->
 	    <td colspan="4"><img src="images/loading.gif" /></td>
     </tr>
     </tbody>
     <tfoot></tfoot>
 </table>
+<div id="hover-icon" class="b-shadow" style="display: none"><img src="" /></div>
 
-<!--模板区域-->
+
+<!--模板-->
 <script id = "tpl-software-list-item" type = "text/template">
     <%for(var i = 0; i<software.length;i++){%>
     <tr>
         <td><%=software[i].id%></td>
-        <td><a target = "_blank" href = <%=software[i].installed_url%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
-        <td><a target = "_blank" href = <%=software[i].recommend_url%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
+        <td><a target = "_blank" href = <%=software[i].installed_url%> icon = <%=software[i].installed_icon%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
+        <td><a target = "_blank" href = <%=software[i].recommend_url%> icon = <%=software[i].recommend_icon%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
 
 	    <%switch(software[i].attitude){
 	    case "1":%>
@@ -56,8 +66,6 @@
 			    href = "#" class = "yes" title = "很准">很靠谱</a>
 	    </td>
 	    <%}%>
-
-
     </tr>
     <%}%>
 </script>
