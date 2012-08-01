@@ -4,40 +4,36 @@
  * Time:   上午8:41
  */
 
-//定义常量
-var REQUEST_HOST = "http://192.168.88.20/"
 
 //定义全局变量
-var soft_all = 0,
-	att_all = 0,
-	att_yes = 0,
-	att_fuck = 0,
-	att_no = 0;
+var soft_all = 0, att_all = 0, att_yes = 0, att_fuck = 0, att_no = 0;
 
+
+//页面加载之后，执行事件
 addLoadEvent(start);
 
 function start(){
-	//alert("baoxu");
+	console.log("开始运行");
 	checkCookie();
 }
 
-
+//检查cookie是否存在，如果存在，直接展示列表，如果不存在，重新登录
 function checkCookie(){
 	var cookiePass = getCookie("baoxu-recommend-contrast-cookie-pass");
 	if(cookiePass){
-		console.log("Cookie:有cookie,"+cookiePass);
-		getSoftware(cookiePass,"保需");
+		console.log("Cookie:有cookie," + cookiePass);
+		getSoftware(cookiePass, "");
 	}else{
 		console.log("Cookie:没有cookie");
 		login();
 	}
 }
 
-function addCookie(objName,objValue,objHours){//添加cookie
+function addCookie(objName, objValue, objHours){//添加cookie
 	var str = objName + "=" + escape(objValue);
 	if(objHours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
 		var date = new Date();
-		var ms = objHours*3600*1000;
+		var ms = objHours * 3600 * 1000;
 		date.setTime(date.getTime() + ms);
 		str += "; expires=" + date.toGMTString();
 	}
@@ -47,7 +43,7 @@ function addCookie(objName,objValue,objHours){//添加cookie
 
 function getCookie(objName){//获取指定名称的cookie的值
 	var arrStr = document.cookie.split("; ");
-	for(var i = 0;i < arrStr.length;i ++){
+	for(var i = 0 ; i < arrStr.length ; i++){
 		var temp = arrStr[i].split("=");
 		if(temp[0] == objName) return escape(temp[1]);
 	}
@@ -57,7 +53,7 @@ function getCookie(objName){//获取指定名称的cookie的值
 //登录处理
 function login(){
 	var login_table = document.getElementById("login");
-	login_table.style.display="";
+	login_table.style.display = "";
 	var start_btn = document.getElementById("start");
 	start_btn.onclick = function(){
 		var user_passport = document.getElementById("passport").value;
@@ -66,10 +62,10 @@ function login(){
 		if(user_passport){
 			document.getElementById("login").style.display = "none";
 			document.getElementById("main-table").style.display = "";
-			addCookie("baoxu-recommend-contrast-cookie-pass",user_passport,0);
-			getSoftware(user_passport,user_name);
+			addCookie("baoxu-recommend-contrast-cookie-pass", user_passport, 0);
+			getSoftware(user_passport, user_name);
 		}else{
-			document.getElementById("passport-e").innerHTML="不能为空";
+			document.getElementById("passport-e").innerHTML = "不能为空";
 		}
 		return false;
 	}
@@ -77,9 +73,9 @@ function login(){
 
 
 //异步获取用户信息和用户推荐列表
-function getSoftware(thePassport,theUserName){
+function getSoftware(thePassport, theUserName){
 	var request = getHTTPObject();
-	var requestUrl = "/baoxu-project/03-recommend-contrast/server/cdr.php?passport="+thePassport+"&size=100&username="+theUserName;
+	var requestUrl = "/baoxu-project/03-recommend-contrast/server/cdr.php?passport=" + thePassport + "&size=100&username=" + theUserName;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -106,7 +102,7 @@ function getSoftware(thePassport,theUserName){
 //初始化用户满意数
 function getAttitudeCount(softwareData){
 	soft_all = softwareData.software.length;
-	for(var i=0;i<soft_all;i++){
+	for(var i = 0 ; i < soft_all ; i++){
 		console.log(softwareData.software[i].attitude);
 		switch(softwareData.software[i].attitude){
 			case "0":
@@ -126,26 +122,32 @@ function getAttitudeCount(softwareData){
 		}
 
 		//LOG记录当前的数目情况
-		console.log("att_all:"+att_all);
-		console.log("att_yes:"+att_yes);
-		console.log("att_no:"+att_no);
-		console.log("att_fuck:"+att_fuck);
-		dataPercent(soft_all,att_all,att_yes,att_no,att_fuck);
+		console.log("att_all:" + att_all);
+		console.log("att_yes:" + att_yes);
+		console.log("att_no:" + att_no);
+		console.log("att_fuck:" + att_fuck);
+		dataPercent(soft_all, att_all, att_yes, att_no, att_fuck);
 	}
 }
 
 //计算数据比例
-function dataPercent(softAll,attAll,attYes,attNo,attFuck){
-	var nowProcess = Math.ceil(100*attAll/softAll);
-	var yesPercent = Math.ceil(100*attYes/attAll);
-	var noPercent = Math.ceil(100*attNo/attAll);
-	var fuckPercent = Math.ceil(100*attFuck/attAll);
+function dataPercent(softAll, attAll, attYes, attNo, attFuck){
+	var nowProcess = Math.ceil(100 * attAll / softAll);
+	var yesPercent = attAll ? Math.ceil(100 * attYes / attAll) : 0;
+	var noPercent = attAll ? Math.ceil(100 * attNo / attAll) : 0;
+	var fuckPercent = attAll ? Math.ceil(100 * attFuck / attAll) : 0;
 
-	document.getElementById("bottom-bar").style.width = nowProcess+"%";
-	document.getElementById("bottom-bar").innerHTML = nowProcess+"%";
-	document.getElementById("bottom-yes").innerHTML = yesPercent+"%";
-	document.getElementById("bottom-fuck").innerHTML = noPercent+"%";
-	document.getElementById("bottom-no").innerHTML = fuckPercent+"%";
+	document.getElementById("bottom-bar").style.width = nowProcess + "%";
+	document.getElementById("bottom-bar").innerHTML = nowProcess + "%";
+	document.getElementById("bottom-yes").innerHTML = yesPercent + "%";
+	document.getElementById("bottom-fuck").innerHTML = noPercent + "%";
+	document.getElementById("bottom-no").innerHTML = fuckPercent + "%";
+
+	if(attAll == softAll){
+		document.getElementById("baoxu-info").innerHTML = "完成了！谢谢参与！！";
+	}else{
+		document.getElementById("baoxu-info").innerHTML = "加油！";
+	}
 }
 
 //生成软件表格
@@ -176,36 +178,36 @@ function activeAttitude(){
 		//该行第2列已安装软件的链接，鼠标移过时显示icon
 		var installLink = pageTableBodyTD[1].getElementsByTagName("a")[0];
 		/*installLink.onmouseover = function(event){
-			var mouseX = event.clientX+10;
-			var mouseY = event.clientY+15;
-			var iconUrl = installLink.getAttribute("icon");
-			//alert(mouseX+";"+mouseY);
-			hoverIcon.style.display = "";
-			hoverIcon.style.top = mouseY+"px";
-			hoverIcon.style.left = mouseX+"px";
-			hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
-		}
-		installLink.onmouseout = function(event){
-			hoverIcon.style.display = "none";
-			hoverIcon.getElementsByTagName("img")[0].src = "";
-		}*/
+		 var mouseX = event.clientX+10;
+		 var mouseY = event.clientY+15;
+		 var iconUrl = installLink.getAttribute("icon");
+		 //alert(mouseX+";"+mouseY);
+		 hoverIcon.style.display = "";
+		 hoverIcon.style.top = mouseY+"px";
+		 hoverIcon.style.left = mouseX+"px";
+		 hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
+		 }
+		 installLink.onmouseout = function(event){
+		 hoverIcon.style.display = "none";
+		 hoverIcon.getElementsByTagName("img")[0].src = "";
+		 }*/
 
 		//该行第3列推荐软件的链接，鼠标移过时显示icon
 		var recommendLink = pageTableBodyTD[2].getElementsByTagName("a")[0];
 		/*recommendLink.onmouseover = function(event){
-			var mouseX = event.clientX+10;
-			var mouseY = event.clientY+15;
-			var iconUrl = recommendLink.getAttribute("icon");
-			//alert(mouseX+";"+mouseY);
-			hoverIcon.style.display = "";
-			hoverIcon.style.top = mouseY+"px";
-			hoverIcon.style.left = mouseX+"px";
-			hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
-		}
-		recommendLink.onmouseout = function(event){
-			hoverIcon.style.display = "none";
-			hoverIcon.getElementsByTagName("img")[0].src = "";
-		}*/
+		 var mouseX = event.clientX+10;
+		 var mouseY = event.clientY+15;
+		 var iconUrl = recommendLink.getAttribute("icon");
+		 //alert(mouseX+";"+mouseY);
+		 hoverIcon.style.display = "";
+		 hoverIcon.style.top = mouseY+"px";
+		 hoverIcon.style.left = mouseX+"px";
+		 hoverIcon.getElementsByTagName("img")[0].src = iconUrl;
+		 }
+		 recommendLink.onmouseout = function(event){
+		 hoverIcon.style.display = "none";
+		 hoverIcon.getElementsByTagName("img")[0].src = "";
+		 }*/
 
 		var attitudeLink = pageTableBodyTD[3].getElementsByTagName("a");
 		for(var t = 0 ; t < attitudeLink.length ; t++){
@@ -216,8 +218,8 @@ function activeAttitude(){
 				var idTableTD = nowTableTR.getElementsByTagName("td")[0];
 				var nowRecomId = idTableTD.textContent;
 				var nowAttitudeLink = this.parentElement.getElementsByTagName("a");
-				var index = getObjectIndex(nowAttitudeLink,this);
-				bindForAttitudeBtn(index,nowTableTD,nowRecomId);
+				var index = getObjectIndex(nowAttitudeLink, this);
+				bindForAttitudeBtn(index, nowTableTD, nowRecomId);
 				return false;
 			}
 		}
@@ -225,17 +227,17 @@ function activeAttitude(){
 }
 
 //按钮的绑定事件
-function bindForAttitudeBtn(theIndex,theTD,theTecomId){
+function bindForAttitudeBtn(theIndex, theTD, theTecomId){
 	//显示加载中
 	theTD.innerHTML = "<img class='result-load' src='images/loading.gif' />";
 	//提交结果
-	postAttitude(theTecomId,theIndex+1,theTD);
+	postAttitude(theTecomId, theIndex + 1, theTD);
 }
 
 //异步提交结果
-function postAttitude(nowRecomId,nowAttitude,nowTD){
+function postAttitude(nowRecomId, nowAttitude, nowTD){
 	var request = getHTTPObject();
-	var requestUrl = "/baoxu-project/03-recommend-contrast/server/post.php?recommendid="+nowRecomId+"&attitude="+nowAttitude;
+	var requestUrl = "/baoxu-project/03-recommend-contrast/server/post.php?recommendid=" + nowRecomId + "&attitude=" + nowAttitude;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -270,13 +272,13 @@ function postAttitude(nowRecomId,nowAttitude,nowTD){
 					att_all++;
 
 					//重绘底部通知区
-					dataPercent(soft_all,att_all,att_yes,att_no,att_fuck);
+					dataPercent(soft_all, att_all, att_yes, att_no, att_fuck);
 
 					//LOG记录当前的数目情况
-					console.log("att_all:"+att_all);
-					console.log("att_yes:"+att_yes);
-					console.log("att_no:"+att_no);
-					console.log("att_fuck:"+att_fuck);
+					console.log("att_all:" + att_all);
+					console.log("att_yes:" + att_yes);
+					console.log("att_no:" + att_no);
+					console.log("att_fuck:" + att_fuck);
 				}else{
 					//返回错误
 					nowTD.innerHTML = "<i class = 'no result-error' title = '内部错误'>出错了</i>";
