@@ -11,20 +11,22 @@
     <script type = "text/javascript" src = "scripts/function.js"></script>
 </head>
 <body>
-<table id="login">
-    <tr>
-        <td>网易通行证</td>
-        <td><input id="passport" type="text" />*<br/><span id="passport-e"></span></td>
-    </tr>
-    <tr>
-        <td>姓名/昵称</td>
-        <td><input id="name" type="text" /></td>
-    </tr>
-    <tr>
-        <td colspan="2"><input id="start" type="button" value="开始测试" /></td>
-    </tr>
-</table>
-<table id = "main-table" style="display: none">
+<form action = "#">
+    <table id = "login" style = "display: none;">
+        <tr>
+            <td>网易通行证</td>
+            <td><input id = "passport" type = "text" />*<br /><span id = "passport-e"></span></td>
+        </tr>
+        <tr>
+            <td>姓名/昵称</td>
+            <td><input id = "name" type = "text" /></td>
+        </tr>
+        <tr>
+            <td colspan = "2"><input type = "submit" id = "start" value = "开始测试" /></td>
+        </tr>
+    </table>
+</form>
+<table id = "main-table" class="t-shadow" style = "display: none">
     <thead>
     <tr>
         <td>ID</td>
@@ -35,37 +37,61 @@
     </thead>
     <tbody>
     <tr>
-	    <td colspan="4"><img src="images/loading.gif" /></td>
+        <td colspan = "4"><img src = "images/loading.gif" /></td>
     </tr>
     </tbody>
     <tfoot></tfoot>
 </table>
-<div id="hover-icon" class="b-shadow" style="display: none"><img src="" /></div>
+<!--<div id="hover-icon" class="b-shadow" style="display: none"><img src="" /></div>-->
+<div id = "bottom-info">
+    <div id = "bottom-process"><span>完成进度：</span>
+        <div id = "bottom-bar-cnt">
+            <div id = "bottom-bar"></div>
+        </div>
+    </div>
 
+    <div id="bottom-count">
+        <div><span>靠谱比率：</span>
+            <div id = "bottom-yes"></div>
+        </div>
+
+        <div><span>一般比率：</span>
+            <div id = "bottom-fuck"></div>
+        </div>
+
+        <div><span>不靠谱比率：</span>
+            <div id = "bottom-no"></div>
+        </div>
+    </div>
+</div>
 
 <!--模板-->
 <script id = "tpl-software-list-item" type = "text/template">
     <%for(var i = 0; i<software.length;i++){%>
     <tr>
         <td><%=software[i].id%></td>
-        <td><a target = "_blank" href = <%=software[i].installed_url%> icon = <%=software[i].installed_icon%>><%=software[i].installed%>&nbsp;<img src="images/external.png" /></a></td>
-        <td><a target = "_blank" href = <%=software[i].recommend_url%> icon = <%=software[i].recommend_icon%>><%=software[i].recommend%>&nbsp;<img src="images/external.png" /></a></td>
+        <td><a target = "_blank" href = <%=software[i].installed_url%> icon = <%=software[i].installed_icon%>><img
+                class = "soft-icon" src = <%=software[i].installed_icon%> />&nbsp;<%=software[i].installed%>&nbsp;<img
+                src = "images/external.png" /></a></td>
+        <td><a target = "_blank" href = <%=software[i].recommend_url%> icon = <%=software[i].recommend_icon%>><img
+                class = "soft-icon" src = <%=software[i].recommend_icon%> />&nbsp;<%=software[i].recommend%>&nbsp;<img
+                src = "images/external.png" /></a></td>
 
-	    <%switch(software[i].attitude){
-	    case "1":%>
-		    <td><i class = "no result" title = "不准">不靠谱</i></td>
-		    <%break;
-	    case "2":%>
-		    <td><i class = "fuck result" title = "没感觉">没感觉</i></td>
-		    <%break;
-	    case "3":%>
-		    <td><i class = "yes result" title = "很准">很靠谱</i></td>
-		    <%break;
-	    default:%>
-	    <td><a href = "#" class = "no" title = "不准">不靠谱</a> <a href = "#" class = "fuck" title = "没感觉">没感觉</a> <a
-			    href = "#" class = "yes" title = "很准">很靠谱</a>
-	    </td>
-	    <%}%>
+        <%switch(software[i].attitude){
+        case "1":%>
+        <td><i class = "no result" title = "不准">不靠谱</i></td>
+        <%break;
+        case "2":%>
+        <td><i class = "fuck result" title = "一般般">一般般</i></td>
+        <%break;
+        case "3":%>
+        <td><i class = "yes result" title = "很准">很靠谱</i></td>
+        <%break;
+        default:%>
+        <td><a class = "no" title = "不准">不靠谱</a> <a class = "fuck" title = "一般般">一般般</a> <a
+                 class = "yes" title = "很准">很靠谱</a>
+        </td>
+        <%}%>
     </tr>
     <%}%>
 </script>

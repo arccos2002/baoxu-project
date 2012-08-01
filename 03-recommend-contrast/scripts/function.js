@@ -5,17 +5,59 @@
  */
 
 //定义常量
-var REQUEST_HOST = "http://localhost/"
+var REQUEST_HOST = "http://192.168.88.20/"
+
+//定义全局变量
+var soft_all = 0,
+	att_all = 0,
+	att_yes = 0,
+	att_fuck = 0,
+	att_no = 0;
 
 addLoadEvent(start);
 
 function start(){
 	//alert("baoxu");
-	login();
+	checkCookie();
 }
+
+
+function checkCookie(){
+	var cookiePass = getCookie("baoxu-recommend-contrast-cookie-pass");
+	if(cookiePass){
+		console.log("Cookie:有cookie,"+cookiePass);
+		getSoftware(cookiePass,"保需");
+	}else{
+		console.log("Cookie:没有cookie");
+		login();
+	}
+}
+
+function addCookie(objName,objValue,objHours){//添加cookie
+	var str = objName + "=" + escape(objValue);
+	if(objHours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+		var date = new Date();
+		var ms = objHours*3600*1000;
+		date.setTime(date.getTime() + ms);
+		str += "; expires=" + date.toGMTString();
+	}
+	document.cookie = str;
+	//alert("添加cookie成功");
+}
+
+function getCookie(objName){//获取指定名称的cookie的值
+	var arrStr = document.cookie.split("; ");
+	for(var i = 0;i < arrStr.length;i ++){
+		var temp = arrStr[i].split("=");
+		if(temp[0] == objName) return escape(temp[1]);
+	}
+}
+
 
 //登录处理
 function login(){
+	var login_table = document.getElementById("login");
+	login_table.style.display="";
 	var start_btn = document.getElementById("start");
 	start_btn.onclick = function(){
 		var user_passport = document.getElementById("passport").value;
@@ -24,10 +66,12 @@ function login(){
 		if(user_passport){
 			document.getElementById("login").style.display = "none";
 			document.getElementById("main-table").style.display = "";
+			addCookie("baoxu-recommend-contrast-cookie-pass",user_passport,0);
 			getSoftware(user_passport,user_name);
 		}else{
 			document.getElementById("passport-e").innerHTML="不能为空";
 		}
+		return false;
 	}
 }
 
@@ -35,7 +79,7 @@ function login(){
 //异步获取用户信息和用户推荐列表
 function getSoftware(thePassport,theUserName){
 	var request = getHTTPObject();
-	var requestUrl = REQUEST_HOST + "baoxu-project/03-recommend-contrast/server/cdr.php?passport="+thePassport+"&size=100&username="+theUserName;
+	var requestUrl = "/baoxu-project/03-recommend-contrast/server/cdr.php?passport="+thePassport+"&size=100&username="+theUserName;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -43,11 +87,12 @@ function getSoftware(thePassport,theUserName){
 			if(request.readyState == 4){
 				//请求成功之后要做的操作
 				var requestResult = request.responseText;
+				//console.log(requestResult);
 				//转化为标准JSON对象
 				requestResult = JSON.parse(requestResult);
-				//alert(requestResult);
 				//生成表格
 				generatTable(requestResult);
+				getAttitudeCount(requestResult);
 				return true;
 			}
 		};
@@ -57,9 +102,56 @@ function getSoftware(thePassport,theUserName){
 	}
 }
 
+
+//初始化用户满意数
+function getAttitudeCount(softwareData){
+	soft_all = softwareData.software.length;
+	for(var i=0;i<soft_all;i++){
+		console.log(softwareData.software[i].attitude);
+		switch(softwareData.software[i].attitude){
+			case "0":
+				break;
+			case "1":
+				att_all++;
+				att_no++;
+				break;
+			case "2":
+				att_all++;
+				att_fuck++;
+				break;
+			case "3":
+				att_all++;
+				att_yes++;
+				break;
+		}
+
+		//LOG记录当前的数目情况
+		console.log("att_all:"+att_all);
+		console.log("att_yes:"+att_yes);
+		console.log("att_no:"+att_no);
+		console.log("att_fuck:"+att_fuck);
+		dataPercent(soft_all,att_all,att_yes,att_no,att_fuck);
+	}
+}
+
+//计算数据比例
+function dataPercent(softAll,attAll,attYes,attNo,attFuck){
+	var nowProcess = Math.ceil(100*attAll/softAll);
+	var yesPercent = Math.ceil(100*attYes/attAll);
+	var noPercent = Math.ceil(100*attNo/attAll);
+	var fuckPercent = Math.ceil(100*attFuck/attAll);
+
+	document.getElementById("bottom-bar").style.width = nowProcess+"%";
+	document.getElementById("bottom-bar").innerHTML = nowProcess+"%";
+	document.getElementById("bottom-yes").innerHTML = yesPercent+"%";
+	document.getElementById("bottom-fuck").innerHTML = noPercent+"%";
+	document.getElementById("bottom-no").innerHTML = fuckPercent+"%";
+}
+
 //生成软件表格
 function generatTable(softwareData){
 	var pageTable = document.getElementById("main-table");
+	pageTable.style.display = "";
 	var pageTableBody = pageTable.getElementsByTagName("tbody")[0];
 
 	//填充模板，填充页面内容
@@ -83,7 +175,7 @@ function activeAttitude(){
 		var pageTableBodyTD = pageTableBodyTR[i].getElementsByTagName("td");
 		//该行第2列已安装软件的链接，鼠标移过时显示icon
 		var installLink = pageTableBodyTD[1].getElementsByTagName("a")[0];
-		installLink.onmouseover = function(event){
+		/*installLink.onmouseover = function(event){
 			var mouseX = event.clientX+10;
 			var mouseY = event.clientY+15;
 			var iconUrl = installLink.getAttribute("icon");
@@ -96,14 +188,14 @@ function activeAttitude(){
 		installLink.onmouseout = function(event){
 			hoverIcon.style.display = "none";
 			hoverIcon.getElementsByTagName("img")[0].src = "";
-		}
+		}*/
 
 		//该行第3列推荐软件的链接，鼠标移过时显示icon
 		var recommendLink = pageTableBodyTD[2].getElementsByTagName("a")[0];
-		recommendLink.onmouseover = function(event){
+		/*recommendLink.onmouseover = function(event){
 			var mouseX = event.clientX+10;
 			var mouseY = event.clientY+15;
-			var iconUrl = installLink.getAttribute("icon");
+			var iconUrl = recommendLink.getAttribute("icon");
 			//alert(mouseX+";"+mouseY);
 			hoverIcon.style.display = "";
 			hoverIcon.style.top = mouseY+"px";
@@ -113,7 +205,7 @@ function activeAttitude(){
 		recommendLink.onmouseout = function(event){
 			hoverIcon.style.display = "none";
 			hoverIcon.getElementsByTagName("img")[0].src = "";
-		}
+		}*/
 
 		var attitudeLink = pageTableBodyTD[3].getElementsByTagName("a");
 		for(var t = 0 ; t < attitudeLink.length ; t++){
@@ -143,7 +235,7 @@ function bindForAttitudeBtn(theIndex,theTD,theTecomId){
 //异步提交结果
 function postAttitude(nowRecomId,nowAttitude,nowTD){
 	var request = getHTTPObject();
-	var requestUrl = REQUEST_HOST + "baoxu-project/03-recommend-contrast/server/post.php?recommendid="+nowRecomId+"&attitude="+nowAttitude;
+	var requestUrl = "/baoxu-project/03-recommend-contrast/server/post.php?recommendid="+nowRecomId+"&attitude="+nowAttitude;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -158,16 +250,33 @@ function postAttitude(nowRecomId,nowAttitude,nowTD){
 						case 1:
 							//alert("0");
 							nowTD.innerHTML = "<i class = 'no result' title = '你认为很不准'>不靠谱</i>";
+							//不靠谱数目加1
+							att_no++;
 							break;
 						case 2:
 							//alert("1");
-							nowTD.innerHTML = "<i class = 'fuck result' title = '你认为没感觉'>没感觉</i>";
+							nowTD.innerHTML = "<i class = 'fuck result' title = '你认为一般般'>一般般</i>";
+							//一般般数目加1
+							att_fuck++;
 							break;
 						case 3:
 							//alert("2");
 							nowTD.innerHTML = "<i class = 'yes result' title = '你认为很准'>很靠谱</i>";
+							//靠谱数目加1
+							att_yes++;
 							break;
 					}
+					//表过态的数目加1
+					att_all++;
+
+					//重绘底部通知区
+					dataPercent(soft_all,att_all,att_yes,att_no,att_fuck);
+
+					//LOG记录当前的数目情况
+					console.log("att_all:"+att_all);
+					console.log("att_yes:"+att_yes);
+					console.log("att_no:"+att_no);
+					console.log("att_fuck:"+att_fuck);
 				}else{
 					//返回错误
 					nowTD.innerHTML = "<i class = 'no result-error' title = '内部错误'>出错了</i>";

@@ -32,10 +32,11 @@
 	border-bottom: 1px #DDD solid;
 	border-right: 1px #DDD solid;
 	height: 30px;
+	font-size: 1.2em;
+	font-family: "微软雅黑";
 }
 
 #main-table thead tr td{
-	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
 	width: 300px;
@@ -47,7 +48,7 @@
 }
 
 #main-table tbody tr td{
-	padding-left: 5px;
+	padding: 5px;
 }
 
 #main-table tbody tr td a{
@@ -66,16 +67,24 @@
 	color: #000;
 }
 
+#main-table tbody tr td:last-child a:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 #main-table tbody tr td a.no, i.no{
 	background: url("../images/emoticon_unhappy.png") left no-repeat;
+	color: #900002;
 }
 
 #main-table tbody tr td a.fuck, i.fuck{
 	background: url("../images/emoticon_surprised.png") left no-repeat;
+	color: #918b2f;
 }
 
 #main-table tbody tr td a.yes, i.yes{
 	background: url("../images/emoticon_grin.png") left no-repeat;
+	color: green;
 }
 
 #main-table tbody tr td a.result, i.result{
@@ -83,7 +92,7 @@
 	clear: both;
 }
 
-#main-table tbody tr td a.result-error , i.result-error{
+#main-table tbody tr td a.result-error, i.result-error{
 	background: url("../images/error.png") left no-repeat;
 	margin-left: 66px;
 	clear: both;
@@ -94,14 +103,12 @@
 	clear: both;
 }
 
-
-
 #main-table td:first-child{
 	width: 50px;
 }
 
 #main-table td:last-child{
-	width: 200px;
+	width: 220px;
 }
 
 #main-table tbody td:last-child{
@@ -113,7 +120,6 @@
 	text-align: center;
 }
 
-
 #login{
 	margin: 10% auto 0 auto;
 	border: 1px #DDD solid;
@@ -124,7 +130,7 @@
 }
 
 #login td:first-child{
-	width:80px;
+	width: 80px;
 	text-align: right;
 	padding-right: 12px;
 }
@@ -166,4 +172,76 @@
 	border-radius: 13px;
 	height: 175px;
 	width: 175px;
+}
+
+#start{
+	padding: 3px;
+}
+
+.soft-icon{
+	height: 70px;
+	width: 70px;
+	border: 1px solid #DDD;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	background: url("../images/loading.gif") no-repeat center #fff;
+}
+
+#bottom-info{
+	height: 20px;
+	background-color: #286fff;
+	width: 100%;
+	bottom: 0;
+	position: fixed;
+	z-index: 199;
+	font-family: "微软雅黑";
+	font-size: 1.1em;
+	line-height: 16px;
+	color: #FFF;
+	padding-top: 4px;
+	-moz-box-shadow: 0px -5px 3px #999;
+	-webkit-box-shadow: 0px -5px 3px #999;
+	box-shadow: 0px -3px 5px #999;
+}
+
+#bottom-process{
+	margin-left: 10px;
+}
+
+#bottom-process span, #bottom-count div, #bottom-count div span{
+	float: left;
+	text-align: left;
+	display: inline;
+}
+
+#bottom-count div{
+	margin-right: 10px;
+}
+
+#bottom-bar-cnt{
+	border: 1px solid #fff;
+	height: 15px;
+	width: 200px;
+	float: left;
+	background: #DDD;
+}
+
+#bottom-bar{
+	height: 13px;
+	background: #ff4f1f;
+	margin-top: 1px;
+	text-align: right;
+	font-size: 0.8em;
+	color: #000;
+	line-height: 12px;
+}
+
+#bottom-count{
+	float: right;
+}
+
+#bottom-yes,#bottom-fuck,#bottom-no{
 }
