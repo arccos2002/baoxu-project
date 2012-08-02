@@ -13,7 +13,7 @@ var soft_all = 0, att_all = 0, att_yes = 0, att_fuck = 0, att_no = 0;
 addLoadEvent(start);
 
 function start(){
-	console.log("开始运行");
+	console.log("Baoxu:开始运行");
 	checkCookie();
 }
 
@@ -38,7 +38,7 @@ function addCookie(objName, objValue, objHours){//添加cookie
 		str += "; expires=" + date.toGMTString();
 	}
 	document.cookie = str;
-	//alert("添加cookie成功");
+	console.log("Cookie:cookie添加成功！");
 }
 
 function getCookie(objName){//获取指定名称的cookie的值
@@ -47,6 +47,12 @@ function getCookie(objName){//获取指定名称的cookie的值
 		var temp = arrStr[i].split("=");
 		if(temp[0] == objName) return escape(temp[1]);
 	}
+}
+
+function delCookie(objName) {
+	var date = new Date();
+	date.setTime(date.getTime() - 10000);
+	document.cookie = objName + "=a; expires=" + date.toGMTString();
 }
 
 
@@ -60,9 +66,6 @@ function login(){
 		var user_name = document.getElementById("name").value;
 		//alert(user_passport);
 		if(user_passport){
-			document.getElementById("login").style.display = "none";
-			document.getElementById("main-table").style.display = "";
-			addCookie("baoxu-recommend-contrast-cookie-pass", user_passport, 0);
 			getSoftware(user_passport, user_name);
 		}else{
 			document.getElementById("passport-e").innerHTML = "不能为空";
@@ -86,9 +89,8 @@ function getSoftware(thePassport, theUserName){
 				//console.log(requestResult);
 				//转化为标准JSON对象
 				requestResult = JSON.parse(requestResult);
-				//生成表格
-				generatTable(requestResult);
-				getAttitudeCount(requestResult);
+				//验证数据
+				varifyData(requestResult);
 				return true;
 			}
 		};
@@ -98,6 +100,33 @@ function getSoftware(thePassport, theUserName){
 	}
 }
 
+
+//验证服务器给回的数据
+function varifyData(requestResult){
+	switch(requestResult.nowSta){
+		case "success":
+			addCookie("baoxu-recommend-contrast-cookie-pass", requestResult.passport, 0);
+			generatTable(requestResult);
+			getAttitudeCount(requestResult);
+			break;
+		case "error":
+			console.error("Varify:验证数据阶段出错！");
+			fixError(requestResult);
+			break;
+	}
+}
+
+//修正验证的数据问题
+function fixError(requestResult){
+	switch(requestResult.class){
+		case "CBX_ERROR_001":
+			alert(requestResult.cause);
+			break;
+		case "CBX_ERROR_002":
+			alert(requestResult.cause);
+			break;
+	}
+}
 
 //初始化用户满意数
 function getAttitudeCount(softwareData){
@@ -152,6 +181,11 @@ function dataPercent(softAll, attAll, attYes, attNo, attFuck){
 
 //生成软件表格
 function generatTable(softwareData){
+
+	//登录框隐藏，显示列表
+	document.getElementById("login").style.display = "none";
+	document.getElementById("main-table").style.display = "";
+
 	var pageTable = document.getElementById("main-table");
 	pageTable.style.display = "";
 	var pageTableBody = pageTable.getElementsByTagName("tbody")[0];

@@ -30,6 +30,15 @@ $fetchData = file_get_contents($fetchUrl);
 //解析JSON值
 $phpJson = json_decode($fetchData);
 
+//判断这个json是不是有效的
+if(!is_object($phpJson)){
+	printError("CBX_ERROR_001","服务器返回数据异常");
+	exit;
+}else if(!array_key_exists("passport", $phpJson)){
+	printError("CBX_ERROR_002","通行证不正确");
+	exit;
+}
+
 //从JSON中获取用户通行证
 $thePassport = $phpJson->passport;
 //从JSON中获取用户装过数
@@ -102,6 +111,7 @@ function refactorJson($thePassport,$userName){
     //重组全表
     $fullData = array
     (
+		"nowSta"=>"success",
     	"passport"=>$thePassport,
     	"username"=>$userName,
     	"software"=>$softArray
@@ -114,5 +124,15 @@ function refactorJson($thePassport,$userName){
     echo json_encode($fullData);
 }
 
+
+function printError($errorClass,$errorWhy){
+	$theError = array
+	(
+		"nowSta"=>"error",
+		"class"=>$errorClass,
+		"cause"=>$errorWhy
+	);
+	echo json_encode($theError);
+}
 
 ?>
