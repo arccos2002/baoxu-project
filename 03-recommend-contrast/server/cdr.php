@@ -1,7 +1,7 @@
 <?php
 //定义从服务器获取数据地址的常量
 //获取用户数据的主机名
-$GET_DATA_HOST = "http://123.123.123.123";
+$GET_DATA_HOST = "http://61.135.251.221/appstore/recommend";
 
 //链接数据库
 include("conn.php");
@@ -11,16 +11,16 @@ $passPort = $_REQUEST['passport'];
 $userName = $_REQUEST['username'];
 $querySize = $_REQUEST['size'];
 
-$queryString = "?passport=".$passPort."&size=".$querySize;
+$queryString = "?uid=".$passPort;
 
 //Encode
 //$queryString = urlencode($queryString);
 
 //正式环境用这个
-//$fetchUrl = $GET_DATA_HOST.$queryString;
+$fetchUrl = $GET_DATA_HOST.$queryString;
 
 //测试用的数据抓取路径
-$fetchUrl = "http://localhost/baoxu-project/03-recommend-contrast/testdata/data.json";
+//$fetchUrl = "http://61.135.251.221/appstore/recommend?uid=yucn1166";
 
 //获取JSON值
 $fetchData = file_get_contents($fetchUrl);
@@ -63,10 +63,10 @@ function insertData($phpJson,$thePassport,$userName,$theInstCount){
     $sqlString_1 = "INSERT INTO `recommend_contrast`.`user` (`id` ,`passport` ,`name`,`install_count`) VALUES (NULL ,'$thePassport', '$userName','$theInstCount');";
     $sqlResult_1 = mysql_query($sqlString_1);
     //如果插入失败，返回error
-    if(!$sqlResult_1){
-    	echo "error";
+    /*if(!$sqlResult_1){
+    	echo "error1";
     	exit;
-    }
+    }*/
 
     //将软件推荐数据插入软件表
     for($i=0;$i<count($phpJson->software);$i++){
@@ -79,10 +79,10 @@ function insertData($phpJson,$thePassport,$userName,$theInstCount){
     	$sqlString_2 = "INSERT INTO `recommend_contrast`.`software` (`id` ,`passport`,`installed` ,`installed_icon`,`installed_url`,`recommend`,`recommend_icon`,`recommend_url`) VALUES (NULL ,'$thePassport','$theInstalled','$theInstalledIcon','$theInstalledUrl','$theRecommend','$theRecommendIcon','$theRecommendUrl');";
         $sqlResult_2 = mysql_query($sqlString_2);
         //如果插入失败，返回error
-        if(!$sqlResult_2){
-        	echo "error";
+        /*if(!$sqlResult_2){
+        	echo "error2";
         	exit;
-        }
+        }*/
     }
 }
 

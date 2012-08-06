@@ -15,6 +15,7 @@ addLoadEvent(start);
 function start(){
 	console.log("Baoxu:开始运行");
 	checkCookie();
+	logout_init();
 }
 
 //检查cookie是否存在，如果存在，直接展示列表，如果不存在，重新登录
@@ -62,8 +63,10 @@ function login(){
 	login_table.style.display = "";
 	var start_btn = document.getElementById("start");
 	start_btn.onclick = function(){
-		var user_passport = document.getElementById("passport").value;
+		var domain = document.getElementById("domainSelect").value;
+		var user_passport = document.getElementById("passport").value + domain;
 		var user_name = document.getElementById("name").value;
+		document.getElementById("start").parentElement.innerHTML = "<img src = 'images/loading.gif' /> 请稍候";
 		//alert(user_passport);
 		if(user_passport){
 			getSoftware(user_passport, user_name);
@@ -71,6 +74,17 @@ function login(){
 			document.getElementById("passport-e").innerHTML = "不能为空";
 		}
 		return false;
+	}
+}
+
+//退出登录
+function logout_init(){
+	var logout_div = document.getElementById("bottom-user");
+	var logout_btn = document.getElementById("bottom-logout-btn");
+	logout_btn.onclick = function(){
+		delCookie("baoxu-recommend-contrast-cookie-pass");
+		logout_div.style.display = "none";
+		window.top.location.reload();
 	}
 }
 
@@ -106,6 +120,10 @@ function varifyData(requestResult){
 	switch(requestResult.nowSta){
 		case "success":
 			addCookie("baoxu-recommend-contrast-cookie-pass", requestResult.passport, 0);
+			var logout_div = document.getElementById("bottom-user");
+			logout_div.style.display = "";
+			var log_user = document.getElementById("bottom-passport");
+			log_user.innerHTML = requestResult.passport;
 			generatTable(requestResult);
 			getAttitudeCount(requestResult);
 			break;
@@ -132,7 +150,7 @@ function fixError(requestResult){
 function getAttitudeCount(softwareData){
 	soft_all = softwareData.software.length;
 	for(var i = 0 ; i < soft_all ; i++){
-		console.log(softwareData.software[i].attitude);
+		//console.log(softwareData.software[i].attitude);
 		switch(softwareData.software[i].attitude){
 			case "0":
 				break;
@@ -151,10 +169,10 @@ function getAttitudeCount(softwareData){
 		}
 
 		//LOG记录当前的数目情况
-		console.log("att_all:" + att_all);
-		console.log("att_yes:" + att_yes);
-		console.log("att_no:" + att_no);
-		console.log("att_fuck:" + att_fuck);
+		//console.log("att_all:" + att_all);
+		//console.log("att_yes:" + att_yes);
+		//console.log("att_no:" + att_no);
+		//console.log("att_fuck:" + att_fuck);
 		dataPercent(soft_all, att_all, att_yes, att_no, att_fuck);
 	}
 }
@@ -162,9 +180,9 @@ function getAttitudeCount(softwareData){
 //计算数据比例
 function dataPercent(softAll, attAll, attYes, attNo, attFuck){
 	var nowProcess = Math.ceil(100 * attAll / softAll);
-	var yesPercent = attAll ? Math.ceil(100 * attYes / attAll) : 0;
-	var noPercent = attAll ? Math.ceil(100 * attNo / attAll) : 0;
-	var fuckPercent = attAll ? Math.ceil(100 * attFuck / attAll) : 0;
+	var yesPercent = attAll ? Math.round(100 * attYes / attAll) : 0;
+	var noPercent = attAll ? Math.round(100 * attNo / attAll) : 0;
+	var fuckPercent = attAll ? Math.round(100 * attFuck / attAll) : 0;
 
 	document.getElementById("bottom-bar").style.width = nowProcess + "%";
 	document.getElementById("bottom-bar").innerHTML = nowProcess + "%";
@@ -195,7 +213,7 @@ function generatTable(softwareData){
 	pageTableBody.innerHTML = createTR;
 
 	//为表格上色
-	cbxColorTable("main-table", "#FFF", "#FAFAFA", "#DBEAF9", "green", "#000", "#000", 1);
+	cbxColorTable("main-table", "#FFF", "#F5F5F5", "#DBEAF9", "green", "#000", "#000", 1);
 
 	//为用户表态的按钮添加事件
 	activeAttitude();

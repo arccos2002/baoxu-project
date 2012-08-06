@@ -15,7 +15,11 @@
     <table id = "login" style = "display: none;">
         <tr>
             <td>网易通行证</td>
-            <td><input id = "passport" type = "text" />*<br /><span id = "passport-e"></span></td>
+            <td><input id = "passport" type = "text" size="15" /> @ <select class="domain" tabindex="3" id="domainSelect">
+	            <option value="">163.com</option>
+	            <option value="@126.com">126.com</option>
+	            <option value="@yeah.net">yeah.net</option>
+            </select>*<br /><span id = "passport-e"></span></td>
         </tr>
         <tr>
             <td>姓名/昵称</td>
@@ -51,6 +55,11 @@
         <span id="baoxu-info">请输入通行证和昵称开始～</span>
     </div>
 
+	<div id="bottom-user">
+		<div id="bottom-passport"></div>
+		<div id="bottom-logout"><a id="bottom-logout-btn">退出</a></div>
+	</div>
+
     <div id="bottom-count">
         <div><span>靠谱比率：</span>
             <div id = "bottom-yes"></div>
@@ -72,10 +81,10 @@
     <tr>
         <td><%=software[i].id%></td>
         <td><a target = "_blank" href = <%=software[i].installed_url%> icon = <%=software[i].installed_icon%>><img
-                class = "soft-icon" src = <%=software[i].installed_icon%> />&nbsp;<%=software[i].installed%>&nbsp;<img
+                class = "soft-icon" src = <%=software[i].installed_icon%> />&nbsp;<%=software[i].installed.substring(0,17)%>&nbsp;<img
                 src = "images/external.png" /></a></td>
         <td><a target = "_blank" href = <%=software[i].recommend_url%> icon = <%=software[i].recommend_icon%>><img
-                class = "soft-icon" src = <%=software[i].recommend_icon%> />&nbsp;<%=software[i].recommend%>&nbsp;<img
+                class = "soft-icon" src = <%=software[i].recommend_icon%> />&nbsp;<%=software[i].recommend.substring(0,17)%>&nbsp;<img
                 src = "images/external.png" /></a></td>
 
         <%switch(software[i].attitude){
