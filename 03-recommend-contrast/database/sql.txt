@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 07 月 29 日 08:34
+-- 生成日期: 2012 年 08 月 15 日 02:30
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.3
 
@@ -12,8 +12,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- 数据库: `recommend_contrast`
 --
-CREATE DATABASE `recommend_contrast` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `recommend_contrast`;
 
 -- --------------------------------------------------------
 
@@ -25,12 +23,14 @@ CREATE TABLE IF NOT EXISTS `software` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `passport` varchar(200) COLLATE utf8_bin NOT NULL,
   `installed` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `installed_icon` varchar(200) COLLATE utf8_bin NOT NULL,
   `installed_url` varchar(500) COLLATE utf8_bin NOT NULL,
   `recommend` varchar(200) COLLATE utf8_bin NOT NULL,
+  `recommend_icon` varchar(200) COLLATE utf8_bin NOT NULL,
   `recommend_url` varchar(500) COLLATE utf8_bin NOT NULL,
   `attitude` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=181 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2006 ;
 
 -- --------------------------------------------------------
 
@@ -44,4 +44,4 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(200) COLLATE utf8_bin NOT NULL,
   `install_count` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=56 ;

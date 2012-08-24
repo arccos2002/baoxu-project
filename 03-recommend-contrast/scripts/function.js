@@ -92,7 +92,7 @@ function logout_init(){
 //异步获取用户信息和用户推荐列表
 function getSoftware(thePassport, theUserName){
 	var request = getHTTPObject();
-	var requestUrl = "/baoxu-project/03-recommend-contrast/server/cdr.php?passport=" + thePassport + "&size=100&username=" + theUserName;
+	var requestUrl = document.location.href + "server/cdr.php?passport=" + thePassport + "&size=100&username=" + theUserName;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
@@ -289,7 +289,7 @@ function bindForAttitudeBtn(theIndex, theTD, theTecomId){
 //异步提交结果
 function postAttitude(nowRecomId, nowAttitude, nowTD){
 	var request = getHTTPObject();
-	var requestUrl = "/baoxu-project/03-recommend-contrast/server/post.php?recommendid=" + nowRecomId + "&attitude=" + nowAttitude;
+	var requestUrl = document.location.href + "server/post.php?recommendid=" + nowRecomId + "&attitude=" + nowAttitude;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, true);
