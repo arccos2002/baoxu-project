@@ -1,8 +1,8 @@
 <?php
 //定义从服务器抓取数据地址的常量
-//在google搜索一个歌曲的ID
+//在百度搜索一个歌曲的ID
 $GET_BAIDU_MUSIC_ID = "http://ting.baidu.com/search?key=";
-//查看google歌词，找到在top100上的下载地址
+//查看百度歌词，找到下载地址
 $GET_BAIDU_MUSIC_LRC = "http://ting.baidu.com/song/";
 
 
