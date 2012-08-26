@@ -46,10 +46,10 @@ if($requestType == "gma"){
     //打印截取长度值
     //echo $gmi_strlen."<br>";
 	if(!$gmi_pos_head){
-		echo("GET_SONG_GOOGLE_ID_ERROR");
+		echo("GET_SONG_BAIDU_ID_ERROR");
 		echo("<br>");
 	}else{
-		echo("GET_SONG_GOOGLE_ID_SUCCESS");
+		echo("GET_SONG_BAIDU_ID_SUCCESS");
 		echo("<br>");
 	}
     $gmi_result = substr($gmi_content,$gmi_pos_head,$gmi_strlen);
@@ -63,10 +63,10 @@ if($requestType == "gma"){
 	$gml_content = htmlentities(file_get_contents( $gml_url ));
 	//echo $gml_content;
 	if(!$gmi_content){
-		echo("GET_SONG_GOOGLE_LRC_ERROR");
+		echo("GET_SONG_BAIDU_LRC_ERROR");
 		echo("<br>");
 	}else{
-		echo("GET_SONG_GOOGLE_LRC_SUCCESS");
+		echo("GET_SONG_BAIDU_LRC_SUCCESS");
 		echo("<br>");
 	}
 	
