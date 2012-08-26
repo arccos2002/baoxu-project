@@ -8,7 +8,7 @@ addOnloadEvent(test);
 
 //定义URL跨域地址
 //公司用
-var CROSS_DOMAIN_REQUEST = "http://localhost/baoxu-project/02-lrc-auto-download/cdr.php?type=gma&"
+var CROSS_DOMAIN_REQUEST = "http://localhost/www/baoxu/lrc/cdr.php?type=gma&"
 //家用
 //var CROSS_DOMAIN_REQUEST = "http://localhost/lrc/cdr.php?type=gma&"
 
@@ -20,7 +20,7 @@ var THE_ERROE_COUNT = 0;
 var ERROR_LIST = new Array();
 
 function test(){
-	THE_SONG_LIST = getSongList("list.xml");
+	THE_SONG_LIST = getSongList("report03-error.xml");
 	if(THE_SONG_I < THE_SONG_LIST.length){
 		getSingleLrc(THE_SONG_LIST[THE_SONG_I].artist, THE_SONG_LIST[THE_SONG_I].song);
 	}else{
