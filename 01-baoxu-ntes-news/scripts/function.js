@@ -6,7 +6,7 @@
 
 
 //定义一些常量
-var CROSS_DOMAIN_PROXY = "http://localhost/baoxu-project/01-baoxu-ntes-news/cdr.php?";
+var CROSS_DOMAIN_PROXY = document.location.href + "cdr.php?";
 var COLUMN_ID_ELEMENT = [
 	{lolumnName:"头条", ntesID:"T1295501906343", elementID:"news-hot"},
 	{lolumnName:"体育", ntesID:"T1295505916992", elementID:"news-sport"},
