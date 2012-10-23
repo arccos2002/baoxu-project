@@ -147,7 +147,7 @@ function activeTemplate(theIndex, data, loadType){
 		//因为头条的li是19个，其余的栏目都是20个，为了便于计算，使用加一求余法
 		var loadMoreFlag = (allLiOfSectionCount + 1) % 20;
 		if(loadMoreFlag == 0){
-			alert(allLiOfSectionCount);
+			//alert(allLiOfSectionCount);
 			loadMoreDiv.innerHTML = "<img src=\"images/loading.gif\"/> <span>加载中…</span>";
 			addClass(loadMoreDiv, "loading");
 			getNewsList(theIndex, allLiOfSectionCount + 2, allLiOfSectionCount + 21, "headline", "loadmore");
