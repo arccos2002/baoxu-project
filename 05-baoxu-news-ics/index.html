@@ -2,9 +2,35 @@
 <html>
 <head>
 	<meta charset = "utf-8" />
-	<title></title>
+	<title>网易新闻ICS版客户端WebApp</title>
+	<link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
+	<link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
+	<script type = "text/javascript" src = "scripts/global.js"></script>
+	<script type = "text/javascript" src = "scripts/function.js"></script>
+	<script type = "text/javascript" src = "scripts/html5.js"></script>
 </head>
 <body>
+<!--抽屉底部背景,包含左边的主导航和右边的个人中心-->
+<section id="bot-layer">
+	<!--左边主导航-->
+	<div id="bot-layer-navi">
+		<ul id="navi-list">
+			<li class="navi-news"><a class="current"></a></li>
+			<li class="navi-ties"><a></a></li>
+			<li class="navi-pics"><a></a></li>
+			<li class="navi-topics"><a></a></li>
+		</ul>
+	</div>
+	<!--主导航的覆盖阴影-->
+	<div id="bot-layer-navi-shadow"></div>
+	<!--右边个人中心的覆盖阴影-->
+	<div id="bot-layer-info-shadow"></div>
+	<!--右边个人中心-->
+	<div id="bot-layer-info"></div>
+</section>
+
+<!--浮动主图层，显示新闻的主要内容-->
+<section id="main-layer"></section>
 
 </body>
 <!--

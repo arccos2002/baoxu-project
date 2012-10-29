@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+/**
+ * Author: Baoxu
+ * Date:   12-10-29
+ * Time:   下午12:09
+ */
+
+html,body{
+	height: 100%;
+	width: 100%;
+}
+
+/*用于底层抽屉的页面*/
+#bot-layer{
+	width: 100%;
+	height: 100%;
+	text-align: left;
+	background: #EEE;
+	position: relative;
+	z-index: 1;
+}
+
+/*抽屉左边的导航栏*/
+#bot-layer-navi{
+	width: 96px;
+	height: auto;
+	float: left;
+	position: relative;
+	z-index: 2;
+	background: url("../images/bot_layer_navi_bg.png") repeat;
+}
+
+#bot-layer-navi ul li{
+	width: 100%;
+	height: 92px;
+	padding-top: 23px;
+	background: url("../images/bot_layer_navi_divider.9.png") bottom repeat-x;
+}
+
+#bot-layer-navi ul li a{
+	width: 50px;
+	height: 70px;
+	display: block;
+	margin: 0 auto;
+	background: url("../images/bot_layer_navi_one.png") top left no-repeat;
+}
+
+#bot-layer-navi ul li.navi-news a{
+	background-position: 0 0;
+}
+
+#bot-layer-navi ul li.navi-news a.current{
+	background-position: 0 -70px;
+}
+
+#bot-layer-navi ul li.navi-ties a{
+	background-position: -50px 0;
+}
+
+#bot-layer-navi ul li.navi-pics a{
+	background-position: -100px 0;
+}
+
+#bot-layer-navi ul li.navi-topics a{
+	background-position: -150px 0;
+}
+
+/*导航栏右边的阴影效果*/
+#bot-layer-navi-shadow{
+	height: auto;
+	width: 40px;
+	float: left;
+	margin-left: -40px;
+	position: relative;
+	z-index: 20;
+	background: url("../images/bot_layer_navi_shadow.9.png") repeat-y;
+}
+
+
+
+/*抽屉右边的个人中心页面*/
+#bot-layer-info{
+	width: auto;
+	height: auto;
+	float: left;
+	margin-left: -40px;
+	position: relative;
+	z-index: 3;
+	background: url("../images/bot_layer_info_bg.png") top left repeat;
+}
+
+#bot-layer-info-shadow{
+	height: auto;
+	width: 40px;
+	float: left;
+	position: relative;
+	z-index: 30;
+	background: url("../images/bot_layer_info_shadow.9.png") repeat-y;
+}

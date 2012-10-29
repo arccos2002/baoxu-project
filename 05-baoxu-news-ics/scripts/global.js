@@ -4,7 +4,7 @@
  * Time:   下午1:56
  */
 
-//添加页面加载后时间
+//添加页面加载后事件
 function addLoadEvent(func){
 	var oldOnloadEvent = window.onload;
 	if(typeof oldOnloadEvent != "function"){
@@ -73,6 +73,14 @@ function getHTTPObject(){
 	return new XMLHttpRequest();
 }
 
+
+//获得浏览器信息
+function getClientInfo(){
+	var client_info = new Array();
+	client_info["width"] = document.body.clientWidth;
+	client_info["height"] = document.body.clientHeight;
+	return client_info;
+}
 
 //鼠标滚轮事件的定义
 function wheelEvent(obj, handle){
