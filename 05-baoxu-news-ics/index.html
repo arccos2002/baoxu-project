@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset = "utf-8" />
-	<!--<meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>-->
-	<meta name="viewport" content="width=480,target-densitydpi=300, initial-scale=0.5,  minimum-scale=0.5, maximum-scale=0.5, user-scalable=no"/>
+	<meta name = "viewport"
+	      content = "width=480,target-densitydpi=300, initial-scale=0.5,  minimum-scale=0.5, maximum-scale=0.5, user-scalable=no" />
 	<title>网易新闻ICS版客户端WebApp</title>
 	<link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
 	<link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
@@ -13,26 +13,47 @@
 </head>
 <body>
 <!--抽屉底部背景,包含左边的主导航和右边的个人中心-->
-<section id="bot-layer">
+<section id = "bot-layer">
 	<!--左边主导航-->
-	<div id="bot-layer-navi">
-		<ul id="navi-list">
-			<li class="navi-news"><a class="current"></a></li>
-			<li class="navi-ties"><a></a></li>
-			<li class="navi-pics"><a></a></li>
-			<li class="navi-topics"><a></a></li>
+	<div id = "bot-layer-navi">
+		<ul id = "navi-list">
+			<li class = "navi-news"><a class = "current"></a></li>
+			<li class = "navi-ties"><a></a></li>
+			<li class = "navi-pics"><a></a></li>
+			<li class = "navi-topics"><a></a></li>
 		</ul>
 	</div>
 	<!--主导航的覆盖阴影-->
-	<div id="bot-layer-navi-shadow"></div>
+	<div id = "bot-layer-navi-shadow"></div>
 	<!--右边个人中心的覆盖阴影-->
-	<div id="bot-layer-info-shadow"></div>
+	<div id = "bot-layer-info-shadow"></div>
 	<!--右边个人中心-->
-	<div id="bot-layer-info"></div>
+	<div id = "bot-layer-info">
+		<div id = "bot-layer-user-info">
+			<div id = "user-photo"><img src = "images/bot_layer_info_user_default.png" /></div>
+			<div id = "user-detail">
+				<h4 class="t-shadow">登录</h4>
+				<h6 class="t-shadow">登录后可查看您的跟帖、收藏等信息</h6>
+			</div>
+			<!--用于修正FF下DIV不会自动伸长的问题-->
+			<div style="clear: both;"></div>
+		</div>
+		<ul id = "bot-layer-user-data">
+			<li class="user-ties"><a></a></li>
+			<li class="user-favo"><a></a></li>
+			<li class="user-push"><a></a></li>
+		</ul>
+		<ul id="bot-layer-menu">
+			<li class="menu-weather"><a class="t-shadow">北京 15℃/2℃</a></li>
+			<li class="menu-offline"><a class="t-shadow">离线下载</a></li>
+			<li class="menu-search"><a class="t-shadow">搜索新闻</a></li>
+			<li class="menu-setting"><a class="t-shadow">设置</a></li>
+		</ul>
+	</div>
 </section>
 
 <!--浮动主图层，显示新闻的主要内容-->
-<section id="main-layer"></section>
+<section id = "main-layer"></section>
 
 </body>
 <!--

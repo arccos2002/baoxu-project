@@ -6,7 +6,15 @@
  * Time:   下午12:09
  */
 
+.t-shadow{
+	-moz-text-shadow: 2px 2px 2px #bbb;
+	-webkit-text-shadow: 2px 2px 2px #bbb;
+	text-shadow: 2px 2px 2px #bbb;
+}
+
+
 html,body{
+	font-family: "微软雅黑";
 	height: 100%;
 	width: 100%;
 }
@@ -97,4 +105,99 @@ html,body{
 	position: relative;
 	z-index: 30;
 	background: url("../images/bot_layer_info_shadow.9.png") repeat-y;
+}
+
+#bot-layer-user-info{
+	position: relative;
+	margin: 25px 0 0 25px;
+}
+
+#user-photo{
+	float: left;
+	position: relative;
+}
+
+#user-detail{
+	float: left;
+	margin-left: 25px;
+	position: relative;
+}
+
+#user-detail h4{
+	font-size: 26px;
+	font-weight: normal;
+	line-height: 50px;
+}
+
+#user-detail h6{
+	font-size: 14px;
+	line-height: 30px;
+}
+
+#bot-layer-user-data{
+	width: 330px;
+	height: 108px;
+	margin: 25px 0 0 25px;
+	clear: both;
+	position: relative;
+	background: url("../images/bot_layer_info_user_detail_bg.png") no-repeat;
+}
+
+#bot-layer-user-data li{
+	float: left;
+	width: 110px;
+	height: 108px;
+	background: url("../images/bot_layer_info_user_detail_divider.png") right no-repeat;
+}
+
+#bot-layer-user-data li a{
+	width: 66px;
+	height: 60px;
+	display: block;
+	margin: 25px auto;
+}
+
+#bot-layer-user-data li.user-ties a{
+	background: url("../images/bot_layer_info_user_detail_ties.png") no-repeat;
+}
+
+#bot-layer-user-data li.user-favo a{
+	background: url("../images/bot_layer_info_user_detail_favor.png") no-repeat;
+}
+
+#bot-layer-user-data li.user-push a{
+	background: url("../images/bot_layer_info_user_detail_push.png") no-repeat;
+}
+
+#bot-layer-menu{
+	position: relative;
+	margin: 25px 0 0 25px;
+}
+
+#bot-layer-menu li{
+	height: 100px;
+}
+
+#bot-layer-menu li a{
+	height: 50px;
+	margin-left: 20px;
+	padding: 25px 0 0 50px;
+	display: block;
+	font-size: 18px;
+}
+
+#bot-layer-menu li.menu-weather a{
+	background: url("../images/bot_layer_menu_weather.png") left no-repeat;
+}
+
+#bot-layer-menu li.menu-offline a{
+	background: url("../images/bot_layer_menu_offline.png") left no-repeat;
+}
+
+#bot-layer-menu li.menu-search a{
+	background: url("../images/bot_layer_menu_search.png") left no-repeat;
+}
+
+#bot-layer-menu li.menu-setting a{
+	background: url("../images/bot_layer_menu_setting.png") left no-repeat;
 }

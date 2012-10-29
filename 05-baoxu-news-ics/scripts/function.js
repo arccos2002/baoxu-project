@@ -15,7 +15,7 @@ function init(){
 	var client_width = getClientInfo()["width"];
 	var client_height = getClientInfo()["height"];
 
-	alert(client_width + ":" + client_height);
+	console.log("页面宽高：" + client_width + ":" + client_height);
 
 	var bot_layer = document.getElementById("bot-layer");
 	bot_layer.style.width = client_width;
