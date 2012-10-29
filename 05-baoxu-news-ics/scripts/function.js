@@ -15,6 +15,8 @@ function init(){
 	var client_width = getClientInfo()["width"];
 	var client_height = getClientInfo()["height"];
 
+	alert(client_width + ":" + client_height);
+
 	var bot_layer = document.getElementById("bot-layer");
 	bot_layer.style.width = client_width;
 	bot_layer.style.height = client_height;
