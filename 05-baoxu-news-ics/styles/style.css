@@ -118,20 +118,25 @@ html,body{
 }
 
 #user-detail{
+	width: 210px;
 	float: left;
-	margin-left: 25px;
+	margin-left: 20px;
 	position: relative;
 }
 
 #user-detail h4{
 	font-size: 26px;
 	font-weight: normal;
-	line-height: 50px;
+	line-height: 30px;
+	color: #333;
+	margin-bottom: 10px;
 }
 
 #user-detail h6{
-	font-size: 14px;
-	line-height: 30px;
+	font-size: 18px;
+	line-height: 25px;
+	color: #666;
+	word-break: break-all;
 }
 
 #bot-layer-user-data{
@@ -181,9 +186,10 @@ html,body{
 #bot-layer-menu li a{
 	height: 50px;
 	margin-left: 20px;
-	padding: 25px 0 0 50px;
+	padding: 18px 0 0 50px;
 	display: block;
-	font-size: 18px;
+	font-size: 24px;
+	color: #555;
 }
 
 #bot-layer-menu li.menu-weather a{
