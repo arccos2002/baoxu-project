@@ -53,7 +53,8 @@
 </section>
 
 <!--浮动主图层，显示新闻的主要内容-->
-<section id = "main-layer">
+<!--下面的margin-left设置是便于JS处理滑动-->
+<section id = "main-layer" style="margin-left: 0;">
 	<!--主图层顶部信息操作条-->
 	<div id="main-layer-action-bar">
 		<!--返回按钮-->
@@ -62,6 +63,8 @@
 		<div id="main-layer-action-bar-logo"></div>
 		<!--栏目名称-->
 		<div id="main-layer-action-bar-column"><a>头图&nbsp;&nbsp;&nbsp;</a></div>
+		<!--占位使用-->
+		<div style="float: left;width: 200px;"></div>
 		<!--右侧用户按钮入口-->
 		<div id="main-layer-action-bar-user"><a></a></div>
 		<!--针对FF的Float校正-->

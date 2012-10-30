@@ -9,6 +9,7 @@ addLoadEvent(todo);
 function todo(){
 	initViewPort();
 	changeBotLayerNavi();
+	bindAllObject();
 }
 
 //初始化页面的高宽以适合所有屏幕的显示
@@ -30,6 +31,28 @@ function initViewPort(){
 	document.getElementById("bot-layer-info").style.height = client_height + "px";
 	//底层个人信息部分校正宽度
 	document.getElementById("bot-layer-info").style.width = client_width - 96 + "px";
+
+	document.getElementById("main-layer").style.width = client_width + "px";
+}
+
+//需要添加时间的对象都写在这里
+function bindAllObject(){
+	document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = function(){
+		if(document.getElementById("main-layer").style.marginLeft == "0px"){
+			var relativeObjects = ["main-layer","main-layer-content","main-layer-action-bar"];
+			moveElementWith("main-layer",96,0.2,10,0);
+		}else{
+			moveElementWith("main-layer",-96,0.2,10,0);
+		}
+	}
+
+	document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0].onclick = function(){
+		if(document.getElementById("main-layer").style.marginLeft == "0px"){
+			moveElementWith("main-layer",-384,0.2,10,0);
+		}else{
+			moveElementWith("main-layer",384,0.2,10,0);
+		}
+	}
 }
 
 //页面底层导航按钮点击效果
