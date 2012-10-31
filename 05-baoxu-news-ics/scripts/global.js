@@ -131,7 +131,9 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 	//移位完成，返回true
 	if(elementX == targetX){
 		MOVEMENT_FLAG = 1;
-		callback();
+		if(callback){
+			callback();
+		}
 		return;
 	}else if(elementX > targetX){
 		dist = Math.ceil((elementX - targetX) * stepDis);

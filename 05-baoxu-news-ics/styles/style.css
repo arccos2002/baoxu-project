@@ -7,9 +7,17 @@
  */
 
 .t-shadow{
-	-moz-text-shadow: 2px 2px 2px #bbb;
-	-webkit-text-shadow: 2px 2px 2px #bbb;
-	text-shadow: 2px 2px 2px #bbb;
+	-moz-text-shadow: 2px 2px 2px #333;
+	-webkit-text-shadow: 2px 2px 2px #333;
+	text-shadow: 2px 2px 2px #333;
+}
+
+.b-shadow{
+	-moz-box-shadow: 1px 1px 5px #333;
+	-webkit-box-shadow: 1px 1px 5px #333;
+	box-shadow: 1px 1px 5px #333;
+	/* 一定要设置background, 不然 ie 会显示在字体上 */
+	background: #fff;
 }
 
 
@@ -93,12 +101,12 @@ html,body{
 /*导航栏右边的阴影效果*/
 #bot-layer-navi-shadow{
 	height: auto;
-	width: 40px;
+	width: 30px;
 	float: left;
-	margin-left: -40px;
+	margin-left: -30px;
 	position: relative;
 	z-index: 21;
-	background: url("../images/bot_layer_navi_shadow.9.png") repeat-y;
+	background: url("../images/bot_layer_navi_shadow.9.png") right repeat-y;
 }
 
 
@@ -231,7 +239,6 @@ html,body{
 	position: absolute;
 	z-index: 100;
 	top: 0;
-	background: #111;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -261,7 +268,7 @@ html,body{
 	background: url("../images/main_layer_action_bar_back_normal.png") no-repeat left;
 }
 
-#main-layer-action-bar-back a:hover{
+#main-layer-action-bar-back a.current{
 	background: url("../images/main_layer_action_bar_back_hover.png") no-repeat left;
 }
 
@@ -309,8 +316,27 @@ html,body{
 	background: url("../images/main_layer_action_bar_user_normal.png") no-repeat left;
 }
 
-#main-layer-action-bar-user a:hover{
+#main-layer-action-bar-user a.current{
 	background: url("../images/main_layer_action_bar_user_hover.png") no-repeat left;
+}
+
+#main-layer-action-bar-shadow{
+	clear: both;
+	position: relative;
+	z-index: 110;
+	width: 100%;
+	height: 8px;
+	background: url("../images/main_layer_action_bar_shadow.9.png") top repeat-x;
+}
+
+#main-layer-action-bar-column-list{
+	clear: both;
+	position: relative;
+	margin: -8px 0 0 103px;
+	z-index: 200;
+	width: 200px;
+	height: 300px;
+	background: #333;
 }
 
 
@@ -320,10 +346,6 @@ html,body{
 	width: 100%;
 	margin-top: 72px;
 	clear: both;
-	background: #EEE;
-}
-
-#main-layer-content p{
-	line-height: 50px;
-	font-size: 20px;
+	background: #fff;
+	padding: 10px 0;
 }
