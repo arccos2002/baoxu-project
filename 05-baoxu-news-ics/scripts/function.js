@@ -39,20 +39,31 @@ function initViewPort(){
 function bindAllObject(){
 	document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = function(){
 		if(document.getElementById("main-layer").style.marginLeft == "0px"){
-			var relativeObjects = ["main-layer","main-layer-content","main-layer-action-bar"];
-			moveElementWith("main-layer",96,0.2,10,0);
+			moveElementWith("main-layer","absolute",96,0.2,10,-1);
+			moveElementWith("main-layer-action-bar","fixed",96,0.2,10,0);
 		}else{
-			moveElementWith("main-layer",-96,0.2,10,0);
+			moveElementWith("main-layer","absolute",-96,0.2,10,1);
+			moveElementWith("main-layer-action-bar","fixed",-96,0.2,10,0);
 		}
 	}
 
 	document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0].onclick = function(){
 		if(document.getElementById("main-layer").style.marginLeft == "0px"){
-			moveElementWith("main-layer",-384,0.2,10,0);
+			moveElementWith("main-layer","absolute",-384,0.2,10,0);
+			moveElementWith("main-layer-action-bar","fixed",-384,0.2,10,0);
 		}else{
-			moveElementWith("main-layer",384,0.2,10,0);
+			 moveElementWith("main-layer","absolute",384,0.2,10,0);
+			moveElementWith("main-layer-action-bar","fixed",384,0.2,10,0);
 		}
 	}
+}
+
+function lockMainLayer(){
+	document.getElementById("main-layer").style.marginLeft = "96px";
+}
+
+function unLockMainLayer(){
+	document.getElementById("main-layer").style.marginLeft = "0px";
 }
 
 //页面底层导航按钮点击效果

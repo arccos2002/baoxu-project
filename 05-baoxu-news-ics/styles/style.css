@@ -231,15 +231,17 @@ html,body{
 	position: absolute;
 	z-index: 100;
 	top: 0;
+	background: #111;
 	margin: 0 auto;
 	overflow: hidden;
 }
 
 #main-layer-action-bar{
 	width: 100%;
+	z-index: 110;
 	height: 72px;
 	background: url("../images/main_layer_action_bar_bg.png") repeat-x;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	margin: 0 auto;
 }

@@ -4,6 +4,11 @@
  * Time:   下午1:56
  */
 
+// 需要的全局变量
+var MOVEMENT_FLAG = 0;  //移位完成标志符
+
+
+
 //添加页面加载后事件
 function addLoadEvent(func){
 	var oldOnloadEvent = window.onload;
@@ -104,12 +109,19 @@ wheelEvent.prototype.wheel = function(event){
  * @parameter stepTime：每一次timeOut的时间
  * @parameter key:用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
  *
- * @return true:表示移动完成
  * */
-function moveElementTo(elementID, targetX, stepDis, stepTime , key){
+function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback){
 	var elementToMove = document.getElementById(elementID);
-	var elementX = parseInt(elementToMove.style.marginLeft);
+	var elementX;
+	if(positionStyle == "absolute"){
+		elementX = parseInt(elementToMove.style.marginLeft);
+	}else if(positionStyle == "fixed"){
+		elementX = parseInt(elementToMove.style.left);
+		//alert(elementX);
+	}
 	var dist;
+
+	MOVEMENT_FLAG = 0;
 
 	//如果上一次的点击的移位还没有完成，先清除循环
 	if(elementToMove.movement){
@@ -118,38 +130,46 @@ function moveElementTo(elementID, targetX, stepDis, stepTime , key){
 
 	//移位完成，返回true
 	if(elementX == targetX){
-		return true;
-	}
-
-	if(elementX > targetX){
+		MOVEMENT_FLAG = 1;
+		callback();
+		return;
+	}else if(elementX > targetX){
 		dist = Math.ceil((elementX - targetX) * stepDis);
 		elementX -= dist;
-	}
-
-	if(elementX < targetX){
+	}else if(elementX < targetX){
 		dist = Math.ceil((targetX - elementX) * stepDis);
 		elementX += dist;
 	}
-	//设定单次移动之后的marginLeft值
-	elementToMove.style.marginLeft = elementX + "px";
+
+	//设定单次移动之后的marginLeft值或者left值
+	if(positionStyle == "absolute"){
+		elementToMove.style.marginLeft = elementX + "px";
+	}else if(positionStyle == "fixed"){
+		elementToMove.style.left = elementX + "px";
+	}
 
 	elementToMove.style.width = key*dist + parseInt(elementToMove.style.width) + "px";
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID  + "'," + targetX + "," + stepDis + "," + stepTime + "," + key+ ")";
+	var repeat = "moveElementTo('" + elementID  + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback+ ")";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
 
-function moveElementWith(elementID, stepX, stepDis, stepTime, key){
+function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback){
 	var elementToMove = document.getElementById(elementID);
 	//获取当前X轴坐标
-	var elementX = parseInt(elementToMove.style.marginLeft);
-	//alert(elementToMove.style.marginLeft);
+	var elementX;
+	if(positionStyle == "absolute"){
+		elementX = parseInt(elementToMove.style.marginLeft);
+	}else if(positionStyle == "fixed"){
+		elementX = parseInt(elementToMove.style.left);
+		//alert(elementX);
+	}
 
 	var targetX = elementX + stepX;
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "'," + targetX + "," + stepDis + "," + stepTime + "," + key+ ")";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback+ ")";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
