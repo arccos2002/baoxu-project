@@ -19,6 +19,11 @@ function todo(){
 	initViewPort();
 	changeBotLayerNavi();
 	bindAllObject();
+
+
+	document.addEventListener("touchstart", handleTouchEvent, false);
+	document.addEventListener("touchend", handleTouchEvent, false);
+	document.addEventListener("touchmove", handleTouchEvent, false);
 }
 
 //初始化页面的高宽以适合所有屏幕的显示
@@ -57,6 +62,7 @@ function bindAllObject(){
 	//点击栏目列表中某一项的时候，更改主图层栏目名称
 	var columnList = document.getElementById("main-layer-action-bar-column-list").getElementsByTagName("li");
 	for(var i = 0; i < columnList.length; i++){
+		columnList[i].getElementsByTagName("a")[0].onclick = toggleDeleteColumn;
 		columnList[i].getElementsByTagName("a")[1].onclick = chooseColumn;
 	}
 	//点击新闻栏目编辑按钮的动作
@@ -139,6 +145,7 @@ function mainLayerRestore(){
 
 //切换新闻类顶部栏目列表是否显示
 function toggleColumnList(){
+	//如果当前栏目列表没有展开，则展开，并将栏目条上的按钮置为按下的状态
 	if(COLUMN_DISPLAY_FLAG == 0){
 		document.getElementById("main-layer-action-bar-column-list").style.display = "block";
 		this.className = "current";
@@ -167,21 +174,65 @@ function toggleEditNewsColumnList(){
 	var i;
 	if(COLUMN_EDIT_FLAG == 0){
 		for(i = 0; i < columnList.length; i++){
+			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_del";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name";
 			columnList[i].getElementsByTagName("a")[2].className = "column_drag";
+			//进入可编辑状态的时候，栏目列表中的栏目名是不可以点击的
+			columnList[i].getElementsByTagName("a")[1].onclick = "";
 		}
+		//隐藏栏目编辑按钮入口，展示完成编辑按钮
 		document.getElementById("main-layer-news-column-ok").style.display = "block";
 		document.getElementById("main-layer-news-column-do").style.display = "none";
 		COLUMN_EDIT_FLAG = 1;
+		console.log(LOG_INFO + "COLUMN_EDIT_FLAG = " + COLUMN_EDIT_FLAG + " & Columns now can edit");//LOG
 	}else{
 		for(i = 0; i < columnList.length; i++){
+			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_dis";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name_all";
 			columnList[i].getElementsByTagName("a")[2].className = "column_dis";
+			//进入可编辑状态的时候，栏目列表中的栏目名重新换回可以点击的
+			columnList[i].getElementsByTagName("a")[1].onclick = chooseColumn;
 		}
+		//隐藏完成编辑按钮，展示编辑按钮入口
 		document.getElementById("main-layer-news-column-ok").style.display = "none";
 		document.getElementById("main-layer-news-column-do").style.display = "block";
 		COLUMN_EDIT_FLAG = 0;
+		console.log(LOG_INFO + "COLUMN_EDIT_FLAG = " + COLUMN_EDIT_FLAG + " & Columns now edit finished");//LOG
 	}
 }
+
+//切换栏目列表中删除按钮的动作
+function toggleDeleteColumn(){
+	//先将按钮变为删除警告
+	if(this.className == "column_del"){
+		this.className = "column_del_check";
+	}else if(this.className == "column_del_check"){
+		//删除该节点
+		this.parentNode.outerHTML = "";
+	}
+}
+
+
+function handleTouchEvent(event){
+
+	//only for one touch
+	if (event.touches.length == 1){
+
+		var output = document.getElementById("output");
+		switch(event.type){
+			case "touchstart":
+				output.innerHTML = "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+				break;
+			case "touchend":
+				output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+				break;
+			case "touchmove":
+				event.preventDefault();  //prevent scrolling
+				output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+				break;
+		}
+	}
+}
+

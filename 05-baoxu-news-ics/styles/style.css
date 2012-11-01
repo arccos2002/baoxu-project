@@ -368,6 +368,11 @@ html,body{
 	background: url("../images/main_layer_action_bar_column_list_del_normal.png") center no-repeat;
 }
 
+#main-layer-action-bar-column-list ul li a.column_del_check{
+	width: 70px;
+	background: url("../images/main_layer_action_bar_column_list_del_checked.png") center no-repeat;
+}
+
 #main-layer-action-bar-column-list ul li a.column_name,
 #main-layer-action-bar-column-list ul li a.column_name_all{
 	width: 120px;
