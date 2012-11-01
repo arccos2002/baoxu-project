@@ -7,15 +7,15 @@
  */
 
 .t-shadow{
-	-moz-text-shadow: 2px 2px 2px #333;
-	-webkit-text-shadow: 2px 2px 2px #333;
-	text-shadow: 2px 2px 2px #333;
+	-moz-text-shadow: 2px 2px 2px #bbb;
+	-webkit-text-shadow: 2px 2px 2px #bbb;
+	text-shadow: 2px 2px 2px #bbb;
 }
 
 .b-shadow{
-	-moz-box-shadow: 1px 1px 5px #333;
-	-webkit-box-shadow: 1px 1px 5px #333;
-	box-shadow: 1px 1px 5px #333;
+	-moz-box-shadow: 1px 1px 5px #aaa;
+	-webkit-box-shadow: 1px 1px 5px #aaa;
+	box-shadow: 1px 1px 5px #aaa;
 	/* 一定要设置background, 不然 ie 会显示在字体上 */
 	background: #fff;
 }
@@ -298,7 +298,7 @@ html,body{
 	color: #FFF;
 }
 
-#main-layer-action-bar-column a:hover{
+#main-layer-action-bar-column a.current{
 	background-color: rgba(19, 19, 19, 0.15);
 	color: #CCC;
 }
@@ -334,18 +334,113 @@ html,body{
 	position: relative;
 	margin: -8px 0 0 103px;
 	z-index: 200;
-	width: 200px;
-	height: 300px;
-	background: #333;
+	width: 260px;
+	height: auto;
+	background: #EFEFEF;
+	display: none;
+}
+
+#main-layer-action-bar-column-list ul li,
+#main-layer-news-column-do,
+#main-layer-news-column-ok{
+	width: 260px;
+	height: 72px;
+	display: block;
+	background: url("../images/main_layer_action_bar_column_list_li_bg.png") bottom center no-repeat;
+}
+
+#main-layer-action-bar-column-list ul li:hover{
+	background: #ddd url("../images/main_layer_action_bar_column_list_li_bg.png") bottom center no-repeat;
+}
+
+#main-layer-action-bar-column-list ul li a{
+	height: 72px;
+	float: left;
+	display: block;
+}
+
+#main-layer-action-bar-column-list ul li a.column_dis{
+	display: none;
+}
+
+#main-layer-action-bar-column-list ul li a.column_del{
+	width: 70px;
+	background: url("../images/main_layer_action_bar_column_list_del_normal.png") center no-repeat;
+}
+
+#main-layer-action-bar-column-list ul li a.column_name,
+#main-layer-action-bar-column-list ul li a.column_name_all{
+	width: 120px;
+	font-size: 26px;
+	color: #666;
+	line-height: 72px;
+	text-align: left;
+
+	-moz-text-shadow: 1px 1px 1px #bbb;
+	-webkit-text-shadow: 1px 1px 1px #bbb;
+	text-shadow: 1px 1px 1px #bbb;
+}
+
+#main-layer-action-bar-column-list ul li a.column_name_all{
+	margin-left: 70px;
+}
+
+#main-layer-action-bar-column-list ul li a.column_drag{
+	width: 70px;
+	background: url("../images/main_layer_action_bar_column_list_drag_normal.png") center no-repeat;
 }
 
 
+
+
+#main-layer-news-column-do{
+	background: #e5e5e5 url("../images/main_layer_action_bar_column_list_edit_divider.png") center no-repeat;
+}
+
+#main-layer-news-column-do a{
+	height: 72px;
+	display: block;
+	float: left;
+}
+
+#main-layer-news-column-do a.column_add{
+	width: 130px;
+	background: url("../images/main_layer_action_bar_column_list_add.png") center no-repeat;
+}
+
+#main-layer-news-column-do a:hover.column_add{
+	background: #D6DAE1 url("../images/main_layer_action_bar_column_list_add.png") center no-repeat;
+}
+
+#main-layer-news-column-do a.column_edit{
+	width: 130px;
+	background: url("../images/main_layer_action_bar_column_list_edit.png") center no-repeat;
+}
+
+#main-layer-news-column-do a:hover.column_edit{
+	background: #D6DAE1 url("../images/main_layer_action_bar_column_list_edit.png") center no-repeat;
+}
+
+#main-layer-news-column-ok{
+	display: none;
+}
+
+#main-layer-news-column-ok a.column_edit_ok{
+	width: 260px;
+	height: 72px;
+	display: block;
+	background: url("../images/main_layer_action_bar_column_list_edit_finish.png") center no-repeat;
+}
+
+#main-layer-news-column-ok a:hover.column_edit_ok{
+	background: #ddd url("../images/main_layer_action_bar_column_list_edit_finish.png") center no-repeat;
+}
 
 
 #main-layer-content{
 	width: 100%;
 	margin-top: 72px;
 	clear: both;
-	background: #fff;
+	background: #f6f6f6;
 	padding: 10px 0;
 }

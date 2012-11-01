@@ -5,7 +5,11 @@
  */
 
 //定义一些要用的常量
-var LOG_INFO = "BAOXU-LOG-INFO: ";
+var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
+
+var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
+var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
+var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
 
 //将TODO事项加入页面加载完成之后立即处理
 addLoadEvent(todo);
@@ -44,47 +48,21 @@ function initViewPort(){
 
 //需要添加事件的对象都写在这里
 function bindAllObject(){
-	//左上角的频道切换按钮的点击事件，点击后主图层向右推开
-	document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = mainLayerMoveToRight;
-	//右上角的用户及设置按钮的点击事件，点击后主图层向左推开
-	document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0].onclick = mainLayerMoveToLeft;
-}
-
-
-//主页面图层向右移动，即点击了左上角的按钮的效果
-function mainLayerMoveToRight(){
-	var theBar = document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0];
-	if(document.getElementById("main-layer").style.marginLeft == "0px"){
-		moveElementWith("main-layer","absolute",96,0.2,10,-1);
-		moveElementWith("main-layer-action-bar","fixed",96,0.2,10,0);
-		theBar.className = "current";
-		//LOG
-		console.log(LOG_INFO + "Main layer moved to the right,and back button style is current");//LOG
-	}else{
-		moveElementWith("main-layer","absolute",-96,0.2,10,1);
-		moveElementWith("main-layer-action-bar","fixed",-96,0.2,10,0);
-		theBar.className = "";
-		//LOG
-		console.log(LOG_INFO + "Main layer go home, and back button style is normal");//LOG
+	//左上角的频道切换按钮的点击事件，点击后主图层向右推开或收回
+	document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = toggleMainLayerMoveToRight;
+	//右上角的用户及设置按钮的点击事件，点击后主图层向左推开或收回
+	document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0].onclick = toggleMainLayerMoveToLeft;
+	//点击主图层操作条中部的栏目选择时，弹出或隐藏栏目列表
+	document.getElementById("main-layer-action-bar-column").getElementsByTagName("a")[0].onclick = toggleColumnList;
+	//点击栏目列表中某一项的时候，更改主图层栏目名称
+	var columnList = document.getElementById("main-layer-action-bar-column-list").getElementsByTagName("li");
+	for(var i = 0; i < columnList.length; i++){
+		columnList[i].getElementsByTagName("a")[1].onclick = chooseColumn;
 	}
-}
-
-//主页面图层向左移动，即点击了右上角的按钮的效果
-function mainLayerMoveToLeft(){
-	var theBar = document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0];
-	if(document.getElementById("main-layer").style.marginLeft == "0px"){
-		moveElementWith("main-layer","absolute",-384,0.2,10,0);
-		moveElementWith("main-layer-action-bar","fixed",-384,0.2,10,0);
-		theBar.className = "current";
-		//LOG
-		console.log(LOG_INFO + "Main layer moved to the left,and user button style is current");//LOG
-	}else{
-		moveElementWith("main-layer","absolute",384,0.2,10,0);
-		moveElementWith("main-layer-action-bar","fixed",384,0.2,10,0);
-		theBar.className = "";
-		//LOG
-		console.log(LOG_INFO + "Main layer go home, and user button style is normal");//LOG
-	}
+	//点击新闻栏目编辑按钮的动作
+	document.getElementById("main-layer-news-column-do").getElementsByTagName("a")[1].onclick = toggleEditNewsColumnList;
+	//点击新闻栏目编辑完成按钮时的动作
+	document.getElementById("main-layer-news-column-ok").getElementsByTagName("a")[0].onclick = toggleEditNewsColumnList;
 }
 
 //页面底层左栏导航按钮点击的样式变化
@@ -99,8 +77,111 @@ function changeBotLayerNavi(){
 			console.log(LOG_INFO + "All navi button style is normal");//LOG
 			//将被点击按钮的样式置为current
 			this.className = "current";
-			setTimeout(mainLayerMoveToRight,200);
+			setTimeout(toggleMainLayerMoveToRight,200);
 			console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
 		}
+	}
+}
+
+//主页面图层向右移动，即点击了左上角的按钮的效果
+function toggleMainLayerMoveToRight(){
+	var theBar = document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0];
+	if(MAIN_LAYER_MOVE_FLAG == 0){
+		moveElementWith("main-layer","absolute",96,0.2,10,-1,mainLayerRightOver);
+		moveElementWith("main-layer-action-bar","fixed",96,0.2,10,0);
+		theBar.className = "current";
+		//LOG
+		console.log(LOG_INFO + "Main layer moving to the right,and back button style is current");//LOG
+	}else{
+		moveElementWith("main-layer","absolute",-96,0.2,10,1,mainLayerRestore);
+		moveElementWith("main-layer-action-bar","fixed",-96,0.2,10,0);
+		theBar.className = "";
+		//LOG
+		console.log(LOG_INFO + "Main layer going home, and back button style is normal");//LOG
+	}
+}
+
+//切换主页面图层向左移动，即点击了右上角的按钮的效果，移动或收起
+function toggleMainLayerMoveToLeft(){
+	var theBar = document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0];
+	if(MAIN_LAYER_MOVE_FLAG == 0){
+		moveElementWith("main-layer","absolute",-384,0.2,10,0,mainLayerLeftOver);
+		moveElementWith("main-layer-action-bar","fixed",-384,0.2,10,0);
+		theBar.className = "current";
+		//LOG
+		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
+	}else{
+		moveElementWith("main-layer","absolute",384,0.2,10,0,mainLayerRestore);
+		moveElementWith("main-layer-action-bar","fixed",384,0.2,10,0);
+		theBar.className = "";
+		//LOG
+		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
+	}
+}
+
+//主图层右移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为1
+function mainLayerRightOver(){
+	MAIN_LAYER_MOVE_FLAG = 1;
+	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is moved to the right");//LOG
+}
+
+//主图层左移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为2
+function mainLayerLeftOver(){
+	MAIN_LAYER_MOVE_FLAG = 2;
+	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is moved to the left");//LOG
+}
+
+//主图层归位时的回调，将MAIN_LAYER_MOVE_FLAG还原为0
+function mainLayerRestore(){
+	MAIN_LAYER_MOVE_FLAG = 0;
+	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is restore");//LOG
+}
+
+//切换新闻类顶部栏目列表是否显示
+function toggleColumnList(){
+	if(COLUMN_DISPLAY_FLAG == 0){
+		document.getElementById("main-layer-action-bar-column-list").style.display = "block";
+		this.className = "current";
+		COLUMN_DISPLAY_FLAG = 1;
+		console.log(LOG_INFO + "COLUMN_DISPLAY_FLAG = " + COLUMN_DISPLAY_FLAG + " & Column list is dispaly");//LOG
+	}else{
+		document.getElementById("main-layer-action-bar-column-list").style.display = "none";
+		this.className = "";
+		COLUMN_DISPLAY_FLAG = 0;
+		console.log(LOG_INFO + "COLUMN_DISPLAY_FLAG = " + COLUMN_DISPLAY_FLAG + " & Column list is hide");//LOG
+	}
+}
+
+//选择栏目
+function chooseColumn(){
+	//切换顶部栏目名
+	document.getElementById("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = this.innerHTML + "&nbsp;&nbsp;&nbsp;";
+	console.log(LOG_INFO + "The now column is " + this.innerHTML);//LOG
+	//收起栏目列表
+	toggleColumnList();
+}
+
+//点击编辑新闻栏目列表的操作函数
+function toggleEditNewsColumnList(){
+	var columnList = document.getElementById("main-layer-action-bar-column-list").getElementsByTagName("li");
+	var i;
+	if(COLUMN_EDIT_FLAG == 0){
+		for(i = 0; i < columnList.length; i++){
+			columnList[i].getElementsByTagName("a")[0].className = "column_del";
+			columnList[i].getElementsByTagName("a")[1].className = "column_name";
+			columnList[i].getElementsByTagName("a")[2].className = "column_drag";
+		}
+		document.getElementById("main-layer-news-column-ok").style.display = "block";
+		document.getElementById("main-layer-news-column-do").style.display = "none";
+		COLUMN_EDIT_FLAG = 1;
+	}else{
+		for(i = 0; i < columnList.length; i++){
+			columnList[i].getElementsByTagName("a")[0].className = "column_dis";
+			columnList[i].getElementsByTagName("a")[1].className = "column_name_all";
+			columnList[i].getElementsByTagName("a")[2].className = "column_dis";
+		}
+		document.getElementById("main-layer-news-column-ok").style.display = "none";
+		document.getElementById("main-layer-news-column-do").style.display = "block";
+		COLUMN_EDIT_FLAG = 0;
 	}
 }
