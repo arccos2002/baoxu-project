@@ -7,9 +7,19 @@
 //定义一些要用的常量
 var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
 
+//定义标志位常量
 var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
 var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
 var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
+
+
+
+
+
+
+/******************************************************************************/
+/******************                 执行函数               *********************/
+/******************************************************************************/
 
 //将TODO事项加入页面加载完成之后立即处理
 addLoadEvent(todo);
@@ -19,7 +29,8 @@ function todo(){
 	initViewPort();
 	changeBotLayerNavi();
 	bindAllObject();
-
+	//显示离线存储状态
+	//showAppCache();
 
 	document.addEventListener("touchstart", handleTouchEvent, false);
 	document.addEventListener("touchend", handleTouchEvent, false);
@@ -216,14 +227,13 @@ function toggleDeleteColumn(){
 
 
 function handleTouchEvent(event){
-
 	//only for one touch
+	//定义共用DOM对象
+	var output = document.getElementById("output");
 	if (event.touches.length == 1){
-
-		var output = document.getElementById("output");
 		switch(event.type){
 			case "touchstart":
-				output.innerHTML = "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+				output.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
 				break;
 			case "touchend":
 				output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
@@ -234,5 +244,14 @@ function handleTouchEvent(event){
 				break;
 		}
 	}
+}
+
+function showAppCache(){
+	var myCache = new appCache();
+	//定义共用DOM对象
+	var output = document.getElementById("output");
+	var act = myCache.cacheStatus;
+	output.innerHTML += act;
+	alert(act);
 }
 

@@ -175,3 +175,45 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
 	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback+ ")";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
+
+//操作离线存储的类
+function appCache(){
+	this.appCacheData = self.applicationCache;
+	alert(String(this.appCacheData));
+	//当前缓存状态
+	this.cacheStatus = function(i){
+		switch (i.status) {
+			case i.UNCACHED: // UNCACHED == 0
+				return 'UNCACHED';
+				break;
+			case i.IDLE: // IDLE == 1
+				return 'IDLE';
+				break;
+			case i.CHECKING: // CHECKING == 2
+				return 'CHECKING';
+				break;
+			case i.DOWNLOADING: // DOWNLOADING == 3
+				return 'DOWNLOADING';
+				break;
+			case i.UPDATEREADY:  // UPDATEREADY == 4
+				return 'UPDATEREADY';
+				break;
+			case i.OBSOLETE: // OBSOLETE == 5
+				return 'OBSOLETE';
+				break;
+			default:
+				return 'UKNOWN CACHE STATUS';
+				break;
+		};
+	}(this.appCacheData);
+	//更新缓存
+	this.cacheUpdate = function(i){
+		i.update(); // 开始更新
+		if (i.status == window.applicationCache.UPDATEREADY) {
+			i.swapCache();  // 得到最新版本缓存列表，并且成功下载资源，更新缓存到最新
+		}
+	}(this.appCacheData);
+	//更新缓存
+	this.cacheUpdate = function(i){
+	}(this.appCacheData);
+}

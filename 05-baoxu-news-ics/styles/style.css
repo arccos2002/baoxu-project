@@ -449,3 +449,18 @@ html,body{
 	background: #f6f6f6;
 	padding: 10px 0;
 }
+
+.div_demo1, .div_demo2{
+	width: 460px;
+	height: 200px;
+	border: 1px solid #999;
+	margin: 10px;
+}
+
+.div_demo1{
+	background: #aaf;
+}
+
+.div_demo2{
+	background: #add;
+}
