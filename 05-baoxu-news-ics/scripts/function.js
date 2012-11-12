@@ -226,6 +226,8 @@ function toggleDeleteColumn(){
 }
 
 
+//触摸事件先不做了
+/*
 function handleTouchEvent(event){
 	//only for one touch
 	//定义共用DOM对象
@@ -245,6 +247,7 @@ function handleTouchEvent(event){
 		}
 	}
 }
+*/
 
 function showAppCache(){
 	var myCache = new appCache();
