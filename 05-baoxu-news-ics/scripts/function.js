@@ -32,9 +32,9 @@ function todo(){
 	//显示离线存储状态
 	//showAppCache();
 
-	document.addEventListener("touchstart", handleTouchEvent, false);
-	document.addEventListener("touchend", handleTouchEvent, false);
-	document.addEventListener("touchmove", handleTouchEvent, false);
+//	document.addEventListener("touchstart", handleTouchEvent, false);
+//	document.addEventListener("touchend", handleTouchEvent, false);
+//	document.addEventListener("touchmove", handleTouchEvent, false);
 }
 
 //初始化页面的高宽以适合所有屏幕的显示
