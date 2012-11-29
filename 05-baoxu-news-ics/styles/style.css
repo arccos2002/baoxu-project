@@ -230,9 +230,14 @@ html, body{
 
 /****************下面开始是主界面的样式*********************/
 
+#main{
+	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	overflow: hidden;
+}
+
 #main-layer{
 	position: absolute;
-	width: 100%;
+	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	z-index: 100;
 	top: 0;
 	margin: 0 auto;
@@ -434,7 +439,7 @@ html, body{
 }
 
 #main-layer-content{
-	width: 480px;
+	width: 100%;
 	margin-top: 72px;
 	clear: both;
 	background: #ecedee;
@@ -447,7 +452,7 @@ html, body{
 }
 
 #head-img ul{
-	width: 1440px;
+	width: 1440px; /*包含三张图,每张宽度约定俗成为480,如果不是480宽度的机型,这里需要改动*/
 	height: 290px;
 	overflow: hidden;
 	position: relative;
@@ -455,10 +460,11 @@ html, body{
 }
 
 #head-img ul li{
-	width: 480px;
+	width: 480px; /*约定每张图的宽度与屏幕宽度相同,为480*/
 	height: 290px;
 	overflow: hidden;
 	float: left;
+	cursor: pointer;
 }
 
 #head-img ul li img{
@@ -514,6 +520,7 @@ html, body{
 	height: 95px;
 	padding: 15px;
 	background: url("../images/news_base_list_divider.png") bottom center no-repeat;
+	cursor:pointer;
 }
 
 #news-list ul li img{
@@ -542,4 +549,13 @@ html, body{
 	line-height: 15px;
 	margin-top: -10px;
 	color: #8D8D8D;
+}
+
+#main-layer-detail{
+	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px;
+	background: #ccc;
+	display: block;
+	position: relative;
+	z-index: 1000;
 }

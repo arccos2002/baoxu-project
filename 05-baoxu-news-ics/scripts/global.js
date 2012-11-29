@@ -106,14 +106,25 @@ wheelEvent.prototype.wheel = function(event){
  * 此方法用于移动元素到指定坐标，自定义单步移动距离百分比和单步移动时间
  *
  * @parameter elementID：需要移动的块的ID
+ * @parameter positionStyle：被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
  * @parameter targetX：移动到的目标X轴坐标
  * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
  * @parameter stepTime：每一次timeOut的时间
  * @parameter key:用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
+ * @parameter callkack：移位完成调用的函数
+ * @parameter 同时移动两个元素的第二个元素ID，可选
  *
  * */
-function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback){
+function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback, secElementID){
 	var elementToMove = document.getElementById(elementID);
+
+	var secElementToMove;
+	if(secElementID){
+		secElementToMove = document.getElementById(secElementID);
+	}else{
+		secElementToMove = 0;
+	}
+
 	var elementX;
 	if(positionStyle == "absolute"){
 		elementX = parseInt(elementToMove.style.marginLeft);
@@ -148,20 +159,39 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 	//设定单次移动之后的marginLeft值或者left值
 	if(positionStyle == "absolute"){
 		elementToMove.style.marginLeft = elementX + "px";
+		if(secElementToMove){
+			secElementToMove.style.marginLeft = elementX + 480 + "px";
+		}
 	}else if(positionStyle == "fixed"){
 		elementToMove.style.left = elementX + "px";
+		if(secElementToMove){
+			secElementToMove.style.left = elementX + 480 + "px";
+		}
 	}
 
 	elementToMove.style.width = key * dist + parseInt(elementToMove.style.width) + "px";
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ")";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + secElementID + "')";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
-
-function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback){
+/**
+ * 此方法用于使移动元素移动指定的位移，自定义单步移动距离百分比和单步移动时间
+ *
+ * @parameter elementID：需要移动的块的ID
+ * @parameter positionStyle：被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
+ * @parameter targetX：移动到的目标X轴坐标
+ * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
+ * @parameter stepTime：每一次timeOut的时间
+ * @parameter key:用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
+ * @parameter callkack：移位完成调用的函数
+ * @parameter 同时移动两个元素的第二个元素ID，可选
+ *
+ * */
+function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback, secElementID){
 	var elementToMove = document.getElementById(elementID);
+
 	//获取当前X轴坐标
 	var elementX;
 	if(positionStyle == "absolute"){
@@ -174,7 +204,7 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
 	var targetX = elementX + stepX;
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ")";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + secElementID + "')";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
