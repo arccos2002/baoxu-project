@@ -29,6 +29,9 @@ function todo(){
 	initViewPort();
 	changeBotLayerNavi();
 	bindAllObject();
+
+	getNewsList("headline", "T1348647909107", 0, 20, renderHeadline);
+
 	//显示离线存储状态
 	//showAppCache();
 
@@ -72,7 +75,7 @@ function bindAllObject(){
 	document.getElementById("main-layer-action-bar-column").getElementsByTagName("a")[0].onclick = toggleColumnList;
 	//点击栏目列表中某一项的时候，更改主图层栏目名称
 	var columnList = document.getElementById("main-layer-action-bar-column-list").getElementsByTagName("li");
-	for(var i = 0; i < columnList.length; i++){
+	for(var i = 0 ; i < columnList.length ; i++){
 		columnList[i].getElementsByTagName("a")[0].onclick = toggleDeleteColumn;
 		columnList[i].getElementsByTagName("a")[1].onclick = chooseColumn;
 	}
@@ -85,16 +88,16 @@ function bindAllObject(){
 //页面底层左栏导航按钮点击的样式变化
 function changeBotLayerNavi(){
 	var bot_layer_navi_li = document.getElementById("navi-list").getElementsByTagName("li");
-	for(var i = 0; i<bot_layer_navi_li.length; i++){
+	for(var i = 0 ; i < bot_layer_navi_li.length ; i++){
 		bot_layer_navi_li[i].getElementsByTagName("a")[0].onclick = function(){
 			//某个按钮被点击后，将所有的按钮样式置空
-			for(var t = 0; t<bot_layer_navi_li.length; t++){
+			for(var t = 0 ; t < bot_layer_navi_li.length ; t++){
 				bot_layer_navi_li[t].getElementsByTagName("a")[0].className = "";
 			}
 			console.log(LOG_INFO + "All navi button style is normal");//LOG
 			//将被点击按钮的样式置为current
 			this.className = "current";
-			setTimeout(toggleMainLayerMoveToRight,200);
+			setTimeout(toggleMainLayerMoveToRight, 200);
 			console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
 		}
 	}
@@ -104,14 +107,14 @@ function changeBotLayerNavi(){
 function toggleMainLayerMoveToRight(){
 	var theBar = document.getElementById("main-layer-action-bar-back").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer","absolute",96,0.2,10,-1,mainLayerRightOver);
-		moveElementWith("main-layer-action-bar","fixed",96,0.2,10,0);
+		moveElementWith("main-layer", "absolute", 96, 0.2, 10, -1, mainLayerRightOver);
+		moveElementWith("main-layer-action-bar", "fixed", 96, 0.2, 10, 0);
 		theBar.className = "current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the right,and back button style is current");//LOG
 	}else{
-		moveElementWith("main-layer","absolute",-96,0.2,10,1,mainLayerRestore);
-		moveElementWith("main-layer-action-bar","fixed",-96,0.2,10,0);
+		moveElementWith("main-layer", "absolute", -96, 0.2, 10, 1, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", -96, 0.2, 10, 0);
 		theBar.className = "";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and back button style is normal");//LOG
@@ -122,14 +125,14 @@ function toggleMainLayerMoveToRight(){
 function toggleMainLayerMoveToLeft(){
 	var theBar = document.getElementById("main-layer-action-bar-user").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer","absolute",-384,0.2,10,0,mainLayerLeftOver);
-		moveElementWith("main-layer-action-bar","fixed",-384,0.2,10,0);
+		moveElementWith("main-layer", "absolute", -384, 0.2, 10, 0, mainLayerLeftOver);
+		moveElementWith("main-layer-action-bar", "fixed", -384, 0.2, 10, 0);
 		theBar.className = "current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
 	}else{
-		moveElementWith("main-layer","absolute",384,0.2,10,0,mainLayerRestore);
-		moveElementWith("main-layer-action-bar","fixed",384,0.2,10,0);
+		moveElementWith("main-layer", "absolute", 384, 0.2, 10, 0, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", 384, 0.2, 10, 0);
 		theBar.className = "";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
@@ -184,7 +187,7 @@ function toggleEditNewsColumnList(){
 	var columnList = document.getElementById("main-layer-action-bar-column-list").getElementsByTagName("li");
 	var i;
 	if(COLUMN_EDIT_FLAG == 0){
-		for(i = 0; i < columnList.length; i++){
+		for(i = 0 ; i < columnList.length ; i++){
 			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_del";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name";
@@ -198,7 +201,7 @@ function toggleEditNewsColumnList(){
 		COLUMN_EDIT_FLAG = 1;
 		console.log(LOG_INFO + "COLUMN_EDIT_FLAG = " + COLUMN_EDIT_FLAG + " & Columns now can edit");//LOG
 	}else{
-		for(i = 0; i < columnList.length; i++){
+		for(i = 0 ; i < columnList.length ; i++){
 			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_dis";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name_all";
@@ -228,26 +231,26 @@ function toggleDeleteColumn(){
 
 //触摸事件先不做了
 /*
-function handleTouchEvent(event){
-	//only for one touch
-	//定义共用DOM对象
-	var output = document.getElementById("output");
-	if (event.touches.length == 1){
-		switch(event.type){
-			case "touchstart":
-				output.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-				break;
-			case "touchend":
-				output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
-				break;
-			case "touchmove":
-				event.preventDefault();  //prevent scrolling
-				output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
-				break;
-		}
-	}
-}
-*/
+ function handleTouchEvent(event){
+ //only for one touch
+ //定义共用DOM对象
+ var output = document.getElementById("output");
+ if (event.touches.length == 1){
+ switch(event.type){
+ case "touchstart":
+ output.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+ break;
+ case "touchend":
+ output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+ break;
+ case "touchmove":
+ event.preventDefault();  //prevent scrolling
+ output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+ break;
+ }
+ }
+ }
+ */
 
 function showAppCache(){
 	var myCache = new appCache();
@@ -258,3 +261,40 @@ function showAppCache(){
 	alert(act);
 }
 
+
+/**
+ * @funtion 通过XHR请求新闻列表
+ *
+ * @parameter newsType:请求的新闻列表的类型（headline：头条新闻；list：普通新闻）
+ * @parameter columnId:新闻栏目的ID
+ * @parameter startId:新闻列表的起始ID
+ * @parameter endId：新闻列表的终止ID
+ * @parameter callback:异步请求完之后的回调函数
+ * */
+function getNewsList(newsType, columuId, startId, endId, callback){
+	var request = getHTTPObject();
+	var requestResult = "";
+	var requestUrl = document.location.href + "cdr.php?type=" + newsType + "&column=" + columuId + "&start=" + startId + "&end=" + endId;
+	if(request){
+		//异步处理
+		request.open("GET", requestUrl, false);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4){
+				//请求成功之后要做的操作
+				requestResult = request.responseText;
+				//console.log(requestResult);
+				//转化为标准JSON对象
+				requestResult = JSON.parse(requestResult);
+				//执行异步处理回调函数
+				callback(requestResult, columuId);
+				//返回请求成功
+				return true;
+			}
+		};
+		request.send(null);
+	}else{
+		alert("浏览器不支持XMLHttpRequest");
+	}
+	//console.log(requestResult);
+	return requestResult;
+}

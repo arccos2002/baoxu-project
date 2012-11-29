@@ -10,6 +10,7 @@
 	<link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
 	<script type = "text/javascript" src = "scripts/global.js"></script>
 	<script type = "text/javascript" src = "scripts/function.js"></script>
+	<script type = "text/javascript" src = "scripts/render.js"></script>
 	<script type = "text/javascript" src = "scripts/html5.js"></script>
 </head>
 <body>
@@ -33,90 +34,94 @@
 		<div id = "bot-layer-user-info">
 			<div id = "user-photo"><img src = "images/bot_layer_info_user_default.png" /></div>
 			<div id = "user-detail">
-				<h4 class="t-shadow">登录</h4>
-				<h6 class="t-shadow">登录后可查看您的跟帖、收藏等信息</h6>
+				<h4 class = "t-shadow">登录</h4>
+				<h6 class = "t-shadow">登录后可查看您的跟帖、收藏等信息</h6>
 			</div>
 			<!--用于修正FF下DIV不会自动伸长的问题-->
-			<div style="clear: both;"></div>
+			<div style = "clear: both;"></div>
 		</div>
 		<ul id = "bot-layer-user-data">
-			<li class="user-ties"><a></a></li>
-			<li class="user-favo"><a></a></li>
-			<li class="user-push"><a></a></li>
+			<li class = "user-ties"><a></a></li>
+			<li class = "user-favo"><a></a></li>
+			<li class = "user-push"><a></a></li>
 		</ul>
-		<ul id="bot-layer-menu">
-			<li class="menu-weather"><a class="t-shadow">北京 15℃/2℃</a></li>
-			<li class="menu-offline"><a class="t-shadow">离线下载</a></li>
-			<li class="menu-search"><a class="t-shadow">搜索新闻</a></li>
-			<li class="menu-setting"><a class="t-shadow">设置</a></li>
+		<ul id = "bot-layer-menu">
+			<li class = "menu-weather"><a class = "t-shadow">北京 15℃/2℃</a></li>
+			<li class = "menu-offline"><a class = "t-shadow">离线下载</a></li>
+			<li class = "menu-search"><a class = "t-shadow">搜索新闻</a></li>
+			<li class = "menu-setting"><a class = "t-shadow">设置</a></li>
 		</ul>
 	</div>
 </section>
 
 <!--浮动主图层，显示新闻的主要内容-->
 <!--下面的margin-left设置是便于JS处理滑动-->
-<section id = "main-layer" style="margin-left: 0;">
+<section id = "main-layer" style = "margin-left: 0;">
 	<!--主图层顶部信息操作条-->
-	<div id="main-layer-action-bar" style="left: 0">
+	<div id = "main-layer-action-bar" style = "left: 0">
 		<!--返回按钮-->
-		<div id="main-layer-action-bar-back"><a></a></div>
+		<div id = "main-layer-action-bar-back"><a></a></div>
 		<!--网易LOGO-->
-		<div id="main-layer-action-bar-logo"></div>
+		<div id = "main-layer-action-bar-logo"></div>
 		<!--栏目名称-->
-		<div id="main-layer-action-bar-column"><a>头图&nbsp;&nbsp;&nbsp;</a></div>
+		<div id = "main-layer-action-bar-column"><a>头图&nbsp;&nbsp;&nbsp;</a></div>
 		<!--占位使用-->
 		<!--<div style="float: left;width: 200px;"></div>-->
 		<!--右侧用户按钮入口-->
-		<div id="main-layer-action-bar-user"><a></a></div>
+		<div id = "main-layer-action-bar-user"><a></a></div>
 
-		<div id="main-layer-action-bar-shadow"></div>
+		<div id = "main-layer-action-bar-shadow"></div>
 		<!--针对FF的Float校正-->
-		<div id="main-layer-action-bar-column-list" class="b-shadow">
+		<div id = "main-layer-action-bar-column-list" class = "b-shadow">
 			<ul>
-				<li><a class="column_dis"></a><a class="column_name_all">头条</a><a class="column_dis"></a></li>
-				<li><a class="column_dis"></a><a class="column_name_all">体育头条</a><a class="column_dis"></a></li>
-				<li><a class="column_dis"></a><a class="column_name_all">财经头条</a><a class="column_dis"></a></li>
-				<li><a class="column_dis"></a><a class="column_name_all">社会头条</a><a class="column_dis"></a></li>
-				<li><a class="column_dis"></a><a class="column_name_all">军事头条</a><a class="column_dis"></a></li>
+				<li><a class = "column_dis"></a><a class = "column_name_all">头条</a><a class = "column_dis"></a></li>
+				<li><a class = "column_dis"></a><a class = "column_name_all">体育头条</a><a class = "column_dis"></a></li>
+				<li><a class = "column_dis"></a><a class = "column_name_all">财经头条</a><a class = "column_dis"></a></li>
+				<li><a class = "column_dis"></a><a class = "column_name_all">社会头条</a><a class = "column_dis"></a></li>
+				<li><a class = "column_dis"></a><a class = "column_name_all">军事头条</a><a class = "column_dis"></a></li>
 			</ul>
-			<div id="main-layer-news-column-do"><a class="column_add"></a><a class="column_edit"></a></div>
-			<div id="main-layer-news-column-ok"><a class="column_edit_ok"></a></div>
+			<div id = "main-layer-news-column-do"><a class = "column_add"></a><a class = "column_edit"></a></div>
+			<div id = "main-layer-news-column-ok"><a class = "column_edit_ok"></a></div>
 		</div>
 	</div>
 	<!--全部新闻列表-->
-	<div id="main-layer-content" style="margin-left: 0;">
+	<div id = "main-layer-content" style = "margin-left: 0;">
 		<!--头图-->
-		<div id="head-img">
+		<div id = "head-img">
 			<ul>
-				<li><img src="testdata/head-img-test.jpg" /><h6>头图1说明文字</h6></li>
-				<li><img src="testdata/head-img-test.jpg" /><h6>头图2说明文字</h6></li>
-				<li><img src="testdata/head-img-test.jpg" /><h6>头图3说明文字</h6></li>
+				<li><img src = "testdata/head-img-test.jpg" /><h6>头图1说明文字</h6></li>
+				<li><img src = "testdata/head-img-test.jpg" /><h6>头图2说明文字</h6></li>
+				<li><img src = "testdata/head-img-test.jpg" /><h6>头图3说明文字</h6></li>
 			</ul>
-			<span id="head-img-flag" class="img-1"></span>
+			<span id = "head-img-flag" class = "img-1"></span>
 		</div>
 		<!--普通新闻列表-->
-		<div id="news-list">
+		<div id = "news-list">
 			<ul>
 				<li>
-					<img src="testdata/news-list-img-test.jpg" />
+					<img src = "testdata/news-list-img-test.jpg" />
+
 					<h1>头条新闻001</h1>
 					<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 					<span>100跟帖</span>
 				</li>
 				<li>
-					<img src="testdata/news-list-img-test.jpg" />
+					<img src = "testdata/news-list-img-test.jpg" />
+
 					<h1>头条新闻001</h1>
 					<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 					<span>100跟帖</span>
 				</li>
 				<li>
-					<img src="testdata/news-list-img-test.jpg" />
+					<img src = "testdata/news-list-img-test.jpg" />
+
 					<h1>头条新闻001</h1>
 					<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 					<span>100跟帖</span>
 				</li>
 				<li>
-					<img src="testdata/news-list-img-test.jpg" />
+					<img src = "testdata/news-list-img-test.jpg" />
+
 					<h1>头条新闻001</h1>
 					<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 					<span>100跟帖</span>

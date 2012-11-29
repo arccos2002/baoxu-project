@@ -7,7 +7,9 @@
 // 需要的全局变量
 var MOVEMENT_FLAG = 0;  //移位完成标志符
 
-
+function $$(id){
+	return document.getElementById(id);
+}
 
 //添加页面加载后事件
 function addLoadEvent(func){
@@ -150,10 +152,10 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 		elementToMove.style.left = elementX + "px";
 	}
 
-	elementToMove.style.width = key*dist + parseInt(elementToMove.style.width) + "px";
+	elementToMove.style.width = key * dist + parseInt(elementToMove.style.width) + "px";
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID  + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback+ ")";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ")";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
@@ -172,7 +174,7 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
 	var targetX = elementX + stepX;
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback+ ")";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ")";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
@@ -182,7 +184,7 @@ function appCache(){
 	alert(String(this.appCacheData));
 	//当前缓存状态
 	this.cacheStatus = function(i){
-		switch (i.status) {
+		switch(i.status){
 			case i.UNCACHED: // UNCACHED == 0
 				return 'UNCACHED';
 				break;
@@ -204,12 +206,13 @@ function appCache(){
 			default:
 				return 'UKNOWN CACHE STATUS';
 				break;
-		};
+		}
+		;
 	}(this.appCacheData);
 	//更新缓存
 	this.cacheUpdate = function(i){
 		i.update(); // 开始更新
-		if (i.status == window.applicationCache.UPDATEREADY) {
+		if(i.status == window.applicationCache.UPDATEREADY){
 			i.swapCache();  // 得到最新版本缓存列表，并且成功下载资源，更新缓存到最新
 		}
 	}(this.appCacheData);

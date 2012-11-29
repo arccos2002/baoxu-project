@@ -20,13 +20,11 @@
 	background: #fff;
 }
 
-
-html,body{
+html, body{
 	font-family: "微软雅黑";
 	height: 100%;
 	width: 100%;
 }
-
 
 /*用于底层抽屉的页面*/
 #bot-layer{
@@ -108,8 +106,6 @@ html,body{
 	z-index: 21;
 	background: url("../images/bot_layer_navi_shadow.9.png") right repeat-y;
 }
-
-
 
 /*抽屉右边的个人中心页面*/
 #bot-layer-info{
@@ -231,7 +227,6 @@ html,body{
 #bot-layer-menu li.menu-setting a{
 	background: url("../images/bot_layer_menu_setting.png") left no-repeat;
 }
-
 
 /****************下面开始是主界面的样式*********************/
 
@@ -381,7 +376,6 @@ html,body{
 	color: #666;
 	line-height: 72px;
 	text-align: left;
-
 	-moz-text-shadow: 1px 1px 1px #bbb;
 	-webkit-text-shadow: 1px 1px 1px #bbb;
 	text-shadow: 1px 1px 1px #bbb;
@@ -395,9 +389,6 @@ html,body{
 	width: 70px;
 	background: url("../images/main_layer_action_bar_column_list_drag_normal.png") center no-repeat;
 }
-
-
-
 
 #main-layer-news-column-do{
 	background: #e5e5e5 url("../images/main_layer_action_bar_column_list_edit_divider.png") center no-repeat;
@@ -442,7 +433,6 @@ html,body{
 	background: #ddd url("../images/main_layer_action_bar_column_list_edit_finish.png") center no-repeat;
 }
 
-
 #main-layer-content{
 	width: 480px;
 	margin-top: 72px;
@@ -460,12 +450,14 @@ html,body{
 	width: 1440px;
 	height: 290px;
 	overflow: hidden;
+	position: relative;
+	z-index: 99;
 }
 
 #head-img ul li{
 	width: 480px;
 	height: 290px;
-	overflow:hidden;
+	overflow: hidden;
 	float: left;
 }
 
@@ -489,6 +481,28 @@ html,body{
 	font-size: 25px;
 	font-weight: bold;
 	color: #FFF;
+}
+
+#head-img-flag{
+	width: 160px;
+	height: 5px;
+	background: #F00;
+	margin-top: -5px;
+	position: relative;
+	display: block;
+	z-index: 102;
+}
+
+#head-img-flag img-1{
+	margin-left: 0;
+}
+
+#head-img-flag img-2{
+	margin-left: 160px;
+}
+
+#head-img-flag img-3{
+	margin-left: 320px;
 }
 
 #news-list{
