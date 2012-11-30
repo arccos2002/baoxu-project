@@ -554,8 +554,19 @@ html, body{
 #main-layer-detail{
 	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	height: 600px;
-	background: #ccc;
+	margin-top: 0;
+	background: #555;
+	display: block;
+	position: fixed;
+	z-index: 200;
+}
+
+#main-layer-ties{
+	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px;
+	margin-top: 0;
+	background: #222;
 	display: block;
 	position: relative;
-	z-index: 1000;
+	z-index: 300;
 }

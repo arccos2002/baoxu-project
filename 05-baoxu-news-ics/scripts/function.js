@@ -11,7 +11,8 @@ var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
 var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
 var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
 var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
-var DETAIL_LAYER_MOVE_FLAG = 0;
+var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
+var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
 
 
 /******************************************************************************/
@@ -60,7 +61,7 @@ function initViewPort(){
 	//上层信息主图层校正宽度
 	$$("main").style.width = client_width + "px";
 	$$("main-layer").style.width = client_width + "px";
-	$$("main-layer-detail").style.width = client_width + "px";
+	//$$("main-layer-detail").style.width = client_width + "px";
 	console.log(LOG_INFO + "Correct main layer width with full page");//LOG
 }
 
@@ -142,15 +143,27 @@ function toggleMainLayerMoveToLeft(){
 //在新闻列表中点击的时候向左推出详情页
 function toggleDetailLayerDisplay(){
 	if(DETAIL_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", -480, 0.2, 10, 0, detailLayerDisplay, "main-layer-detail");
-		moveElementWith("main-layer-action-bar", "fixed", -480, 0.2, 10, 0);
+		moveElementWith("main-layer-detail", "absolute", -480, 0.2, 10, 0, detailLayerDisplay);
 		//LOG
-		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
+		console.log(LOG_INFO + "Detail layer moving to the main view");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", 480, 0.2, 10, 0, detailLayerRestore, "main-layer-detail");
-		moveElementWith("main-layer-action-bar", "fixed", 480, 0.2, 10, 0);
+		moveElementWith("main-layer-detail", "absolute", 480, 0.2, 10, 0, detailLayerRestore);
 		//LOG
-		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
+		console.log(LOG_INFO + "Detail layer moving out the main view, now is hide");//LOG
+	}
+}
+
+
+//点击跟帖数的时候向左推出跟帖页
+function toggleTiesLayerDisplay(){
+	if(TIES_LAYER_MOVE_FLAG == 0){
+		moveElementWith("main-layer-ties", "absolute", -480, 0.2, 10, 0, tiesLayerDisplay);
+		//LOG
+		console.log(LOG_INFO + "Ties layer moving to the main view");//LOG
+	}else{
+		moveElementWith("main-layer-ties", "absolute", 480, 0.2, 10, 0, tiesLayerRestore);
+		//LOG
+		console.log(LOG_INFO + "Ties layer moving out the main view, now is hide");//LOG
 	}
 }
 
@@ -182,6 +195,18 @@ function detailLayerDisplay(){
 function detailLayerRestore(){
 	DETAIL_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is restore");//LOG
+}
+
+//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
+function tiesLayerDisplay(){
+	TIES_LAYER_MOVE_FLAG = 1;
+	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is dispaly");//LOG
+}
+
+//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
+function tiesLayerRestore(){
+	TIES_LAYER_MOVE_FLAG = 0;
+	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is restore");//LOG
 }
 
 //切换新闻类顶部栏目列表是否显示
