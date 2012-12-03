@@ -57,43 +57,51 @@ html, body{
 }
 
 #bot-layer-navi ul li a{
-	width: 50px;
-	height: 70px;
+	width: 52px;
+	height: 72px;
 	display: block;
 	margin: 0 auto;
-	background: url("../images/bot_layer_navi_one.png") top left no-repeat;
+	background: url("../images/bot_layer_all.png") no-repeat;
 }
 
 #bot-layer-navi ul li.navi-news a{
-	background-position: 0 0;
+	background-position: 0 -200px;
 }
 
 #bot-layer-navi ul li.navi-news a.current{
-	background-position: 0 -70px;
+	background-position: 0 -272px;
 }
 
 #bot-layer-navi ul li.navi-ties a{
-	background-position: -50px 0;
+	background-position: -52px -200px;
 }
 
 #bot-layer-navi ul li.navi-ties a.current{
-	background-position: -50px -70px;
+	background-position: -52px -272px;
 }
 
 #bot-layer-navi ul li.navi-pics a{
-	background-position: -100px 0;
+	background-position: -104px -200px;
 }
 
 #bot-layer-navi ul li.navi-pics a.current{
-	background-position: -100px -70px;
+	background-position: -104px -272px;
 }
 
 #bot-layer-navi ul li.navi-topics a{
-	background-position: -150px 0;
+	background-position: -156px -200px;
 }
 
 #bot-layer-navi ul li.navi-topics a.current{
-	background-position: -150px -70px;
+	background-position: -156px -272px;
+}
+
+#bot-layer-navi ul li.navi-vote a{
+	background-position: -208px -200px;
+}
+
+#bot-layer-navi ul li.navi-vote a.current{
+	background-position: -208px -272px;
 }
 
 /*导航栏右边的阴影效果*/
@@ -135,6 +143,9 @@ html, body{
 #user-photo{
 	float: left;
 	position: relative;
+	width: 80px;
+	height: 80px;
+	background: url("../images/bot_layer_all.png") 0 0 no-repeat;
 }
 
 #user-detail{
@@ -165,7 +176,7 @@ html, body{
 	margin: 25px 0 0 25px;
 	clear: both;
 	position: relative;
-	background: url("../images/bot_layer_info_user_detail_bg.png") no-repeat;
+	background: url("../images/bot_layer_all.png") 0 -90px no-repeat;
 }
 
 #bot-layer-user-data li{
@@ -183,15 +194,15 @@ html, body{
 }
 
 #bot-layer-user-data li.user-ties a{
-	background: url("../images/bot_layer_info_user_detail_ties.png") no-repeat;
+	background: url("../images/bot_layer_all.png") -90px 0px no-repeat;
 }
 
 #bot-layer-user-data li.user-favo a{
-	background: url("../images/bot_layer_info_user_detail_favor.png") no-repeat;
+	background: url("../images/bot_layer_all.png") -160px 0px no-repeat;
 }
 
 #bot-layer-user-data li.user-push a{
-	background: url("../images/bot_layer_info_user_detail_push.png") no-repeat;
+	background: url("../images/bot_layer_all.png") -230px 0px no-repeat;
 }
 
 #bot-layer-menu{
@@ -206,26 +217,35 @@ html, body{
 #bot-layer-menu li a{
 	height: 50px;
 	margin-left: 20px;
-	padding: 18px 0 0 50px;
+	padding: 18px 0 0 0;
 	display: block;
 	font-size: 24px;
+	line-height: 50px;
 	color: #555;
 }
 
-#bot-layer-menu li.menu-weather a{
-	background: url("../images/bot_layer_menu_weather.png") left no-repeat;
+#bot-layer-menu li a span{
+	height: 40px;
+	width: 40px;
+	display: block;
+	float: left;
+	margin: 10px 10px 0 0;
 }
 
-#bot-layer-menu li.menu-offline a{
-	background: url("../images/bot_layer_menu_offline.png") left no-repeat;
+#bot-layer-menu li.menu-weather a span{
+	background: url("../images/bot_layer_all.png") -310px 0 no-repeat;
 }
 
-#bot-layer-menu li.menu-search a{
-	background: url("../images/bot_layer_menu_search.png") left no-repeat;
+#bot-layer-menu li.menu-offline a span{
+	background: url("../images/bot_layer_all.png") -350px 0 no-repeat;
 }
 
-#bot-layer-menu li.menu-setting a{
-	background: url("../images/bot_layer_menu_setting.png") left no-repeat;
+#bot-layer-menu li.menu-search a span{
+	background: url("../images/bot_layer_all.png") -390px 0 no-repeat;
+}
+
+#bot-layer-menu li.menu-setting a span{
+	background: url("../images/bot_layer_all.png") -430px 0 no-repeat;
 }
 
 /****************下面开始是主界面的样式*********************/
@@ -264,22 +284,22 @@ html, body{
 
 #main-layer-action-bar-back a{
 	display: block;
-	width: 95px;
+	width: 92px;
 	height: 72px;
 	float: left;
-	background: url("../images/main_layer_action_bar_back_normal.png") no-repeat left;
+	background: url("../images/bot_layer_all.png") 0 -350px no-repeat;
 }
 
 #main-layer-action-bar-back a.current{
-	background: url("../images/main_layer_action_bar_back_hover.png") no-repeat left;
+	background: url("../images/bot_layer_all.png") 0 -422px no-repeat;
 }
 
 #main-layer-action-bar-logo{
-	height: 72px;
+	height: 32px;
 	width: 64px;
 	float: left;
-	margin-left: 15px;
-	background: url("../images/logo.png") center no-repeat;
+	margin: 22px 0 0 15px;
+	background: url("../images/bot_layer_all.png") -420px -40px no-repeat;
 }
 
 #main-layer-action-bar-column{
@@ -307,19 +327,19 @@ html, body{
 
 #main-layer-action-bar-user{
 	height: 72px;
-	width: 86px;
+	width: 72px;
 	float: right;
 }
 
 #main-layer-action-bar-user a{
 	display: block;
-	width: 86px;
+	width: 72px;
 	height: 72px;
-	background: url("../images/main_layer_action_bar_user_normal.png") no-repeat left;
+	background: url("../images/bot_layer_all.png") -470px -350px no-repeat;
 }
 
 #main-layer-action-bar-user a.current{
-	background: url("../images/main_layer_action_bar_user_hover.png") no-repeat left;
+	background: url("../images/bot_layer_all.png") -470px -422px no-repeat;
 }
 
 #main-layer-action-bar-shadow{
@@ -367,12 +387,12 @@ html, body{
 
 #main-layer-action-bar-column-list ul li a.column_del{
 	width: 70px;
-	background: url("../images/main_layer_action_bar_column_list_del_normal.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -340px -278px no-repeat;
 }
 
 #main-layer-action-bar-column-list ul li a.column_del_check{
 	width: 70px;
-	background: url("../images/main_layer_action_bar_column_list_del_checked.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -410px -278px no-repeat;
 }
 
 #main-layer-action-bar-column-list ul li a.column_name,
@@ -393,7 +413,7 @@ html, body{
 
 #main-layer-action-bar-column-list ul li a.column_drag{
 	width: 70px;
-	background: url("../images/main_layer_action_bar_column_list_drag_normal.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -270px -278px no-repeat;
 }
 
 #main-layer-news-column-do{
@@ -408,20 +428,20 @@ html, body{
 
 #main-layer-news-column-do a.column_add{
 	width: 130px;
-	background: url("../images/main_layer_action_bar_column_list_add.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -366px -200px no-repeat;
 }
 
 #main-layer-news-column-do a:hover.column_add{
-	background: #D6DAE1 url("../images/main_layer_action_bar_column_list_add.png") center no-repeat;
+	background: #D6DAE1 url("../images/bot_layer_all.png") -366px -200px no-repeat;
 }
 
 #main-layer-news-column-do a.column_edit{
 	width: 130px;
-	background: url("../images/main_layer_action_bar_column_list_edit.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -270px -200px no-repeat;
 }
 
 #main-layer-news-column-do a:hover.column_edit{
-	background: #D6DAE1 url("../images/main_layer_action_bar_column_list_edit.png") center no-repeat;
+	background: #D6DAE1 url("../images/bot_layer_all.png") -270px -200px no-repeat;
 }
 
 #main-layer-news-column-ok{
@@ -432,11 +452,11 @@ html, body{
 	width: 260px;
 	height: 72px;
 	display: block;
-	background: url("../images/main_layer_action_bar_column_list_edit_finish.png") center no-repeat;
+	background: url("../images/bot_layer_all.png") -340px -90px no-repeat;
 }
 
 #main-layer-news-column-ok a:hover.column_edit_ok{
-	background: #ddd url("../images/main_layer_action_bar_column_list_edit_finish.png") center no-repeat;
+	background: #ddd url("../images/bot_layer_all.png") -340px -90px no-repeat;
 }
 
 #main-layer-content{
