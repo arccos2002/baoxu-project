@@ -103,10 +103,10 @@
 			<!--普通新闻列表-->
 			<div id = "news-list">
 				<ul>
-					<li>
+					<li onclick = "toggleDetailLayerDisplay()">
 						<img src = "testdata/news-list-img-test.jpg" />
 
-						<h1>头条新闻001</h1>
+						<h1>展开详情页</h1>
 						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 						<span>100跟帖</span>
 					</li>
@@ -124,14 +124,14 @@
 						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 						<span>100跟帖</span>
 					</li>
-					<li onclick="toggleTiesLayerDisplay()">
+					<li>
 						<img src = "testdata/news-list-img-test.jpg" />
 
 						<h1>头条新闻001</h1>
 						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
 						<span>100跟帖</span>
 					</li>
-					<li onclick="toggleDetailLayerDisplay()">
+					<li>
 						<img src = "testdata/news-list-img-test.jpg" />
 
 						<h1>头条新闻001</h1>
@@ -151,10 +151,17 @@
 	</section>
 
 	<!--详情页的Section-->
-	<section id = "main-layer-detail" style = "margin-left: 480px">1234567890qwertyuiopfghdfghdfh</section>
+	<section id = "main-layer-detail" style = "margin-left: 480px">
+		<div><a onclick="toggleDetailLayerDisplay()">返回主界面</a></div>
+		<div><a href = "http://www.baidu.com">这是新闻详情页</a></div>
+		<div><a onclick="toggleTiesLayerDisplay()">打开跟帖页</a></div>
+	</section>
 
 	<!--跟帖页的Section-->
-	<section id = "main-layer-ties" style = "margin-left: 480px">1234567890qwertyuiopfghdfghdfh</section>
+	<section id = "main-layer-ties" style = "margin-left: 480px">
+		<div><a onclick="toggleTiesLayerDisplay()">返回新闻详情页</a></div>
+		<div><a href = "http://www.baidu.com">这是跟帖页</a></div>
+	</section>
 
 </section>
 </body>

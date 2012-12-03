@@ -250,3 +250,14 @@ function appCache(){
 	this.cacheUpdate = function(i){
 	}(this.appCacheData);
 }
+
+/**
+ * 此方法用于使元素显示出来
+ *
+ * @parameter elementID：需要改变显示方式的块的ID
+ * @parameter how:是要显示还是隐藏(block:块状显示；none：不显示)
+ *
+ * */
+function setElementDisplay(elementID , how ){
+	document.getElementById(elementID).style.display = how;
+}

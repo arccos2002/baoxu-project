@@ -7,12 +7,14 @@
 //定义一些要用的常量
 var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
 
-//定义标志位常量
+//定义标志位全局变量
 var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
 var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
 var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
 var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
 var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
+
+var VIEW_SCROLL_TOP = 0;
 
 
 /******************************************************************************/
@@ -61,8 +63,13 @@ function initViewPort(){
 	//上层信息主图层校正宽度
 	$$("main").style.width = client_width + "px";
 	$$("main-layer").style.width = client_width + "px";
-	//$$("main-layer-detail").style.width = client_width + "px";
 	console.log(LOG_INFO + "Correct main layer width with full page");//LOG
+	//新闻详情页图层校正宽高与视图一致
+	$$("main-layer-detail").style.width = client_width + "px";
+	$$("main-layer-detail").style.height = client_height + "px";
+	//跟帖页图层校正宽高与视图一致
+	$$("main-layer-ties").style.width = client_width + "px";
+	$$("main-layer-ties").style.height = client_height + "px";
 }
 
 //需要添加事件的对象都写在这里
@@ -143,10 +150,21 @@ function toggleMainLayerMoveToLeft(){
 //在新闻列表中点击的时候向左推出详情页
 function toggleDetailLayerDisplay(){
 	if(DETAIL_LAYER_MOVE_FLAG == 0){
+		//获取页面的已滚动高度，以便于复原
+		//VIEW_SCROLL_TOP = document.documentElement.scrollTop;   //Firefox
+		VIEW_SCROLL_TOP = document.body.scrollTop;   //Webkit
+
+		//先显示新闻详情页，设为block，然后将其移入主视图，占满主视图之后，在回调函数里面隐藏列表页，以方便滚动条
+		setElementDisplay("main-layer-detail", "block");
 		moveElementWith("main-layer-detail", "absolute", -480, 0.2, 10, 0, detailLayerDisplay);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving to the main view");//LOG
 	}else{
+		//先显示出隐藏了的新闻列表页，复原滚动高度，将新闻详情页移出主视图，在回调函数里面将其设置为none
+		setElementDisplay("main-layer", "block");
+		//document.documentElement.scrollTop = VIEW_SCROLL_TOP; //Firefox
+		document.body.scrollTop = VIEW_SCROLL_TOP; //Webkit
+
 		moveElementWith("main-layer-detail", "absolute", 480, 0.2, 10, 0, detailLayerRestore);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving out the main view, now is hide");//LOG
@@ -157,10 +175,13 @@ function toggleDetailLayerDisplay(){
 //点击跟帖数的时候向左推出跟帖页
 function toggleTiesLayerDisplay(){
 	if(TIES_LAYER_MOVE_FLAG == 0){
+		//先显示跟帖页，设为block，然后将其移入主视图
+		setElementDisplay("main-layer-ties", "block");
 		moveElementWith("main-layer-ties", "absolute", -480, 0.2, 10, 0, tiesLayerDisplay);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving to the main view");//LOG
 	}else{
+		//将跟帖页移出主视图，在回调函数里面将其设置为none
 		moveElementWith("main-layer-ties", "absolute", 480, 0.2, 10, 0, tiesLayerRestore);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving out the main view, now is hide");//LOG
@@ -189,12 +210,17 @@ function mainLayerRestore(){
 function detailLayerDisplay(){
 	DETAIL_LAYER_MOVE_FLAG = 1;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is dispaly");//LOG
+
+	//新闻详情页在主视图中显示的时候，将新闻列表页面隐藏
+	setElementDisplay("main-layer", "none");
 }
 
 //详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
 function detailLayerRestore(){
 	DETAIL_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is restore");//LOG
+
+	setElementDisplay("main-layer-detail", "none");
 }
 
 //详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
@@ -207,6 +233,8 @@ function tiesLayerDisplay(){
 function tiesLayerRestore(){
 	TIES_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is restore");//LOG
+
+	setElementDisplay("main-layer-ties", "none");
 }
 
 //切换新闻类顶部栏目列表是否显示

@@ -242,6 +242,7 @@ html, body{
 	top: 0;
 	margin: 0 auto;
 	overflow: hidden;
+	display: block;
 }
 
 #main-layer-action-bar{
@@ -552,21 +553,30 @@ html, body{
 }
 
 #main-layer-detail{
-	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	height: 600px;
+	width: 480px;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin-top: 0;
 	background: #555;
-	display: block;
 	position: fixed;
+	overflow: scroll;
 	z-index: 200;
+	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
 }
 
 #main-layer-ties{
-	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	height: 600px;
+	width: 480px;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin-top: 0;
 	background: #222;
-	display: block;
-	position: relative;
+	position: fixed;
+	overflow: scroll;
 	z-index: 300;
+	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
+}
+
+#main-layer-detail div a, #main-layer-ties div a{
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	font-size: 50px;
 }
