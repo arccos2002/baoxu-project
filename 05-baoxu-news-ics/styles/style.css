@@ -301,11 +301,47 @@ html, body{
 	width: 92px;
 	height: 72px;
 	float: left;
-	background: url("../images/bot_layer_all.png") 0 -350px no-repeat;
+	background: url("../images/bot_layer_all.png") no-repeat;
 }
 
-#main-layer-action-bar-back a.current{
-	background: url("../images/bot_layer_all.png") 0 -422px no-repeat;
+#main-layer-action-bar-back a.news-back{
+	background-position: 0 -350px;
+}
+
+#main-layer-action-bar-back a.news-back-current{
+	background-position: 0 -422px;
+}
+
+#main-layer-action-bar-back a.ties-back{
+	background-position: -90px -350px;
+}
+
+#main-layer-action-bar-back a.ties-back-current{
+	background-position: -90px -422px;
+}
+
+#main-layer-action-bar-back a.pics-back{
+	background-position: -180px -350px;
+}
+
+#main-layer-action-bar-back a.pics-back-current{
+	background-position: -180px -422px;
+}
+
+#main-layer-action-bar-back a.topics-back{
+	background-position: -270px -350px;
+}
+
+#main-layer-action-bar-back a.topics-back-current{
+	background-position: -270px -422px;
+}
+
+#main-layer-action-bar-back a.vote-back{
+	background-position: -360px -350px;
+}
+
+#main-layer-action-bar-back a.vote-back-current{
+	background-position: -360px -422px;
 }
 
 #main-layer-action-bar-logo{

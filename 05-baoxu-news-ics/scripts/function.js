@@ -14,7 +14,8 @@ var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标
 var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
 var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
 
-var VIEW_SCROLL_TOP = 0;
+var VIEW_SCROLL_TOP = 0;            //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
+var CURRENT_TOP_ITEM = "news";          //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
 
 
 /******************************************************************************/
@@ -27,7 +28,6 @@ addLoadEvent(todo);
 function todo(){
 	console.log(LOG_INFO + "Starting, just do it!");//LOG
 	initViewPort();
-	changeBotLayerNavi();
 	bindAllObject();
 
 	//getNewsList("headline", "T1348647909107", 0, 20, renderHeadline);
@@ -74,6 +74,10 @@ function initViewPort(){
 
 //需要添加事件的对象都写在这里
 function bindAllObject(){
+	//底部图层右边顶级栏目列表点击绑定事件
+	bindBotLayerNavi();
+	//顶级新闻栏目新闻列表绑定事件
+	bindNewsListItem();
 	//左上角的频道切换按钮的点击事件，点击后主图层向右推开或收回
 	$$("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = toggleMainLayerMoveToRight;
 	//右上角的用户及设置按钮的点击事件，点击后主图层向左推开或收回
@@ -96,8 +100,8 @@ function bindAllObject(){
 	$$("ties-header-bar-back").getElementsByTagName("a")[0].onclick = toggleTiesLayerDisplay;
 }
 
-//页面底层左栏导航按钮点击的样式变化
-function changeBotLayerNavi(){
+//为页面底层左栏导航按钮点击绑定动作
+function bindBotLayerNavi(){
 	var bot_layer_navi_li = $$("navi-list").getElementsByTagName("li");
 	for(var i = 0 ; i < bot_layer_navi_li.length ; i++){
 		bot_layer_navi_li[i].getElementsByTagName("a")[0].onclick = function(){
@@ -108,11 +112,22 @@ function changeBotLayerNavi(){
 			console.log(LOG_INFO + "All navi button style is normal");//LOG
 			//将被点击按钮的样式置为current
 			this.className = "current";
-			setTimeout(toggleMainLayerMoveToRight, 200);
+			//获取当前顶级项目，存入全局变量
+			CURRENT_TOP_ITEM = this.parentElement.className.slice(5);
+			setTimeout(toggleMainLayerMoveToRight, 100);
 			console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
 		}
 	}
 }
+
+//新闻栏目新闻列表内单条新闻绑定事件
+function bindNewsListItem(){
+	var news_list_li = $$("news-list").getElementsByTagName("li");
+	for(var i = 0; i<news_list_li.length; i++){
+		news_list_li[i].onclick = toggleDetailLayerDisplay;
+	}
+}
+
 
 //主页面图层向右移动，即点击了左上角的按钮的效果
 function toggleMainLayerMoveToRight(){
@@ -120,13 +135,14 @@ function toggleMainLayerMoveToRight(){
 	if(MAIN_LAYER_MOVE_FLAG == 0){
 		moveElementWith("main-layer", "absolute", 96, 0.2, 10, -1, mainLayerRightOver);
 		moveElementWith("main-layer-action-bar", "fixed", 96, 0.2, 10, 0);
-		theBar.className = "current";
+		theBar.className = CURRENT_TOP_ITEM + "-back-current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the right,and back button style is current");//LOG
 	}else{
 		moveElementWith("main-layer", "absolute", -96, 0.2, 10, 1, mainLayerRestore);
 		moveElementWith("main-layer-action-bar", "fixed", -96, 0.2, 10, 0);
-		theBar.className = "";
+		//theBar.className = theBar.className.slice(0, -8);
+		theBar.className = CURRENT_TOP_ITEM + "-back";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and back button style is normal");//LOG
 	}
