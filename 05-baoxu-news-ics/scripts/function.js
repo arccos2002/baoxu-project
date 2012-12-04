@@ -90,6 +90,10 @@ function bindAllObject(){
 	$$("main-layer-news-column-do").getElementsByTagName("a")[1].onclick = toggleEditNewsColumnList;
 	//点击新闻栏目编辑完成按钮时的动作
 	$$("main-layer-news-column-ok").getElementsByTagName("a")[0].onclick = toggleEditNewsColumnList;
+
+	$$("detail-header-bar-back").getElementsByTagName("a")[0].onclick = toggleDetailLayerDisplay;
+	$$("detail-header-bar-ties").getElementsByTagName("a")[0].onclick = toggleTiesLayerDisplay;
+	$$("ties-header-bar-back").getElementsByTagName("a")[0].onclick = toggleTiesLayerDisplay;
 }
 
 //页面底层左栏导航按钮点击的样式变化
@@ -156,16 +160,19 @@ function toggleDetailLayerDisplay(){
 
 		//先显示新闻详情页，设为block，然后将其移入主视图，占满主视图之后，在回调函数里面隐藏列表页，以方便滚动条
 		setElementDisplay("main-layer-detail", "block");
-		moveElementWith("main-layer-detail", "absolute", -480, 0.2, 10, 0, detailLayerDisplay);
+		moveElementWith("main-layer-detail", "fixed", -480, 0.2, 10, 0, detailLayerDisplay);
+		moveElementWith("detail-header-bar", "fixed", -480, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving to the main view");//LOG
 	}else{
 		//先显示出隐藏了的新闻列表页，复原滚动高度，将新闻详情页移出主视图，在回调函数里面将其设置为none
 		setElementDisplay("main-layer", "block");
+		setElementDisplay("bot-layer", "block");
 		//document.documentElement.scrollTop = VIEW_SCROLL_TOP; //Firefox
 		document.body.scrollTop = VIEW_SCROLL_TOP; //Webkit
 
-		moveElementWith("main-layer-detail", "absolute", 480, 0.2, 10, 0, detailLayerRestore);
+		moveElementWith("main-layer-detail", "fixed", 480, 0.2, 10, 0, detailLayerRestore);
+		moveElementWith("detail-header-bar", "fixed", 480, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving out the main view, now is hide");//LOG
 	}
@@ -177,12 +184,14 @@ function toggleTiesLayerDisplay(){
 	if(TIES_LAYER_MOVE_FLAG == 0){
 		//先显示跟帖页，设为block，然后将其移入主视图
 		setElementDisplay("main-layer-ties", "block");
-		moveElementWith("main-layer-ties", "absolute", -480, 0.2, 10, 0, tiesLayerDisplay);
+		moveElementWith("main-layer-ties", "fixed", -480, 0.2, 10, 0, tiesLayerDisplay);
+		moveElementWith("ties-header-bar", "fixed", -480, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving to the main view");//LOG
 	}else{
 		//将跟帖页移出主视图，在回调函数里面将其设置为none
-		moveElementWith("main-layer-ties", "absolute", 480, 0.2, 10, 0, tiesLayerRestore);
+		moveElementWith("main-layer-ties", "fixed", 480, 0.2, 10, 0, tiesLayerRestore);
+		moveElementWith("ties-header-bar", "fixed", 480, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving out the main view, now is hide");//LOG
 	}
@@ -213,6 +222,7 @@ function detailLayerDisplay(){
 
 	//新闻详情页在主视图中显示的时候，将新闻列表页面隐藏
 	setElementDisplay("main-layer", "none");
+	setElementDisplay("bot-layer", "none");
 }
 
 //详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏

@@ -6,6 +6,11 @@
  * Time:   下午12:09
  */
 
+
+/******************************************************************************/
+/******************                 公共样式               *********************/
+/******************************************************************************/
+
 .t-shadow{
 	-moz-text-shadow: 2px 2px 2px #bbb;
 	-webkit-text-shadow: 2px 2px 2px #bbb;
@@ -25,6 +30,11 @@ html, body{
 	height: 100%;
 	width: 100%;
 }
+
+
+/******************************************************************************/
+/******************                 底层样式               *********************/
+/******************************************************************************/
 
 /*用于底层抽屉的页面*/
 #bot-layer{
@@ -248,7 +258,11 @@ html, body{
 	background: url("../images/bot_layer_all.png") -430px 0 no-repeat;
 }
 
-/****************下面开始是主界面的样式*********************/
+
+/******************************************************************************/
+/******************                主图层样式               *********************/
+/******************************************************************************/
+
 
 #main{
 	width: 480px; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
@@ -572,31 +586,190 @@ html, body{
 	color: #8D8D8D;
 }
 
+
+/******************************************************************************/
+/******************               新闻详情页样式             *********************/
+/******************************************************************************/
+
+
 #main-layer-detail{
 	width: 480px;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	margin-top: 0;
-	background: #555;
+	margin: 0 auto;
+	top:0;
+	padding-top: 72px;
+	background: #F6F6F6;
 	position: fixed;
-	overflow: scroll;
+	overflow: auto;
 	z-index: 200;
 	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
 }
 
+#detail-header-bar{
+	height: 72px;
+	width: 100%;
+	position: fixed;
+	margin: 0 auto;
+	top:0;
+	background: rgba(246, 246, 246, 0.80) url("../images/news_base_list_divider.png") bottom no-repeat;
+	z-index: 290;
+}
+
+#detail-header-bar-back{
+	width: 95px;
+	height: 70px;
+	float: left;
+	position: absolute;
+	z-index: 291;
+}
+
+#detail-header-bar-back a{
+	width: 95px;
+	height: 70px;
+	display: block;
+	background: url("../images/bot_layer_all.png") 0 -500px no-repeat;
+}
+
+#detail-header-bar-back a:hover{
+	background: url("../images/bot_layer_all.png") -95px -500px no-repeat;
+}
+
+
+#detail-header-bar-menu{
+	width: 74px;
+	height: 70px;
+	float: right;
+	position: relative;
+	z-index: 291;
+}
+
+#detail-header-bar-menu a{
+	width: 74px;
+	height: 70px;
+	display: block;
+	background: url("../images/bot_layer_all.png") -190px -500px no-repeat;
+}
+
+#detail-header-bar-menu a:hover{
+	background: url("../images/bot_layer_all.png") -264px -500px no-repeat;
+}
+
+#detail-header-bar-ties{
+	width: 124px;
+	height: 72px;
+	float: right;
+	position: relative;
+	z-index: 291;
+}
+
+#detail-header-bar-ties a{
+	width: 124px;
+	height: 72px;
+	display: block;
+	background: url("../images/bot_layer_all.png") -340px -500px no-repeat;
+	color: #FFF;
+	font-size: 20px;
+	text-align: center;
+	line-height: 70px;
+}
+
+#detail-article{
+	margin: 0 25px 0 25px;
+	position: relative;
+	z-index: 280;
+}
+
+#detail-article h1{
+	padding: 25px 0 15px 0;
+	font-size: 35px;
+	line-height: 40px;
+	display: block;
+	position: relative;
+}
+
+#detail-article h6{
+	padding-bottom: 20px;
+	font-size: 18px;
+	line-height: 20px;
+	color: #999;
+	display: block;
+	position: relative;
+}
+
+#detail-article-content{
+	margin-bottom: 90px;
+}
+
+#detail-article-content p{
+	margin: 10px 0;
+	font-size: 25px;
+	line-height: 38px;
+	color: #585858;
+}
+
+#detail-article-content img{
+	width: 100%;
+	margin-top: 10px;
+	border: 1px #ccc solid;
+}
+
+#detail-article-content span{
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 20px;
+	line-height: 20px;
+	color: #7a7a7a;
+}
+
+
+
+
+
+/******************************************************************************/
+/******************                 跟帖页样式              *********************/
+/******************************************************************************/
+
+
 #main-layer-ties{
 	width: 480px;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	margin-top: 0;
-	background: #222;
+	margin: 0 auto;
+	padding-top: 72px;
+	background: #F6F6F6;
 	position: fixed;
-	overflow: scroll;
+	top:0;
+	overflow: auto;
 	z-index: 300;
 	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
 }
 
-#main-layer-detail div a, #main-layer-ties div a{
+#ties-header-bar{
+	height: 72px;
+	width: 100%;
+	position: fixed;
+	margin: 0 auto;
+	top:0;
+	background: rgba(246, 246, 246, 0.80) url("../images/news_base_list_divider.png") bottom no-repeat;
+	z-index: 390;
+}
+
+#ties-header-bar-back{
+	width: 95px;
+	height: 70px;
+	float: left;
+	position: absolute;
+	z-index: 391;
+}
+
+#ties-header-bar-back a{
+	width: 95px;
+	height: 70px;
 	display: block;
-	height: 50px;
-	line-height: 50px;
-	font-size: 50px;
+	background: url("../images/bot_layer_all.png") 0 -500px no-repeat;
+}
+
+#ties-header-bar-back a:hover{
+	background: url("../images/bot_layer_all.png") -95px -500px no-repeat;
 }
