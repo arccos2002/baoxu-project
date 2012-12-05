@@ -20,11 +20,11 @@
 	<!--左边主导航-->
 	<div id = "bot-layer-navi">
 		<ul id = "navi-list">
-			<li class = "navi-news"><a class = "current"></a></li>
-			<li class = "navi-ties"><a></a></li>
-			<li class = "navi-pics"><a></a></li>
-			<li class = "navi-topics"><a></a></li>
-			<li class = "navi-vote"><a></a></li>
+			<li class = "navi-news"><a data-event-tag = "et_top_nav" class = "current"></a></li>
+			<li class = "navi-ties"><a data-event-tag = "et_top_nav"></a></li>
+			<li class = "navi-pics"><a data-event-tag = "et_top_nav"></a></li>
+			<li class = "navi-topics"><a data-event-tag = "et_top_nav"></a></li>
+			<li class = "navi-vote"><a data-event-tag = "et_top_nav"></a></li>
 		</ul>
 	</div>
 	<!--主导航的覆盖阴影-->
@@ -63,32 +63,47 @@
 		<!--主图层顶部信息操作条-->
 		<div id = "main-layer-action-bar" style = "left: 0">
 			<!--返回按钮-->
-			<div id = "main-layer-action-bar-back"><a class="news-back"></a></div>
+			<div id = "main-layer-action-bar-back"><a data-event-tag = "et_main_layer_back" class = "news-back"></a>
+			</div>
 			<!--网易LOGO-->
 			<div id = "main-layer-action-bar-logo"></div>
 			<!--栏目名称-->
-			<div id = "main-layer-action-bar-column"><a>头图&nbsp;&nbsp;&nbsp;</a></div>
+			<div id = "main-layer-action-bar-column"><a data-event-tag = "et_main_layer_colm">头条&nbsp;&nbsp;&nbsp;</a>
+			</div>
 			<!--占位使用-->
 			<!--<div style="float: left;width: 200px;"></div>-->
 			<!--右侧用户按钮入口-->
-			<div id = "main-layer-action-bar-user"><a></a></div>
+			<div id = "main-layer-action-bar-user"><a data-event-tag = "et_main_layer_user"></a></div>
 
 			<div id = "main-layer-action-bar-shadow"></div>
 			<!--针对FF的Float校正-->
 			<div id = "main-layer-action-bar-column-list" class = "b-shadow">
 				<ul>
-					<li><a class = "column_dis"></a><a class = "column_name_all">头条</a><a class = "column_dis"></a></li>
-					<li><a class = "column_dis"></a><a class = "column_name_all">体育头条</a><a class = "column_dis"></a>
-					</li>
-					<li><a class = "column_dis"></a><a class = "column_name_all">财经头条</a><a class = "column_dis"></a>
-					</li>
-					<li><a class = "column_dis"></a><a class = "column_name_all">社会头条</a><a class = "column_dis"></a>
-					</li>
-					<li><a class = "column_dis"></a><a class = "column_name_all">军事头条</a><a class = "column_dis"></a>
-					</li>
+					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+							data-event-tag = "et_colm_list_choose" class = "column_name_all">头条</a><a
+							data-event-tag = "et_colm_list_drag"
+							class = "column_dis"></a></li>
+					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+							data-event-tag = "et_colm_list_choose" class = "column_name_all">体育头条</a><a
+							data-event-tag = "et_colm_list_drag"
+							class = "column_dis"></a></li>
+					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+							data-event-tag = "et_colm_list_choose" class = "column_name_all">财经头条</a><a
+							data-event-tag = "et_colm_list_drag"
+							class = "column_dis"></a></li>
+					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+							data-event-tag = "et_colm_list_choose" class = "column_name_all">社会头条</a><a
+							data-event-tag = "et_colm_list_drag"
+							class = "column_dis"></a></li>
+					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+							data-event-tag = "et_colm_list_choose" class = "column_name_all">军事头条</a><a
+							data-event-tag = "et_colm_list_drag"
+							class = "column_dis"></a></li>
 				</ul>
-				<div id = "main-layer-news-column-do"><a class = "column_add"></a><a class = "column_edit"></a></div>
-				<div id = "main-layer-news-column-ok"><a class = "column_edit_ok"></a></div>
+				<div id = "main-layer-news-column-do"><a data-event-tag = "et_colm_add" class = "column_add"></a><a
+						data-event-tag = "et_colm_edit" class = "column_edit"></a></div>
+				<div id = "main-layer-news-column-ok"><a data-event-tag = "et_colm_edit_ok"
+				                                         class = "column_edit_ok"></a></div>
 			</div>
 		</div>
 		<!--全部新闻列表-->
@@ -105,47 +120,41 @@
 			<!--普通新闻列表-->
 			<div id = "news-list">
 				<ul>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>展开详情页</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>头条新闻001</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>头条新闻001</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>头条新闻001</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>头条新闻001</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
-					<li>
-						<img src = "testdata/news-list-img-test.jpg" />
-
-						<h1>头条新闻001</h1>
-						<h6>这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span>100跟帖</span>
+					<li data-event-tag = "et_news_item">
+						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+						<h1 data-event-tag = "et_news_item">展开详情页</h1>
+						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+						<span data-event-tag = "et_news_item">100跟帖</span>
 					</li>
 				</ul>
 			</div>
@@ -154,9 +163,9 @@
 
 	<!--详情页的Section-->
 	<header id = "detail-header-bar" style = "left: 480px;">
-		<div id = "detail-header-bar-back"><a></a></div>
-		<div id = "detail-header-bar-menu"><a></a></div>
-		<div id = "detail-header-bar-ties"><a>100跟帖</a></div>
+		<div id = "detail-header-bar-back"><a data-event-tag = "et_detail_back"></a></div>
+		<div id = "detail-header-bar-menu"><a data-event-tag = "et_detail_menu"></a></div>
+		<div id = "detail-header-bar-ties"><a data-event-tag = "et_detail_ties">100跟帖</a></div>
 	</header>
 	<section id = "main-layer-detail" style = "left: 480px">
 		<article id = "detail-article">
@@ -189,10 +198,9 @@
 
 	<!--跟帖页的Section-->
 	<header id = "ties-header-bar" style = "left: 480px;">
-		<div id = "ties-header-bar-back"><a></a></div>
+		<div id = "ties-header-bar-back"><a data-event-tag = "et_ties_back"></a></div>
 	</header>
 	<section id = "main-layer-ties" style = "left: 480px">
-		<div><a onclick = "toggleTiesLayerDisplay()">返回新闻详情页</a></div>
 		<div><a href = "http://www.baidu.com">这是跟帖页</a></div>
 	</section>
 

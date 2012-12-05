@@ -27,17 +27,20 @@ addLoadEvent(todo);
 //TODO函数中包括要立即处理的函数
 function todo(){
 	console.log(LOG_INFO + "Starting, just do it!");//LOG
+	//初始化各个块的大小
 	initViewPort();
-	bindAllObject();
+	//在document级别做事件委派
+	bindEvent();
 
+	//加载网络新闻列表
 	//getNewsList("headline", "T1348647909107", 0, 20, renderHeadline);
 
 	//显示离线存储状态
 	//showAppCache();
 
-//	document.addEventListener("touchstart", handleTouchEvent, false);
-//	document.addEventListener("touchend", handleTouchEvent, false);
-//	document.addEventListener("touchmove", handleTouchEvent, false);
+/*	document.addEventListener("touchstart", handleTouchEvent, false);
+	document.addEventListener("touchend", handleTouchEvent, false);
+	document.addEventListener("touchmove", handleTouchEvent, false);*/
 }
 
 //初始化页面的高宽以适合所有屏幕的显示
@@ -72,62 +75,108 @@ function initViewPort(){
 	$$("main-layer-ties").style.height = client_height + "px";
 }
 
-//需要添加事件的对象都写在这里
-function bindAllObject(){
-	//底部图层右边顶级栏目列表点击绑定事件
-	bindBotLayerNavi();
-	//顶级新闻栏目新闻列表绑定事件
-	bindNewsListItem();
-	//左上角的频道切换按钮的点击事件，点击后主图层向右推开或收回
-	$$("main-layer-action-bar-back").getElementsByTagName("a")[0].onclick = toggleMainLayerMoveToRight;
-	//右上角的用户及设置按钮的点击事件，点击后主图层向左推开或收回
-	$$("main-layer-action-bar-user").getElementsByTagName("a")[0].onclick = toggleMainLayerMoveToLeft;
-	//点击主图层操作条中部的栏目选择时，弹出或隐藏栏目列表
-	$$("main-layer-action-bar-column").getElementsByTagName("a")[0].onclick = toggleColumnList;
-	//点击栏目列表中某一项的时候，更改主图层栏目名称
-	var columnList = $$("main-layer-action-bar-column-list").getElementsByTagName("li");
-	for(var i = 0 ; i < columnList.length ; i++){
-		columnList[i].getElementsByTagName("a")[0].onclick = toggleDeleteColumn;
-		columnList[i].getElementsByTagName("a")[1].onclick = chooseColumn;
-	}
-	//点击新闻栏目编辑按钮的动作
-	$$("main-layer-news-column-do").getElementsByTagName("a")[1].onclick = toggleEditNewsColumnList;
-	//点击新闻栏目编辑完成按钮时的动作
-	$$("main-layer-news-column-ok").getElementsByTagName("a")[0].onclick = toggleEditNewsColumnList;
+//绑定事件
+function bindEvent(){
+	EventUtil.addHandler(document, "click", function(event){
+		event = EventUtil.getEvent(event);
+		var target = EventUtil.getTarget(event);
+		var event_tag = target.dataset["eventTag"];
 
-	$$("detail-header-bar-back").getElementsByTagName("a")[0].onclick = toggleDetailLayerDisplay;
-	$$("detail-header-bar-ties").getElementsByTagName("a")[0].onclick = toggleTiesLayerDisplay;
-	$$("ties-header-bar-back").getElementsByTagName("a")[0].onclick = toggleTiesLayerDisplay;
-}
+		switch(event_tag){
+			//底层顶级栏目导航被点击
+			case "et_top_nav":
+				clickBotLayerNavi(target);
+				break;
 
-//为页面底层左栏导航按钮点击绑定动作
-function bindBotLayerNavi(){
-	var bot_layer_navi_li = $$("navi-list").getElementsByTagName("li");
-	for(var i = 0 ; i < bot_layer_navi_li.length ; i++){
-		bot_layer_navi_li[i].getElementsByTagName("a")[0].onclick = function(){
-			//某个按钮被点击后，将所有的按钮样式置空
-			for(var t = 0 ; t < bot_layer_navi_li.length ; t++){
-				bot_layer_navi_li[t].getElementsByTagName("a")[0].className = "";
-			}
-			console.log(LOG_INFO + "All navi button style is normal");//LOG
-			//将被点击按钮的样式置为current
-			this.className = "current";
-			//获取当前顶级项目，存入全局变量
-			CURRENT_TOP_ITEM = this.parentElement.className.slice(5);
-			setTimeout(toggleMainLayerMoveToRight, 100);
-			console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
+			//主图层左上角展开隐藏左侧边栏按钮被点击
+			case "et_main_layer_back":
+				toggleMainLayerMoveToRight();
+				break;
+
+			//主图层左上角展开隐藏左侧边栏按钮被点击
+			case "et_main_layer_user":
+				toggleMainLayerMoveToLeft();
+				break;
+
+			//主图层中部新闻栏目选择按钮被点击
+			case "et_main_layer_colm":
+				toggleColumnList();
+				break;
+
+			//主图层弹出新闻列表中某一栏目被点击
+			case "et_colm_list_choose":
+				chooseColumn(target);
+				break;
+
+			//主图层弹出新闻列表下方，添加栏目按钮被点击
+			case "et_colm_add":
+				break;
+
+			//主图层弹出新闻列表下方，编辑栏目按钮被点击
+			case "et_colm_edit":
+				toggleEditNewsColumnList();
+				break;
+
+			//主图层弹出的新闻栏目列表编辑的时候，左侧删除按钮被点击
+			case "et_colm_list_remove":
+				toggleDeleteColumn(target);
+				break;
+
+			//主图层弹出的新闻栏目列表编辑的时候，右侧拖拽按钮被点击
+			case "et_colm_list_drag":
+				break;
+
+			//主图层弹出的新闻栏目列表编辑的时候，底部完成按钮被点击
+			case "et_colm_edit_ok":
+				toggleEditNewsColumnList();
+				break;
+
+			//新闻详情页左上角返回按钮被点击
+			case "et_detail_back":
+				toggleDetailLayerDisplay();
+				break;
+
+			//新闻详情页右上角菜单按钮被点击
+			case "et_detail_menu":
+				break;
+
+			//新闻详情页中部查看跟帖按钮被点击
+			case "et_detail_ties":
+				toggleTiesLayerDisplay();
+				break;
+
+			//跟帖页左上角返回按钮被点击
+			case "et_ties_back":
+				toggleTiesLayerDisplay();
+				break;
+
+			//新闻列表页单条新闻被点击
+			case "et_news_item":
+				toggleDetailLayerDisplay();
+				break;
 		}
-	}
+	})
 }
 
-//新闻栏目新闻列表内单条新闻绑定事件
-function bindNewsListItem(){
-	var news_list_li = $$("news-list").getElementsByTagName("li");
-	for(var i = 0; i<news_list_li.length; i++){
-		news_list_li[i].onclick = toggleDetailLayerDisplay;
-	}
-}
 
+/**
+ * @funtion 页面底层主栏目导航被点击时的反应
+ * @parameter target:被点击的目标元素
+ * */
+function clickBotLayerNavi(target){
+	var bot_layer_navi_li = $$("navi-list").getElementsByTagName("li");
+	//某个按钮被点击后，将所有的按钮样式置空
+	for(var t = 0 ; t < bot_layer_navi_li.length ; t++){
+		bot_layer_navi_li[t].getElementsByTagName("a")[0].className = "";
+	}
+	console.log(LOG_INFO + "All navi button style is normal");//LOG
+	//将被点击按钮的样式置为current
+	target.className = "current";
+	//获取当前顶级项目，存入全局变量
+	CURRENT_TOP_ITEM = target.parentElement.className.slice(5);
+	setTimeout(toggleMainLayerMoveToRight, 100);
+	console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
+}
 
 //主页面图层向右移动，即点击了左上角的按钮的效果
 function toggleMainLayerMoveToRight(){
@@ -280,10 +329,10 @@ function toggleColumnList(){
 }
 
 //选择栏目
-function chooseColumn(){
+function chooseColumn(target){
 	//切换顶部栏目名
-	$$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = this.innerHTML + "&nbsp;&nbsp;&nbsp;";
-	console.log(LOG_INFO + "The now column is " + this.innerHTML);//LOG
+	$$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = target.innerHTML + "&nbsp;&nbsp;&nbsp;";
+	console.log(LOG_INFO + "The now column is " + target.innerHTML);//LOG
 	//收起栏目列表
 	toggleColumnList();
 }
@@ -324,13 +373,13 @@ function toggleEditNewsColumnList(){
 }
 
 //切换栏目列表中删除按钮的动作
-function toggleDeleteColumn(){
+function toggleDeleteColumn(target){
 	//先将按钮变为删除警告
-	if(this.className == "column_del"){
-		this.className = "column_del_check";
-	}else if(this.className == "column_del_check"){
+	if(target.className == "column_del"){
+		target.className = "column_del_check";
+	}else if(target.className == "column_del_check"){
 		//删除该节点
-		this.parentNode.outerHTML = "";
+		target.parentNode.outerHTML = "";
 	}
 }
 
