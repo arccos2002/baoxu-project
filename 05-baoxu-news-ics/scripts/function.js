@@ -304,7 +304,10 @@ function mainLayerLeftOver(){
 	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is moved to the left");//LOG
 }
 
-//主图层归位时的回调，将MAIN_LAYER_MOVE_FLAG还原为0
+/**
+ * @name mainLayerRestore
+ * @class 主图层归位时的回调，将MAIN_LAYER_MOVE_FLAG还原为0
+ */
 function mainLayerRestore(){
 	MAIN_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is restore");//LOG
@@ -357,19 +360,18 @@ function tiesLayerRestore(){
 /**
  * @name toggleColumnList
  * @class 切换新闻类顶部栏目列表是否显示
- *
- * @param {object} target 被点击的目标，可选参数
  */
-function toggleColumnList(target){
+function toggleColumnList(){
+	var column_select_btn = document.getElementById("main-layer-action-bar-column").getElementsByTagName("a")[0];
 	//如果当前栏目列表没有展开，则展开，并将栏目条上的按钮置为按下的状态
 	if(COLUMN_DISPLAY_FLAG == 0){
 		$$("main-layer-action-bar-column-list").style.display = "block";
-		this.className = "current";
+		column_select_btn.className = "current";
 		COLUMN_DISPLAY_FLAG = 1;
 		console.log(LOG_INFO + "COLUMN_DISPLAY_FLAG = " + COLUMN_DISPLAY_FLAG + " & Column list is dispaly");//LOG
 	}else{
 		$$("main-layer-action-bar-column-list").style.display = "none";
-		this.className = "";
+		column_select_btn.className = "";
 		COLUMN_DISPLAY_FLAG = 0;
 		console.log(LOG_INFO + "COLUMN_DISPLAY_FLAG = " + COLUMN_DISPLAY_FLAG + " & Column list is hide");//LOG
 	}
@@ -392,10 +394,8 @@ function chooseColumn(target){
 /**
  * @name toggleEditNewsColumnList
  * @class 点击编辑新闻栏目列表的操作函数
- *
- * @param {object} target 被点击的目标，可选参数
  */
-function toggleEditNewsColumnList(target){
+function toggleEditNewsColumnList(){
 	var columnList = $$("main-layer-action-bar-column-list").getElementsByTagName("li");
 	var i;
 	if(COLUMN_EDIT_FLAG == 0){
@@ -452,9 +452,9 @@ function toggleDeleteColumn(target){
  *
  * @param {string} newsType 请求的新闻列表的类型（headline：头条新闻；list：普通新闻）
  * @param {string} columnId 新闻栏目的ID
- * @param {int} startId 新闻列表的起始ID
- * @param {int} endId 新闻列表的终止ID
- * @param {string} callback 异步请求完之后的回调函数
+ * @param {number} startId 新闻列表的起始ID
+ * @param {number} endId 新闻列表的终止ID
+ * @param {function} callback 异步请求完之后的回调函数
  */
 function getNewsList(newsType, columnId, startId, endId, callback){
 	var request = getHTTPObject();
@@ -473,7 +473,9 @@ function getNewsList(newsType, columnId, startId, endId, callback){
 				//执行异步处理回调函数
 				callback(requestResult, columnId);
 				//返回请求成功
-				return true;
+				//return true;
+			}else{
+				//
 			}
 		};
 		request.send(null);
@@ -531,7 +533,7 @@ function displayNews(docId){
  */
 
 function showAppCache(){
-	var myCache = new appCache();
+	var myCache = new AppCache();
 	//定义共用DOM对象
 	var output = $$("output");
 	var act = myCache.cacheStatus;

@@ -7,11 +7,21 @@
 // 需要的全局变量
 var MOVEMENT_FLAG = 0;  //移位完成标志符
 
+/**
+ * @name $$
+ * @class 根据ID获取DOM元素
+ * @param {String} id 元素ID
+ * @return {Node}
+ */
 function $$(id){
 	return document.getElementById(id);
 }
 
-//添加页面加载后事件
+/**
+ * @name addLoadEvent
+ * @class 添加页面加载后事件
+ * @param {Function} func 需要页面载入后执行的函数
+ */
 function addLoadEvent(func){
 	var oldOnloadEvent = window.onload;
 	if(typeof oldOnloadEvent != "function"){
@@ -24,7 +34,12 @@ function addLoadEvent(func){
 	}
 }
 
-//在某元素之后插入
+/**
+ * @name insertAfter
+ * @class 在某元素之后插入
+ * @param {Node} newElement 需要插入的新元素
+ * @param {Node} targetElement 在这个元素之后插入
+ */
 function insertAfter(newElement, targetElement){
 	var theParentNode = targetElement.parentNode;
 	if(theParentNode.lastChild == targetElement){
@@ -34,7 +49,12 @@ function insertAfter(newElement, targetElement){
 	}
 }
 
-//为某元素添加class
+/**
+ * @name addClass
+ * @class 为某元素添加class
+ * @param {Node} targetElement 为这个元素添加CSS类
+ * @param {String} className 需要添加的CSS类
+ */
 function addClass(targetElement, className){
 	if(!targetElement.className){
 		targetElement.className = className;
@@ -46,8 +66,13 @@ function addClass(targetElement, className){
 	}
 }
 
-
-//获取某对象元素在目标数组中的位置索引，如果有，返回索引，没有则返回-1
+/**
+ * @name getObjectIndex
+ * @class 获取某对象元素在目标数组中的位置索引
+ * @param {Array} targetArray 要在这个序列里面查找
+ * @param {Object} checkObject 查找的目标
+ * @return {Number} 如果找到，返回索引，没有则返回-1
+ */
 function getObjectIndex(targetArray, checkObject){
 	for(var i = 0 ; i < targetArray.length ; i++){
 		if(targetArray[i] == checkObject){
@@ -58,10 +83,14 @@ function getObjectIndex(targetArray, checkObject){
 }
 
 
-//通用函数，根据不同的浏览器获取XmlHttpRequest对象
+/**
+ * @name getHTTPObject
+ * @class 通用函数，根据不同的浏览器获取XmlHttpRequest对象
+ * @return {Object} 返回XmlHttpRequest对象
+ */
 function getHTTPObject(){
 	if(typeof XMLHttpRequest == "undefined"){
-		XMLHttpRequest = function(){
+		var XMLHttpRequest = function(){
 			try{
 				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
 			}catch(e){
@@ -74,47 +103,36 @@ function getHTTPObject(){
 				return new ActiveXObject("Msxml2.XMLHTTP");
 			}catch(e){
 			}
-			return false;
+			return {};
 		}
 	}
 	return new XMLHttpRequest();
 }
 
-
-//获得浏览器信息
+/**
+ * @name getClientInfo
+ * @class 获得浏览器信息
+ * @return {Array} 返回浏览器信息数组
+ */
 function getClientInfo(){
-	var client_info = new Array();
+	var client_info = [];
 	client_info["width"] = document.body.clientWidth;
 	client_info["height"] = document.body.clientHeight;
 	return client_info;
 }
 
-//鼠标滚轮事件的定义
-function wheelEvent(obj, handle){
-	this.handle = handle;
-	//兼容火狐和IE
-	window.addEventListener ? obj.addEventListener("DOMMouseScroll", this.wheel, false) : (obj.onmousewheel = this.wheel);
-}
-wheelEvent.prototype.wheel = function(event){
-	var ev = event || window.event;
-	var delta = ev.wheelDelta ? (ev.wheelDelta / 120) : (-ev.detail / 3); // Firefox using `wheelDelta` IE using `detail`
-	eval('delta ? ' + parent.wheelEventHandle + '(delta) : null;');
-}
-
-
 /**
- * 此方法用于移动元素到指定坐标，自定义单步移动距离百分比和单步移动时间
- *
- * @parameter elementID：需要移动的块的ID
- * @parameter positionStyle：被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
- * @parameter targetX：移动到的目标X轴坐标
- * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
- * @parameter stepTime：每一次timeOut的时间
- * @parameter key:用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
- * @parameter callkack：移位完成调用的函数
- * @parameter 同时移动两个元素的第二个元素ID，可选
- *
- * */
+ * @name moveElementTo
+ * @class 将元素移动至指定的坐标
+ * @param {String} elementID 需要移动的块的ID
+ * @param {String} positionStyle 被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
+ * @param {Number} targetX 移动到的目标X轴坐标
+ * @param {Number} stepDis 每一次timeOut的移动距离百分比，用小数表示
+ * @param {Number} stepTime 每一次timeOut的时间
+ * @param {Number} key 用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
+ * @param {Function} callback 移位完成调用的函数
+ * @param {String} secElementID 同时移动两个元素的第二个元素ID，可选
+ */
 function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback, secElementID){
 	var elementToMove = document.getElementById(elementID);
 
@@ -177,18 +195,17 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 }
 
 /**
- * 此方法用于使移动元素移动指定的位移，自定义单步移动距离百分比和单步移动时间
- *
- * @parameter elementID：需要移动的块的ID
- * @parameter positionStyle：被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
- * @parameter targetX：移动到的目标X轴坐标
- * @parameter stepDis：每一次timeOut的移动距离百分比，用小数表示
- * @parameter stepTime：每一次timeOut的时间
- * @parameter key:用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
- * @parameter callkack：移位完成调用的函数
- * @parameter 同时移动两个元素的第二个元素ID，可选
- *
- * */
+ * @name moveElementWith
+ * @class 将元素移动指定的位移
+ * @param {String} elementID 需要移动的块的ID
+ * @param {String} positionStyle 被移动元素的position属性，absolute可以取到margin值，fixed只能使用left值
+ * @param {Number} stepX 移动到的目标X轴坐标
+ * @param {Number} stepDis 每一次timeOut的移动距离百分比，用小数表示
+ * @param {Number} stepTime 每一次timeOut的时间
+ * @param {Number} key 用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
+ * @param {Function} callback 移位完成调用的函数
+ * @param {String} secElementID 同时移动两个元素的第二个元素ID，可选
+ */
 function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback, secElementID){
 	var elementToMove = document.getElementById(elementID);
 
@@ -208,10 +225,15 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
-//操作离线存储的类
-function appCache(){
+/**
+ * @name AppCache
+ * @class 操作离线存储的类
+ * @return {String} 返回当前Cache状态
+ */
+function AppCache(){
 	this.appCacheData = self.applicationCache;
 	alert(String(this.appCacheData));
+
 	//当前缓存状态
 	this.cacheStatus = function(i){
 		switch(i.status){
@@ -237,7 +259,6 @@ function appCache(){
 				return 'UKNOWN CACHE STATUS';
 				break;
 		}
-		;
 	}(this.appCacheData);
 	//更新缓存
 	this.cacheUpdate = function(i){
@@ -252,21 +273,20 @@ function appCache(){
 }
 
 /**
- * 此方法用于使元素显示出来
- *
- * @parameter elementID：需要改变显示方式的块的ID
- * @parameter how:是要显示还是隐藏(block:块状显示；none：不显示)
- *
- * */
+ * @name setElementDisplay
+ * @class 此方法用于使元素显示出来
+ * @param elementID 需要改变显示方式的块的ID
+ * @param how 是要显示还是隐藏(block:块状显示；none：不显示)
+ */
 function setElementDisplay(elementID, how){
 	document.getElementById(elementID).style.display = how;
 }
 
 
 /**
- * 此方法处理事件
- *
- * */
+ * @name EventUtil
+ * @class 此方法处理事件
+ */
 var EventUtil = {
 
 	addHandler:function(element, type, handler){

@@ -4,6 +4,12 @@
  * Time:   下午2:52
  */
 
+/**
+ * @name renderHeadline
+ * @class 渲染头条新闻列表
+ * @param {Object} data XHR获取的JSON数据
+ * @param {String} columnId 需要渲染的栏目ID
+ */
 function renderHeadline(data, columnId){
 	var dataList = data[columnId];
 	var headImgArea = $$("head-img").getElementsByTagName("ul")[0].getElementsByTagName("li")[0];
