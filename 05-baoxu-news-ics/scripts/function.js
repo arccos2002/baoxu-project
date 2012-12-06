@@ -15,7 +15,7 @@ var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，
 var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
 
 var VIEW_SCROLL_TOP = 0;            //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
-var CURRENT_TOP_ITEM = "news";          //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
+var CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
 
 
 /******************************************************************************/
@@ -24,7 +24,11 @@ var CURRENT_TOP_ITEM = "news";          //记录当前选中的顶级栏目是�
 
 //将TODO事项加入页面加载完成之后立即处理
 addLoadEvent(todo);
-//TODO函数中包括要立即处理的函数
+
+/**
+ * @name todo
+ * @class TODO函数中包括要立即处理的函数
+ */
 function todo(){
 	console.log(LOG_INFO + "Starting, just do it!");//LOG
 	//初始化各个块的大小
@@ -38,12 +42,15 @@ function todo(){
 	//显示离线存储状态
 	//showAppCache();
 
-/*	document.addEventListener("touchstart", handleTouchEvent, false);
-	document.addEventListener("touchend", handleTouchEvent, false);
-	document.addEventListener("touchmove", handleTouchEvent, false);*/
+//	document.addEventListener("touchstart", handleTouchEvent, false);
+//	document.addEventListener("touchend", handleTouchEvent, false);
+//	document.addEventListener("touchmove", handleTouchEvent, false);
 }
 
-//初始化页面的高宽以适合所有屏幕的显示
+/**
+ * @name initViewPort
+ * @class 初始化页面的高宽以适合所有屏幕的显示
+ */
 function initViewPort(){
 	//获取屏幕信息
 	var client_width = getClientInfo()["width"];
@@ -75,7 +82,10 @@ function initViewPort(){
 	$$("main-layer-ties").style.height = client_height + "px";
 }
 
-//绑定事件
+/**
+ * @name bindEvent
+ * @class 绑定事件
+ */
 function bindEvent(){
 	EventUtil.addHandler(document, "click", function(event){
 		event = EventUtil.getEvent(event);
@@ -160,9 +170,11 @@ function bindEvent(){
 
 
 /**
- * @funtion 页面底层主栏目导航被点击时的反应
- * @parameter target:被点击的目标元素
- * */
+ * @name clickBotLayerNavi
+ * @class 选择新闻栏目
+ *
+ * @param {object} target 被点击的目标，必选参数
+ */
 function clickBotLayerNavi(target){
 	var bot_layer_navi_li = $$("navi-list").getElementsByTagName("li");
 	//某个按钮被点击后，将所有的按钮样式置空
@@ -178,7 +190,10 @@ function clickBotLayerNavi(target){
 	console.log(LOG_INFO + "The navi button who is clicked style is current and main layer goes home");//LOG
 }
 
-//主页面图层向右移动，即点击了左上角的按钮的效果
+/**
+ * @name toggleMainLayerMoveToRight
+ * @class 主页面图层向右移动，即点击了左上角的按钮的效果
+ */
 function toggleMainLayerMoveToRight(){
 	var theBar = $$("main-layer-action-bar-back").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
@@ -197,7 +212,10 @@ function toggleMainLayerMoveToRight(){
 	}
 }
 
-//切换主页面图层向左移动，即点击了右上角的按钮的效果，移动或收起
+/**
+ * @name toggleMainLayerMoveToLeft
+ * @class 切换主页面图层向左移动，即点击了右上角的按钮的效果，移动或收起
+ */
 function toggleMainLayerMoveToLeft(){
 	var theBar = $$("main-layer-action-bar-user").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
@@ -216,7 +234,10 @@ function toggleMainLayerMoveToLeft(){
 }
 
 
-//在新闻列表中点击的时候向左推出详情页
+/**
+ * @name toggleDetailLayerDisplay
+ * @class 在新闻列表中点击的时候向左推出详情页
+ */
 function toggleDetailLayerDisplay(){
 	if(DETAIL_LAYER_MOVE_FLAG == 0){
 		//获取页面的已滚动高度，以便于复原
@@ -244,7 +265,10 @@ function toggleDetailLayerDisplay(){
 }
 
 
-//点击跟帖数的时候向左推出跟帖页
+/**
+ * @name toggleTiesLayerDisplay
+ * @class 点击跟帖数的时候向左推出跟帖页
+ */
 function toggleTiesLayerDisplay(){
 	if(TIES_LAYER_MOVE_FLAG == 0){
 		//先显示跟帖页，设为block，然后将其移入主视图
@@ -262,13 +286,19 @@ function toggleTiesLayerDisplay(){
 	}
 }
 
-//主图层右移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为1
+/**
+ * @name mainLayerRightOver
+ * @class 主图层右移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为1
+ */
 function mainLayerRightOver(){
 	MAIN_LAYER_MOVE_FLAG = 1;
 	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is moved to the right");//LOG
 }
 
-//主图层左移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为2
+/**
+ * @name mainLayerLeftOver
+ * @class 主图层左移完成之后的回调，将MAIN_LAYER_MOVE_FLAG设置为2
+ */
 function mainLayerLeftOver(){
 	MAIN_LAYER_MOVE_FLAG = 2;
 	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is moved to the left");//LOG
@@ -280,7 +310,10 @@ function mainLayerRestore(){
 	console.log(LOG_INFO + "MAIN_LAYER_MOVE_FLAG = " + MAIN_LAYER_MOVE_FLAG + " & Main layer is restore");//LOG
 }
 
-//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
+/**
+ * @name detailLayerDisplay
+ * @class 详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
+ */
 function detailLayerDisplay(){
 	DETAIL_LAYER_MOVE_FLAG = 1;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is dispaly");//LOG
@@ -290,7 +323,10 @@ function detailLayerDisplay(){
 	setElementDisplay("bot-layer", "none");
 }
 
-//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
+/**
+ * @name detailLayerRestore
+ * @class 详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
+ */
 function detailLayerRestore(){
 	DETAIL_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is restore");//LOG
@@ -298,13 +334,19 @@ function detailLayerRestore(){
 	setElementDisplay("main-layer-detail", "none");
 }
 
-//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
+/**
+ * @name tiesLayerDisplay
+ * @class 详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
+ */
 function tiesLayerDisplay(){
 	TIES_LAYER_MOVE_FLAG = 1;
 	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is dispaly");//LOG
 }
 
-//详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
+/**
+ * @name tiesLayerRestore
+ * @class 详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页已经隐藏
+ */
 function tiesLayerRestore(){
 	TIES_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is restore");//LOG
@@ -312,8 +354,13 @@ function tiesLayerRestore(){
 	setElementDisplay("main-layer-ties", "none");
 }
 
-//切换新闻类顶部栏目列表是否显示
-function toggleColumnList(){
+/**
+ * @name toggleColumnList
+ * @class 切换新闻类顶部栏目列表是否显示
+ *
+ * @param {object} target 被点击的目标，可选参数
+ */
+function toggleColumnList(target){
 	//如果当前栏目列表没有展开，则展开，并将栏目条上的按钮置为按下的状态
 	if(COLUMN_DISPLAY_FLAG == 0){
 		$$("main-layer-action-bar-column-list").style.display = "block";
@@ -328,7 +375,12 @@ function toggleColumnList(){
 	}
 }
 
-//选择栏目
+/**
+ * @name chooseColumn
+ * @class 选择新闻栏目
+ *
+ * @param {object} target 被点击的目标，必选参数
+ */
 function chooseColumn(target){
 	//切换顶部栏目名
 	$$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = target.innerHTML + "&nbsp;&nbsp;&nbsp;";
@@ -337,8 +389,13 @@ function chooseColumn(target){
 	toggleColumnList();
 }
 
-//点击编辑新闻栏目列表的操作函数
-function toggleEditNewsColumnList(){
+/**
+ * @name toggleEditNewsColumnList
+ * @class 点击编辑新闻栏目列表的操作函数
+ *
+ * @param {object} target 被点击的目标，可选参数
+ */
+function toggleEditNewsColumnList(target){
 	var columnList = $$("main-layer-action-bar-column-list").getElementsByTagName("li");
 	var i;
 	if(COLUMN_EDIT_FLAG == 0){
@@ -372,7 +429,12 @@ function toggleEditNewsColumnList(){
 	}
 }
 
-//切换栏目列表中删除按钮的动作
+/**
+ * @name toggleDeleteColumn
+ * @class 点击切换栏目列表中删除按钮的动作
+ *
+ * @param {object} target 被点击的目标，必选参数
+ */
 function toggleDeleteColumn(target){
 	//先将按钮变为删除警告
 	if(target.className == "column_del"){
@@ -385,18 +447,19 @@ function toggleDeleteColumn(target){
 
 
 /**
- * @funtion 通过XHR请求新闻列表
+ * @name getNewsList
+ * @class 通过XHR请求新闻列表
  *
- * @parameter newsType:请求的新闻列表的类型（headline：头条新闻；list：普通新闻）
- * @parameter columnId:新闻栏目的ID
- * @parameter startId:新闻列表的起始ID
- * @parameter endId：新闻列表的终止ID
- * @parameter callback:异步请求完之后的回调函数
- * */
-function getNewsList(newsType, columuId, startId, endId, callback){
+ * @param {string} newsType 请求的新闻列表的类型（headline：头条新闻；list：普通新闻）
+ * @param {string} columnId 新闻栏目的ID
+ * @param {int} startId 新闻列表的起始ID
+ * @param {int} endId 新闻列表的终止ID
+ * @param {string} callback 异步请求完之后的回调函数
+ */
+function getNewsList(newsType, columnId, startId, endId, callback){
 	var request = getHTTPObject();
 	var requestResult = "";
-	var requestUrl = document.location.href + "cdr.php?type=" + newsType + "&column=" + columuId + "&start=" + startId + "&end=" + endId;
+	var requestUrl = document.location.href + "cdr.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&end=" + endId;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, false);
@@ -408,7 +471,7 @@ function getNewsList(newsType, columuId, startId, endId, callback){
 				//转化为标准JSON对象
 				requestResult = JSON.parse(requestResult);
 				//执行异步处理回调函数
-				callback(requestResult, columuId);
+				callback(requestResult, columnId);
 				//返回请求成功
 				return true;
 			}
@@ -423,19 +486,22 @@ function getNewsList(newsType, columuId, startId, endId, callback){
 
 
 /**
- * @funtion 通过XHR请求单条新闻内容
+ * @name getNews
+ * @class 通过XHR请求单条新闻内容
  *
- * @parameter
- * */
-function getNews(){
+ * @param {object} target 被点中的目标
+ */
+function getNews(target){
 
 }
 
 
 /**
- * @function 显示新闻页面
+ * @name displayNews
+ * @class 显示新闻页面
  *
- * */
+ * @param {string} docId 新闻ID
+ */
 function displayNews(docId){
 	//先显示出详细页面Layer
 	toggleDetailLayerDisplay();
