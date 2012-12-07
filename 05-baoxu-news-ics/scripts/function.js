@@ -37,14 +37,10 @@ function todo(){
 	bindEvent();
 
 	//加载网络新闻列表
-	//getNewsList("headline", "T1348647909107", 0, 20, renderHeadline);
+	getNewsList("headline", "T1348647909107", 0, 20, renderNewsList);
 
 	//显示离线存储状态
 	//showAppCache();
-
-//	document.addEventListener("touchstart", handleTouchEvent, false);
-//	document.addEventListener("touchend", handleTouchEvent, false);
-//	document.addEventListener("touchmove", handleTouchEvent, false);
 }
 
 /**
@@ -160,9 +156,15 @@ function bindEvent(){
 				toggleTiesLayerDisplay();
 				break;
 
+			//新闻头图被点击
+			case "et_head_img":
+				toggleDetailLayerDisplay();
+				break;
+
 			//新闻列表页单条新闻被点击
 			case "et_news_item":
 				toggleDetailLayerDisplay();
+				getNews(target,renderNews);
 				break;
 		}
 	})
@@ -459,7 +461,7 @@ function toggleDeleteColumn(target){
 function getNewsList(newsType, columnId, startId, endId, callback){
 	var request = getHTTPObject();
 	var requestResult = "";
-	var requestUrl = document.location.href + "cdr.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&end=" + endId;
+	var requestUrl = document.location.href + "cdr_list.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&end=" + endId;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, false);
@@ -471,7 +473,7 @@ function getNewsList(newsType, columnId, startId, endId, callback){
 				//转化为标准JSON对象
 				requestResult = JSON.parse(requestResult);
 				//执行异步处理回调函数
-				callback(requestResult, columnId);
+				callback(requestResult);
 				//返回请求成功
 				//return true;
 			}else{
@@ -492,9 +494,44 @@ function getNewsList(newsType, columnId, startId, endId, callback){
  * @class 通过XHR请求单条新闻内容
  *
  * @param {object} target 被点中的目标
+ * @param {Function} callback 被点中的目标
  */
-function getNews(target){
+function getNews(target, callback){
+	console.log(target.tagName);
+	var newsId = "";
+	if (target.tagName == "li"){
+		newsId = target.dataset["newsId"];
+	}else{
+		newsId = target.parentElement.dataset["newsId"];
+	}
 
+	var request = getHTTPObject();
+	var requestResult = "";
+	var requestUrl = document.location.href + "cdr_news.php?newsid=" + newsId;
+	if(request){
+		//异步处理
+		request.open("GET", requestUrl, false);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4){
+				//请求成功之后要做的操作
+				requestResult = request.responseText;
+				//console.log(requestResult);
+				//转化为标准JSON对象
+				requestResult = JSON.parse(requestResult);
+				//执行异步处理回调函数
+				callback(requestResult);
+				//返回请求成功
+				//return true;
+			}else{
+				//
+			}
+		};
+		request.send(null);
+	}else{
+		alert("浏览器不支持XMLHttpRequest");
+	}
+	//console.log(requestResult);
+	return requestResult;
 }
 
 
@@ -509,28 +546,9 @@ function displayNews(docId){
 	toggleDetailLayerDisplay();
 }
 
-//触摸事件先不做了
-/*
- function handleTouchEvent(event){
- //only for one touch
- //定义共用DOM对象
- var output = $$("output");
- if (event.touches.length == 1){
- switch(event.type){
- case "touchstart":
- output.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
- break;
- case "touchend":
- output.innerHTML += "<br>Touch ended (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
- break;
- case "touchmove":
- event.preventDefault();  //prevent scrolling
- output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
- break;
- }
- }
- }
- */
+
+
+
 
 function showAppCache(){
 	var myCache = new AppCache();

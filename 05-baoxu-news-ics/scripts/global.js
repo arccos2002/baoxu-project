@@ -90,7 +90,7 @@ function getObjectIndex(targetArray, checkObject){
  */
 function getHTTPObject(){
 	if(typeof XMLHttpRequest == "undefined"){
-		var XMLHttpRequest = function(){
+		XMLHttpRequest = function(){
 			try{
 				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
 			}catch(e){

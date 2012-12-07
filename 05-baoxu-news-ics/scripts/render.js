@@ -4,19 +4,63 @@
  * Time:   下午2:52
  */
 
+/*******************************    新闻列表模板    ************************************/
+//头图模板
+var tp_head_img = "<ul>"
+	+ "<li>"
+	+ "<img data-event-tag = 'et_head_img' src = '"+"<%= xhrData[0].imgsrc %>"+"' />"
+	+ "<h6 data-event-tag = 'et_head_img'>"+ "<%= xhrData[0]['title'] %>" +"</h6>"
+	+ "</li>"
+	+ "</ul>";
+
+//编译头图模板
+var render_head_img = template.compile(tp_head_img);
+
+//头条新闻新闻列表模板
+var tp_head_news_list = "<ul>"
+	+ "<% for(var i = 1; i < xhrData.length; i++){ %>"
+	+ "<li data-event-tag = 'et_news_item' data-news-id = '"+"<%= xhrData[i]['docid'] %>"+"'>"
+	+ "<img data-event-tag = 'et_news_item' src = '"+"<%= xhrData[i]['imgsrc'] %>"+"' />"
+	+ "<h1 data-event-tag = 'et_news_item'>"+ "<%= xhrData[i]['title'] %>" +"</h1>"
+	+ "<h6 data-event-tag = 'et_news_item'>"+ "<%= xhrData[i]['digest'] %>" +"</h6>"
+	+ "<span data-event-tag = 'et_news_item'>"+"<%= xhrData[i]['replyCount'] %>"+"跟帖</span>"
+	+ "</li>"
+	+ "<%}%>"
+	+ "</ul>";
+
+//编译新闻列表模板
+var render_head_news_list = template.compile(tp_head_news_list);
+
 /**
- * @name renderHeadline
- * @class 渲染头条新闻列表
+ * @name renderNewsList
+ * @class 渲染头图和新闻列表
  * @param {Object} data XHR获取的JSON数据
- * @param {String} columnId 需要渲染的栏目ID
  */
-function renderHeadline(data, columnId){
-	var dataList = data[columnId];
-	var headImgArea = $$("head-img").getElementsByTagName("ul")[0].getElementsByTagName("li")[0];
-	headImgArea.getElementsByTagName("img")[0].setAttribute("src", dataList[0].imgsrc);
-	headImgArea.getElementsByTagName("h6")[0].innerHTML = dataList[0].title;
+function renderNewsList(data){
+	//渲染头图
+	$$("head-img").innerHTML = render_head_img(data);
+	//渲染新闻列表
+	$$("news-list").innerHTML = render_head_news_list(data);
+}
 
-	for(var i = 1 ; i < dataList.length ; i++){
 
-	}
+/*******************************    新闻详情模板    ************************************/
+//新闻详情模板
+var tp_news = "<h1>"+"<%= xhrData['title'] %>"+"</h1>"
+	+ "<h6>来源:<%= xhrData['source'] %> <%= xhrData['ptime'] %></h6>"
+	+ "<div id = 'detail-article-content'>"
+	+ "<%= xhrData['body'] %>"
+	+ "</div>";
+
+//编辑新闻详情模板
+var render_news = template.compile(tp_news);
+
+/**
+ * @name renderNews
+ * @class 渲染新闻详情页
+ * @param {Object} data XHR获取的JSON数据
+ */
+function renderNews(data){
+	//渲染头图
+	$$("detail-article").innerHTML = render_news(data);
 }

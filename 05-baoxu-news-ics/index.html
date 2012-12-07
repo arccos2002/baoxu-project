@@ -2,207 +2,211 @@
 <!--<html manifest="baoxuNewsFile.appcache">-->
 <html>
 <head>
-	<meta charset = "utf-8" />
-	<meta name = "viewport"
-	      content = "width=480, target-densitydpi=device-dpi, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>网易新闻ICS版客户端WebApp</title>
-	<link href = "images/favicon.ico" rel = "Shortcut Icon" title = "网易新闻WEB APP" type = "image/x-icon" />
-	<link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
-	<link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
-	<script type = "text/javascript" src = "scripts/global.js"></script>
-	<script type = "text/javascript" src = "scripts/function.js"></script>
-	<script type = "text/javascript" src = "scripts/render.js"></script>
-	<script type = "text/javascript" src = "scripts/html5.js"></script>
+    <meta charset = "utf-8" />
+    <meta name = "viewport"
+          content = "width=480, target-densitydpi=device-dpi, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>网易新闻ICS版客户端WebApp</title>
+    <link href = "images/favicon.ico" rel = "Shortcut Icon" title = "网易新闻WEB APP" type = "image/x-icon" />
+    <link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
+    <link type = "text/css" rel = "stylesheet" href = "styles/style.css" />
+    <script type = "text/javascript" src = "scripts/global.js"></script>
+    <script type = "text/javascript" src = "scripts/function.js"></script>
+    <script type = "text/javascript" src = "scripts/template.js"></script>
+    <script type = "text/javascript" src = "scripts/render.js"></script>
+    <script type = "text/javascript" src = "scripts/html5.js"></script>
 </head>
 <body>
 <!--抽屉底部背景,包含左边的主导航和右边的个人中心-->
 <section id = "bot-layer">
-	<!--左边主导航-->
-	<div id = "bot-layer-navi">
-		<ul id = "navi-list">
-			<li class = "navi-news"><a data-event-tag = "et_top_nav" class = "current"></a></li>
-			<li class = "navi-ties"><a data-event-tag = "et_top_nav"></a></li>
-			<li class = "navi-pics"><a data-event-tag = "et_top_nav"></a></li>
-			<li class = "navi-topics"><a data-event-tag = "et_top_nav"></a></li>
-			<li class = "navi-vote"><a data-event-tag = "et_top_nav"></a></li>
-		</ul>
-	</div>
-	<!--主导航的覆盖阴影-->
-	<div id = "bot-layer-navi-shadow"></div>
-	<!--右边个人中心的覆盖阴影-->
-	<div id = "bot-layer-info-shadow"></div>
-	<!--右边个人中心-->
-	<div id = "bot-layer-info">
-		<div id = "bot-layer-user-info">
-			<div id = "user-photo"><img src = "" /></div>
-			<div id = "user-detail">
-				<h4 class = "t-shadow">登录</h4>
-				<h6 class = "t-shadow">登录后可查看您的跟帖、收藏等信息</h6>
-			</div>
-			<!--用于修正FF下DIV不会自动伸长的问题-->
-			<div style = "clear: both;"></div>
-		</div>
-		<ul id = "bot-layer-user-data">
-			<li class = "user-ties"><a></a></li>
-			<li class = "user-favo"><a></a></li>
-			<li class = "user-push"><a></a></li>
-		</ul>
-		<ul id = "bot-layer-menu">
-			<li class = "menu-weather"><a class = "t-shadow"><span></span>北京 15℃/2℃</a></li>
-			<li class = "menu-offline"><a class = "t-shadow"><span></span>离线下载</a></li>
-			<li class = "menu-search"><a class = "t-shadow"><span></span>搜索新闻</a></li>
-			<li class = "menu-setting"><a class = "t-shadow"><span></span>设置</a></li>
-		</ul>
-	</div>
+    <!--左边主导航-->
+    <div id = "bot-layer-navi">
+        <ul id = "navi-list">
+            <li class = "navi-news"><a data-event-tag = "et_top_nav" class = "current"></a></li>
+            <li class = "navi-ties"><a data-event-tag = "et_top_nav"></a></li>
+            <li class = "navi-pics"><a data-event-tag = "et_top_nav"></a></li>
+            <li class = "navi-topics"><a data-event-tag = "et_top_nav"></a></li>
+            <li class = "navi-vote"><a data-event-tag = "et_top_nav"></a></li>
+        </ul>
+    </div>
+    <!--主导航的覆盖阴影-->
+    <div id = "bot-layer-navi-shadow"></div>
+    <!--右边个人中心的覆盖阴影-->
+    <div id = "bot-layer-info-shadow"></div>
+    <!--右边个人中心-->
+    <div id = "bot-layer-info">
+        <div id = "bot-layer-user-info">
+            <div id = "user-photo"><img src = "" /></div>
+            <div id = "user-detail">
+                <h4 class = "t-shadow">登录</h4>
+                <h6 class = "t-shadow">登录后可查看您的跟帖、收藏等信息</h6>
+            </div>
+            <!--用于修正FF下DIV不会自动伸长的问题-->
+            <div style = "clear: both;"></div>
+        </div>
+        <ul id = "bot-layer-user-data">
+            <li class = "user-ties"><a></a></li>
+            <li class = "user-favo"><a></a></li>
+            <li class = "user-push"><a></a></li>
+        </ul>
+        <ul id = "bot-layer-menu">
+            <li class = "menu-weather"><a class = "t-shadow"><span></span>北京 15℃/2℃</a></li>
+            <li class = "menu-offline"><a class = "t-shadow"><span></span>离线下载</a></li>
+            <li class = "menu-search"><a class = "t-shadow"><span></span>搜索新闻</a></li>
+            <li class = "menu-setting"><a class = "t-shadow"><span></span>设置</a></li>
+        </ul>
+    </div>
 </section>
 
 <!--浮动主图层，显示新闻的主要内容-->
 <section id = "main">
-	<!--下面的margin-left设置是便于JS处理滑动-->
-	<section id = "main-layer" style = "margin-left: 0;">
-		<!--主图层顶部信息操作条-->
-		<div id = "main-layer-action-bar" style = "left: 0">
-			<!--返回按钮-->
-			<div id = "main-layer-action-bar-back"><a data-event-tag = "et_main_layer_back" class = "news-back"></a>
-			</div>
-			<!--网易LOGO-->
-			<div id = "main-layer-action-bar-logo"></div>
-			<!--栏目名称-->
-			<div id = "main-layer-action-bar-column"><a data-event-tag = "et_main_layer_colm">头条&nbsp;&nbsp;&nbsp;</a>
-			</div>
-			<!--占位使用-->
-			<!--<div style="float: left;width: 200px;"></div>-->
-			<!--右侧用户按钮入口-->
-			<div id = "main-layer-action-bar-user"><a data-event-tag = "et_main_layer_user"></a></div>
+    <!--下面的margin-left设置是便于JS处理滑动-->
+    <section id = "main-layer" style = "margin-left: 0;">
+        <!--主图层顶部信息操作条-->
+        <div id = "main-layer-action-bar" style = "left: 0">
+            <!--返回按钮-->
+            <div id = "main-layer-action-bar-back"><a data-event-tag = "et_main_layer_back" class = "news-back"></a>
+            </div>
+            <!--网易LOGO-->
+            <div id = "main-layer-action-bar-logo"></div>
+            <!--栏目名称-->
+            <div id = "main-layer-action-bar-column"><a data-event-tag = "et_main_layer_colm">头条&nbsp;&nbsp;&nbsp;</a>
+            </div>
+            <!--占位使用-->
+            <!--<div style="float: left;width: 200px;"></div>-->
+            <!--右侧用户按钮入口-->
+            <div id = "main-layer-action-bar-user"><a data-event-tag = "et_main_layer_user"></a></div>
 
-			<div id = "main-layer-action-bar-shadow"></div>
-			<!--针对FF的Float校正-->
-			<div id = "main-layer-action-bar-column-list" class = "b-shadow">
-				<ul>
-					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
-							data-event-tag = "et_colm_list_choose" class = "column_name_all">头条</a><a
-							data-event-tag = "et_colm_list_drag"
-							class = "column_dis"></a></li>
-					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
-							data-event-tag = "et_colm_list_choose" class = "column_name_all">体育头条</a><a
-							data-event-tag = "et_colm_list_drag"
-							class = "column_dis"></a></li>
-					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
-							data-event-tag = "et_colm_list_choose" class = "column_name_all">财经头条</a><a
-							data-event-tag = "et_colm_list_drag"
-							class = "column_dis"></a></li>
-					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
-							data-event-tag = "et_colm_list_choose" class = "column_name_all">社会头条</a><a
-							data-event-tag = "et_colm_list_drag"
-							class = "column_dis"></a></li>
-					<li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
-							data-event-tag = "et_colm_list_choose" class = "column_name_all">军事头条</a><a
-							data-event-tag = "et_colm_list_drag"
-							class = "column_dis"></a></li>
-				</ul>
-				<div id = "main-layer-news-column-do"><a data-event-tag = "et_colm_add" class = "column_add"></a><a
-						data-event-tag = "et_colm_edit" class = "column_edit"></a></div>
-				<div id = "main-layer-news-column-ok"><a data-event-tag = "et_colm_edit_ok"
-				                                         class = "column_edit_ok"></a></div>
-			</div>
-		</div>
-		<!--全部新闻列表-->
-		<div id = "main-layer-content">
-			<!--头图-->
-			<div id = "head-img">
-				<ul>
-					<li><img src = "testdata/head-img-test.jpg" /><h6>头图1说明文字</h6></li>
-					<li><img src = "testdata/head-img-test.jpg" /><h6>头图2说明文字</h6></li>
-					<li><img src = "testdata/head-img-test.jpg" /><h6>头图3说明文字</h6></li>
-				</ul>
-				<span id = "head-img-flag" class = "img-1"></span>
-			</div>
-			<!--普通新闻列表-->
-			<div id = "news-list">
-				<ul>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-					<li data-event-tag = "et_news_item">
-						<img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
-						<h1 data-event-tag = "et_news_item">展开详情页</h1>
-						<h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
-						<span data-event-tag = "et_news_item">100跟帖</span>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</section>
+            <div id = "main-layer-action-bar-shadow"></div>
+            <!--针对FF的Float校正-->
+            <div id = "main-layer-action-bar-column-list" class = "b-shadow">
+                <ul>
+                    <li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+                            data-event-tag = "et_colm_list_choose" class = "column_name_all">头条</a><a
+                            data-event-tag = "et_colm_list_drag"
+                            class = "column_dis"></a></li>
+                    <li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+                            data-event-tag = "et_colm_list_choose" class = "column_name_all">体育头条</a><a
+                            data-event-tag = "et_colm_list_drag"
+                            class = "column_dis"></a></li>
+                    <li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+                            data-event-tag = "et_colm_list_choose" class = "column_name_all">财经头条</a><a
+                            data-event-tag = "et_colm_list_drag"
+                            class = "column_dis"></a></li>
+                    <li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+                            data-event-tag = "et_colm_list_choose" class = "column_name_all">社会头条</a><a
+                            data-event-tag = "et_colm_list_drag"
+                            class = "column_dis"></a></li>
+                    <li><a data-event-tag = "et_colm_list_remove" class = "column_dis"></a><a
+                            data-event-tag = "et_colm_list_choose" class = "column_name_all">军事头条</a><a
+                            data-event-tag = "et_colm_list_drag"
+                            class = "column_dis"></a></li>
+                </ul>
+                <div id = "main-layer-news-column-do"><a data-event-tag = "et_colm_add" class = "column_add"></a><a
+                        data-event-tag = "et_colm_edit" class = "column_edit"></a></div>
+                <div id = "main-layer-news-column-ok"><a data-event-tag = "et_colm_edit_ok"
+                                                         class = "column_edit_ok"></a></div>
+            </div>
+        </div>
+        <!--全部新闻列表-->
+        <div id = "main-layer-content">
+            <!--头图-->
+            <div id = "head-img">
+                <ul>
+                    <li><img data-event-tag = "et_head_img" src = "testdata/head-img-test.jpg" /><h6
+                            data-event-tag = "et_head_img">头图1说明文字</h6></li>
+                    <li><img data-event-tag = "et_head_img" src = "testdata/head-img-test.jpg" /><h6
+                            data-event-tag = "et_head_img">头图2说明文字</h6></li>
+                    <li><img data-event-tag = "et_head_img" src = "testdata/head-img-test.jpg" /><h6
+                            data-event-tag = "et_head_img">头图3说明文字</h6></li>
+                </ul>
+                <span id = "head-img-flag" class = "img-1"></span>
+            </div>
+            <!--普通新闻列表-->
+            <div id = "news-list">
+                <ul>
+                    <li data-event-tag = "et_news_item" data-news-id = "">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                    <li data-event-tag = "et_news_item">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                    <li data-event-tag = "et_news_item">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                    <li data-event-tag = "et_news_item">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                    <li data-event-tag = "et_news_item">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                    <li data-event-tag = "et_news_item">
+                        <img data-event-tag = "et_news_item" src = "testdata/news-list-img-test.jpg" />
+                        <h1 data-event-tag = "et_news_item">展开详情页</h1>
+                        <h6 data-event-tag = "et_news_item">这里是头条新闻001的副标题这里是头条新闻001的副标题</h6>
+                        <span data-event-tag = "et_news_item">100跟帖</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-	<!--详情页的Section-->
-	<header id = "detail-header-bar" style = "left: 480px;">
-		<div id = "detail-header-bar-back"><a data-event-tag = "et_detail_back"></a></div>
-		<div id = "detail-header-bar-menu"><a data-event-tag = "et_detail_menu"></a></div>
-		<div id = "detail-header-bar-ties"><a data-event-tag = "et_detail_ties">100跟帖</a></div>
-	</header>
-	<section id = "main-layer-detail" style = "left: 480px">
-		<article id = "detail-article">
-			<h1>这里是新闻主标题这里是新闻主标题</h1>
-			<h6>来源:人民网 2012-12-04 13:53</h6>
+    <!--详情页的Section-->
+    <header id = "detail-header-bar" style = "left: 480px;">
+        <div id = "detail-header-bar-back"><a data-event-tag = "et_detail_back"></a></div>
+        <div id = "detail-header-bar-menu"><a data-event-tag = "et_detail_menu"></a></div>
+        <div id = "detail-header-bar-ties"><a data-event-tag = "et_detail_ties">100跟帖</a></div>
+    </header>
+    <section id = "main-layer-detail" style = "left: 480px">
+        <article id = "detail-article">
+            <h1>这里是新闻主标题这里是新闻主标题</h1>
+            <h6>来源:人民网 2012-12-04 13:53</h6>
 
-			<div id = "detail-article-content">
-				<p>　　最新消息：今天早上9时左右，一架空军歼击战斗机在广东汕头市护堤路赤窖路段坠毁，飞行员跳伞逃生。事故致一房屋大火，3人受伤已送院救治，目前着火点已被扑灭。</p>
-				<img src = "http://img3.cache.netease.com/photo/0096/2012-12-04/8HSKRBC554GI0096.jpg" />
-				<span>广东汕头一架军机坠毁</span>
-				<p>
-					　　现场图片飞机残骸主体部分呈三角形，后缘有中国空军的军徽，整体为中国空军常用的空优浅灰色，基本可以排除是直升机的可能，残骸有可能是三角翼战机的机翼残片。</p>
+            <div id = "detail-article-content">
+                <p>　　最新消息：今天早上9时左右，一架空军歼击战斗机在广东汕头市护堤路赤窖路段坠毁，飞行员跳伞逃生。事故致一房屋大火，3人受伤已送院救治，目前着火点已被扑灭。</p>
+                <img src = "http://img3.cache.netease.com/photo/0096/2012-12-04/8HSKRBC554GI0096.jpg" />
+                <span>广东汕头一架军机坠毁</span>
+                <p>
+                    　　现场图片飞机残骸主体部分呈三角形，后缘有中国空军的军徽，整体为中国空军常用的空优浅灰色，基本可以排除是直升机的可能，残骸有可能是三角翼战机的机翼残片。</p>
 
-				<p>
-					　　此外，据现场报道，一名飞行员跳伞逃生。直升机与传统的固定翼在救生方面有很大不同，目前几乎所有的固定翼战机均有弹射求生设备，在发生紧急情况时，飞行员可以使用火箭座椅弹射逃生。而直升机的旋翼成为弹射逃生的最大障碍，如果强行弹射逃生，高速旋转的旋翼无疑成为一具恐怖的"绞肉机"，绝大多数直升机都是通过提高直升机抗坠毁性能等被动方式提升飞行员的生存概率。世界上只有俄罗斯的卡-50，卡-52武装直升机能弹射跳伞，先炸掉旋翼和座舱盖，然后弹射。中国并无这些机型，也无相关技术储备。</p>
+                <p>
+                    　　此外，据现场报道，一名飞行员跳伞逃生。直升机与传统的固定翼在救生方面有很大不同，目前几乎所有的固定翼战机均有弹射求生设备，在发生紧急情况时，飞行员可以使用火箭座椅弹射逃生。而直升机的旋翼成为弹射逃生的最大障碍，如果强行弹射逃生，高速旋转的旋翼无疑成为一具恐怖的"绞肉机"，绝大多数直升机都是通过提高直升机抗坠毁性能等被动方式提升飞行员的生存概率。世界上只有俄罗斯的卡-50，卡-52武装直升机能弹射跳伞，先炸掉旋翼和座舱盖，然后弹射。中国并无这些机型，也无相关技术储备。</p>
 
-				<p>　　综上所述，坠毁的飞机非常有可能是歼7或歼教7系列某型，而不是直升机。</p>
+                <p>　　综上所述，坠毁的飞机非常有可能是歼7或歼教7系列某型，而不是直升机。</p>
 
-				<p>
-					　　央视快讯：今天早上九点多，汕头市护堤路赤窖路段有飞机失事坠毁，击中赤窖某一房屋致大火，火势过大，浓烟滚滚。据广东消防消息，失事飞机为一架小型军用直升机，驾驶员已跳伞逃生，没有造成更大范围的伤亡。</p>
+                <p>
+                    　　央视快讯：今天早上九点多，汕头市护堤路赤窖路段有飞机失事坠毁，击中赤窖某一房屋致大火，火势过大，浓烟滚滚。据广东消防消息，失事飞机为一架小型军用直升机，驾驶员已跳伞逃生，没有造成更大范围的伤亡。</p>
 
-				<p>
-					　　汕头市政府应急办发布消息称，汕头市金平区护堤路发生一宗火灾。12月4日上午9时10分左右，我市金平区月浦街道护堤路赤窖路段因故发生一宗火灾，火灾发生时有4人被困，其中1人自行走出，3人受伤已经送往医院救治，目前，火灾已被全部扑灭。火灾事故造成护堤路赤窖路段双向堵塞，目前暂未通行，请广大车主绕道行驶。 </p>
+                <p>
+                    　　汕头市政府应急办发布消息称，汕头市金平区护堤路发生一宗火灾。12月4日上午9时10分左右，我市金平区月浦街道护堤路赤窖路段因故发生一宗火灾，火灾发生时有4人被困，其中1人自行走出，3人受伤已经送往医院救治，目前，火灾已被全部扑灭。火灾事故造成护堤路赤窖路段双向堵塞，目前暂未通行，请广大车主绕道行驶。 </p>
 
-				<p>
-					　　《实时新闻发布》最新消息，刚才早上九点许，有一架空军小型直升机坠毁在市区护堤路赤窖路段，导致该路段交通堵塞，随后我市公安、消防等多个部门及时到场处置。据了解，机上驾驶员的坠毁瞬间已跳伞逃生;另外，截至目前，其他伤亡情况不明。</p>
-			</div>
-		</article>
-	</section>
+                <p>
+                    　　《实时新闻发布》最新消息，刚才早上九点许，有一架空军小型直升机坠毁在市区护堤路赤窖路段，导致该路段交通堵塞，随后我市公安、消防等多个部门及时到场处置。据了解，机上驾驶员的坠毁瞬间已跳伞逃生;另外，截至目前，其他伤亡情况不明。</p>
+            </div>
+        </article>
+    </section>
 
-	<!--跟帖页的Section-->
-	<header id = "ties-header-bar" style = "left: 480px;">
-		<div id = "ties-header-bar-back"><a data-event-tag = "et_ties_back"></a></div>
-	</header>
-	<section id = "main-layer-ties" style = "left: 480px">
-		<div><a href = "http://www.baidu.com">这是跟帖页</a></div>
-	</section>
+    <!--跟帖页的Section-->
+    <header id = "ties-header-bar" style = "left: 480px;">
+        <div id = "ties-header-bar-back"><a data-event-tag = "et_ties_back"></a></div>
+    </header>
+    <section id = "main-layer-ties" style = "left: 480px">
+        <div><a href = "http://www.baidu.com">这是跟帖页</a></div>
+    </section>
 
 </section>
 </body>

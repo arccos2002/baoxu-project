@@ -22,5 +22,6 @@ $fetchUrl = $GET_DATA_HOST . $queryString;
 
 $fetchData = file_get_contents($fetchUrl);
 //$fetchData = iconv("UTF-8", "GBK", $fetchData);
+$fetchData = str_replace($queryColumnID,"xhrData",$fetchData);
 echo $fetchData;
 ?>
