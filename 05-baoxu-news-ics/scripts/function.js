@@ -335,7 +335,7 @@ function detailLayerDisplay(){
 function detailLayerRestore(){
 	DETAIL_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is restore");//LOG
-
+	renderNewsDefault();
 	setElementDisplay("main-layer-detail", "none");
 }
 
@@ -497,9 +497,9 @@ function getNewsList(newsType, columnId, startId, endId, callback){
  * @param {Function} callback 被点中的目标
  */
 function getNews(target, callback){
-	console.log(target.tagName);
+	console.log(target.tagName.toLowerCase());
 	var newsId = "";
-	if (target.tagName == "li"){
+	if (target.tagName.toLowerCase() == "li"){
 		newsId = target.dataset["newsId"];
 	}else{
 		newsId = target.parentElement.dataset["newsId"];

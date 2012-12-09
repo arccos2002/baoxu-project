@@ -45,6 +45,24 @@ function renderNewsList(data){
 
 
 /*******************************    新闻详情模板    ************************************/
+//默认新闻详情模板
+var tp_news_default = "<div id='article-loading'>"
+	+ "<img class='load-gif' src='images/loading.gif' />"
+	+ "<img class='load-logo' src='images/loading_bg.png'>"
+	+ "</div>";
+
+//编译默认新闻详情模板
+var render_news_default = template.compile(tp_news_default);
+
+/**
+ * @name renderNewsDefault
+ * @class 渲染默认新闻详情页，就是加载页
+ */
+function renderNewsDefault(){
+	//渲染新闻详情页
+	$$("detail-article").innerHTML = render_news_default();
+}
+
 //新闻详情模板
 var tp_news = "<h1>"+"<%= xhrData['title'] %>"+"</h1>"
 	+ "<h6>来源:<%= xhrData['source'] %> <%= xhrData['ptime'] %></h6>"
@@ -61,6 +79,6 @@ var render_news = template.compile(tp_news);
  * @param {Object} data XHR获取的JSON数据
  */
 function renderNews(data){
-	//渲染头图
+	//渲染新闻详情页
 	$$("detail-article").innerHTML = render_news(data);
 }

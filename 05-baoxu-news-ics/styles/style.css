@@ -715,6 +715,26 @@ html, body{
 	z-index: 280;
 }
 
+#article-loading{
+	width: 100%;
+	height: auto;
+	text-align: center;
+}
+
+#article-loading img.load-gif{
+	width: 32px;
+	height: 32px;
+	border: none;
+	vertical-align: middle;
+}
+
+#article-loading img.load-logo{
+	width: 198px;
+	height: 92px;
+	border: none;
+	vertical-align: middle;
+}
+
 #detail-article h1{
 	padding: 25px 0 15px 0;
 	font-size: 35px;
