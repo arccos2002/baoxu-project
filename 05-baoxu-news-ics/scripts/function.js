@@ -158,13 +158,12 @@ function bindEvent(){
 
 			//新闻头图被点击
 			case "et_head_img":
-				toggleDetailLayerDisplay();
+				toggleDetailLayerDisplay(target);
 				break;
 
 			//新闻列表页单条新闻被点击
 			case "et_news_item":
-				toggleDetailLayerDisplay();
-				getNews(target,renderNews);
+				toggleDetailLayerDisplay(target);
 				break;
 		}
 	})
@@ -239,8 +238,20 @@ function toggleMainLayerMoveToLeft(){
 /**
  * @name toggleDetailLayerDisplay
  * @class 在新闻列表中点击的时候向左推出详情页
+ * @param {Object} target 触及本动作被点击的对象
  */
-function toggleDetailLayerDisplay(){
+function toggleDetailLayerDisplay(target){
+
+	if(target){
+		console.log(target.tagName.toLowerCase());
+		var newsId = "";
+		if(target.tagName.toLowerCase() == "li"){
+			newsId = target.dataset["newsId"];
+		}else{
+			newsId = target.parentElement.dataset["newsId"];
+		}
+	}
+
 	if(DETAIL_LAYER_MOVE_FLAG == 0){
 		//获取页面的已滚动高度，以便于复原
 		//VIEW_SCROLL_TOP = document.documentElement.scrollTop;   //Firefox
@@ -248,7 +259,7 @@ function toggleDetailLayerDisplay(){
 
 		//先显示新闻详情页，设为block，然后将其移入主视图，占满主视图之后，在回调函数里面隐藏列表页，以方便滚动条
 		setElementDisplay("main-layer-detail", "block");
-		moveElementWith("main-layer-detail", "fixed", -480, 0.2, 10, 0, detailLayerDisplay);
+		moveElementWith("main-layer-detail", "fixed", -480, 0.2, 10, 0, detailLayerDisplay, newsId);
 		moveElementWith("detail-header-bar", "fixed", -480, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving to the main view");//LOG
@@ -319,13 +330,16 @@ function mainLayerRestore(){
  * @name detailLayerDisplay
  * @class 详情页图层显示时的回调，将DETAIL_LAYER_MOVE_FLAG变为1，表示详情页正在显示
  */
-function detailLayerDisplay(){
+function detailLayerDisplay(newsId){
 	DETAIL_LAYER_MOVE_FLAG = 1;
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is dispaly");//LOG
 
 	//新闻详情页在主视图中显示的时候，将新闻列表页面隐藏
 	setElementDisplay("main-layer", "none");
 	setElementDisplay("bot-layer", "none");
+
+	//详情页显示出来的时候，请求新闻内容
+	getNews(newsId, renderNews);
 }
 
 /**
@@ -493,17 +507,10 @@ function getNewsList(newsType, columnId, startId, endId, callback){
  * @name getNews
  * @class 通过XHR请求单条新闻内容
  *
- * @param {object} target 被点中的目标
+ * @param {String} newsId 被点中的目标
  * @param {Function} callback 被点中的目标
  */
-function getNews(target, callback){
-	console.log(target.tagName.toLowerCase());
-	var newsId = "";
-	if (target.tagName.toLowerCase() == "li"){
-		newsId = target.dataset["newsId"];
-	}else{
-		newsId = target.parentElement.dataset["newsId"];
-	}
+function getNews(newsId, callback){
 
 	var request = getHTTPObject();
 	var requestResult = "";
@@ -545,9 +552,6 @@ function displayNews(docId){
 	//先显示出详细页面Layer
 	toggleDetailLayerDisplay();
 }
-
-
-
 
 
 function showAppCache(){

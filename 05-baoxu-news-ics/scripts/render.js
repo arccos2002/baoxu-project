@@ -7,7 +7,7 @@
 /*******************************    新闻列表模板    ************************************/
 //头图模板
 var tp_head_img = "<ul>"
-	+ "<li>"
+	+ "<li data-news-id='"+ "<%= xhrData[0].docid%>" +"'>"
 	+ "<img data-event-tag = 'et_head_img' src = '"+"<%= xhrData[0].imgsrc %>"+"' />"
 	+ "<h6 data-event-tag = 'et_head_img'>"+ "<%= xhrData[0]['title'] %>" +"</h6>"
 	+ "</li>"
@@ -47,8 +47,8 @@ function renderNewsList(data){
 /*******************************    新闻详情模板    ************************************/
 //默认新闻详情模板
 var tp_news_default = "<div id='article-loading'>"
-	+ "<img class='load-gif' src='images/loading.gif' />"
-	+ "<img class='load-logo' src='images/loading_bg.png'>"
+	+ "<span class='load-gif'></span>"
+	+ "<span class='load-logo'></span>"
 	+ "</div>";
 
 //编译默认新闻详情模板

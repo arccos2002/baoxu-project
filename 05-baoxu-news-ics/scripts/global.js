@@ -131,17 +131,10 @@ function getClientInfo(){
  * @param {Number} stepTime 每一次timeOut的时间
  * @param {Number} key 用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
  * @param {Function} callback 移位完成调用的函数
- * @param {String} secElementID 同时移动两个元素的第二个元素ID，可选
+ * @param {String} callbackParam callback回调函数的参数
  */
-function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback, secElementID){
+function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key, callback, callbackParam){
 	var elementToMove = document.getElementById(elementID);
-
-	var secElementToMove;
-	if(secElementID){
-		secElementToMove = document.getElementById(secElementID);
-	}else{
-		secElementToMove = 0;
-	}
 
 	var elementX;
 	if(positionStyle == "absolute"){
@@ -163,7 +156,11 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 	if(elementX == targetX){
 		MOVEMENT_FLAG = 1;
 		if(callback){
-			callback();
+			if(callbackParam){
+				callback(callbackParam);
+			}else{
+				callback();
+			}
 		}
 		return;
 	}else if(elementX > targetX){
@@ -177,20 +174,14 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
 	//设定单次移动之后的marginLeft值或者left值
 	if(positionStyle == "absolute"){
 		elementToMove.style.marginLeft = elementX + "px";
-		if(secElementToMove){
-			secElementToMove.style.marginLeft = elementX + 480 + "px";
-		}
 	}else if(positionStyle == "fixed"){
 		elementToMove.style.left = elementX + "px";
-		if(secElementToMove){
-			secElementToMove.style.left = elementX + 480 + "px";
-		}
 	}
 
 	elementToMove.style.width = key * dist + parseInt(elementToMove.style.width) + "px";
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + secElementID + "')";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + callbackParam + "')";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 
@@ -204,9 +195,9 @@ function moveElementTo(elementID, positionStyle, targetX, stepDis, stepTime, key
  * @param {Number} stepTime 每一次timeOut的时间
  * @param {Number} key 用于标识关联影响的元素是应该变宽还是变窄，取值为-1，0，1
  * @param {Function} callback 移位完成调用的函数
- * @param {String} secElementID 同时移动两个元素的第二个元素ID，可选
+ * @param {String} callbackParam 同时移动两个元素的第二个元素ID，可选
  */
-function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback, secElementID){
+function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key, callback, callbackParam){
 	var elementToMove = document.getElementById(elementID);
 
 	//获取当前X轴坐标
@@ -221,7 +212,7 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
 	var targetX = elementX + stepX;
 
 	//循环单次移动，形成动画效果
-	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + secElementID + "')";
+	var repeat = "moveElementTo('" + elementID + "','" + positionStyle + "'," + targetX + "," + stepDis + "," + stepTime + "," + key + "," + callback + ",'" + callbackParam + "')";
 	elementToMove.movement = setTimeout(repeat, stepTime);
 }
 

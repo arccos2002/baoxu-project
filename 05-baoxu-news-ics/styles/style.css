@@ -25,6 +25,10 @@
 	background: #fff;
 }
 
+.clear-both{
+	clear: both;
+}
+
 html, body{
 	font-family: "微软雅黑";
 	height: 100%;
@@ -711,6 +715,7 @@ html, body{
 
 #detail-article{
 	margin: 0 25px 0 25px;
+	height: auto;
 	position: relative;
 	z-index: 280;
 }
@@ -719,20 +724,24 @@ html, body{
 	width: 100%;
 	height: auto;
 	text-align: center;
+	margin-top: 50%;
 }
 
-#article-loading img.load-gif{
+#article-loading .load-gif{
 	width: 32px;
 	height: 32px;
-	border: none;
 	vertical-align: middle;
+	display: inline-block;
+	background: url("../images/loading.gif") center no-repeat;
 }
 
-#article-loading img.load-logo{
+#article-loading .load-logo{
 	width: 198px;
 	height: 92px;
-	border: none;
+	margin-left: 15px;
 	vertical-align: middle;
+	display: inline-block;
+	background: url("../images/bot_layer_all.png") 0 -580px no-repeat;
 }
 
 #detail-article h1{
@@ -753,7 +762,7 @@ html, body{
 }
 
 #detail-article-content{
-	margin-bottom: 90px;
+	margin-bottom: 100px;
 }
 
 #detail-article-content p{
