@@ -157,9 +157,15 @@ html, body{
 #user-photo{
 	float: left;
 	position: relative;
-	width: 80px;
-	height: 80px;
+	width: 70px;
+	height: 70px;
+	padding: 5px;
 	background: url("../images/bot_layer_all.png") 0 0 no-repeat;
+}
+
+#user-photo img{
+	height: 70px;
+	width: 70px;
 }
 
 #user-detail{
@@ -260,6 +266,17 @@ html, body{
 
 #bot-layer-menu li.menu-setting a span{
 	background: url("../images/bot_layer_all.png") -430px 0 no-repeat;
+}
+
+#bot-layer-info-version{
+	display: block;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0 15px 15px 0;
 }
 
 
