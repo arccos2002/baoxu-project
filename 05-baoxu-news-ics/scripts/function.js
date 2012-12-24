@@ -37,7 +37,10 @@ function todo(){
 	bindEvent();
 
 	//加载网络新闻列表
-	getNewsList("headline", "T1348647909107", 0, 20, renderNewsList);
+	getNewsList("headline", "T1348647909107", 0, 20, renderHeadNewsList);
+
+	//渲染新闻栏目列表
+	renderNewsColumn(data_news_column);
 
 	//显示离线存储状态
 	//showAppCache();
@@ -198,14 +201,14 @@ function clickBotLayerNavi(target){
 function toggleMainLayerMoveToRight(){
 	var theBar = $$("main-layer-action-bar-back").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", 96, 0.2, 10, -1, mainLayerRightOver);
-		moveElementWith("main-layer-action-bar", "fixed", 96, 0.2, 10, 0);
+		moveElementWith("main-layer", "absolute", 96, 0.4, 10, -1, mainLayerRightOver);
+		moveElementWith("main-layer-action-bar", "fixed", 96, 0.4, 10, 0);
 		theBar.className = CURRENT_TOP_ITEM + "-back-current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the right,and back button style is current");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", -96, 0.2, 10, 1, mainLayerRestore);
-		moveElementWith("main-layer-action-bar", "fixed", -96, 0.2, 10, 0);
+		moveElementWith("main-layer", "absolute", -96, 0.4, 10, 1, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", -96, 0.4, 10, 0);
 		//theBar.className = theBar.className.slice(0, -8);
 		theBar.className = CURRENT_TOP_ITEM + "-back";
 		//LOG
@@ -405,6 +408,12 @@ function chooseColumn(target){
 	console.log(LOG_INFO + "The now column is " + target.innerHTML);//LOG
 	//收起栏目列表
 	toggleColumnList();
+	//加载该栏目下的新闻列表
+	if(target.innerHTML == "头条"){
+		getNewsList("headline",target.parentElement.dataset.columnId,0,20,renderHeadNewsList);
+	}else{
+		getNewsList("list",target.parentElement.dataset.columnId,0,20,renderNormalNewsList);
+	}
 }
 
 /**
@@ -415,7 +424,8 @@ function toggleEditNewsColumnList(){
 	var columnList = $$("main-layer-action-bar-column-list").getElementsByTagName("li");
 	var i;
 	if(COLUMN_EDIT_FLAG == 0){
-		for(i = 0 ; i < columnList.length ; i++){
+		//头条不允许删除和拖动，i从1开始算起
+		for(i = 1 ; i < columnList.length ; i++){
 			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_del";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name";
@@ -429,7 +439,8 @@ function toggleEditNewsColumnList(){
 		COLUMN_EDIT_FLAG = 1;
 		console.log(LOG_INFO + "COLUMN_EDIT_FLAG = " + COLUMN_EDIT_FLAG + " & Columns now can edit");//LOG
 	}else{
-		for(i = 0 ; i < columnList.length ; i++){
+		//头条不允许删除和拖动，i从1开始算起
+		for(i = 1 ; i < columnList.length ; i++){
 			//进入可编辑状态的时候，修改栏目名前后的可操作样式
 			columnList[i].getElementsByTagName("a")[0].className = "column_dis";
 			columnList[i].getElementsByTagName("a")[1].className = "column_name_all";
