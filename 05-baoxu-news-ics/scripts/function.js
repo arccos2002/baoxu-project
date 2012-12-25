@@ -168,6 +168,11 @@ function bindEvent(){
 			case "et_news_item":
 				toggleDetailLayerDisplay(target);
 				break;
+
+			//加载下20条
+			case "et_news_more":
+				getMoreNews(target);
+				break;
 		}
 	})
 }
@@ -409,11 +414,12 @@ function chooseColumn(target){
 	//收起栏目列表
 	toggleColumnList();
 	//加载该栏目下的新闻列表
-	if(target.innerHTML == "头条"){
+	/*if(target.innerHTML == "头条"){
 		getNewsList("headline",target.parentElement.dataset.columnId,0,20,renderHeadNewsList);
 	}else{
 		getNewsList("list",target.parentElement.dataset.columnId,0,20,renderNormalNewsList);
-	}
+	}*/
+	getNewsList("headline",target.parentElement.dataset.columnId,0,20,renderHeadNewsList);
 }
 
 /**
@@ -480,13 +486,13 @@ function toggleDeleteColumn(target){
  * @param {string} newsType 请求的新闻列表的类型（headline：头条新闻；list：普通新闻）
  * @param {string} columnId 新闻栏目的ID
  * @param {number} startId 新闻列表的起始ID
- * @param {number} endId 新闻列表的终止ID
+ * @param {number} size 新闻列表获取的数量
  * @param {function} callback 异步请求完之后的回调函数
  */
-function getNewsList(newsType, columnId, startId, endId, callback){
+function getNewsList(newsType, columnId, startId, size, callback){
 	var request = getHTTPObject();
 	var requestResult = "";
-	var requestUrl = document.location.href + "cdr_list.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&end=" + endId;
+	var requestUrl = document.location.href + "cdr_list.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&size=" + size;
 	if(request){
 		//异步处理
 		request.open("GET", requestUrl, false);
@@ -552,16 +558,17 @@ function getNews(newsId, callback){
 	return requestResult;
 }
 
-
 /**
- * @name displayNews
- * @class 显示新闻页面
+ * @name getMoreNews
+ * @class 点击加载下20条时执行的函数
  *
- * @param {string} docId 新闻ID
+ * @param {object} target 被点击的目标，必选参数
  */
-function displayNews(docId){
-	//先显示出详细页面Layer
-	toggleDetailLayerDisplay();
+function getMoreNews(target){
+	target.innerHTML = "正在载入";
+	//得到了news-list这个ID下所有的ul的数量，用于判断加载到第几页了
+	var news_list_ul_size = $$("news-list").getElementsByTagName("ul").length;
+	getNewsList("headline",target.parentElement.dataset.columnId,news_list_ul_size*20,20,renderMoreNewsList)
 }
 
 

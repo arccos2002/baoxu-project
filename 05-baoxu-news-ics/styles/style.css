@@ -615,6 +615,19 @@ html, body{
 	cursor:pointer;
 }
 
+#news-list ul li:hover{
+	background: url("../images/news_base_list_divider.png") bottom center no-repeat #e2e3e4;
+	cursor:pointer;
+}
+
+#news-list ul li.load-more{
+	height: 50px;
+	font: 24px bolder;
+	color: #323232;
+	line-height: 50px;
+	text-align: center;
+}
+
 #news-list ul li img{
 	height: 78px;
 	width: 110px;

@@ -65,7 +65,7 @@ function renderNewsColumn(data){
 
 /*******************************    新闻列表模板    ************************************/
 //头图模板
-var tp_head_img = "<ul>"
+var tp_head_img = "<ul data-column-id = '<%= xhrData[0].cid %>'>"
 	+ "<li data-news-id='"+ "<%= xhrData[0].docid%>" +"'>"
 	+ "<img data-event-tag = 'et_head_img' src = '"+"<%= xhrData[0].imgsrc %>"+"' />"
 	+ "<h6 data-event-tag = 'et_head_img'>"+ "<%= xhrData[0]['title'] %>" +"</h6>"
@@ -75,8 +75,11 @@ var tp_head_img = "<ul>"
 //编译头图模板
 var render_head_img = template.compile(tp_head_img);
 
+//加载下20条模板
+var tp_load_more = "<li class='load-more' data-event-tag = 'et_news_more'>加载下20条</li>";
+
 //头条新闻新闻列表模板
-var tp_head_news_list = "<ul>"
+var tp_head_news_list = "<ul data-column-id = '<%= xhrData[0].cid %>'>"
 	+ "<% for(var i = 1; i < xhrData.length; i++){ %>"
 	+ "<li data-event-tag = 'et_news_item' data-news-id = '"+"<%= xhrData[i]['docid'] %>"+"'>"
 	+ "<img data-event-tag = 'et_news_item' src = '"+"<%= xhrData[i]['imgsrc']?xhrData[i]['imgsrc']:'images/news_list_default_icon.png' %>"+"' />"
@@ -85,13 +88,14 @@ var tp_head_news_list = "<ul>"
 	+ "<span data-event-tag = 'et_news_item'>"+"<%= xhrData[i]['replyCount'] %>"+"跟帖</span>"
 	+ "</li>"
 	+ "<%}%>"
+	+ tp_load_more
 	+ "</ul>";
 
 //编译新闻列表模板
 var render_head_news_list = template.compile(tp_head_news_list);
 
 //普通新闻新闻列表模板
-var tp_normal_news_list = "<ul>"
+var tp_normal_news_list = "<ul  data-column-id = '<%= xhrData[0].cid %>'>"
 	+ "<% for(var i = 1; i < xhrData.length; i++){ %>"
 	+ "<li data-event-tag = 'et_news_item' data-news-id = '"+"<%= xhrData[i]['docid'] %>"+"'>"
 	+ "<img data-event-tag = 'et_news_item' src = '"+"<%= xhrData[i]['imgsrc']?xhrData[i]['imgsrc']:'images/news_list_default_icon.png' %>"+"' />"
@@ -100,6 +104,7 @@ var tp_normal_news_list = "<ul>"
 	+ "<span data-event-tag = 'et_news_item'>"+"<%= xhrData[i]['replyCount'] %>"+"跟帖</span>"
 	+ "</li>"
 	+ "<%}%>"
+	+ tp_load_more
 	+ "</ul>";
 
 //编译普通新闻列表模板
@@ -121,7 +126,7 @@ function renderHeadNewsList(data){
 
 /**
  * @name renderNormalNewsList
- * @class 渲染头图和新闻列表
+ * @class 渲染普通栏目的新闻列表，没有头图
  * @param {Object} data XHR获取的JSON数据
  */
 function renderNormalNewsList(data){
@@ -129,6 +134,20 @@ function renderNormalNewsList(data){
 	setElementDisplay("head-img","none");
 	//渲染新闻列表
 	$$("news-list").innerHTML = render_normal_news_list(data);
+}
+
+/**
+ * @name renderMoreNewsList
+ * @class 渲染加载更多新闻列表
+ * @param {Object} data XHR获取的JSON数据
+ */
+function renderMoreNewsList(data){
+	//得到了news-list这个ID下所有的ul
+	var news_list_ul = $$("news-list").getElementsByTagName("ul");
+	//删除已经用过的加载更多
+	news_list_ul[news_list_ul.length - 1].removeChild(news_list_ul[news_list_ul.length - 1].lastChild);
+	//渲染新闻列表
+	$$("news-list").innerHTML += render_normal_news_list(data);
 }
 
 

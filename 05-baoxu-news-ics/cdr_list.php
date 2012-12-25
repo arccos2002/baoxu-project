@@ -7,9 +7,9 @@ $GET_DATA_HOST = "http://c.3g.163.com";
 $requestType = $_REQUEST['type'];
 $queryColumnID = $_REQUEST['column'];
 $queryStart = $_REQUEST['start'];
-$queryEnd = $_REQUEST['end'];
+$querySize = $_REQUEST['size'];
 
-$queryString = "/nc/article/" . $requestType . "/" . $queryColumnID . "/" . $queryStart . "-" . $queryEnd . ".html";
+$queryString = "/nc/article/" . $requestType . "/" . $queryColumnID . "/" . $queryStart . "-" . $querySize . ".html";
 
 //Encode
 //$queryString = urlencode($queryString);
@@ -22,6 +22,7 @@ $fetchUrl = $GET_DATA_HOST . $queryString;
 
 $fetchData = file_get_contents($fetchUrl);
 //$fetchData = iconv("UTF-8", "GBK", $fetchData);
-$fetchData = str_replace($queryColumnID,"xhrData",$fetchData);
+$temp_str_1 = "\":[{";
+$fetchData = str_replace($queryColumnID.$temp_str_1,"xhrData".$temp_str_1.'"cid":"'.$queryColumnID.'",',$fetchData);
 echo $fetchData;
 ?>
