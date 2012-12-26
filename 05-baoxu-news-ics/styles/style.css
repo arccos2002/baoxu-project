@@ -629,10 +629,11 @@ html, body{
 }
 
 #news-list ul li img{
-	height: 78px;
+	height: 80px;
 	width: 110px;
 	float: left;
 	margin-right: 10px;
+	background: url("../images/news_list_default_icon.png") center no-repeat transparent;
 }
 
 #news-list ul li h1{
@@ -874,4 +875,77 @@ html, body{
 
 #ties-header-bar-back a:hover{
 	background: url("../images/bot_layer_all.png") -95px -500px no-repeat;
+}
+
+#tie-hot-title, #tie-normal-title{
+	width: 104px;
+	height: 34px;
+	margin: 5px 0 5px 0;
+}
+
+#tie-hot-title{
+	background: url("../images/bot_layer_all.png") -200px -580px no-repeat transparent;
+}
+
+#tie-normal-title{
+	background: url("../images/bot_layer_all.png") -200px -620px no-repeat transparent;
+}
+
+#tie-hot-article{
+}
+
+#tie-normal-article{
+	padding-bottom: 70px;
+}
+
+.tie-article{
+
+}
+
+.tie-article ul li{
+	padding: 25px;
+	background: url("../images/news_base_list_divider.png") no-repeat scroll center bottom transparent;
+	cursor: pointer;
+}
+
+.tie-article ul li div.tie-user-photo{
+	height: 36px;
+	width: 36px;
+	background: url("../images/bot_layer_all.png") -310px -580px no-repeat transparent;
+	float: left;
+}
+
+.tie-article ul li div.tie-user-photo img{
+	width: 30px;
+	height: 30px;
+	border: none;
+	margin: 3px;
+	float: left;
+}
+
+.tie-article ul li h6{
+	font-size: 20px;
+	line-height: 36px;
+	font-style: normal;
+	margin-left: 12px;
+	color: #5392D3;
+	float: left;
+}
+
+.tie-article ul li label{
+	font-size: 16px;
+	line-height: 36px;
+	font-style: normal;
+	margin-left: 12px;
+	color: #838383;
+	float: right;
+}
+
+.tie-article ul li span{
+	clear: both;
+	font-size: 25px;
+	line-height: 35px;
+	color: #545454;
+	display: block;
+	padding: 20px 0 0 0;
 }

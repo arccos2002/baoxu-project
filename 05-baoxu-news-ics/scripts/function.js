@@ -37,7 +37,7 @@ function todo(){
 	bindEvent();
 
 	//加载网络新闻列表
-	getNewsList("headline", "T1348647909107", 0, 20, renderHeadNewsList);
+	//getNewsList("headline", "T1348647909107", 0, 20, renderHeadNewsList);
 
 	//渲染新闻栏目列表
 	renderNewsColumn(data_news_column);
@@ -102,7 +102,7 @@ function bindEvent(){
 				toggleMainLayerMoveToRight();
 				break;
 
-			//主图层左上角展开隐藏左侧边栏按钮被点击
+			//主图层右上角展开隐藏右侧个人信息侧边栏按钮被点击
 			case "et_main_layer_user":
 				toggleMainLayerMoveToLeft();
 				break;
@@ -228,14 +228,14 @@ function toggleMainLayerMoveToRight(){
 function toggleMainLayerMoveToLeft(){
 	var theBar = $$("main-layer-action-bar-user").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", -384, 0.2, 10, 0, mainLayerLeftOver);
-		moveElementWith("main-layer-action-bar", "fixed", -384, 0.2, 10, 0);
+		moveElementWith("main-layer", "absolute", -384, 0.3, 10, 0, mainLayerLeftOver);
+		moveElementWith("main-layer-action-bar", "fixed", -384, 0.3, 10, 0);
 		theBar.className = "current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", 384, 0.2, 10, 0, mainLayerRestore);
-		moveElementWith("main-layer-action-bar", "fixed", 384, 0.2, 10, 0);
+		moveElementWith("main-layer", "absolute", 384, 0.3, 10, 0, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", 384, 0.3, 10, 0);
 		theBar.className = "";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
