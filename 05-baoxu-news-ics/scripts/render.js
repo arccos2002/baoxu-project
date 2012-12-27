@@ -65,7 +65,7 @@ function renderNewsColumn(data){
 
 /*******************************    新闻列表模板    ************************************/
 //头图模板
-var tp_head_img = "<ul data-column-id = '<%= xhrData[0].cid %>'>"
+var tp_head_img = "<ul id='head-img-list' data-column-id = '<%= xhrData[0].cid %>'>"
 	+ "<li data-news-id='"+ "<%= xhrData[0].docid%>" +"'>"
 	+ "<img data-event-tag = 'et_head_img' src = '"+"<%= xhrData[0].imgsrc %>"+"' />"
 	+ "<h6 data-event-tag = 'et_head_img'>"+ "<%= xhrData[0]['title'] %>" +"</h6>"

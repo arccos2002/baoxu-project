@@ -7,6 +7,13 @@
 //定义一些要用的常量
 var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
 
+//浏览器信息
+var CLIENT_WIDTH = 0;
+var CLIENT_HEIGHT = 0;
+
+//页面组件固定宽度或者高度信息
+var BOTTOM_LEFT_NAVI_WIDTH = 96;
+
 //定义标志位全局变量
 var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
 var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
@@ -37,7 +44,7 @@ function todo(){
 	bindEvent();
 
 	//加载网络新闻列表
-	//getNewsList("headline", "T1348647909107", 0, 20, renderHeadNewsList);
+	getNewsList("headline", "T1348647909107", 0, 20, renderHeadNewsList);
 
 	//渲染新闻栏目列表
 	renderNewsColumn(data_news_column);
@@ -52,33 +59,44 @@ function todo(){
  */
 function initViewPort(){
 	//获取屏幕信息
-	var client_width = getClientInfo()["width"];
-	var client_height = getClientInfo()["height"];
-	console.log(LOG_INFO + "ViewSize is " + client_width + " & " + client_height);//LOG
+	CLIENT_WIDTH = getClientInfo()["width"];
+	CLIENT_HEIGHT = getClientInfo()["height"];
+	console.log(LOG_INFO + "ViewSize is " + CLIENT_WIDTH + " & " + CLIENT_HEIGHT);//LOG
 
 	//页面底层图层全比例显示
-	$$("bot-layer").style.width = client_width;
-	$$("bot-layer").style.height = client_height;
+	$$("bot-layer").style.width = CLIENT_WIDTH;
+	$$("bot-layer").style.height = CLIENT_HEIGHT;
 	console.log(LOG_INFO + "Bottom layer is full of page");//LOG
 	//底层导航，导航遮罩阴影，底层个人信息，个人信息遮罩阴影校正高度
-	$$("bot-layer-navi").style.height = client_height + "px";
-	$$("bot-layer-navi-shadow").style.height = client_height + "px";
-	$$("bot-layer-info-shadow").style.height = client_height + "px";
-	$$("bot-layer-info").style.height = client_height + "px";
+	$$("bot-layer-navi").style.height = CLIENT_HEIGHT + "px";
+	$$("bot-layer-navi-shadow").style.height = CLIENT_HEIGHT + "px";
+	$$("bot-layer-info-shadow").style.height = CLIENT_HEIGHT + "px";
+	$$("bot-layer-info").style.height = CLIENT_HEIGHT + "px";
 	console.log(LOG_INFO + "Correct bottom layer navi and info's heigh with full page");//LOG
 	//底层个人信息部分校正宽度
-	$$("bot-layer-info").style.width = client_width - 96 + "px";
-	console.log(LOG_INFO + "Correct bottom layer info's width with full page but navi");//LOG
+	$$("bot-layer-info").style.width = CLIENT_WIDTH - BOTTOM_LEFT_NAVI_WIDTH + "px";
+	console.log(LOG_INFO + "Correct bottom layer info's width with full page but bottom left navi");//LOG
 	//上层信息主图层校正宽度
-	$$("main").style.width = client_width + "px";
-	$$("main-layer").style.width = client_width + "px";
+	$$("main").style.width = CLIENT_WIDTH + "px";
+	$$("main-layer").style.width = CLIENT_WIDTH + "px";
 	console.log(LOG_INFO + "Correct main layer width with full page");//LOG
 	//新闻详情页图层校正宽高与视图一致
-	$$("main-layer-detail").style.width = client_width + "px";
-	$$("main-layer-detail").style.height = client_height + "px";
+	$$("main-layer-detail").style.width = CLIENT_WIDTH + "px";
+	$$("main-layer-detail").style.height = CLIENT_HEIGHT + "px";
+	console.log(LOG_INFO + "Correct detail layer width with full page");//LOG
 	//跟帖页图层校正宽高与视图一致
-	$$("main-layer-ties").style.width = client_width + "px";
-	$$("main-layer-ties").style.height = client_height + "px";
+	$$("main-layer-ties").style.width = CLIENT_WIDTH + "px";
+	$$("main-layer-ties").style.height = CLIENT_HEIGHT + "px";
+	console.log(LOG_INFO + "Correct tie layer width with full page");//LOG
+
+	//初始化详情页以及跟帖页距离页面左边的距离，刚好为屏幕宽度
+	$$("detail-header-bar").style.left = CLIENT_WIDTH + "px";
+	$$("main-layer-detail").style.left = CLIENT_WIDTH + "px";
+	$$("ties-header-bar").style.left = CLIENT_WIDTH + "px";
+	$$("main-layer-ties").style.left = CLIENT_WIDTH + "px";
+	console.log(LOG_INFO + "Correct detail layer & tie layer stay from left");//LOG
+
+	//$$("head-img-list").style.width = CLIENT_WIDTH + "px";
 }
 
 /**
@@ -201,19 +219,21 @@ function clickBotLayerNavi(target){
 
 /**
  * @name toggleMainLayerMoveToRight
- * @class 主页面图层向右移动，即点击了左上角的按钮的效果
+ * @class 主页面图层向右移动，即点击了左上角的按钮的效果,移位的距离就是BOTTOM_LEFT_NAVI_WIDTH，底层左边导航的距离
  */
 function toggleMainLayerMoveToRight(){
+	var step_pers = 0.4;    //单步移动的百分比，越大越快
+	var step_time = 10;     //单步移动的时间间隔，越小越快
 	var theBar = $$("main-layer-action-bar-back").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", 96, 0.4, 10, -1, mainLayerRightOver);
-		moveElementWith("main-layer-action-bar", "fixed", 96, 0.4, 10, 0);
+		moveElementWith("main-layer", "absolute", BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, -1, mainLayerRightOver);
+		moveElementWith("main-layer-action-bar", "fixed", BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0);
 		theBar.className = CURRENT_TOP_ITEM + "-back-current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the right,and back button style is current");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", -96, 0.4, 10, 1, mainLayerRestore);
-		moveElementWith("main-layer-action-bar", "fixed", -96, 0.4, 10, 0);
+		moveElementWith("main-layer", "absolute", -BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 1, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", -BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0);
 		//theBar.className = theBar.className.slice(0, -8);
 		theBar.className = CURRENT_TOP_ITEM + "-back";
 		//LOG
@@ -226,16 +246,18 @@ function toggleMainLayerMoveToRight(){
  * @class 切换主页面图层向左移动，即点击了右上角的按钮的效果，移动或收起
  */
 function toggleMainLayerMoveToLeft(){
+	var step_pers = 0.3;    //单步移动的百分比，越大越快
+	var step_time = 10;     //单步移动的时间间隔，越小越快
 	var theBar = $$("main-layer-action-bar-user").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", -384, 0.3, 10, 0, mainLayerLeftOver);
-		moveElementWith("main-layer-action-bar", "fixed", -384, 0.3, 10, 0);
+		moveElementWith("main-layer", "absolute", -(CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0, mainLayerLeftOver);
+		moveElementWith("main-layer-action-bar", "fixed", -(CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0);
 		theBar.className = "current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", 384, 0.3, 10, 0, mainLayerRestore);
-		moveElementWith("main-layer-action-bar", "fixed", 384, 0.3, 10, 0);
+		moveElementWith("main-layer", "absolute", CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0);
 		theBar.className = "";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
@@ -267,8 +289,9 @@ function toggleDetailLayerDisplay(target){
 
 		//先显示新闻详情页，设为block，然后将其移入主视图，占满主视图之后，在回调函数里面隐藏列表页，以方便滚动条
 		setElementDisplay("main-layer-detail", "block");
-		moveElementWith("main-layer-detail", "fixed", -480, 0.2, 10, 0, detailLayerDisplay, newsId);
-		moveElementWith("detail-header-bar", "fixed", -480, 0.2, 10, 0);
+		setElementDisplay("detail-header-bar", "block");
+		moveElementWith("main-layer-detail", "fixed", -CLIENT_WIDTH, 0.2, 10, 0, detailLayerDisplay, newsId);
+		moveElementWith("detail-header-bar", "fixed", -CLIENT_WIDTH, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving to the main view");//LOG
 	}else{
@@ -278,8 +301,8 @@ function toggleDetailLayerDisplay(target){
 		//document.documentElement.scrollTop = VIEW_SCROLL_TOP; //Firefox
 		document.body.scrollTop = VIEW_SCROLL_TOP; //Webkit
 
-		moveElementWith("main-layer-detail", "fixed", 480, 0.2, 10, 0, detailLayerRestore);
-		moveElementWith("detail-header-bar", "fixed", 480, 0.2, 10, 0);
+		moveElementWith("main-layer-detail", "fixed", CLIENT_WIDTH, 0.2, 10, 0, detailLayerRestore);
+		moveElementWith("detail-header-bar", "fixed", CLIENT_WIDTH, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving out the main view, now is hide");//LOG
 	}
@@ -294,14 +317,15 @@ function toggleTiesLayerDisplay(){
 	if(TIES_LAYER_MOVE_FLAG == 0){
 		//先显示跟帖页，设为block，然后将其移入主视图
 		setElementDisplay("main-layer-ties", "block");
-		moveElementWith("main-layer-ties", "fixed", -480, 0.2, 10, 0, tiesLayerDisplay);
-		moveElementWith("ties-header-bar", "fixed", -480, 0.2, 10, 0);
+		setElementDisplay("ties-header-bar", "block");
+		moveElementWith("main-layer-ties", "fixed", -CLIENT_WIDTH, 0.2, 10, 0, tiesLayerDisplay);
+		moveElementWith("ties-header-bar", "fixed", -CLIENT_WIDTH, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving to the main view");//LOG
 	}else{
 		//将跟帖页移出主视图，在回调函数里面将其设置为none
-		moveElementWith("main-layer-ties", "fixed", 480, 0.2, 10, 0, tiesLayerRestore);
-		moveElementWith("ties-header-bar", "fixed", 480, 0.2, 10, 0);
+		moveElementWith("main-layer-ties", "fixed", CLIENT_WIDTH, 0.2, 10, 0, tiesLayerRestore);
+		moveElementWith("ties-header-bar", "fixed", CLIENT_WIDTH, 0.2, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Ties layer moving out the main view, now is hide");//LOG
 	}
@@ -359,6 +383,7 @@ function detailLayerRestore(){
 	console.log(LOG_INFO + "DETAIL_LAYER_MOVE_FLAG = " + DETAIL_LAYER_MOVE_FLAG + " & Detail layer is restore");//LOG
 	renderNewsDefault();
 	setElementDisplay("main-layer-detail", "none");
+	setElementDisplay("detail-header-bar", "none");
 }
 
 /**
@@ -378,6 +403,7 @@ function tiesLayerRestore(){
 	TIES_LAYER_MOVE_FLAG = 0;
 	console.log(LOG_INFO + "TIES_LAYER_MOVE_FLAG = " + TIES_LAYER_MOVE_FLAG + " & Ties layer is restore");//LOG
 
+	setElementDisplay("ties-header-bar", "none");
 	setElementDisplay("main-layer-ties", "none");
 }
 
