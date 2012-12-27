@@ -79,6 +79,7 @@ function initViewPort(){
 	//上层信息主图层校正宽度
 	$$("main").style.width = CLIENT_WIDTH + "px";
 	$$("main-layer").style.width = CLIENT_WIDTH + "px";
+	$$("main-layer-content").style.width = CLIENT_WIDTH + "px";
 	console.log(LOG_INFO + "Correct main layer width with full page");//LOG
 	//新闻详情页图层校正宽高与视图一致
 	$$("main-layer-detail").style.width = CLIENT_WIDTH + "px";

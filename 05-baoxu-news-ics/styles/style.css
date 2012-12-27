@@ -531,7 +531,7 @@ html, body{
 }
 
 #main-layer-content{
-	width: 100%;
+	width: 100%;    /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin-top: 72px;
 	clear: both;
 	background: #ecedee;
@@ -608,7 +608,9 @@ html, body{
 }
 
 #news-list ul li{
-	width: calc(100%-30);
+	width: -moz-calc(100% - 30);
+	width: -webkit-calc(100% - 30);
+	width: calc(100% - 30);
 	height: 95px;
 	padding: 15px;
 	background: url("../images/news_base_list_divider.png") bottom center no-repeat;
