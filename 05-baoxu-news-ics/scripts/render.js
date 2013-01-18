@@ -63,6 +63,18 @@ function renderNewsColumn(data){
 	$$("main-layer-action-bar-column-list").getElementsByTagName("ul")[0].innerHTML = render_news_column(data);
 }
 
+/*******************************    新闻列表加载    ************************************/
+function renderListLoad(){
+
+	$$("head-img").innerHTML = "";
+
+	$$("news-list").innerHTML = "<div class='list-loading'>"
+	+ "<span class='load-gif'></span>"
+	+ "<span class='load-logo'></span>"
+	+ "</div>";
+}
+
+
 /*******************************    新闻列表模板    ************************************/
 //头图模板
 var tp_head_img = "<ul id='head-img-list' data-column-id = '<%= xhrData[0].cid %>'>"
@@ -119,7 +131,7 @@ function renderHeadNewsList(data){
 	//渲染头图
 	$$("head-img").innerHTML = render_head_img(data);
 	//显示头图区域
-	setElementDisplay("head-img","");
+	//setElementDisplay("head-img","");
 	//渲染新闻列表
 	$$("news-list").innerHTML = render_head_news_list(data);
 }

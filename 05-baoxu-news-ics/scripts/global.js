@@ -223,25 +223,25 @@ function moveElementWith(elementID, positionStyle, stepX, stepDis, stepTime, key
  */
 function AppCache(){
 	this.appCacheData = self.applicationCache;
-	alert(String(this.appCacheData));
+	//alert(String(this.appCacheData));
 
 	//当前缓存状态
 	this.cacheStatus = function(i){
 		switch(i.status){
 			case i.UNCACHED: // UNCACHED == 0
-				return 'UNCACHED';
+				return 'UNCACHED/未缓存';
 				break;
 			case i.IDLE: // IDLE == 1
-				return 'IDLE';
+				return 'IDLE/正在处理缓存';
 				break;
 			case i.CHECKING: // CHECKING == 2
-				return 'CHECKING';
+				return 'CHECKING/检查缓存状态';
 				break;
 			case i.DOWNLOADING: // DOWNLOADING == 3
-				return 'DOWNLOADING';
+				return 'DOWNLOADING/正在下载缓存';
 				break;
 			case i.UPDATEREADY:  // UPDATEREADY == 4
-				return 'UPDATEREADY';
+				return 'UPDATEREADY/可以更新缓存';
 				break;
 			case i.OBSOLETE: // OBSOLETE == 5
 				return 'OBSOLETE';

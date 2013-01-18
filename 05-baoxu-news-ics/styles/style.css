@@ -560,7 +560,8 @@ html, body{
 }
 
 #head-img ul li img{
-	width: 100%;
+	min-width: 100%;
+	min-height: 290px;
 	z-index: 100;
 	margin: 0;
 	position: relative;

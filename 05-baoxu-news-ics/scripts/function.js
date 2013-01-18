@@ -20,9 +20,11 @@ var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志
 var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
 var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
 var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
-
 var VIEW_SCROLL_TOP = 0;            //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
 var CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
+
+//代码要使用的全局变量
+var STORAGE = window.localStorage;
 
 
 /******************************************************************************/
@@ -50,7 +52,7 @@ function todo(){
 	renderNewsColumn(data_news_column);
 
 	//显示离线存储状态
-	//showAppCache();
+	showAppCache();
 }
 
 /**
@@ -108,7 +110,8 @@ function bindEvent(){
 	EventUtil.addHandler(document, "click", function(event){
 		event = EventUtil.getEvent(event);
 		var target = EventUtil.getTarget(event);
-		var event_tag = target.dataset["eventTag"];
+		//var event_tag = target.dataset["eventTag"];
+		var event_tag = target.getAttribute("data-event-tag");
 
 		switch(event_tag){
 			//底层顶级栏目导航被点击
@@ -251,14 +254,14 @@ function toggleMainLayerMoveToLeft(){
 	var step_time = 10;     //单步移动的时间间隔，越小越快
 	var theBar = $$("main-layer-action-bar-user").getElementsByTagName("a")[0];
 	if(MAIN_LAYER_MOVE_FLAG == 0){
-		moveElementWith("main-layer", "absolute", -(CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0, mainLayerLeftOver);
-		moveElementWith("main-layer-action-bar", "fixed", -(CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0);
+		moveElementWith("main-layer", "absolute", -(CLIENT_WIDTH - BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0, mainLayerLeftOver);
+		moveElementWith("main-layer-action-bar", "fixed", -(CLIENT_WIDTH - BOTTOM_LEFT_NAVI_WIDTH), step_pers, step_time, 0);
 		theBar.className = "current";
 		//LOG
 		console.log(LOG_INFO + "Main layer moving to the left,and user button style is current");//LOG
 	}else{
-		moveElementWith("main-layer", "absolute", CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0, mainLayerRestore);
-		moveElementWith("main-layer-action-bar", "fixed", CLIENT_WIDTH-BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0);
+		moveElementWith("main-layer", "absolute", CLIENT_WIDTH - BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0, mainLayerRestore);
+		moveElementWith("main-layer-action-bar", "fixed", CLIENT_WIDTH - BOTTOM_LEFT_NAVI_WIDTH, step_pers, step_time, 0);
 		theBar.className = "";
 		//LOG
 		console.log(LOG_INFO + "Main layer going home, and user button style is normal");//LOG
@@ -302,8 +305,8 @@ function toggleDetailLayerDisplay(target){
 		//document.documentElement.scrollTop = VIEW_SCROLL_TOP; //Firefox
 		document.body.scrollTop = VIEW_SCROLL_TOP; //Webkit
 
-		moveElementWith("main-layer-detail", "fixed", CLIENT_WIDTH, 0.2, 10, 0, detailLayerRestore);
-		moveElementWith("detail-header-bar", "fixed", CLIENT_WIDTH, 0.2, 10, 0);
+		moveElementWith("main-layer-detail", "fixed", CLIENT_WIDTH, 0.3, 10, 0, detailLayerRestore);
+		moveElementWith("detail-header-bar", "fixed", CLIENT_WIDTH, 0.3, 10, 0);
 		//LOG
 		console.log(LOG_INFO + "Detail layer moving out the main view, now is hide");//LOG
 	}
@@ -435,18 +438,28 @@ function toggleColumnList(){
  * @param {object} target 被点击的目标，必选参数
  */
 function chooseColumn(target){
-	//切换顶部栏目名
-	$$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = target.innerHTML + "&nbsp;&nbsp;&nbsp;";
-	console.log(LOG_INFO + "The now column is " + target.innerHTML);//LOG
-	//收起栏目列表
-	toggleColumnList();
-	//加载该栏目下的新闻列表
-	/*if(target.innerHTML == "头条"){
-		getNewsList("headline",target.parentElement.dataset.columnId,0,20,renderHeadNewsList);
+	//当前栏目名称
+	var now_cloumn = $$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML;
+	//被点击的栏目名称
+	var click_cloumn = target.innerHTML + "&nbsp;&nbsp;&nbsp;";
+	if(now_cloumn != click_cloumn){
+		//切换顶部栏目名
+		$$("main-layer-action-bar-column").getElementsByTagName("a")[0].innerHTML = click_cloumn;
+		console.log(LOG_INFO + "The now column is " + click_cloumn);//LOG
+		//收起栏目列表
+		toggleColumnList();
+
+		//将新闻列表移到顶部
+		document.body.scrollTop = 0;
+		//加载该栏目下的新闻列表
+		getNewsList("headline", target.parentElement.dataset.columnId, 0, 20, renderHeadNewsList);
+
+		//将主页面置为加载中
+		//renderListLoad();
 	}else{
-		getNewsList("list",target.parentElement.dataset.columnId,0,20,renderNormalNewsList);
-	}*/
-	getNewsList("headline",target.parentElement.dataset.columnId,0,20,renderHeadNewsList);
+		//收起栏目列表
+		toggleColumnList();
+	}
 }
 
 /**
@@ -517,33 +530,61 @@ function toggleDeleteColumn(target){
  * @param {function} callback 异步请求完之后的回调函数
  */
 function getNewsList(newsType, columnId, startId, size, callback){
+	//预备XHR
 	var request = getHTTPObject();
+	var requestString = "";
 	var requestResult = "";
 	var requestUrl = document.location.href + "cdr_list.php?type=" + newsType + "&column=" + columnId + "&start=" + startId + "&size=" + size;
-	if(request){
-		//异步处理
-		request.open("GET", requestUrl, false);
-		request.onreadystatechange = function(){
-			if(request.readyState == 4){
-				//请求成功之后要做的操作
-				requestResult = request.responseText;
-				//console.log(requestResult);
-				//转化为标准JSON对象
-				requestResult = JSON.parse(requestResult);
-				//执行异步处理回调函数
-				callback(requestResult);
-				//返回请求成功
-				//return true;
-			}else{
-				//
-			}
-		};
-		request.send(null);
+
+	//判定LocalStorage中是否已经存储了这个新闻列表
+	var storage_key = columnId + "_" + startId / 20;
+	alert(STORAGE.getItem(storage_key));
+	var storage_value = JSON.parse(STORAGE.getItem(storage_key));
+	//如果已经存有，直接渲染
+	if(storage_value){
+		//如果LocalStorage此条存在，直接渲染
+		callback(storage_value);
+		console.log(LOG_INFO + "Already exist in LocalStorage, key is " + storage_key);//LOG
+		//然后通过网络获取最新的列表放到LocalStorage中
+		if(request){
+			//异步处理
+			request.open("GET", requestUrl, true);
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					//请求成功之后要做的操作
+					requestString = request.responseText;
+					//存入LocalStorage
+					STORAGE.setItem(storage_key, requestString);
+				}
+			};
+			request.send(null);
+		}else{
+			alert("浏览器不支持XMLHttpRequest");
+		}
+
 	}else{
-		alert("浏览器不支持XMLHttpRequest");
+		console.log(LOG_INFO + "Not exist in LocalStorage, key is " + storage_key);//LOG
+		//通过网络方式获取并渲染存入
+		if(request){
+			//异步处理
+			request.open("GET", requestUrl, true);
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					//请求成功之后要做的操作
+					requestString = request.responseText;
+					//转化为标准JSON对象
+					requestResult = JSON.parse(requestString);
+					//执行异步处理回调函数
+					callback(requestResult);
+					//存入LocalStorage
+					STORAGE.setItem(storage_key, requestString);
+				}
+			};
+			request.send(null);
+		}else{
+			alert("浏览器不支持XMLHttpRequest");
+		}
 	}
-	//console.log(requestResult);
-	return requestResult;
 }
 
 
@@ -556,33 +597,57 @@ function getNewsList(newsType, columnId, startId, size, callback){
  */
 function getNews(newsId, callback){
 
+	//预备XHR
 	var request = getHTTPObject();
+	var requestString = "";
 	var requestResult = "";
 	var requestUrl = document.location.href + "cdr_news.php?newsid=" + newsId;
-	if(request){
-		//异步处理
-		request.open("GET", requestUrl, false);
-		request.onreadystatechange = function(){
-			if(request.readyState == 4){
-				//请求成功之后要做的操作
-				requestResult = request.responseText;
-				//console.log(requestResult);
-				//转化为标准JSON对象
-				requestResult = JSON.parse(requestResult);
-				//执行异步处理回调函数
-				callback(requestResult);
-				//返回请求成功
-				//return true;
-			}else{
-				//
-			}
-		};
-		request.send(null);
+
+	//判定LocalStorage中是否已经存储了这个新闻列表
+	var storage_key = newsId;
+	var storage_value = JSON.parse(STORAGE.getItem(storage_key));
+
+	if(storage_value){
+		//渲染页面
+		callback(storage_value);
+		//获取最新的数据并存储
+		//新闻存储一遍就可以了，不刷新存储
+		/*if(request){
+			//异步处理
+			request.open("GET", requestUrl, true);
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					//请求成功之后要做的操作
+					requestString = request.responseText;
+					//存入LocalStorage
+					STORAGE.setItem(storage_key, requestString);
+				}
+			};
+			request.send(null);
+		}else{
+			alert("浏览器不支持XMLHttpRequest");
+		}*/
 	}else{
-		alert("浏览器不支持XMLHttpRequest");
+		if(request){
+			//异步处理
+			request.open("GET", requestUrl, true);
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					//请求成功之后要做的操作
+					requestString = request.responseText;
+					//转化为标准JSON对象
+					requestResult = JSON.parse(requestString);
+					//执行异步处理回调函数
+					callback(requestResult);
+					//存入LocalStorage
+					STORAGE.setItem(storage_key, requestString);
+				}
+			};
+			request.send(null);
+		}else{
+			alert("浏览器不支持XMLHttpRequest");
+		}
 	}
-	//console.log(requestResult);
-	return requestResult;
 }
 
 /**
@@ -595,15 +660,13 @@ function getMoreNews(target){
 	target.innerHTML = "正在载入";
 	//得到了news-list这个ID下所有的ul的数量，用于判断加载到第几页了
 	var news_list_ul_size = $$("news-list").getElementsByTagName("ul").length;
-	getNewsList("headline",target.parentElement.dataset.columnId,news_list_ul_size*20,20,renderMoreNewsList)
+	getNewsList("headline", target.parentElement.dataset.columnId, news_list_ul_size * 20, 20, renderMoreNewsList)
 }
 
 
 function showAppCache(){
 	var myCache = new AppCache();
 	//定义共用DOM对象
-	var output = $$("output");
 	var act = myCache.cacheStatus;
-	output.innerHTML += act;
 	alert(act);
 }
