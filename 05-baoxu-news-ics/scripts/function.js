@@ -52,7 +52,7 @@ function todo(){
 	renderNewsColumn(data_news_column);
 
 	//显示离线存储状态
-	showAppCache();
+	//showAppCache();
 }
 
 /**
@@ -538,12 +538,11 @@ function getNewsList(newsType, columnId, startId, size, callback){
 
 	//判定LocalStorage中是否已经存储了这个新闻列表
 	var storage_key = columnId + "_" + startId / 20;
-	alert(STORAGE.getItem(storage_key));
-	var storage_value = JSON.parse(STORAGE.getItem(storage_key));
+
 	//如果已经存有，直接渲染
-	if(storage_value){
+	if(STORAGE.getItem(storage_key)){
 		//如果LocalStorage此条存在，直接渲染
-		callback(storage_value);
+		callback(JSON.parse(STORAGE.getItem(storage_key)));
 		console.log(LOG_INFO + "Already exist in LocalStorage, key is " + storage_key);//LOG
 		//然后通过网络获取最新的列表放到LocalStorage中
 		if(request){
@@ -551,10 +550,14 @@ function getNewsList(newsType, columnId, startId, size, callback){
 			request.open("GET", requestUrl, true);
 			request.onreadystatechange = function(){
 				if(request.readyState == 4){
-					//请求成功之后要做的操作
-					requestString = request.responseText;
-					//存入LocalStorage
-					STORAGE.setItem(storage_key, requestString);
+					if((request.status >= 200 && request.status < 300) || request.status == 304){
+						//请求成功之后要做的操作
+						requestString = request.responseText;
+						//存入LocalStorage
+						STORAGE.setItem(storage_key, requestString);
+					}else{
+						alert("网络请求状态码错误" + request.status);
+					}
 				}
 			};
 			request.send(null);
@@ -570,14 +573,18 @@ function getNewsList(newsType, columnId, startId, size, callback){
 			request.open("GET", requestUrl, true);
 			request.onreadystatechange = function(){
 				if(request.readyState == 4){
-					//请求成功之后要做的操作
-					requestString = request.responseText;
-					//转化为标准JSON对象
-					requestResult = JSON.parse(requestString);
-					//执行异步处理回调函数
-					callback(requestResult);
-					//存入LocalStorage
-					STORAGE.setItem(storage_key, requestString);
+					if((request.status >= 200 && request.status < 300) || request.status == 304){
+						//请求成功之后要做的操作
+						requestString = request.responseText;
+						//转化为标准JSON对象
+						requestResult = JSON.parse(requestString);
+						//执行异步处理回调函数
+						callback(requestResult);
+						//存入LocalStorage
+						STORAGE.setItem(storage_key, requestString);
+					}else{
+						alert("网络请求状态码错误" + request.status);
+					}
 				}
 			};
 			request.send(null);
@@ -605,42 +612,45 @@ function getNews(newsId, callback){
 
 	//判定LocalStorage中是否已经存储了这个新闻列表
 	var storage_key = newsId;
-	var storage_value = JSON.parse(STORAGE.getItem(storage_key));
 
-	if(storage_value){
+	if(STORAGE.getItem(storage_key)){
 		//渲染页面
-		callback(storage_value);
+		callback(JSON.parse(STORAGE.getItem(storage_key)));
 		//获取最新的数据并存储
 		//新闻存储一遍就可以了，不刷新存储
 		/*if(request){
-			//异步处理
-			request.open("GET", requestUrl, true);
-			request.onreadystatechange = function(){
-				if(request.readyState == 4){
-					//请求成功之后要做的操作
-					requestString = request.responseText;
-					//存入LocalStorage
-					STORAGE.setItem(storage_key, requestString);
-				}
-			};
-			request.send(null);
-		}else{
-			alert("浏览器不支持XMLHttpRequest");
-		}*/
+		 //异步处理
+		 request.open("GET", requestUrl, true);
+		 request.onreadystatechange = function(){
+		 if(request.readyState == 4){
+		 //请求成功之后要做的操作
+		 requestString = request.responseText;
+		 //存入LocalStorage
+		 STORAGE.setItem(storage_key, requestString);
+		 }
+		 };
+		 request.send(null);
+		 }else{
+		 alert("浏览器不支持XMLHttpRequest");
+		 }*/
 	}else{
 		if(request){
 			//异步处理
 			request.open("GET", requestUrl, true);
 			request.onreadystatechange = function(){
 				if(request.readyState == 4){
-					//请求成功之后要做的操作
-					requestString = request.responseText;
-					//转化为标准JSON对象
-					requestResult = JSON.parse(requestString);
-					//执行异步处理回调函数
-					callback(requestResult);
-					//存入LocalStorage
-					STORAGE.setItem(storage_key, requestString);
+					if((request.status >= 200 && request.status < 300) || request.status == 304){
+						//请求成功之后要做的操作
+						requestString = request.responseText;
+						//转化为标准JSON对象
+						requestResult = JSON.parse(requestString);
+						//执行异步处理回调函数
+						callback(requestResult);
+						//存入LocalStorage
+						STORAGE.setItem(storage_key, requestString);
+					}else{
+						alert("网络请求状态码错误" + request.status);
+					}
 				}
 			};
 			request.send(null);

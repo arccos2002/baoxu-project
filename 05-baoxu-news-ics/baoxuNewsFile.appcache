@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# baoxu NTES News Web App v1.4
+# baoxu NTES News Web App v1.0.2
 CACHE:
+index.html
 images/baoxu_70.jpg
 images/bot_layer_all.png
 images/bot_layer_info_bg.png
@@ -31,5 +32,4 @@ styles/style.css
 NETWORK:
 cdr_list.php
 cdr_news.php
-index.html
 *
