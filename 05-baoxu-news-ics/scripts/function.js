@@ -20,6 +20,7 @@ var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志
 var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
 var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
 var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
+var MASK_DISPLAY_FLAG = 0;          //主页面遮罩是否显示，0表示没有，1表示正在显示
 var VIEW_SCROLL_TOP = 0;            //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
 var CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
 
@@ -131,6 +132,12 @@ function bindEvent(){
 
 			//主图层中部新闻栏目选择按钮被点击
 			case "et_main_layer_colm":
+				toggleColumnList();
+				break;
+
+			//主图层中部新闻栏目选择按钮被点击
+			case "et_main_layer_mask":
+				hideLayerMask();
 				toggleColumnList();
 				break;
 
@@ -277,7 +284,6 @@ function toggleMainLayerMoveToLeft(){
 function toggleDetailLayerDisplay(target){
 
 	if(target){
-		console.log(target.tagName.toLowerCase());
 		var newsId = "";
 		if(target.tagName.toLowerCase() == "li"){
 			newsId = target.dataset["newsId"];
@@ -419,11 +425,13 @@ function toggleColumnList(){
 	var column_select_btn = document.getElementById("main-layer-action-bar-column").getElementsByTagName("a")[0];
 	//如果当前栏目列表没有展开，则展开，并将栏目条上的按钮置为按下的状态
 	if(COLUMN_DISPLAY_FLAG == 0){
+		showLayerMask();    //显示MASK
 		$$("main-layer-action-bar-column-list").style.display = "block";
 		column_select_btn.className = "current";
 		COLUMN_DISPLAY_FLAG = 1;
 		console.log(LOG_INFO + "COLUMN_DISPLAY_FLAG = " + COLUMN_DISPLAY_FLAG + " & Column list is dispaly");//LOG
 	}else{
+		hideLayerMask();    //隐藏MASK
 		$$("main-layer-action-bar-column-list").style.display = "none";
 		column_select_btn.className = "";
 		COLUMN_DISPLAY_FLAG = 0;
@@ -519,6 +527,23 @@ function toggleDeleteColumn(target){
 }
 
 
+function showLayerMask(){
+	//显示mask
+	$$("main-layer-mask").style.display = "block";
+	//mainLayer和MASK的高度设定为与屏幕一致，避免滚动
+	$$("main-layer-content").style.height = $$("main-layer-mask").style.height;
+	MASK_DISPLAY_FLAG = 1;
+}
+
+function hideLayerMask(){
+	//将MASK删除
+	$$("main-layer-mask").style.display = "none";
+	//mainLayer和MASK的高度设定取消
+	$$("main-layer-content").style.height = $$("main-layer-mask").style.height = "auto";
+	MASK_DISPLAY_FLAG = 0;
+}
+
+
 /**
  * @name getNewsList
  * @class 通过XHR请求新闻列表
@@ -555,6 +580,7 @@ function getNewsList(newsType, columnId, startId, size, callback){
 						requestString = request.responseText;
 						//存入LocalStorage
 						STORAGE.setItem(storage_key, requestString);
+						console.log(LOG_INFO + "Update it in LocalStorage, key is " + storage_key);//LOG
 					}else{
 						alert("网络请求状态码错误" + request.status);
 					}
@@ -582,6 +608,7 @@ function getNewsList(newsType, columnId, startId, size, callback){
 						callback(requestResult);
 						//存入LocalStorage
 						STORAGE.setItem(storage_key, requestString);
+						console.log(LOG_INFO + "Save it in LocalStorage, key is " + storage_key);//LOG
 					}else{
 						alert("网络请求状态码错误" + request.status);
 					}
@@ -616,6 +643,7 @@ function getNews(newsId, callback){
 	if(STORAGE.getItem(storage_key)){
 		//渲染页面
 		callback(JSON.parse(STORAGE.getItem(storage_key)));
+		console.log(LOG_INFO + "Already exist in LocalStorage, key is " + storage_key);//LOG
 		//获取最新的数据并存储
 		//新闻存储一遍就可以了，不刷新存储
 		/*if(request){
@@ -634,6 +662,7 @@ function getNews(newsId, callback){
 		 alert("浏览器不支持XMLHttpRequest");
 		 }*/
 	}else{
+		console.log(LOG_INFO + "Not exist in LocalStorage, key is " + storage_key);//LOG
 		if(request){
 			//异步处理
 			request.open("GET", requestUrl, true);
@@ -648,6 +677,7 @@ function getNews(newsId, callback){
 						callback(requestResult);
 						//存入LocalStorage
 						STORAGE.setItem(storage_key, requestString);
+						console.log(LOG_INFO + "Save it in LocalStorage, key is " + storage_key);//LOG
 					}else{
 						alert("网络请求状态码错误" + request.status);
 					}

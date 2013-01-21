@@ -302,7 +302,7 @@ html, body{
 
 #main-layer-action-bar{
 	width: 100%;
-	z-index: 110;
+	z-index: 120;
 	height: 72px;
 	background: url("../images/main_layer_action_bar_bg.png") repeat-x;
 	position: fixed;
@@ -530,9 +530,21 @@ html, body{
 	background: #ddd url("../images/bot_layer_all.png") -340px -90px no-repeat;
 }
 
+#main-layer-mask{
+	width: 100%;    /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 500px;
+	position: absolute;
+	margin-top: 72px;
+	clear: both;
+	display: none;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: 115;
+}
+
 #main-layer-content{
 	width: 100%;    /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin-top: 72px;
+	position: relative;
 	clear: both;
 	background: #ecedee;
 }
