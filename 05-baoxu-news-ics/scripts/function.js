@@ -6,6 +6,7 @@
 
 //定义一些要用的常量
 var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
+var LOG_TOUCH = "BAOXU-LOG-TOUCH: ";
 
 //浏览器信息
 var CLIENT_WIDTH = 0;
@@ -26,6 +27,7 @@ var CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么
 
 //代码要使用的全局变量
 var STORAGE = window.localStorage;
+var TOUCHOBJ = new Object();
 
 
 /******************************************************************************/
@@ -100,6 +102,9 @@ function initViewPort(){
 	$$("main-layer-ties").style.left = CLIENT_WIDTH + "px";
 	console.log(LOG_INFO + "Correct detail layer & tie layer stay from left");//LOG
 
+	//初始化MainLayer的遮罩层高度
+	$$("main-layer-mask").style.height = CLIENT_HEIGHT + "px";
+
 	//$$("head-img-list").style.width = CLIENT_WIDTH + "px";
 }
 
@@ -108,11 +113,11 @@ function initViewPort(){
  * @class 绑定事件
  */
 function bindEvent(){
+	//全局点击事件的代理委派
 	EventUtil.addHandler(document, "click", function(event){
 		event = EventUtil.getEvent(event);
 		var target = EventUtil.getTarget(event);
-		//var event_tag = target.dataset["eventTag"];
-		var event_tag = target.getAttribute("data-event-tag");
+		var event_tag = target.dataset["eventTag"] ? target.dataset["eventTag"] : target.getAttribute("data-event-tag");
 
 		switch(event_tag){
 			//底层顶级栏目导航被点击
@@ -204,6 +209,10 @@ function bindEvent(){
 				break;
 		}
 	})
+
+	//绑定触摸事件
+	document.addEventListener("touchstart", handleTouchEvent, false);
+	document.addEventListener("touchmove", handleTouchEvent, false);
 }
 
 
@@ -530,16 +539,18 @@ function toggleDeleteColumn(target){
 function showLayerMask(){
 	//显示mask
 	$$("main-layer-mask").style.display = "block";
-	//mainLayer和MASK的高度设定为与屏幕一致，避免滚动
-	$$("main-layer-content").style.height = $$("main-layer-mask").style.height;
+	//避免滚动
+
+	//标志位说明当前MASK层正在显示
 	MASK_DISPLAY_FLAG = 1;
 }
 
 function hideLayerMask(){
 	//将MASK删除
 	$$("main-layer-mask").style.display = "none";
-	//mainLayer和MASK的高度设定取消
-	$$("main-layer-content").style.height = $$("main-layer-mask").style.height = "auto";
+	//可以滚动了
+
+	//标志位说明当前MASK层没有显示
 	MASK_DISPLAY_FLAG = 0;
 }
 
@@ -644,23 +655,6 @@ function getNews(newsId, callback){
 		//渲染页面
 		callback(JSON.parse(STORAGE.getItem(storage_key)));
 		console.log(LOG_INFO + "Already exist in LocalStorage, key is " + storage_key);//LOG
-		//获取最新的数据并存储
-		//新闻存储一遍就可以了，不刷新存储
-		/*if(request){
-		 //异步处理
-		 request.open("GET", requestUrl, true);
-		 request.onreadystatechange = function(){
-		 if(request.readyState == 4){
-		 //请求成功之后要做的操作
-		 requestString = request.responseText;
-		 //存入LocalStorage
-		 STORAGE.setItem(storage_key, requestString);
-		 }
-		 };
-		 request.send(null);
-		 }else{
-		 alert("浏览器不支持XMLHttpRequest");
-		 }*/
 	}else{
 		console.log(LOG_INFO + "Not exist in LocalStorage, key is " + storage_key);//LOG
 		if(request){
@@ -709,4 +703,161 @@ function showAppCache(){
 	//定义共用DOM对象
 	var act = myCache.cacheStatus;
 	alert(act);
+}
+
+/**
+ * @name handleTouchEvent
+ * @class 监控并处理触摸事件
+ *
+ * @param {object} event 触摸事件对象
+ */
+function handleTouchEvent(event){
+
+	if(event.touches.length == 1){
+
+		switch(event.type){
+			case "touchstart":
+				onTouchStart(event);
+				break;
+			case "touchend":
+				break;
+			case "touchmove":
+				onTouchMove(event);
+				break;
+		}
+	}
+}
+
+/**
+ * @name onTouchStart
+ * @class 触摸开始时触发的事件
+ *
+ * @param {object} e 触摸事件对象
+ */
+function onTouchStart(e){
+	TOUCHOBJ.start = {
+		//获取触摸的初始位置
+		pageX:e.touches[0].pageX,
+		pageY:e.touches[0].pageY,
+		//初始化触摸事件的时间戳顺序
+		time:Number(new Date())
+	};
+
+	//用于定义用户是在上下滚动还是左右滑动
+	TOUCHOBJ.isScrolling = undefined;
+	//X轴上的变动距离
+	TOUCHOBJ.deltaX = 0;
+	//Y轴上的变动距离
+	TOUCHOBJ.deltaY = 0;
+	//是不是同一系列的事件，事件函数执行过一次之后置为1
+	TOUCHOBJ.isOne = 0;
+
+	console.log(LOG_TOUCH + "Touch Start at X轴：" + TOUCHOBJ.start.pageX + " and Y轴: " + TOUCHOBJ.start.pageY);//LOG
+
+	//先阻止事件冒泡
+	e.stopPropagation();
+}
+
+/**
+ * @name onTouchMove
+ * @class 触摸进行中触发的事件
+ *
+ * @param {object} e 触摸事件对象
+ */
+function onTouchMove(e){
+	//确保当前是单指操作的
+	if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+
+	//获取此次触摸离第一次的距离
+	TOUCHOBJ.deltaX = e.touches[0].pageX - TOUCHOBJ.start.pageX;
+	TOUCHOBJ.deltaY = e.touches[0].pageY - TOUCHOBJ.start.pageY;
+
+	console.log("Target是：" + e.target.tagName);
+
+	console.log(LOG_TOUCH + "X轴变化：" + TOUCHOBJ.deltaX + "; Y轴变化：" + TOUCHOBJ.deltaY);
+
+	// 判定Scroll滚动测试是否在运行
+	if(typeof TOUCHOBJ.isScrolling == 'undefined'){
+		//如果在X轴上移动的距离小于Y轴上移动的距离，那么判定用户在上下滚动屏幕
+		TOUCHOBJ.isScrolling = (Math.abs(TOUCHOBJ.deltaX) < Math.abs(TOUCHOBJ.deltaY));
+	}
+
+	//如果判定用户不是在滚动屏幕而是横向滑动
+	if(!TOUCHOBJ.isScrolling){
+
+		//运行横向触摸事件
+		doLanscapeTouch();
+		//阻止系统滚动事件
+		e.preventDefault();
+		e.stopPropagation();
+	}else{
+		//用户在纵向触摸，使用系统默认的滚动
+	}
+}
+
+
+/**
+ * @name doLanscapeTouch
+ * @class 处理横向触摸事件的执行
+ */
+function doLanscapeTouch(){
+	console.log(LOG_TOUCH + "横向触摸事件发生, isOne = " + TOUCHOBJ.isOne);
+
+	//同一系列的触摸事件，下面的函数只发生一次
+	if(!TOUCHOBJ.isOne){
+		if(TIES_LAYER_MOVE_FLAG){
+			//如果跟帖页显示在主视图
+			if(TOUCHOBJ.deltaX < 0){
+				//用户手指向左划动，不处理
+			}else{
+				//用户手指向右滑动，隐藏跟帖页
+				toggleTiesLayerDisplay();
+			}
+		}else if(DETAIL_LAYER_MOVE_FLAG){
+			//如果新闻详情页显示在主视图
+			if(TOUCHOBJ.deltaX < 0){
+				//用户手指向左划动，展示跟帖页
+				toggleTiesLayerDisplay();
+			}else{
+				//用户手指向右滑动，收起新闻详情页
+				toggleDetailLayerDisplay();
+			}
+		}else{
+			//如果新闻详情页和跟帖页都不在主视图，判断首页列表的位置
+			switch(MAIN_LAYER_MOVE_FLAG){
+				//如果主图层没有移动
+				case 0:
+					if(TOUCHOBJ.deltaX < 0){
+						//用户手指向左划动，主图层需要向左划动，展示个人中心
+						toggleMainLayerMoveToLeft();
+					}else{
+						//用户手指向右滑动，主图层向右滑动，展示频道
+						toggleMainLayerMoveToRight();
+					}
+					break;
+
+				//如果主图层向右移了，正在展示频道
+				case 1:
+					if(TOUCHOBJ.deltaX < 0){
+						//用户手指向左划动，主图层需要向左划动，隐藏频道
+						toggleMainLayerMoveToRight();
+					}else{
+						//用户手指向右滑动，不处理
+					}
+					break;
+
+				//如果主图层向左移了，正在展示个人中心
+				case 2:
+					if(TOUCHOBJ.deltaX < 0){
+						//用户手指向左划动，不处理
+					}else{
+						//用户手指向右滑动，主图层向右滑动，隐藏个人中心
+						toggleMainLayerMoveToLeft();
+					}
+					break;
+			}
+		}
+		//本次横向移动的任务完成，不响应下面本系列其他的move
+		TOUCHOBJ.isOne = 1;
+	}
 }

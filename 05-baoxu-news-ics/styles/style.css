@@ -6,7 +6,6 @@
  * Time:   下午12:09
  */
 
-
 /******************************************************************************/
 /******************                 公共样式               *********************/
 /******************************************************************************/
@@ -34,7 +33,6 @@ html, body{
 	height: 100%;
 	width: 100%;
 }
-
 
 /******************************************************************************/
 /******************                 底层样式               *********************/
@@ -279,11 +277,9 @@ html, body{
 	margin: 0 15px 15px 0;
 }
 
-
 /******************************************************************************/
 /******************                主图层样式               *********************/
 /******************************************************************************/
-
 
 #main{
 	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
@@ -531,9 +527,9 @@ html, body{
 }
 
 #main-layer-mask{
-	width: 100%;    /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	height: 500px;
-	position: absolute;
+	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 100%;
+	position: fixed;
 	margin-top: 72px;
 	clear: both;
 	display: none;
@@ -542,7 +538,7 @@ html, body{
 }
 
 #main-layer-content{
-	width: 100%;    /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin-top: 72px;
 	position: relative;
 	clear: both;
@@ -621,18 +617,18 @@ html, body{
 }
 
 #news-list ul li{
-	width: -moz-calc(100% - 30);
-	width: -webkit-calc(100% - 30);
-	width: calc(100% - 30);
+	width: -moz-calc(100% -30);
+	width: -webkit-calc(100% -30);
+	width: calc(100% -30);
 	height: 95px;
 	padding: 15px;
 	background: url("../images/news_base_list_divider.png") bottom center no-repeat;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #news-list ul li:hover{
 	background: url("../images/news_base_list_divider.png") bottom center no-repeat #e2e3e4;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #news-list ul li.load-more{
@@ -672,23 +668,21 @@ html, body{
 	color: #8D8D8D;
 }
 
-
 /******************************************************************************/
 /******************               新闻详情页样式             *********************/
 /******************************************************************************/
 
-
 #main-layer-detail{
-	width: 100%;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px; /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin: 0 auto;
-	top:0;
+	top: 0;
 	padding-top: 72px;
 	background: #F6F6F6;
 	position: fixed;
 	overflow: auto;
 	z-index: 200;
-	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
+	display: none; /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
 }
 
 #detail-header-bar{
@@ -696,7 +690,7 @@ html, body{
 	width: 100%;
 	position: fixed;
 	margin: 0 auto;
-	top:0;
+	top: 0;
 	background: rgba(246, 246, 246, 0.80) url("../images/news_base_list_divider.png") bottom no-repeat;
 	z-index: 290;
 	display: none;
@@ -720,7 +714,6 @@ html, body{
 #detail-header-bar-back a:hover{
 	background: url("../images/bot_layer_all.png") -95px -500px no-repeat;
 }
-
 
 #detail-header-bar-menu{
 	width: 74px;
@@ -842,26 +835,21 @@ html, body{
 	color: #7a7a7a;
 }
 
-
-
-
-
 /******************************************************************************/
 /******************                 跟帖页样式              *********************/
 /******************************************************************************/
 
-
 #main-layer-ties{
-	width: 100%;   /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	height: 600px;  /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
+	height: 600px; /*获取的设备高度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
 	margin: 0 auto;
 	padding-top: 72px;
 	background: #F6F6F6;
 	position: fixed;
-	top:0;
+	top: 0;
 	overflow: auto;
 	z-index: 300;
-	display: none;  /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
+	display: none; /*默认新闻详情页和跟帖页是不显示的，由JS调用显示*/
 }
 
 #ties-header-bar{
@@ -869,7 +857,7 @@ html, body{
 	width: 100%;
 	position: fixed;
 	margin: 0 auto;
-	top:0;
+	top: 0;
 	background: rgba(246, 246, 246, 0.80) url("../images/news_base_list_divider.png") bottom no-repeat;
 	z-index: 390;
 	display: none;
@@ -916,7 +904,6 @@ html, body{
 }
 
 .tie-article{
-
 }
 
 .tie-article ul li{

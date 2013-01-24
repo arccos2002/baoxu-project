@@ -4,7 +4,7 @@
 <head>
     <meta charset = "utf-8" />
     <meta name = "viewport"
-          content = "target-densitydpi=device-dpi, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          content = "target-densitydpi=device-dpi,width=device-width, initial-scale=0.66667, user-scalable=no" />
     <title>网易新闻ICS版客户端WebApp</title>
     <link href = "images/favicon.ico" rel = "Shortcut Icon" title = "网易新闻WEB APP" type = "image/x-icon" />
     <link type = "text/css" rel = "stylesheet" href = "styles/base.css" />
@@ -41,11 +41,11 @@
                 <h6 class = "t-shadow">基于HTML5+CSS3+JS原生实现</h6>
             </div>
             <!--用于修正FF下DIV不会自动伸长的问题-->
-            <div class="clear-both"></div>
+            <div class = "clear-both"></div>
         </div>
         <ul id = "bot-layer-user-data">
-            <li class = "user-ties"><a href="http://code.baoxu.net"></a></li>
-            <li class = "user-favo"><a href="http://weibo.com/chbaoxu"></a></li>
+            <li class = "user-ties"><a href = "http://code.baoxu.net"></a></li>
+            <li class = "user-favo"><a href = "http://weibo.com/chbaoxu"></a></li>
             <li class = "user-push"><a></a></li>
         </ul>
         <ul id = "bot-layer-menu">
@@ -54,7 +54,7 @@
             <li class = "menu-search"><a class = "t-shadow"><span></span>搜索新闻</a></li>
             <li class = "menu-setting"><a class = "t-shadow"><span></span>设置</a></li>
         </ul>
-        <span id="bot-layer-info-version">V1.0 by Baoxu</span>
+        <span id = "bot-layer-info-version">V1.0 by Baoxu</span>
     </div>
 </section>
 
@@ -90,7 +90,7 @@
             </div>
         </div>
         <!--新闻列表mask-->
-        <div id="main-layer-mask" data-event-tag="et_main_layer_mask"></div>
+        <div id = "main-layer-mask" data-event-tag = "et_main_layer_mask"></div>
         <!--全部新闻列表-->
         <div id = "main-layer-content">
             <!--头图-->
@@ -100,9 +100,9 @@
             <!--普通新闻列表-->
             <div id = "news-list">
                 <!--新闻列表，渲染填充-->
-                <div class="list-loading">
-                    <span class="load-gif"></span>
-                    <span class="load-logo"></span>
+                <div class = "list-loading">
+                    <span class = "load-gif"></span>
+                    <span class = "load-logo"></span>
                 </div>
             </div>
         </div>
@@ -116,10 +116,10 @@
     </header>
     <section id = "main-layer-detail" style = "left: 0">
         <article id = "detail-article">
-	        <div class="detail-loading">
-		        <span class="load-gif"></span>
-		        <span class="load-logo"></span>
-	        </div>
+            <div class = "detail-loading">
+                <span class = "load-gif"></span>
+                <span class = "load-logo"></span>
+            </div>
         </article>
     </section>
 
@@ -129,34 +129,34 @@
     </header>
     <section id = "main-layer-ties" style = "left: 0">
         <!--热门跟帖-->
-        <div id="tie-hot-title"></div>
-        <article id="tie-hot-article" class="tie-article">
+        <div id = "tie-hot-title"></div>
+        <article id = "tie-hot-article" class = "tie-article">
             <ul>
                 <li>
-                    <div class="tie-user-photo"><img src="images/baoxu_70.jpg" /></div>
+                    <div class = "tie-user-photo"><img src = "images/baoxu_70.jpg" /></div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
@@ -165,36 +165,36 @@
             </ul>
         </article>
         <!--全部跟贴-->
-        <div id="tie-normal-title"></div>
-        <article id="tie-normal-article"  class="tie-article">
+        <div id = "tie-normal-title"></div>
+        <article id = "tie-normal-article" class = "tie-article">
             <ul>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
                     <span>跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容，跟帖的内容。</span>
                 </li>
                 <li>
-                    <div class="tie-user-photo">
-                        <img src="images/baoxu_70.jpg" />
+                    <div class = "tie-user-photo">
+                        <img src = "images/baoxu_70.jpg" />
                     </div>
                     <h6>网易广东省深圳市网友：</h6>
                     <label>1小时前</label>
