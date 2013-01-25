@@ -303,8 +303,7 @@ function toggleDetailLayerDisplay(target){
 
 	if(DETAIL_LAYER_MOVE_FLAG == 0){
 		//获取页面的已滚动高度，以便于复原
-		//VIEW_SCROLL_TOP = document.documentElement.scrollTop;   //Firefox
-		VIEW_SCROLL_TOP = document.body.scrollTop;   //Webkit
+		VIEW_SCROLL_TOP = document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;   //Webkit OR Firefox
 
 		//先显示新闻详情页，设为block，然后将其移入主视图，占满主视图之后，在回调函数里面隐藏列表页，以方便滚动条
 		setElementDisplay("main-layer-detail", "block");
@@ -751,6 +750,10 @@ function onTouchStart(e){
 	TOUCHOBJ.deltaY = 0;
 	//是不是同一系列的事件，事件函数执行过一次之后置为1
 	TOUCHOBJ.isOne = 0;
+	//定义一个标志，表现当前文档是不是在顶部，以便实施下拉刷新
+	TOUCHOBJ.isTop = !((document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop) && true);
+	//当前新闻栏目ID
+	TOUCHOBJ.columnID = $$("head-img-list").dataset["columnId"];
 
 	console.log(LOG_TOUCH + "Touch Start at X轴：" + TOUCHOBJ.start.pageX + " and Y轴: " + TOUCHOBJ.start.pageY);//LOG
 
@@ -792,6 +795,8 @@ function onTouchMove(e){
 		e.stopPropagation();
 	}else{
 		//用户在纵向触摸，使用系统默认的滚动
+		//也要处理纵向滑动的事务，比如说下拉刷新
+		doPortraitTouch();
 	}
 }
 
@@ -860,4 +865,71 @@ function doLanscapeTouch(){
 		//本次横向移动的任务完成，不响应下面本系列其他的move
 		TOUCHOBJ.isOne = 1;
 	}
+}
+
+/**
+ * @name doPortraitTouch
+ * @class 处理纵向触摸事件的执行
+ */
+function doPortraitTouch(){
+	console.log(LOG_TOUCH + "纵向触摸事件发生, isOne = " + TOUCHOBJ.isOne + "isTop = " + TOUCHOBJ.isTop);
+	//如果详情页和跟帖页都不在前台展示，前台展示的是新闻列表页
+	if(!(TIES_LAYER_MOVE_FLAG || DETAIL_LAYER_MOVE_FLAG || TOUCHOBJ.isOne)){
+		if(TOUCHOBJ.deltaY > 0){
+			if(TOUCHOBJ.isTop){
+				//显示下拉刷新条
+				refreshList(72, 0.4, 20);
+				getNewsList("headline", TOUCHOBJ.columnID, 0, 20, renderHeadNewsList);
+
+				setTimeout("refreshList(0,0.4,20)", 1000);
+
+				//本次移动的任务完成，不响应下面本系列其他的move
+				TOUCHOBJ.isOne = 1;
+			}
+		}
+	}
+
+}
+
+/**
+ * @name refreshList
+ * @class 下拉刷新操作的响应
+ *
+ * @param {Number} targetTop 需要移动到什么程度，按照需求，0表示隐藏下拉刷新状态栏，72表示显示下拉刷新状态栏
+ * @param {Number} stepDis 每一步需要移动的百分比
+ * @param {Number} stepTime 每一次timeOut的时间
+ */
+function refreshList(targetTop, stepDis, stepTime){
+	//改变新闻列表对象的MarginTop值，已达到显示下拉刷新提示栏的功能
+	var elementToMove = $$("main-layer-content");
+	//目标对象的MarginTop的值
+	var elementTop = parseInt(elementToMove.style.marginTop);
+	//单次移动的距离
+	var dist = 0;
+
+	//如果上一次的点击的移位还没有完成，先清除循环
+	if(elementToMove.movement){
+		clearTimeout(elementToMove.movement);
+	}
+
+	//alert(elementTop);
+
+	//如果移动完成
+	if(elementTop == targetTop){
+		//alert("完成了！");
+	}else if(elementTop > targetTop){
+		dist = Math.ceil((elementTop - targetTop) * stepDis);
+		elementTop -= dist;
+	}else if(elementTop < targetTop){
+		dist = Math.ceil((targetTop - elementTop) * stepDis);
+		elementTop += dist;
+	}
+
+	//设置DOM的位置，进行渲染
+	elementToMove.style.marginTop = elementTop + "px";
+
+	//循环单次移动，形成动画效果
+	var repeat = "refreshList(" + targetTop + "," + stepDis + "," + stepTime + ")";
+	elementToMove.movement = setTimeout(repeat, stepTime);
+
 }

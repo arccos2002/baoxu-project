@@ -539,10 +539,34 @@ html, body{
 
 #main-layer-content{
 	width: 100%; /*获取的设备宽度会覆盖这个值,子级的百分比宽度其实跟这个值没有关系*/
-	margin-top: 72px;
 	position: relative;
 	clear: both;
 	background: #ecedee;
+}
+
+#news-list-refresh{
+	width: 100%;
+	height: 46px;
+	padding-top: 25px;
+	background: #f0f0f0;
+	border-bottom: #e0e0e0 solid 1px;
+	text-align: center;
+}
+
+#news-list-refresh span{
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 18px;
+	color: #828282;
+	vertical-align: middle;
+}
+
+#news-list-refresh img{
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	border: none;
 }
 
 #head-img{
