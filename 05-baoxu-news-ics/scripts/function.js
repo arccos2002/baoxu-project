@@ -5,29 +5,29 @@
  */
 
 //定义一些要用的常量
-var LOG_INFO = "BAOXU-LOG-INFO: ";  //LOG_INFO的前缀
-var LOG_TOUCH = "BAOXU-LOG-TOUCH: ";
+var LOG_INFO = "BAOXU-LOG-INFO: ", //LOG_INFO的前缀
+	LOG_TOUCH = "BAOXU-LOG-TOUCH: ";
 
 //浏览器信息
-var CLIENT_WIDTH = 0;
-var CLIENT_HEIGHT = 0;
+var CLIENT_WIDTH = 0,
+	CLIENT_HEIGHT = 0;
 
 //页面组件固定宽度或者高度信息
 var BOTTOM_LEFT_NAVI_WIDTH = 96;
 
 //定义标志位全局变量
-var MAIN_LAYER_MOVE_FLAG = 0;       //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
-var COLUMN_DISPLAY_FLAG = 0;        //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
-var COLUMN_EDIT_FLAG = 0;           //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
-var DETAIL_LAYER_MOVE_FLAG = 0;     //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
-var TIES_LAYER_MOVE_FLAG = 0;       //跟帖页是否显示在主视图，0表示没有，1表示正在显示
-var MASK_DISPLAY_FLAG = 0;          //主页面遮罩是否显示，0表示没有，1表示正在显示
-var VIEW_SCROLL_TOP = 0;            //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
-var CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
+var MAIN_LAYER_MOVE_FLAG = 0, //主图层的位移情况，0表示未移动，1表示向右移了，2表示向左移了
+	COLUMN_DISPLAY_FLAG = 0, //新闻类顶部栏目列表的显示标志，0表示没有展开，1表示展开了
+	COLUMN_EDIT_FLAG = 0, //新闻类顶部栏目列表编辑状态标志，0表示没有编辑或者编辑完成，1表示正在编辑
+	DETAIL_LAYER_MOVE_FLAG = 0, //新闻详情页是否显示在主视图，0表示没有，1表示正在显示
+	TIES_LAYER_MOVE_FLAG = 0, //跟帖页是否显示在主视图，0表示没有，1表示正在显示
+	MASK_DISPLAY_FLAG = 0, //主页面遮罩是否显示，0表示没有，1表示正在显示
+	VIEW_SCROLL_TOP = 0, //记录新闻列表页向上滚动了多少，以便在新闻列表页展示的时候还原这个状态
+	CURRENT_TOP_ITEM = "news";      //记录当前选中的顶级栏目是什么，取值（news,ties,pics,topics,vote）
 
 //代码要使用的全局变量
-var STORAGE = window.localStorage;
-var TOUCHOBJ = new Object();
+var STORAGE = window.localStorage,
+	TOUCHOBJ = {};
 
 
 /******************************************************************************/
@@ -208,7 +208,7 @@ function bindEvent(){
 				getMoreNews(target);
 				break;
 		}
-	})
+	});
 
 	//绑定触摸事件
 	document.addEventListener("touchstart", handleTouchEvent, false);
