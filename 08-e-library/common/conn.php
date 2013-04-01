@@ -5,12 +5,14 @@
  * Time: 下午6:26
  */
 
-$host = "localhost";
-$user = "root";
-$pass = "";
+
+
+$host = "192.168.1.14";
+$user = "baoxu";
+$pass = ",.";
 $db = "library";
 
 $conn = mysql_connect($host,$user,$pass);
-mysql_select_db($db);
-mysql_query("SET NAMES 'utf-8'");
+mysql_select_db($db,$conn);
+mysql_query("SET NAMES 'utf8'");
 ?>

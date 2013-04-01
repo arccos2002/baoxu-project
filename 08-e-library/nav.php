@@ -36,11 +36,12 @@ include "common/conn.php";
                         </ul>
                     </li>
                 </ul>
-                <form class = "navbar-form pull-right" method="post" id="login" name="login" action="" onsubmit="return verifyForm(this);">
+                <form class = "navbar-form pull-right" id="login" name="login" action="" onsubmit="return false;">
                     <input type = "text" placeholder = "邮箱前缀" class = "span2" name="email" id="email">
                     <input type = "password" placeholder = "密码" class = "span2" name="password" id="password">
-                    <button class = "btn" type = "submit" id="bx-login-btn">登录</button>
+                    <button class = "btn" id="bx-login-btn" type="submit" onclick="login()">登录</button>
                 </form>
+                <div class="navbar-form pull-right dropdown">shdflkhasfjkh</div>
             </div>
         </div>
     </div>
