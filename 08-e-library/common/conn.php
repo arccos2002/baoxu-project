@@ -7,7 +7,7 @@
 
 
 
-$host = "192.168.1.14";
+$host = "127.0.0.1";
 $user = "baoxu";
 $pass = ",.";
 $db = "library";

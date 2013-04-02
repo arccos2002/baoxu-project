@@ -13,7 +13,7 @@
 <body>
 
 <!--引入导航文件-->
-<?php include "../nav.php"; ?>
+<?php include "../common/nav.php"; ?>
 
 <div class = "container">
 
@@ -73,4 +73,4 @@
 </div>
 
 <!--引入页尾文件-->
-<?php include "../foot.php"; ?>
+<?php include "../common/foot.php"; ?>

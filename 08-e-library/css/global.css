@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+/**
+ * Author: Baoxu
+ * Date:   13-4-2
+ * Time:   上午10:27
+ */
+
+.bx-login-success{
+	padding: 10px;
+	color: #EEE;
+}
+
+.bx-login-success span{
+	padding-left: 10px;
+}
