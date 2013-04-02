@@ -7,6 +7,10 @@
 function doLogin(){
 	var form = document.loginForm, mail = form.email.value, pass = form.password.value;
 
+	if(!form["email"] || !form["password"]){
+		return false;
+	}
+
 	//登录
 	var verifyUrl = "../common/login.php?mail=" + mail + "@corp.netease.com&password=" + pass;
 	$.getJSON(verifyUrl, function(json){
@@ -14,6 +18,12 @@ function doLogin(){
 			//登录成功后改写登陆框部分
 			$("#loginForm").addClass("f-dn");
 			$("#loginSuccess").removeClass("f-dn");
+			var displayNameSpan = $("span#displayUserName");
+			if(json["name"]){
+				displayNameSpan.text(json["name"]);
+			}else{
+				displayNameSpan.text(json["mail"].slice(0,json["mail"].indexOf("@")));
+			}
 		}else{
 			alert("用户名或密码错误，请重试。");
 		}

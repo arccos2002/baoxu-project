@@ -8,6 +8,7 @@ header("Content-Type:application/json; charset=utf-8");
 header("Cache-Control: must-revalidate, no-cache, private");
 
 include "conn.php";
+include "function.php";
 
 $mail = $_GET["mail"];
 $password = $_GET["password"];
@@ -20,8 +21,11 @@ $success = mysql_num_rows($result);
 if ($success) {
     while ($row = mysql_fetch_array($result)) {
         echo '{"status":1,"userId":' . $row["user_id"] . ',"name":"' . $row["name"] . '","mail":"' . $row["mail"] . '"' . '}';
+
         /*写Cookie*/
-        setcookie("userId", $row["user_id"], time() + 3600, "/");
+        $userIdAdmin = $row["user_id"].$row["admin"];
+        //echo $userIdAdmin;
+        setcookie("userCode", encodeCookie($userIdAdmin).$userIdAdmin, time() + 3600, "/");
         setcookie("userMail", $row["mail"], time() + 3600, "/");
         setcookie("userName", $row["name"], time() + 3600, "/");
     }
