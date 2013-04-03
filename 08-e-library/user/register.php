@@ -17,12 +17,12 @@
 <!--内容主体-->
 <div class = "container">
     <div class = "page-header"><h2>用户注册</h2></div>
-    <form class = "form-horizontal" name = "userRegister" id = "userRegister" action = "../admin/user_save.php" enctype="multipart/form-data" method = "post">
+    <form class = "form-horizontal" name = "userRegister" id = "userRegister" action = "../admin/user_save.php" onsubmit="return verifyRegistForm();" enctype="multipart/form-data" method = "post">
         <div class = "control-group">
             <label class = "control-label" for = "name">姓名</label>
 
             <div class = "controls">
-                <input type = "text" id = "name" name = "name" class = "span3" required = "required" placeholder = "请填写真实姓名">
+                <input type = "text" id = "name" name = "name" maxlength="5" class = "span3" required = "required" placeholder = "请填写真实姓名">
             </div>
         </div>
 
@@ -55,7 +55,7 @@
             <label class = "control-label" for = "phone">手机号</label>
 
             <div class = "controls">
-                <input type = "text" id = "phone" name = "phone" class = "span5" placeholder = "请输入手机号">
+                <input type = "text" id = "phone" name = "phone" maxlength="11" size="11" placeholder = "请输入手机号">
             </div>
         </div>
 
@@ -63,7 +63,7 @@
             <label class = "control-label" for = "sign">签名档</label>
 
             <div class = "controls">
-                <textarea id = "sign" name = "sign" rows = "3" class = "span7" placeholder = "不要超过70个字"></textarea>
+                <textarea id = "sign" name = "sign" rows = "3" maxlength="70" class = "span7" placeholder = "不要超过70个字"></textarea>
             </div>
         </div>
 

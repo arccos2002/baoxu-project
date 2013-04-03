@@ -6,6 +6,10 @@
  * Time:   上午10:27
  */
 
+body{
+	padding: 60px 0 40px 0;
+}
+
 .bx-login-success{
 	padding: 10px;
 	color: #EEE;
@@ -23,8 +27,7 @@
 	padding: 120px 0;
 }
 
-@font-face
-{
+@font-face{
 	font-family: logoFont;
 	src: url('anastas.ttf')
 }

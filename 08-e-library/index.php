@@ -74,7 +74,7 @@
         <input class = "bx-login-password-input" name = "password" type = "password" placeholder = "password" required = "required">
         <p id = "s_login_error" class = "text-error f-dn">登录失败，请确认用户名与密码。</p>
         <button class = "btn btn-large btn-primary" type = "submit">登录</button>
-        <button class = "btn btn-link f-fr btn-regist">注册</button>
+        <a style="padding-top: 15px;" class="f-fr" href="user/register.php">注册</a>
     </form>
 </div>
 

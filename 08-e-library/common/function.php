@@ -50,3 +50,40 @@ function getDataFromCookie($type, $cookie){
         return "";
     }
 }
+
+/**
+ * 发送邮箱地址验证邮件
+ * @param $address   收件人地址
+ * @param $name      收件人称呼
+ * @param $title     邮件标题
+ * @param $verifyURL 验证地址
+ */
+function sendMail($address, $name, $title, $verifyURL){
+    //发邮件模块
+    require("PHPMailer/class.phpmailer.php"); //下载的文件必须放在该文件所在目录
+    $mail = new PHPMailer(); //建立邮件发送类
+    $mail->CharSet = "utf-8"; //字符集
+    $mail->Encoding = "base64"; //编码方式
+    $mail->IsSMTP(); //使用SMTP方式发送
+    $mail->Port = 25; //SMTP端口
+    $mail->SMTPAuth = true; //启用SMTP验证功能
+    $mail->Host = "smtp.163.com"; //您的企业邮局域名
+    $mail->Username = "just_read_admin@163.com"; //邮箱用户名(请填写完整的email地址)
+    $mail->Password = "justread"; //邮局密码
+    $mail->From = "just_read_admin@163.com"; //邮件发送者email地址，与上面的邮箱用户名相同
+    $mail->FromName = "JustRead管理员"; //发出者称呼
+    $mail->AddAddress("$address", "$name"); //收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+    $mail->IsHTML(true); //是否使用HTML格式
+
+    $mail->Subject = $title; //邮件标题
+
+    $content = "你好，请点击这个链接完成您的注册(如果链接无法点击，请复制到浏览器打开)：<a href='" . $verifyURL . "'>" . $verifyURL . "</a>";
+    $mail->Body = $content; //邮件内容
+
+    if(!$mail->Send()){
+        echo '{"status":-1}';
+        exit;
+    } else{
+        echo '{"status":1}';
+    }
+}

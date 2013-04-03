@@ -5,7 +5,7 @@
  * Time: 下午6:26
  */
 
-$host = "localhost";
+$host = "192.168.1.14";
 $user = "baoxu";
 $pass = ",.";
 $db = "library";
