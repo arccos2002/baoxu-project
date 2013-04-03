@@ -21,7 +21,7 @@ $src = file_get_contents($_POST["image"]);
 $des = fopen($picUrl, "w");
 fwrite($des, $src);
 
-$saveBookSql = "INSERT INTO `library`.`book` (`book_id`, `isbn10`, `isbn13`, `title`, `subtitle`, `origin_title`, `pubdate`, `author`, `translator`, `publisher`, `image`, `summary`, `pages`, `tags`, `provider`, `count`, `status`) VALUES (NULL, '" . $_POST["isbn10"] . "', '" . $_POST["isbn13"] . "', '" . $_POST["title"] . "', '" . $_POST["subtitle"] . "', '" . $_POST["origin_title"] . "', '" . $_POST["pubdate"] . "', '" . $_POST["author"] . "', '" . $_POST["translator"] . "', '" . $_POST["publisher"] . "', '" . $picName . "', '" . $_POST["summary"] . "', '" . $_POST["pages"] . "', '" . $_POST["tags"] . "', '" . $_POST["provider"] . "', '" . $_POST["count"] . "', '1')";
+$saveBookSql = "INSERT INTO `book` (`book_id`, `isbn10`, `isbn13`, `title`, `subtitle`, `origin_title`, `pubdate`, `author`, `translator`, `publisher`, `image`, `summary`, `pages`, `tags`, `provider`, `count`, `status`) VALUES (NULL, '" . $_POST["isbn10"] . "', '" . $_POST["isbn13"] . "', '" . $_POST["title"] . "', '" . $_POST["subtitle"] . "', '" . $_POST["origin_title"] . "', '" . $_POST["pubdate"] . "', '" . $_POST["author"] . "', '" . $_POST["translator"] . "', '" . $_POST["publisher"] . "', '" . $picName . "', '" . $_POST["summary"] . "', '" . $_POST["pages"] . "', '" . $_POST["tags"] . "', '" . $_POST["provider"] . "', '" . $_POST["count"] . "', '1')";
 $result = mysql_query($saveBookSql, $conn);
 
 if(!$result){

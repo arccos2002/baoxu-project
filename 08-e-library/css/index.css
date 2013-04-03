@@ -22,6 +22,10 @@ a:hover{
 	margin: 0 8px 0 0;
 }
 
+.bx-book-img img{
+	height: 160px;
+}
+
 .bx-author{
 	padding: 2px 0;
 }
@@ -33,4 +37,8 @@ a:hover{
 
 .bx-title{
 	padding-top: 5px;
+}
+
+#spider_book_img{
+	height: 100px;
 }

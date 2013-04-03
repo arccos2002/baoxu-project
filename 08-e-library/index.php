@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href = "css/bootstrap.min.css">
     <link rel = "stylesheet" href = "css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "css/function.css">
+    <link rel = "stylesheet" href = "css/global.css">
     <style type = "text/css">
         body{
             background-color: #F5F5F5;
@@ -21,7 +22,7 @@
             border: 1px solid #E5E5E5;
             border-radius: 5px 5px 5px 5px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            margin: 0 auto 20px;
+            margin: 30px auto 20px;
             max-width: 300px;
             padding: 19px 29px 29px;
         }
@@ -42,16 +43,36 @@
             padding: 10px 8px 0 0;
             vertical-align: text-bottom;
         }
+
+        .bx-login-email, .bx-login-password-input{
+            width: 94%;
+        }
+
+        .bx-login-email-input{
+            width: 130px;
+        }
+
+        .bx-login-add{
+            font-size: 16px !important;
+            height: auto !important;
+            margin-bottom: 15px !important;
+            padding: 7px 4px !important;
+        }
     </style>
 </head>
 <body>
 
 <div class = "container">
+    <div class = "text-center bx-login-logo">Just Read</div>
     <form class = "form-signin" method = "post" action = "">
         <h2 class = "form-signin-heading">登录</h2>
-        <input class = "input-block-level" name = "email" type = "text" placeholder = "Corp邮箱前缀" required = "required">
-        <input class = "input-block-level" name = "password" type = "password" placeholder = "密码" required = "required">
-        <p id="s_login_error" class="text-error f-dn">登录失败，请确认用户名与密码。</p>
+
+        <div class = "input-append bx-login-email">
+            <input class = "bx-login-email-input" name = "email" type = "text" placeholder = "mail" required = "required">
+            <span class = "add-on bx-login-add">@corp.netease.com</span>
+        </div>
+        <input class = "bx-login-password-input" name = "password" type = "password" placeholder = "password" required = "required">
+        <p id = "s_login_error" class = "text-error f-dn">登录失败，请确认用户名与密码。</p>
         <button class = "btn btn-large btn-primary" type = "submit">登录</button>
         <button class = "btn btn-link f-fr btn-regist">注册</button>
     </form>
@@ -96,7 +117,6 @@ if($_POST){
     }
 }
 ?>
-
 
 </body>
 <!--

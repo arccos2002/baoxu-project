@@ -6,10 +6,16 @@
     </footer>
 </div>
 
+
+<!--[if lt IE 9]>
+<script src="../js/html5shiv.js"></script>
+<![endif]-->
+
 <script src = "../js/jquery-1.9.1.min.js"></script>
 <script src = "../js/bootstrap.min.js"></script>
 <script src = "../js/globle.js"></script>
 <script src = "../js/function.js"></script>
+
 </body>
 <!--
 Author: Baoxu

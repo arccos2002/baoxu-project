@@ -22,7 +22,7 @@
     <div class = "input-append input-prepend">
         <span class = "add-on">ISBN:</span>
         <input class = "span4" id = "appendedInput" type = "text" placeholder = "13位的ISBN码">
-        <span class = "add-on btn" onclick = "getBookInfoByISBN();">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
+        <span class = "add-on btn" data-event-tag="et_spider_book_btn">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
     </div>
     <p class = "f-dn" id = "spider-info-loading"><img src = "../img/spider_loading.gif"></p>
     <p class = "text-error f-dn" id = "spider-info-error">抓取失败，请检查ISBN是否正确。</p>
@@ -92,7 +92,7 @@
             <label class = "control-label" for = "image">封面图</label>
 
             <div class = "controls">
-                <img id = "book_img" src = "../img/book_default_img.png" class = "img-polaroid">
+                <img id = "spider_book_img" src = "../img/book_default_img.png" class = "img-polaroid">
                 <input type = "text" id = "image" name = "image" value = "" style = "display: none">
             </div>
         </div>

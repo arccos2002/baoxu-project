@@ -11,7 +11,11 @@ body{
 }
 
 .bx-book-img{
-	margin-right: 15px;
+	margin: 0 22px 15px 0;
+}
+
+.bx-book-img img{
+	height: 210px;
 }
 
 .bx-apply-book{

@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+/**
+ * Author: Baoxu
+ * Date:   13-4-3
+ * Time:   下午7:25
+ */
+
+body{
+	padding: 60px 0 40px 0;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+#head{
+	font-size: 12px;
+	height: 25px;
+}

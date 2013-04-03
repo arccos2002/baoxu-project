@@ -30,7 +30,7 @@
         <div class = "span4">
             <h2>新书</h2>
 
-            <div class = "f-fl bx-book-img"><a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a></div>
+            <div class = "f-fl bx-book-img"><a href = "#"><img src = "../img/book_default_img.png" class = "img-polaroid"></a></div>
             <div>
                 <h4 class = "bx-title"><a href = "#">这么远，那么近</a></h4>
                 <p class = "bx-author">张国荣</p>
@@ -42,7 +42,7 @@
         <div class = "span4">
             <h2>热门</h2>
 
-            <div class = "f-fl bx-book-img"><img src = "../img/721159.jpg" class = "img-polaroid"></div>
+            <div class = "f-fl bx-book-img"><img src = "../img/book_default_img.png" class = "img-polaroid"></div>
             <div>
                 <h5 class = "bx-title">这里是书名</h5>
                 <p class = "bx-author">这里是作者</p>
@@ -54,7 +54,7 @@
         <div class = "span4">
             <h2>公告</h2>
 
-            <div class = "f-fl bx-book-img"><img src = "../img/721159.jpg" class = "img-polaroid"></div>
+            <div class = "f-fl bx-book-img"><img src = "../img/book_default_img.png" class = "img-polaroid"></div>
             <div>
                 <h5 class = "bx-title">这里是书名</h5>
                 <p class = "bx-author">这里是作者</p>

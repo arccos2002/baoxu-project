@@ -19,6 +19,13 @@
 <!--判断用户权限-->
 <?php include "../common/check_user_permission.php"; ?>
 
+<!--读取数据库，获取数目列表-->
+<?php
+$sql = "SELECT * FROM `book`";
+$result = mysql_query($sql, $conn);
+$success = mysql_num_rows($result);
+?>
+
 <!--页面主体-->
 <div class = "container">
     <div class = "input-append f-fr">
@@ -36,43 +43,57 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>在馆</td>
-            <td>—</td>
-        </tr>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>已借出</td>
-            <td>2013-05-01</td>
-        </tr>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>在馆</td>
-            <td>—</td>
-        </tr>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>已借出</td>
-            <td>2013-05-01</td>
-        </tr>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>在馆</td>
-            <td>—</td>
-        </tr>
-        <tr>
-            <td><a href = "#">这么近，那么远</a></td>
-            <td>张国荣</td>
-            <td>已借出</td>
-            <td>2013-05-01</td>
-        </tr>
-        </tbody>
+
+        <?php
+        //返回结果，打印TR
+        if($success){
+            while($row = mysql_fetch_array($result)){
+                $bookName = $row["title"];
+                $bookAuthor = $row["author"];
+                $bookPublisher = $row["publisher"];
+                $bookPubdate = $row["pubdate"];
+                //解释书籍状态，获取剩余应还天数
+                if($row["status"] == 1){
+                    $bookStatus = "在馆可借";
+                    $bookExpireDate = "-";
+                    $bookBackDay = "-";
+                } elseif($row["status"] == 0){
+                    $bookStatus = "借出未还";
+                    //借出日的时间戳
+                    $borrowDateStamp = strtotime($row["borrow_date"]);
+                    //当前的时间戳
+                    $nowDateStamp = strtotime(date("Y-m-d"));
+                    //到期那天的时间戳
+                    $bookExpireStamp = BORROW_DAY * 24 * 60 * 60 + $borrowDateStamp;
+                    //到期时间
+                    $bookExpireDate = date("Y-m-d", $bookExpireStamp);
+                    //剩余时间
+                    $bookBackDay = BORROW_DAY - ($nowDateStamp - $borrowDateStamp) / (60 * 60 * 24) - 1;
+                } else{
+                    $bookStatus = "状态错误";
+                    $bookExpireDate = "-";
+                    $bookBackDay = "-";
+                }
+                $bookProvider = $row["provider"];
+                $bookSummary = $row["summary"];
+                $bookISBN = $row["isbn13"];
+                $bookPages = $row["pages"];
+                $bookImg = "book_img/" . $row["image"];
+                $bookTags = explode(",", $row["tags"]);
+
+                //填充表格
+                echo '<tr>';
+                echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["title"] . '</a></td>';
+                echo '<td>' . $row["author"] . '</td>';
+                echo '<td>' . $bookStatus . '</td>';
+                echo '<td>' . $bookExpireDate . '</td>';
+                echo '</tr>';
+            }
+        } else{
+            echo '没有书！';
+        }
+        ?>
+
     </table>
 </div>
 

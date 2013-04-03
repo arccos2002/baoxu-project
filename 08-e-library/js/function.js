@@ -28,7 +28,7 @@ function bindEvent(){
 	EventUtil.addHandler(document, "click", function(event){
 		event = EventUtil.getEvent(event);
 		var target = EventUtil.getTarget(event);
-		var event_tag = target.dataset["eventTag"] ? target.dataset["eventTag"] : target.getAttribute("data-event-tag");
+		var event_tag = target.getAttribute("data-event-tag");
 
 		switch(event_tag){
 			case "et_login_btn":
@@ -36,6 +36,9 @@ function bindEvent(){
 				break;
 			case "et_logout_btn":
 				doLogout();
+				break;
+			case "et_spider_book_btn":
+				getBookInfoByISBN();
 				break;
 		}
 	});
@@ -141,7 +144,7 @@ function getBookInfoByISBN(){
 			$("input#tags").val(tagsString);
 			$("input#isbn10").val(json["isbn10"]);
 			$("input#isbn13").val(json["isbn13"]);
-			$("img#book_img").attr("src", json["images"]["small"]);
+			$("img#spider_book_img").attr("src", json["images"]["medium"]);
 		}else{
 			//显示工作状态，失败
 			$("p#spider-info-error").removeClass("f-dn");

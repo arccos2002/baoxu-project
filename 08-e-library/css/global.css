@@ -22,3 +22,20 @@
 .bx-dialog-info p{
 	padding: 120px 0;
 }
+
+@font-face
+{
+	font-family: logoFont;
+	src: url('anastas.ttf')
+}
+
+.bx-logo{
+	font-family: logoFont;
+	font-size: 28px !important;
+}
+
+.bx-login-logo{
+	font-family: logoFont;
+	font-size: 36px !important;
+	line-height: 40px;
+}

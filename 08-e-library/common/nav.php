@@ -13,7 +13,7 @@ include "function.php";
                 <span class = "icon-bar"></span>
                 <span class = "icon-bar"></span>
             </button>
-            <a href = "../home" class = "brand">Just Read</a>
+            <a href = "../home" class = "brand bx-logo">Just Read</a>
 
             <div class = "nav-collapse collapse" style = "height: 0px;">
                 <ul class = "nav">
@@ -33,6 +33,7 @@ include "function.php";
                             <li><a href = "../admin/user_list.php">用户列表</a></li>
                         </ul>
                     </li>
+                    <li><a href = "../about/">关于</a></li>
                 </ul>
                 <!--判断cookie-->
                 <?php

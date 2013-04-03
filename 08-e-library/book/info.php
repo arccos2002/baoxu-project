@@ -7,25 +7,80 @@
     <link rel = "stylesheet" href = "css/info.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
+    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
 <!--引入导航文件-->
 <?php include "../common/nav.php"; ?>
 
+<!--判断用户权限-->
+<?php include "../common/check_user_permission.php"; ?>
+
+<!--判断参数-->
+<?php include "../common/check_parameter.php"; ?>
+
+<!--读取数据库，获取书籍信息-->
+<?php
+$sql = "SELECT * FROM `book` WHERE `book_id` = " . $_GET["bookId"];
+$result = mysql_query($sql, $conn);
+$success = mysql_num_rows($result);
+
+if($success){
+    while($row = mysql_fetch_array($result)){
+        $bookName = $row["title"];
+        $bookAuthor = $row["author"];
+        $bookPublisher = $row["publisher"];
+        $bookPubdate = $row["pubdate"];
+        //解释书籍状态，获取剩余应还天数
+        if($row["status"] == 1){
+            $bookStatus = "在馆可借";
+            $bookExpireDate = "-";
+            $bookBackDay = "-";
+        } elseif($row["status"] == 0){
+            $bookStatus = "借出未还";
+            //借出日的时间戳
+            $borrowDateStamp = strtotime($row["borrow_date"]);
+            //当前的时间戳
+            $nowDateStamp = strtotime(date("Y-m-d"));
+            //到期那天的时间戳
+            $bookExpireStamp = BORROW_DAY * 24 * 60 * 60 + $borrowDateStamp;
+            //到期时间
+            $bookExpireDate = date("Y-m-d", $bookExpireStamp);
+            //剩余时间
+            $bookBackDay = BORROW_DAY - ($nowDateStamp - $borrowDateStamp) / (60 * 60 * 24) - 1;
+        } else{
+            $bookStatus = "状态错误";
+            $bookExpireDate = "-";
+            $bookBackDay = "-";
+        }
+        $bookProvider = $row["provider"];
+        $bookSummary = $row["summary"];
+        $bookISBN = $row["isbn13"];
+        $bookPages = $row["pages"];
+        $bookImg = "book_img/" . $row["image"];
+        $bookTags = explode(",", $row["tags"]);
+    }
+} else{
+    $bookName = "没有找到该书的信息";
+    $bookTags = explode(",", $bookName);
+    $bookImg = "../img/book_default_img.png";
+}
+?>
+
 <!--书籍主要信息-->
 <div class = "container">
-    <div class = "page-header"><h2>我是个年轻人，我心情不太好</h2></div>
+    <div class = "page-header"><h2><?php echo $bookName ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-book-img"><a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
-            </div>
+            <div class = "f-fl bx-book-img"><img src = "<?php echo @$bookImg ?>" class = "img-polaroid"></div>
             <div>
-                <p>作者：<strong>张国荣</strong></p>
-                <p>出版社：<strong>人民大学出版社</strong></p>
-                <p>出版时间：<strong>2009-10-25</strong></p>
-                <p>状态：<strong>在馆</strong></p>
-                <p>提供者：<strong>陈保需</strong></p>
+                <p>作者：<strong><?php echo @$bookAuthor ?></strong></p>
+                <p>出版社：<strong><?php echo @$bookPublisher ?></strong></p>
+                <p>出版时间：<strong><?php echo @$bookPubdate ?></strong></p>
+                <p>状态：<strong><?php echo @$bookStatus ?></strong></p>
+                <p>应还日期：<strong><?php echo @$bookExpireDate ?></strong></p>
+                <p>提供者：<strong><?php echo @$bookProvider ?></strong></p>
                 <p class = "bx-apply-book">
                     <button class = "btn btn-primary" type = "button">申请借阅</button>
                 </p>
@@ -34,12 +89,11 @@
         <div class = "span3">
             <h4>标签</h4>
             <ul class = "inline bx-tag">
-                <li>标签1</li>
-                <li>标签1</li>
-                <li>标签1</li>
-                <li>标签1</li>
-                <li>标签1</li>
-                <li>标签1</li>
+                <?php
+                foreach($bookTags as $tag){
+                    echo '<li>' . @$tag . '</li>';
+                }
+                ?>
             </ul>
         </div>
 
@@ -49,17 +103,14 @@
 <!--书籍摘要信息-->
 <div class = "container">
     <h4>摘要</h4>
-    <p class = "f-ti2">《用户体验要素:以用户为中心的产品设计(原书第2版)》是AJAX之父Jesse James
-        Garrett的经典之作。本书用简洁的语言系统化地诠释了设计、技术和商业融合是最重要的发展趋势。全书共8章，包括关于用户体验以及为什么它如此重要、认识这些要素、战略层、范围层、结构层、框架层、表现层以及要素的应用。
-        《用户体验要素:以用户为中心的产品设计(原书第2版)》用清晰的说明和生动的图形分析了以用户为中心的设计方法（UCD）来进行网站设计的复杂内涵，并关注于思路而不是工具或技术，从而使你的网站具备高质量体验的流程。</p>
+    <p class = "f-ti2"><?php echo @$bookSummary ?></p>
 </div>
 
 <!--书籍其他信息-->
-<div class="container">
+<div class = "container">
     <h4>其他</h4>
-    <p>ISBN：<strong>123456789</strong></p>
-    <p>页数：<strong>201</strong></p>
-    <p>发售时间：<strong>2009-10-25</strong></p>
+    <p>ISBN：<strong><?php echo @$bookISBN ?></strong></p>
+    <p>页数：<strong><?php echo @$bookPages ?></strong></p>
 </div>
 
 <!--引入页尾文件-->
