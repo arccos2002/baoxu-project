@@ -9,14 +9,18 @@
     </style>
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
+    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
 <!--引入导航文件-->
 <?php include "../common/nav.php"; ?>
 
-<div class = "container">
+<!--判断用户权限-->
+<?php include "../common/check_user_permission.php"; ?>
 
+<!--页面主体-->
+<div class = "container">
     <div class = "input-append f-fr">
         <input class = "span3" id = "appendedInputButton" placeholder = "书名" type = "text">
         <button class = "btn" type = "button">搜索</button>

@@ -7,7 +7,7 @@
 
 
 
-$host = "192.168.1.14";
+$host = "localhost";
 $user = "baoxu";
 $pass = ",.";
 $db = "library";
@@ -15,4 +15,3 @@ $db = "library";
 $conn = mysql_connect($host,$user,$pass);
 mysql_select_db($db,$conn);
 mysql_query("SET NAMES 'utf8'");
-?>

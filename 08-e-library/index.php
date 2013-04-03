@@ -4,6 +4,8 @@
     <meta charset = "utf-8" />
     <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>登录-Just Read</title>
+    <script src = "js/jquery-1.9.1.min.js"></script>
+    <script src = "js/bootstrap.min.js"></script>
     <link rel = "stylesheet" href = "css/bootstrap.min.css">
     <link rel = "stylesheet" href = "css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "css/function.css">
@@ -45,21 +47,57 @@
 <body>
 
 <div class = "container">
-    <form class = "form-signin">
+    <form class = "form-signin" method = "post" action = "">
         <h2 class = "form-signin-heading">登录</h2>
-        <input class = "input-block-level" type = "text" placeholder = "Email">
-        <input class = "input-block-level" type = "password" placeholder = "Pasword">
-        <label class = "checkbox">
-            <input type = "checkbox" value = "remember-me">
-            自动登录
-        </label>
+        <input class = "input-block-level" name = "email" type = "text" placeholder = "Corp邮箱前缀" required = "required">
+        <input class = "input-block-level" name = "password" type = "password" placeholder = "密码" required = "required">
+        <p id="s_login_error" class="text-error f-dn">登录失败，请确认用户名与密码。</p>
         <button class = "btn btn-large btn-primary" type = "submit">登录</button>
         <button class = "btn btn-link f-fr btn-regist">注册</button>
     </form>
 </div>
 
-<script src = "js/jquery-1.9.1.min.js"></script>
-<script src = "js/bootstrap.min.js"></script>
+<?php
+
+if($_POST){
+
+    include "common/conn.php";
+    include "common/function.php";
+
+    //获取QueryString
+    $mail = $_POST["email"] . "@corp.netease.com";
+    $password = $_POST["password"];
+    $pass_md5 = md5($password);
+
+    //查询数据库
+    $verify_sql = "SELECT * FROM `user` WHERE `mail` = '" . $mail . "' AND `password` = '" . $pass_md5 . "'";
+    $result = mysql_query($verify_sql, $conn);
+    $success = mysql_num_rows($result);
+
+    //返回结果
+    if($success){
+        while($row = mysql_fetch_array($result)){
+            /*写Cookie*/
+            $userIdAdmin = $row["user_id"] . $row["admin"];
+            setcookie("userCode", encodeCookie($userIdAdmin) . $userIdAdmin, time() + 3600, "/");
+            setcookie("userMail", $row["mail"], time() + 3600, "/");
+            setcookie("userName", $row["name"], time() + 3600, "/");
+
+            /*跳转*/
+            echo "<script language='javascript' type='text/javascript'>";
+            echo "window.location.href='home/'";
+            echo "</script>";
+        }
+    } else{
+        //提示登陆失败
+        echo "<script language='javascript' type='text/javascript'>";
+        echo "$('#s_login_error').removeClass('f-dn')";
+        echo "</script>";
+    }
+}
+?>
+
+
 </body>
 <!--
 Author: Baoxu

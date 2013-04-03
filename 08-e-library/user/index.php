@@ -7,11 +7,15 @@
     <link rel = "stylesheet" href = "css/index.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
+    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
 <!--引入导航文件-->
 <?php include "../common/nav.php"; ?>
+
+<!--判断用户权限-->
+<?php include "../common/check_user_permission.php"; ?>
 
 <!--书籍主要信息-->
 <div class = "container">

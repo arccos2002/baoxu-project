@@ -14,6 +14,9 @@
 <!--引入导航文件-->
 <?php include "../common/nav.php"; ?>
 
+<!--判断管理员权限权限-->
+<?php include "../common/check_admin_permission.php" ?>
+
 <!--首页内容主体-->
 <div class = "container text-center">
     <div class = "input-append input-prepend">
@@ -21,14 +24,14 @@
         <input class = "span4" id = "appendedInput" type = "text" placeholder = "13位的ISBN码">
         <span class = "add-on btn" onclick = "getBookInfoByISBN();">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
     </div>
-    <p class="f-dn" id="spider-info-loading"><img src = "../img/spider_loading.gif"></p>
+    <p class = "f-dn" id = "spider-info-loading"><img src = "../img/spider_loading.gif"></p>
     <p class = "text-error f-dn" id = "spider-info-error">抓取失败，请检查ISBN是否正确。</p>
     <p class = "text-success f-dn" id = "spider-info-ok">抓取成功，请输入捐赠者姓名并保存。</p>
 </div>
 
 <div class = "container">
     <div class = "page-header"></div>
-    <form class = "form-horizontal" name = "bookAdd" id = "bookAdd" action = "save_book.php" method = "post">
+    <form class = "form-horizontal" name = "bookAdd" id = "bookAdd" action = "book_save.php" method = "post">
         <div class = "control-group">
             <label class = "control-label" for = "title">书名</label>
 

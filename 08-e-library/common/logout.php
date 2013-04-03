@@ -4,9 +4,12 @@
  * Date: 13-4-2
  * Time: 上午11:22
  */
+header("Content-Type:application/json; charset=utf-8");
+header("Cache-Control: must-revalidate, no-cache, private");
 
-echo '{"status":1}';
-/*写Cookie*/
+//删除COOKIE
 setcookie("userCode", "", time() - 3600, "/");
 setcookie("userMail", "", time() - 3600, "/");
 setcookie("userName", "", time() - 3600, "/");
+
+echo '{"status":1}';

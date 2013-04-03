@@ -14,3 +14,11 @@
 .bx-login-success span{
 	padding-left: 10px;
 }
+
+.bx-dialog-info{
+	height: 250px;
+}
+
+.bx-dialog-info p{
+	padding: 120px 0;
+}
