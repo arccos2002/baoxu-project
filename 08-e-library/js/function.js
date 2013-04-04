@@ -51,9 +51,9 @@ function bindEvent(){
  * @returns {boolean}
  */
 function doLogin(){
-	var form = document.loginForm, mail = form.email.value, pass = form.password.value;
+	var form = document.loginForm, mail = form.nav_email.value, pass = form.nav_password.value;
 
-	if(!form["email"] || !form["password"]){
+	if(!form["nav_email"] || !form["nav_password"]){
 		return false;
 	}
 
@@ -152,4 +152,25 @@ function getBookInfoByISBN(){
 			$("p#spider-info-ok").addClass("f-dn");
 		}
 	});
+}
+
+
+function checkMail(e){
+	$.getJSON("../common/check_mail_exist.php?mail=" + e.value, function(json){
+		if(json["exists"] == 1){
+			e.focus();
+			$("#js-regist-mail-exist").removeClass("f-dn");
+		}else{
+			$("#js-regist-mail-exist").addClass("f-dn");
+		}
+	});
+}
+
+function checkPassword(e){
+	if($("#password").val() != $("#password2").val()){
+		$("#js-regist-pass-not-equal").removeClass("f-dn");
+		e.focus();
+	}else{
+		$("#js-regist-pass-not-equal").addClass("f-dn");
+	}
 }

@@ -10,8 +10,8 @@ $user = "baoxu";
 $pass = ",.";
 $db = "library";
 
-$conn = mysql_connect($host,$user,$pass);
-mysql_select_db($db,$conn);
+$conn = mysql_connect($host, $user, $pass);
+mysql_select_db($db, $conn);
 mysql_query("SET NAMES 'utf8'");
 
 include "global.php";

@@ -44,15 +44,15 @@ include "function.php";
                         $displayName = substr($_COOKIE["userMail"], 0, strpos($_COOKIE["userMail"], "@"));
                     }
                     echo '<form class = "navbar-form pull-right f-dn" id = "loginForm" name = "loginForm" action = "" onsubmit = "return false;">
-                    <input type = "text" placeholder = "邮箱前缀" class = "span2" name = "email" required="required"  id = "email">
-                    <input type = "password" placeholder = "密码" class = "span2" name = "password" required="required"  id = "password">
+                    <input type = "text" placeholder = "邮箱前缀" class = "span2" name = "nav_email" required="required"  id = "nav_email">
+                    <input type = "password" placeholder = "密码" class = "span2" name = "nav_password" required="required"  id = "nav_password">
                     <button class = "btn" id = "bx-login-btn" data-event-tag = "et_login_btn">登录</button>
                     </form>';
                     echo '<div id="loginSuccess" class = "navbar-form pull-right bx-login-success">' . $displayName . ' <a href="#" onclick="doLogout()"><span>注销</span></a></div>';
                 } else {
                     echo '<form class = "navbar-form pull-right" id = "loginForm" name = "loginForm" action = "" onsubmit = "return false;">
-                    <input type = "text" placeholder = "邮箱前缀" class = "span2" name = "email" required="required"  id = "email">
-                    <input type = "password" placeholder = "密码" class = "span2" name = "password" required="required"  id = "password">
+                    <input type = "text" placeholder = "邮箱前缀" class = "span2" name = "nav_email" required="required"  id = "nav_email">
+                    <input type = "password" placeholder = "密码" class = "span2" name = "nav_password" required="required"  id = "nav_password">
                     <button class = "btn" id = "bx-login-btn" data-event-tag = "et_login_btn">登录</button>
                     </form>';
                     echo '<div id = "loginSuccess" class = "navbar-form pull-right bx-login-success f-dn"><span id="displayUserName"></span>&nbsp;<a href = "#" data-event-tag = "et_logout_btn"><span>注销</span></a></div>';

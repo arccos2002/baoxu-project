@@ -57,33 +57,68 @@ function getDataFromCookie($type, $cookie){
  * @param $name      收件人称呼
  * @param $title     邮件标题
  * @param $verifyURL 验证地址
+ * @return bool 邮件是否发送成功
  */
 function sendMail($address, $name, $title, $verifyURL){
     //发邮件模块
     require("PHPMailer/class.phpmailer.php"); //下载的文件必须放在该文件所在目录
-    $mail = new PHPMailer(); //建立邮件发送类
-    $mail->CharSet = "utf-8"; //字符集
-    $mail->Encoding = "base64"; //编码方式
-    $mail->IsSMTP(); //使用SMTP方式发送
-    $mail->Port = 25; //SMTP端口
-    $mail->SMTPAuth = true; //启用SMTP验证功能
-    $mail->Host = "smtp.163.com"; //您的企业邮局域名
-    $mail->Username = "just_read_admin@163.com"; //邮箱用户名(请填写完整的email地址)
-    $mail->Password = "justread"; //邮局密码
-    $mail->From = "just_read_admin@163.com"; //邮件发送者email地址，与上面的邮箱用户名相同
-    $mail->FromName = "JustRead管理员"; //发出者称呼
-    $mail->AddAddress("$address", "$name"); //收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
-    $mail->IsHTML(true); //是否使用HTML格式
+    $mailToSend = new PHPMailer(); //建立邮件发送类
+    $mailToSend->CharSet = "utf-8"; //字符集
+    $mailToSend->Encoding = "base64"; //编码方式
+    $mailToSend->IsSMTP(); //使用SMTP方式发送
+    $mailToSend->Port = 25; //SMTP端口
+    $mailToSend->SMTPAuth = true; //启用SMTP验证功能
+    $mailToSend->Host = "smtp.163.com"; //您的企业邮局域名
+    $mailToSend->Username = "just_read_admin@163.com"; //邮箱用户名(请填写完整的email地址)
+    $mailToSend->Password = "justread"; //邮局密码
+    $mailToSend->From = "just_read_admin@163.com"; //邮件发送者email地址，与上面的邮箱用户名相同
+    $mailToSend->FromName = "JustRead管理员"; //发出者称呼
+    $mailToSend->AddAddress("$address", "$name"); //收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+    $mailToSend->IsHTML(true); //是否使用HTML格式
 
-    $mail->Subject = $title; //邮件标题
+    $mailToSend->Subject = $title; //邮件标题
 
     $content = "你好，请点击这个链接完成您的注册(如果链接无法点击，请复制到浏览器打开)：<a href='" . $verifyURL . "'>" . $verifyURL . "</a>";
-    $mail->Body = $content; //邮件内容
+    $mailToSend->Body = $content; //邮件内容
 
-    if(!$mail->Send()){
-        echo '{"status":-1}';
-        exit;
+    if(!$mailToSend->Send()){
+        return false;
     } else{
-        echo '{"status":1}';
+        return true;
+    }
+}
+
+/**
+ * 验证数据库时候有这个mail地址
+ * @param $mail 需要查询的mail地址
+ * @param $conn 数据库连接
+ * @return bool 返回结果，存在true，不存在false
+ */
+function checkMailExist($mail, $conn){
+    $sql = "SELECT * FROM `user` WHERE `mail` = '" . $mail . "'";
+    $result = mysql_query($sql, $conn);
+    $success = @mysql_num_rows($result);
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 验证用户名和密码时候匹配
+ * @param $mail     用户登录邮箱
+ * @param $password 用户密码
+ * @param $conn     数据库连接
+ * @return bool 返回值，匹配返回true，不匹配返回false
+ */
+function checkUserPassword($mail, $password, $conn){
+    $sql = "SELECT * FROM `user` WHERE `mail` = '" . $mail . "' AND `password` = '" . $password . "'";
+    $result = mysql_query($sql, $conn);
+    $success = mysql_num_rows($result);
+    if($success){
+        return true;
+    } else{
+        return false;
     }
 }

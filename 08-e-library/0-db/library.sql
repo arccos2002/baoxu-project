@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50508
 File Encoding         : 65001
 
-Date: 2013-04-03 22:48:09
+Date: 2013-04-04 16:33:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,14 +85,11 @@ CREATE TABLE `user` (
   `last_login` date DEFAULT NULL COMMENT '最后登录时间',
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '帐号状态',
   `verify_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '注册改密码等的验证码',
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1239 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息表';
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `mail` (`mail`)
+) ENGINE=MyISAM AUTO_INCREMENT=1256 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '陈保需', 'bxchen@corp.netease.com', 'c4ca4238a0b923820dcc509a6f75849b', '1', '15117909906', null, null, '0', '0000-00-00', null, '1', null);
-INSERT INTO `user` VALUES ('1235', '姓名', 'bxchen@corp.netease.co', '123456', '0', '123456', '123.jpg', '撒旦发送地方哦啊发', '0', '2013-04-03', '2013-04-03', '1', null);
-INSERT INTO `user` VALUES ('1236', '撒旦发送到', 'ddd2', '4', '0', '135463513', '../user/user_img/1364990801.jp', '撒旦分为哦', '0', '2013-04-03', '0000-00-00', '1', null);
-INSERT INTO `user` VALUES ('1237', '情悄悄', 'bxchen@corp.netease.com', '1', '0', '111', '1364998559.jpg', '呜呜呜', '0', '2013-04-03', '0000-00-00', '1', null);
-INSERT INTO `user` VALUES ('1238', '情悄悄', 'bxchen@corp.netease.com', '1', '0', '111', '1365000411.jpg', '呜呜呜', '0', '2013-04-03', '0000-00-00', '1', null);
+INSERT INTO `user` VALUES ('1255', '等门铃', 'bxchen@corp.netease.com', '202cb962ac59075b964b07152d234b70', '0', '0', '', '', '0', '2013-04-04', '0000-00-00', '0', '074130e386641794c485e80245853e9f');
