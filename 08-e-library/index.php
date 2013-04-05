@@ -98,6 +98,8 @@ if($_POST){
     //返回结果
     if($success){
         while($row = mysql_fetch_array($result)){
+            /*修改最后登录时间*/
+            updateLoginDate($row["user_id"], $conn);
             /*写Cookie*/
             $userIdAdmin = $row["user_id"] . $row["admin"];
             setcookie("userCode", encodeCookie($userIdAdmin) . $userIdAdmin, time() + 3600, "/");
@@ -116,6 +118,7 @@ if($_POST){
         echo "</script>";
     }
 }
+
 ?>
 
 </body>

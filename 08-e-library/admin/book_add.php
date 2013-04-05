@@ -113,20 +113,6 @@
         </div>
 
         <div class = "control-group">
-            <label class = "control-label" for = "provider">捐赠者</label>
-            <div class = "controls">
-                <input type = "text" id = "provider" name = "provider" class = "span5" value = "">
-            </div>
-        </div>
-
-        <div class = "control-group">
-            <label class = "control-label" for = "count">数量</label>
-            <div class = "controls">
-                <input type = "text" id = "count" name = "count" class = "span3" value = "1">
-            </div>
-        </div>
-
-        <div class = "control-group">
             <label class = "control-label" for = "isbn10">ISBN10</label>
             <div class = "controls">
                 <input type = "text" id = "isbn10" name = "isbn10" class = "span5" value = "">
@@ -136,7 +122,22 @@
         <div class = "control-group">
             <label class = "control-label" for = "isbn13">ISBN13</label>
             <div class = "controls">
-                <input type = "text" id = "isbn13" name = "isbn13" class = "span5" value = "">
+                <input type = "text" id = "isbn13" name = "isbn13" class = "span5" onblur="checkBookIsbn13(this);">
+                <span id="js-book-isbn-exist" class="text-error add-on f-dn">该书已经存在，不能重复添加。</span>
+            </div>
+        </div>
+
+        <div class = "control-group">
+            <label class = "control-label" for = "provider">捐赠者</label>
+            <div class = "controls">
+                <input type = "text" id = "provider" required="required" name = "provider" class = "span5" value = "">
+            </div>
+        </div>
+
+        <div class = "control-group">
+            <label class = "control-label" for = "count">数量</label>
+            <div class = "controls">
+                <input type = "text" id = "count" name = "count" class = "span3" value = "1">
             </div>
         </div>
 

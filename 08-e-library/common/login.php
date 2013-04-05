@@ -26,6 +26,8 @@ if($success){
     while($row = mysql_fetch_array($result)){
         echo '{"status":1,"userId":' . $row["user_id"] . ',"name":"' . $row["name"] . '","mail":"' . $row["mail"] . '"' . '}';
 
+        /*修改最后登录时间*/
+        updateLoginDate($row["user_id"], $conn);
         /*写Cookie*/
         $userIdAdmin = $row["user_id"] . $row["admin"];
         setcookie("userCode", encodeCookie($userIdAdmin) . $userIdAdmin, time() + 3600, "/");

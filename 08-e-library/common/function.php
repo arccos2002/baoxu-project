@@ -121,3 +121,38 @@ function checkUserPassword($mail, $password, $conn){
         return false;
     }
 }
+
+/**
+ * 用户登录时候，更新用户的最后登录时间
+ * @param $userId 登录用户ID
+ * @param $conn   数据库连接
+ * @return bool 更新成功返回true，失败返回false
+ */
+function updateLoginDate($userId, $conn){
+    $todayDate = date("Y-m-d");
+    $sql = "UPDATE `user` SET `last_login` = '$todayDate' WHERE `user_id` = '$userId'";
+    mysql_query($sql, $conn);
+    $success = mysql_affected_rows();
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 检查ISBN号在数据库中是否已经存在
+ * @param $isbn 需要查询的ISBN号
+ * @param $conn 数据库连接
+ * @return bool 存在则返回true，不存在false
+ */
+function checkIsbnExist($isbn, $conn){
+    $sql = "SELECT * FROM `book` WHERE `isbn13` = '$isbn'";
+    $result = mysql_query($sql, $conn);
+    $success = @mysql_num_rows($result);
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}

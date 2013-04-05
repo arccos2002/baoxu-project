@@ -33,7 +33,7 @@
         <div class = "control-group">
             <label class = "control-label" for = "mail">邮箱</label>
             <div class = "controls">
-                <input type = "text" id = "mail" name = "mail" class = "span2" required = "required" placeholder = "Corp邮箱前缀" onblur = "checkMail(this);">
+                <input type = "text" id = "mail" name = "mail" class = "span2" required = "required" placeholder = "Corp邮箱前缀" onblur = "checkRegistMail(this);">
                 <span class = "add-on">@corp.netease.com</span>
                 <span id = "js-regist-mail-exist" class = "add-on text-error f-dn">&nbsp;&nbsp;该邮箱地址已被注册</span>
                 <span id = "js-regist-mail-ok" class = "add-on text-success f-dn">&nbsp;&nbsp;该邮箱地址可以使用</span>
@@ -50,7 +50,7 @@
         <div class = "control-group">
             <label class = "control-label" for = "password2">密码确认</label>
             <div class = "controls">
-                <input type = "password" id = "password2" class = "span5" required = "required" placeholder = "再输入密码" onblur = "checkPassword(this);">
+                <input type = "password" id = "password2" class = "span5" required = "required" placeholder = "再输入密码" onblur = "checkRegistPassword(this);">
                 <span id = "js-regist-pass-not-equal" class = "add-on text-error f-dn">&nbsp;&nbsp;两次密码不一致</span>
             </div>
         </div>

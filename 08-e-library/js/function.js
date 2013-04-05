@@ -102,75 +102,111 @@ function doLogout(){
  * @name getBookInfoByISBN
  */
 function getBookInfoByISBN(){
+	var spiderInfoLoad = $("p#spider-info-loading");
+	var spiderInfoError = $("p#spider-info-error");
+	var spiderInfoOk = $("p#spider-info-ok");
+
 	//显示工作状态，进行中
-	$("p#spider-info-loading").removeClass("f-dn");
-	$("p#spider-info-error").addClass("f-dn");
-	$("p#spider-info-ok").addClass("f-dn");
+	spiderInfoLoad.removeClass("f-dn");
+	spiderInfoError.addClass("f-dn");
+	spiderInfoOk.addClass("f-dn");
 
 	//Ajax请求抓取
 	var isbn = $("#appendedInput").val();
 	var getUrl = "../common/get_book_info.php?isbn=" + isbn;
-	//alert(getUrl);
-	$.getJSON(getUrl, function(json){
-		if(json["title"]){
-			//显示工作状态，成功
-			$("p#spider-info-ok").removeClass("f-dn");
-			$("p#spider-info-loading").addClass("f-dn");
-			$("p#spider-info-error").addClass("f-dn");
 
-			//将tags转换为以逗号分隔的形式
-			var tagsString = "";
-			for(var i = 0 ; i < json["tags"].length - 1 ; i++){
-				tagsString += json["tags"][i]["name"] + ",";
-			}
-			tagsString += json["tags"][json["tags"].length - 1]["name"]
+	//先判断拟抓取的ISBN是否已经存在
+	$.getJSON("../common/check_isbn_exist.php?isbn13=" + isbn, function(data){
+		if(!data["exists"]){
+			$.getJSON(getUrl, function(json){
+				if(json["title"]){
+					//显示工作状态，成功
+					spiderInfoOk.removeClass("f-dn");
+					spiderInfoLoad.addClass("f-dn");
+					spiderInfoError.addClass("f-dn");
 
-			//标准化日期字符串
-			var pubYear = 0;
-			var e = new RegExp("[0-9][0-9][0-9][0-9]", "g");
-			pubYear = e.exec(json["pubdate"]);
+					//将tags转换为以逗号分隔的形式
+					var tagsString = "";
+					for(var i = 0 ; i < json["tags"].length - 1 ; i++){
+						tagsString += json["tags"][i]["name"] + ",";
+					}
+					tagsString += json["tags"][json["tags"].length - 1]["name"];
 
-			//抓取信息回显到表单
-			$("input#title").val(json["title"]);
-			$("input#subtitle").val(json["subtitle"]);
-			$("input#origin_title").val(json["origin_title"]);
-			$("input#pubdate").val(pubYear);
-			$("input#author").val(json["author"]);
-			$("input#translator").val(json["translator"]);
-			$("input#publisher").val(json["publisher"]);
-			$("input#image").val(json["images"]["large"]);
-			$("textarea#summary").text(json["summary"]);
-			$("input#pages").val(json["pages"]);
-			$("input#tags").val(tagsString);
-			$("input#isbn10").val(json["isbn10"]);
-			$("input#isbn13").val(json["isbn13"]);
-			$("img#spider_book_img").attr("src", json["images"]["medium"]);
+					//标准化日期字符串
+					var e = new RegExp("[0-9][0-9][0-9][0-9]", "g");
+					var pubYear = e.exec(json["pubdate"]);
+
+					//抓取信息回显到表单
+					$("input#title").val(json["title"]);
+					$("input#subtitle").val(json["subtitle"]);
+					$("input#origin_title").val(json["origin_title"]);
+					$("input#pubdate").val(pubYear);
+					$("input#author").val(json["author"]);
+					$("input#translator").val(json["translator"]);
+					$("input#publisher").val(json["publisher"]);
+					$("input#image").val(json["images"]["large"]);
+					$("textarea#summary").text(json["summary"]);
+					$("input#pages").val(json["pages"]);
+					$("input#tags").val(tagsString);
+					$("input#isbn10").val(json["isbn10"]);
+					$("input#isbn13").val(json["isbn13"]);
+					$("img#spider_book_img").attr("src", json["images"]["medium"]);
+				}else{
+					//显示工作状态，失败
+					spiderInfoError.removeClass("f-dn");
+					spiderInfoLoad.addClass("f-dn");
+					spiderInfoOk.addClass("f-dn");
+				}
+			});
 		}else{
-			//显示工作状态，失败
-			$("p#spider-info-error").removeClass("f-dn");
-			$("p#spider-info-loading").addClass("f-dn");
-			$("p#spider-info-ok").addClass("f-dn");
+			alert("这本书已存在，请不要重复添加！");
 		}
 	});
 }
 
-
-function checkMail(e){
+/**
+ * 用户注册的时候检查填写的邮箱是否已经被注册
+ * @param e 引用的input输入框
+ */
+function checkRegistMail(e){
+	var mailExistInfo = $("#js-regist-mail-exist");
 	$.getJSON("../common/check_mail_exist.php?mail=" + e.value, function(json){
 		if(json["exists"] == 1){
 			e.focus();
-			$("#js-regist-mail-exist").removeClass("f-dn");
+			mailExistInfo.removeClass("f-dn");
 		}else{
-			$("#js-regist-mail-exist").addClass("f-dn");
+			mailExistInfo.addClass("f-dn");
 		}
 	});
 }
 
-function checkPassword(e){
+/**
+ * 用户注册的时候，检查用户两遍输入的密码是否一致
+ * @param e 引用的password2输入框
+ */
+function checkRegistPassword(e){
+	var passNotEqualInfo = $("#js-regist-pass-not-equal");
 	if($("#password").val() != $("#password2").val()){
-		$("#js-regist-pass-not-equal").removeClass("f-dn");
+		passNotEqualInfo.removeClass("f-dn");
 		e.focus();
 	}else{
-		$("#js-regist-pass-not-equal").addClass("f-dn");
+		passNotEqualInfo.addClass("f-dn");
 	}
+}
+
+/**
+ * 抓取书籍的时候，验证填入的ISBN13在数据库中是否存在
+ * @param isbn 要检查的ISBN号
+ */
+function checkBookIsbn13(isbn){
+	//这里要用同步请求，不然无法赋值
+	$.ajax({
+		type:"GET",
+		url:"../common/check_isbn_exist.php?isbn13=" + isbn,
+		async:"false",
+		dataType:"json",
+		success:function(json){
+			return json["exists"];
+		}
+	});
 }
