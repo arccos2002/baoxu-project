@@ -53,15 +53,16 @@ $userRegistTime = date("Y-m-d");
 //计算验证码
 $userVerifyCode = md5($userMail . $userRegistTime);
 
+//输入数据库SQL
 $saveUserSql = "INSERT INTO `user` (`user_id`, `name`, `mail`, `password`, `admin`, `phone`, `head`, `sign`, `level`, `regist_time`, `last_login`, `status`, `verify_code`) VALUES (NULL, '" . $_POST["name"] . "', '" . $userMail . "', '" . md5($_POST["password"]) . "', '0', '" . $_POST["phone"] . "', '" . $userHeadUrl . "', '" . $_POST["sign"] . "', '0', '" . $userRegistTime . "', '" . NULL . "', '0','" . $userVerifyCode . "');";
-//echo $saveUserSql;
-//exit;
 $result = mysql_query($saveUserSql, $conn);
 
 if(!$result){
     die('Error: ' . mysql_error());
 } else{
-    $sendMailResult = sendMail($userMail, $_POST["name"], "JustRead验证邮件", "http://" . HOST . DOCROOT . "user/verifyUser.php?code=" . $userVerifyCode);
+    $verifyURL = "http://" . HOST . DOCROOT . "user/verifyUser.php?code=" . $userVerifyCode;
+    $mailContent = "你好，请点击这个链接完成您的注册(如果链接无法点击，请复制到浏览器打开)：<a href='" . $verifyURL . "'>" . $verifyURL . "</a>";
+    $sendMailResult = sendMail($userMail, $_POST["name"], "JustRead验证邮件", $mailContent);
     if($sendMailResult){
         echo "<script language='javascript' type='text/javascript'>";
         echo "window.location.href='../user/regist_ok.php'";

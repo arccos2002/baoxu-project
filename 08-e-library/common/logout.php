@@ -3,6 +3,7 @@
  * User: Baoxu
  * Date: 13-4-2
  * Time: 上午11:22
+ * 处理用户注销并删除COOKIE
  */
 header("Content-Type:application/json; charset=utf-8");
 header("Cache-Control: must-revalidate, no-cache, private");

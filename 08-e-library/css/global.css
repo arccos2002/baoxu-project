@@ -10,15 +10,21 @@ body{
 	padding: 60px 0 40px 0;
 }
 
-.bx-login-success{
+a:hover{
+	text-decoration: none;
+}
+
+/*导航条上登录成功之后显示用户名的地方*/
+.bx-nav-login-success{
 	padding: 10px;
 	color: #EEE;
 }
 
-.bx-login-success span{
+.bx-nav-login-success span{
 	padding-left: 10px;
 }
 
+/*各种提醒页面定位用的*/
 .bx-dialog-info{
 	height: 250px;
 }
@@ -27,6 +33,7 @@ body{
 	padding: 120px 0;
 }
 
+/*LOGO的特殊字体*/
 @font-face{
 	font-family: logoFont;
 	src: url('anastas.ttf')
@@ -42,3 +49,25 @@ body{
 	font-size: 36px !important;
 	line-height: 40px;
 }
+
+/*展示TAG*/
+ul.bx-tag{
+	display: inline-block;
+}
+
+ul.bx-tag li{
+	margin: 3px;
+	padding:  2px 4px;
+	background-color: #EBEBE4;
+	border-radius: 3px 3px 3px 3px;
+	color: #666;
+}
+
+/*阅读历史书籍的图片展示*/
+.bx-read-history-img{
+	height: 200px;
+}
+
+/*用户头像显示*/
+.bx-user-head-img{ margin-right: 15px; }
+.bx-user-head-img img{ height: 170px; }

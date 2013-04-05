@@ -11,8 +11,6 @@ echo "正在处理...";
 
 $fileType = strrchr($_POST["image"], ".");
 $picDir = "../book/book_img/";
-//用时间戳做图片文件名
-//$picName = gmmktime() . $fileType;
 //用ISBN号做图片文件名
 $picName = $_POST["isbn13"] . $fileType;
 $picUrl = $picDir . $picName;

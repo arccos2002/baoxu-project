@@ -4,10 +4,12 @@
     <meta charset = "utf-8" />
     <title>添加书籍-Just Read后台</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "../css/index.css">
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
+    <style type="text/css">
+        #spider_book_img{height: 100px;}
+    </style>
 </head>
 <body>
 
@@ -22,7 +24,7 @@
     <div class = "input-append input-prepend">
         <span class = "add-on">ISBN:</span>
         <input class = "span4" id = "appendedInput" type = "text" placeholder = "13位的ISBN码">
-        <span class = "add-on btn" data-event-tag="et_spider_book_btn">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
+        <span class = "add-on btn" data-event-tag = "et_spider_book_btn">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
     </div>
     <p class = "f-dn" id = "spider-info-loading"><img src = "../img/spider_loading.gif"></p>
     <p class = "text-error f-dn" id = "spider-info-error">抓取失败，请检查ISBN是否正确。</p>
@@ -34,7 +36,6 @@
     <form class = "form-horizontal" name = "bookAdd" id = "bookAdd" action = "book_save.php" method = "post">
         <div class = "control-group">
             <label class = "control-label" for = "title">书名</label>
-
             <div class = "controls">
                 <input type = "text" id = "title" name = "title" class = "span5" required = "required" value = "">
             </div>
@@ -42,7 +43,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "subtitle">副标题</label>
-
             <div class = "controls">
                 <input type = "text" id = "subtitle" name = "subtitle" class = "span7" value = "">
             </div>
@@ -50,7 +50,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "origin_title">原书名</label>
-
             <div class = "controls">
                 <input type = "text" id = "origin_title" name = "origin_title" class = "span5" value = "">
             </div>
@@ -58,7 +57,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "pubdate">出版日期</label>
-
             <div class = "controls">
                 <input type = "text" id = "pubdate" name = "pubdate" class = "span3" value = "">
             </div>
@@ -66,7 +64,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "author">作者</label>
-
             <div class = "controls">
                 <input type = "text" id = "author" name = "author" class = "span5" value = "">
             </div>
@@ -74,7 +71,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "translator">译者</label>
-
             <div class = "controls">
                 <input type = "text" id = "translator" name = "translator" class = "span5" value = "">
             </div>
@@ -82,7 +78,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "publisher">出版社</label>
-
             <div class = "controls">
                 <input type = "text" id = "publisher" name = "publisher" class = "span6" value = "">
             </div>
@@ -90,7 +85,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "image">封面图</label>
-
             <div class = "controls">
                 <img id = "spider_book_img" src = "../img/book_default_img.png" class = "img-polaroid">
                 <input type = "text" id = "image" name = "image" value = "" style = "display: none">
@@ -99,7 +93,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "summary">摘要</label>
-
             <div class = "controls">
                 <textarea id = "summary" name = "summary" rows = "3" class = "span7"></textarea>
             </div>
@@ -107,7 +100,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "pages">页数</label>
-
             <div class = "controls">
                 <input type = "text" id = "pages" name = "pages" class = "span3" value = "">
             </div>
@@ -115,7 +107,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "tags">标签</label>
-
             <div class = "controls">
                 <input type = "text" id = "tags" name = "tags" class = "span7" value = "">
             </div>
@@ -123,7 +114,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "provider">捐赠者</label>
-
             <div class = "controls">
                 <input type = "text" id = "provider" name = "provider" class = "span5" value = "">
             </div>
@@ -131,7 +121,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "count">数量</label>
-
             <div class = "controls">
                 <input type = "text" id = "count" name = "count" class = "span3" value = "1">
             </div>
@@ -139,7 +128,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "isbn10">ISBN10</label>
-
             <div class = "controls">
                 <input type = "text" id = "isbn10" name = "isbn10" class = "span5" value = "">
             </div>
@@ -147,7 +135,6 @@
 
         <div class = "control-group">
             <label class = "control-label" for = "isbn13">ISBN13</label>
-
             <div class = "controls">
                 <input type = "text" id = "isbn13" name = "isbn13" class = "span5" value = "">
             </div>

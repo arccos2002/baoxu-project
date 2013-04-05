@@ -4,12 +4,9 @@
     <meta charset = "utf-8" />
     <title>用户列表—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <style type = "text/css">
-        body{ padding: 60px 0 40px 0; }
-    </style>
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
@@ -64,8 +61,10 @@ $success = mysql_num_rows($result);
                 //解释用户状态
                 if($row["status"] == 1){
                     $userStatus = "正常";
-                } elseif($row["status"] == 0){
+                } elseif($row["status"] == 2){
                     $userStatus = "冻结";
+                } elseif($row["status"] == 0){
+                    $userStatus = "未激活";
                 } else{
                     $userStatus = "状态错误";
                 }
@@ -78,7 +77,7 @@ $success = mysql_num_rows($result);
                 echo '<td>' . $userPhone . '</td>';
                 echo '<td>' . $userLevel . '</td>';
                 echo '<td>' . $userStatus . '</td>';
-                echo '<td>' . 4565 . '</td>';
+                echo '<td>' . "管理" . '</td>';
                 echo '</tr>';
             }
         } else{

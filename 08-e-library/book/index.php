@@ -4,12 +4,9 @@
     <meta charset = "utf-8" />
     <title>书籍列表—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <style type = "text/css">
-        body{ padding: 60px 0 40px 0; }
-    </style>
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
@@ -29,6 +26,7 @@ $success = mysql_num_rows($result);
 <!--页面主体-->
 <div class = "container">
     <div class = "input-append f-fr">
+        <label for="appendedInputButton" class="f-dn"></label>
         <input class = "span3" id = "appendedInputButton" placeholder = "书名" type = "text">
         <button class = "btn" type = "button">搜索</button>
     </div>
@@ -90,7 +88,9 @@ $success = mysql_num_rows($result);
                 echo '</tr>';
             }
         } else{
-            echo '没有书！';
+            echo '<tr>';
+            echo '<td>没有书</td>';
+            echo '</tr>';
         }
         ?>
 

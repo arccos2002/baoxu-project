@@ -3,6 +3,7 @@
  * User: Baoxu
  * Date: 13-4-4
  * Time: 下午12:07
+ * 注册时候检查用户输入的邮箱时候已经被注册
  */
 header("Content-Type:application/json; charset=utf-8");
 header("Cache-Control: must-revalidate, no-cache, private");

@@ -4,10 +4,9 @@
     <meta charset = "utf-8" />
     <title>个人中心—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "css/index.css">
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 
@@ -38,8 +37,10 @@ if($success){
         //解释用户状态
         if($row["status"] == 1){
             $userStatus = "正常";
-        } elseif($row["status"] == 0){
+        } elseif($row["status"] == 2){
             $userStatus = "冻结";
+        } elseif($row["status"] == 0){
+            $userStatus = "未激活";
         } else{
             $userStatus = "状态错误";
         }
@@ -56,7 +57,7 @@ if($success){
     <div class = "page-header"><h2><?php echo $userName ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-book-img"><img src = "<?php echo $userHead ?>" class = "img-polaroid"></div>
+            <div class = "f-fl bx-user-head-img"><img src = "<?php echo $userHead ?>" class = "img-polaroid"></div>
             <div>
                 <p>邮箱：<strong><?php echo $userMail ?></strong></p>
                 <p>手机：<strong><?php echo $userPhone ?></strong></p>
@@ -94,30 +95,29 @@ if($success){
 
     <div class = "row">
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
         <div class = "span2">
-            <a href = "#"><img src = "../img/721159.jpg" class = "img-polaroid"></a>
+            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
             <p><a href = "#">132465432154</a></p>
         </div>
-
     </div>
 </div>
 

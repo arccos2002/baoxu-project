@@ -8,14 +8,15 @@ include "function.php";
 <div class = "navbar navbar-inverse navbar-fixed-top">
     <div class = "navbar-inner">
         <div class = "container">
-            <button data-target = ".nav-collapse" data-toggle = "collapse" class = "btn btn-navbar collapsed" type = "button">
+            <button data-target = ".nav-collapse" data-toggle = "collapse" class = "btn btn-navbar collapsed"
+                    type = "button">
                 <span class = "icon-bar"></span>
                 <span class = "icon-bar"></span>
                 <span class = "icon-bar"></span>
             </button>
             <a href = "../home" class = "brand bx-logo">Just Read</a>
 
-            <div class = "nav-collapse collapse" style = "height: 0px;">
+            <div class = "nav-collapse collapse" style = "height: 0;">
                 <ul class = "nav">
                     <li><a href = "../home/">首页</a></li>
                     <li><a href = "../book/">书目列表</a></li>
@@ -37,10 +38,10 @@ include "function.php";
                 </ul>
                 <!--判断cookie-->
                 <?php
-                if (isset($_COOKIE["userCode"])) {
-                    if ($_COOKIE["userName"]) {
+                if(isset($_COOKIE["userCode"])){
+                    if($_COOKIE["userName"]){
                         $displayName = $_COOKIE["userName"];
-                    } else {
+                    } else{
                         $displayName = substr($_COOKIE["userMail"], 0, strpos($_COOKIE["userMail"], "@"));
                     }
                     echo '<form class = "navbar-form pull-right f-dn" id = "loginForm" name = "loginForm" action = "" onsubmit = "return false;">
@@ -48,14 +49,14 @@ include "function.php";
                     <input type = "password" placeholder = "密码" class = "span2" name = "nav_password" required="required"  id = "nav_password">
                     <button class = "btn" id = "bx-login-btn" data-event-tag = "et_login_btn">登录</button>
                     </form>';
-                    echo '<div id="loginSuccess" class = "navbar-form pull-right bx-login-success">' . $displayName . ' <a href="#" onclick="doLogout()"><span>注销</span></a></div>';
-                } else {
+                    echo '<div id="loginSuccess" class = "navbar-form pull-right bx-nav-login-success">' . $displayName . ' <a href="#" onclick="doLogout()"><span>注销</span></a></div>';
+                } else{
                     echo '<form class = "navbar-form pull-right" id = "loginForm" name = "loginForm" action = "" onsubmit = "return false;">
                     <input type = "text" placeholder = "邮箱前缀" class = "span2" name = "nav_email" required="required"  id = "nav_email">
                     <input type = "password" placeholder = "密码" class = "span2" name = "nav_password" required="required"  id = "nav_password">
                     <button class = "btn" id = "bx-login-btn" data-event-tag = "et_login_btn">登录</button>
                     </form>';
-                    echo '<div id = "loginSuccess" class = "navbar-form pull-right bx-login-success f-dn"><span id="displayUserName"></span>&nbsp;<a href = "#" data-event-tag = "et_logout_btn"><span>注销</span></a></div>';
+                    echo '<div id = "loginSuccess" class = "navbar-form pull-right bx-nav-login-success f-dn"><span id="displayUserName"></span>&nbsp;<a href = "#" data-event-tag = "et_logout_btn"><span>注销</span></a></div>';
                 }
                 ?>
 

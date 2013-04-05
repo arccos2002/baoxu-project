@@ -3,6 +3,7 @@
  * User: Baoxu
  * Date: 13-4-2
  * Time: 下午2:46
+ * 通过ISBN号码去豆瓣查询书籍信息并打印成一个JSON
  */
 header("Content-Type:application/json; charset=utf-8");
 header("Cache-Control: must-revalidate, no-cache, private");

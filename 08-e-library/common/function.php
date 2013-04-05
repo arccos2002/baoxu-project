@@ -53,13 +53,13 @@ function getDataFromCookie($type, $cookie){
 
 /**
  * 发送邮箱地址验证邮件
- * @param $address   收件人地址
- * @param $name      收件人称呼
- * @param $title     邮件标题
- * @param $verifyURL 验证地址
+ * @param $address     收件人地址
+ * @param $name        收件人称呼
+ * @param $title       邮件标题
+ * @param $mailContent 邮件内容
  * @return bool 邮件是否发送成功
  */
-function sendMail($address, $name, $title, $verifyURL){
+function sendMail($address, $name, $title, $mailContent){
     //发邮件模块
     require("PHPMailer/class.phpmailer.php"); //下载的文件必须放在该文件所在目录
     $mailToSend = new PHPMailer(); //建立邮件发送类
@@ -78,8 +78,7 @@ function sendMail($address, $name, $title, $verifyURL){
 
     $mailToSend->Subject = $title; //邮件标题
 
-    $content = "你好，请点击这个链接完成您的注册(如果链接无法点击，请复制到浏览器打开)：<a href='" . $verifyURL . "'>" . $verifyURL . "</a>";
-    $mailToSend->Body = $content; //邮件内容
+    $mailToSend->Body = $mailContent; //邮件内容
 
     if(!$mailToSend->Send()){
         return false;

@@ -7,6 +7,7 @@
     <script src = "js/jquery-1.9.1.min.js"></script>
     <script src = "js/bootstrap.min.js"></script>
     <link rel = "stylesheet" href = "css/bootstrap.min.css">
+    <link rel = "stylesheet" href = "css/global.css">
     <link rel = "stylesheet" href = "css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "css/function.css">
     <link rel = "stylesheet" href = "css/global.css">
@@ -27,7 +28,7 @@
             padding: 19px 29px 29px;
         }
 
-        .form-signin .form-signin-heading, .form-signin .checkbox{
+        .form-signin .form-signin-heading, .form-signin{
             margin-bottom: 10px;
         }
 
@@ -36,12 +37,6 @@
             height: auto;
             margin-bottom: 15px;
             padding: 7px 9px;
-        }
-
-        .btn-regist{
-            line-height: 40px;
-            padding: 10px 8px 0 0;
-            vertical-align: text-bottom;
         }
 
         .bx-login-email, .bx-login-password-input{
@@ -58,6 +53,10 @@
             margin-bottom: 15px !important;
             padding: 7px 4px !important;
         }
+
+        .bx-register-btn{
+            padding-top: 18px;
+        }
     </style>
 </head>
 <body>
@@ -66,15 +65,16 @@
     <div class = "text-center bx-login-logo">Just Read</div>
     <form class = "form-signin" method = "post" action = "">
         <h2 class = "form-signin-heading">登录</h2>
-
         <div class = "input-append bx-login-email">
-            <input class = "bx-login-email-input" name = "email" type = "text" placeholder = "mail" required = "required">
+            <label for = "email" class = "f-dn"></label>
+            <input class = "bx-login-email-input" id = "email" name = "email" type = "text" placeholder = "mail" required = "required">
             <span class = "add-on bx-login-add">@corp.netease.com</span>
         </div>
-        <input class = "bx-login-password-input" name = "password" type = "password" placeholder = "password" required = "required">
-        <p id = "s_login_error" class = "text-error f-dn">登录失败，请确认用户名与密码。</p>
+        <label for = "password" class = "f-dn"></label>
+        <input class = "bx-login-password-input" id = "password" name = "password" type = "password" placeholder = "password" required = "required">
+        <p id = "js_login_error_info" class = "text-error f-dn">登录失败，请确认用户名与密码。</p>
         <button class = "btn btn-large btn-primary" type = "submit">登录</button>
-        <a style="padding-top: 15px;" class="f-fr" href="user/register.php">注册</a>
+        <a class = "f-fr bx-register-btn" href = "user/register.php">注册</a>
     </form>
 </div>
 
@@ -112,7 +112,7 @@ if($_POST){
     } else{
         //提示登陆失败
         echo "<script language='javascript' type='text/javascript'>";
-        echo "$('#s_login_error').removeClass('f-dn')";
+        echo "$('#js_login_error_info').removeClass('f-dn')";
         echo "</script>";
     }
 }

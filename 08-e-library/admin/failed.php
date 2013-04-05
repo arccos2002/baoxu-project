@@ -4,10 +4,9 @@
     <meta charset = "utf-8" />
     <title>操作失败-Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "../css/index.css">
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
 </head>
 <body>
 

@@ -4,10 +4,16 @@
     <meta charset = "utf-8" />
     <title>书籍详情—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "css/info.css">
+    <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <link rel = "stylesheet" href = "../css/global.css">
+    <style type = "text/css">
+        .bx-book-img{ margin: 0 22px 15px 0; }
+
+        .bx-book-img img{ height: 210px; }
+
+        .bx-apply-book{ padding-top: 8px; }
+    </style>
 </head>
 <body>
 
