@@ -113,12 +113,11 @@ function getBookInfoByISBN(){
 
 	//Ajax请求抓取
 	var isbn = $("#appendedInput").val();
-	var getUrl = "../common/get_book_info.php?isbn=" + isbn;
 
 	//先判断拟抓取的ISBN是否已经存在
-	$.getJSON("../common/check_isbn_exist.php?isbn13=" + isbn, function(data){
+	$.getJSON("../common/get_isbn_exist.php?isbn13=" + isbn, function(data){
 		if(!data["exists"]){
-			$.getJSON(getUrl, function(json){
+			$.getJSON("../common/get_book_info.php?isbn=" + isbn, function(json){
 				if(json["title"]){
 					//显示工作状态，成功
 					spiderInfoOk.removeClass("f-dn");
@@ -170,7 +169,7 @@ function getBookInfoByISBN(){
  */
 function checkRegistMail(e){
 	var mailExistInfo = $("#js-regist-mail-exist");
-	$.getJSON("../common/check_mail_exist.php?mail=" + e.value, function(json){
+	$.getJSON("../common/get_mail_exist.php?mail=" + e.value, function(json){
 		if(json["exists"] == 1){
 			e.focus();
 			mailExistInfo.removeClass("f-dn");
@@ -202,7 +201,7 @@ function checkBookIsbn13(isbn){
 	//这里要用同步请求，不然无法赋值
 	$.ajax({
 		type:"GET",
-		url:"../common/check_isbn_exist.php?isbn13=" + isbn,
+		url:"../common/get_isbn_exist.php?isbn13=" + isbn,
 		async:"false",
 		dataType:"json",
 		success:function(json){
