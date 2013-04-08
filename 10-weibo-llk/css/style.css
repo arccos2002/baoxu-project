@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+/* CSS Document */
+* {
+	font-size: 0px;
+	line-height: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+BODY {
+	width: 760px;
+	height: 700px;
+	background:url(../img/green_garden.jpg) no-repeat;
+}
+
+
+/*连连看table的样式*/
+#llk_table {
+	border-collapse: collapse;
+	border:#999 3px solid;
+	height:410px;
+	width:570px;
+	margin-left:85px;
+	padding:10px;
+	border-radius:10px;
+	background:url(../img/alpha50.png) repeat;
+	margin-top:50px;
+	
+}
+
+#llk_table td {
+	border: solid #ccc 1px;
+	height: 56px;
+	width: 56px;
+	cursor: pointer;
+	padding-left:6px;
+	padding-right:6px;
+	padding-bottom:5px;
+	padding-top:4px;
+}
+
+#llk_table td img {
+	height: 50px;
+	width: 50px;
+	border: 0px;
+	margin:4px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow:1px 2px 3px #999;
+	-moz-box-shadow:1px 2px 3px #999;
+	box-shadow:1px 2px 3px #999;
+}
+
+/*倒计时的样式*/
+#daojishi_con {	
+	clear: both;
+	height: 25px;
+	padding-left: 3px;
+	margin-left:130px;
+	margin-top:50px;
+}
+
+#timeleft {
+	float: left;
+	font-size: 12px;
+	line-height: 18px;
+	font-family: "微软雅黑";
+	height: 15px;
+	width: 40px;
+	margin-top: 10px;
+	text-align: left;
+}
+
+#timebar_con {
+	height: 5px;
+	width: 300px;
+	border: #666 1px solid;
+	margin-left: 0px;
+	margin-top: 15px;
+	float: left;
+}
+
+#timebar {
+	height: 5px;
+	width: 300px;
+	background: #00C;
+}
+
+#daojishi_bot {
+	margin-top: 5px;
+	margin-left: 3px;
+	float: left;
+}
+
+#start_button {
+	font-family: "微软雅黑";
+	padding: 0px;
+	font-size: 12px;
+	line-height: 15px;
+	padding-left: 5px;
+	height: 23px;
+	width: 50px;
+	text-align: center;
+}
+
+/*用户头像生成table*/
+#user_llk{
+	width:100%;
+	text-align:center;
+	margin-top:50px;
+}
+
+#user_table {
+	border:#999 3px solid;
+	height:410px;
+	width:580px;
+	margin-left:85px;
+	padding:10px;
+	border-radius:10px;
+	background:url(../img/alpha50.png) repeat;
+}
+
+#user_table tr td {
+	font-size: 12px;
+	line-height: 22px;
+	width:50px;
+	padding-left:6px;
+	padding-right:6px;
+	padding-bottom:5px;
+	color:#FFF;
+}
+
+#user_table tr td input {
+	width:15px;
+	height:13px;
+}
+
+#user_table tr td img {
+	border:0px;
+	margin:4px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow:1px 2px 3px #999;
+	-moz-box-shadow:1px 2px 3px #999;
+	box-shadow:1px 2px 3px #999;
+	padding:0px;
+}
+
+#user_control{
+	margin-top:20px;
+}
+
+#user_control input{
+	font-size: 12px;
+	line-height: 22px;
+	padding:8px;;
+}
