@@ -36,7 +36,7 @@ a:hover{
 /*LOGO的特殊字体*/
 @font-face{
 	font-family: logoFont;
-	src: url('anastas.ttf')
+	src: url('ANASTAS.TTF')
 }
 
 .bx-logo{
