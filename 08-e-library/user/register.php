@@ -74,6 +74,7 @@
             <label class = "control-label" for = "head">头像</label>
             <div class = "controls">
                 <input type = "file" id = "head" name = "head" class = "span3" size = "40" value = "">
+                <span style = "padding-left: 80px">jpg格式，且小于200K</span>
             </div>
         </div>
 

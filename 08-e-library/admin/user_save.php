@@ -13,7 +13,7 @@ echo "正在处理...";
 //图片存储路径
 $picDir = "../user/user_img/";
 //用时间戳做图片文件名
-$picName = time() . ".jpg";
+$picName = $_POST["mail"] . ".jpg";
 
 /**
  * 存储用户上传的图片的函数
@@ -22,7 +22,7 @@ $picName = time() . ".jpg";
  * @return bool 是否成功
  */
 function savePic($dir, $name){
-    if((($_FILES["head"]["type"] == "image/gif") || ($_FILES["head"]["type"] == "image/jpeg") || ($_FILES["head"]["type"] == "image/pjpeg")) && ($_FILES["head"]["size"] < 1000000)){
+    if((($_FILES["head"]["type"] == "image/gif") || ($_FILES["head"]["type"] == "image/jpeg") || ($_FILES["head"]["type"] == "image/pjpeg")) && ($_FILES["head"]["size"] < 300000)){
         if($_FILES["head"]["error"] > 0){
             //echo "Return Code: " . $_FILES["head"]["error"] . "<br />";
             return false;
