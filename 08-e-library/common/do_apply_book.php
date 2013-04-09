@@ -3,7 +3,7 @@
  * User: Baoxu
  * Date: 13-4-2
  * Time: 下午2:46
- * 点击申请阅读之后，请求申请阅读的参数
+ * 点击申请阅读之后，先判断是否已经申请过了，没申请过的话就写数据库
  */
 header("Content-Type:application/json; charset=utf-8");
 header("Cache-Control: must-revalidate, no-cache, private");

@@ -32,16 +32,35 @@ function bindEvent(){
 
 		switch(event_tag){
 			case "et_login_btn":
+				//用户点击登陆按钮
 				doLogin();
 				break;
 			case "et_logout_btn":
+				//用户点击注销按钮
 				doLogout();
 				break;
 			case "et_spider_book_btn":
+				//管理员点击通过ISBN码抓取图书信息按钮
 				getBookInfoByISBN();
 				break;
 			case "et_apply_book_btn":
+				//用户点击申请借阅按钮
 				applyBook(target);
+				break;
+			case "et_loan_book_btn":
+				//管理员点击借阅管理里面的统一借阅按钮
+				EventUtil.preventDefault(event);
+				loanBook(target);
+				break;
+			case "et_return_book_btn":
+				//管理员点击借阅管理里面的统一借阅按钮
+				EventUtil.preventDefault(event);
+				returnBook(target);
+				break;
+			case "et_renew_book_btn":
+				//管理员点击借阅管理里面的统一借阅按钮
+				EventUtil.preventDefault(event);
+				renewBook(target);
 				break;
 		}
 	});
@@ -73,6 +92,7 @@ function doLogin(){
 			}else{
 				displayNameSpan.text(json["mail"].slice(0, json["mail"].indexOf("@")));
 			}
+			document.location.reload();
 		}else{
 			alert("用户名或密码错误，请重试。");
 		}
@@ -213,7 +233,10 @@ function checkBookIsbn13(isbn){
 	});
 }
 
-
+/**
+ * 用户点击申请借书的按钮之后，异步请求申请借书接口，在数据库中添加申请借书的记录
+ * @param e 被点击的对象
+ */
 function applyBook(e){
 	var applyBookInfo = $("#js-apply-book-info");
 	var bookId = e.getAttribute("data-book-id");
@@ -234,6 +257,57 @@ function applyBook(e){
 				applyBookInfo.addClass("text-error");
 				applyBookInfo.text("已经申请了，请不要重复申请");
 				break;
+		}
+	});
+}
+
+/**
+ * 管理员批准用户申请借书的请求，借出书籍
+ * @param e 被点击的对象，从中获取书籍ID和借阅ID
+ */
+function loanBook(e){
+	var bookId = e.getAttribute("data-book-id");
+	var borrowId = e.getAttribute("data-borrow-id");
+	$.getJSON("../common/do_loan_book.php?bookId=" + bookId + "&borrowId=" + borrowId, function(json){
+		if(json["state"] == 1){
+			alert("操作成功，请确认已将书籍交给借书人。");
+			document.location.reload();
+		}else{
+			alert("操作失败，请联系管理员");
+		}
+	});
+}
+
+/**
+ * 用户还回书，管理员确认入库
+ * @param e 被点击的对象，从中获取书籍ID和借阅ID
+ */
+function returnBook(e){
+	var bookId = e.getAttribute("data-book-id");
+	var borrowId = e.getAttribute("data-borrow-id");
+	$.getJSON("../common/do_return_book.php?bookId=" + bookId + "&borrowId=" + borrowId, function(json){
+		if(json["state"] == 1){
+			alert("操作成功，请确认已将图书收回");
+			document.location.reload();
+		}else{
+			alert("操作失败，请联系管理员");
+		}
+	});
+}
+
+/**
+ * 设置续借
+ * @param e 被点击的对象，从中获取书籍ID和借阅ID
+ */
+function renewBook(e){
+	var bookId = e.getAttribute("data-book-id");
+	var borrowId = e.getAttribute("data-borrow-id");
+	$.getJSON("../common/do_renew_book.php?bookId=" + bookId + "&borrowId=" + borrowId, function(json){
+		if(json["state"] == 1){
+			alert("续借成功");
+			document.location.reload();
+		}else{
+			alert("操作失败");
 		}
 	});
 }

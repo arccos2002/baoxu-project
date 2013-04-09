@@ -34,6 +34,7 @@ $success = mysql_num_rows($result);
     <table class = "table table-bordered table-hover table-striped">
         <thead>
         <tr>
+            <th>ID</th>
             <th>书名</th>
             <th>作者</th>
             <th>状态</th>
@@ -81,6 +82,7 @@ $success = mysql_num_rows($result);
 
                 //填充表格
                 echo '<tr>';
+                echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["book_id"] . '</a></td>';
                 echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["title"] . '</a></td>';
                 echo '<td>' . $row["author"] . '</td>';
                 echo '<td>' . $bookStatus . '</td>';

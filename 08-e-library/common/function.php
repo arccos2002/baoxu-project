@@ -192,3 +192,138 @@ function applyBook($userId, $bookId, $conn){
         return false;
     }
 }
+
+/**
+ * 根据ID获取用户信息
+ * @param $userId 用户ID
+ * @param $conn   数据库连接
+ * @return array|bool 如果存在，返回用户信息数据，不存在返回false
+ */
+function getUserInfoById($userId, $conn){
+    $sql = "SELECT * FROM `user` WHERE `user_id` = '$userId'";
+    $result = mysql_query($sql, $conn);
+    $row = mysql_fetch_array($result);
+    $success = @mysql_num_rows($result);
+
+    $userInfo = array(
+        "user_id" => $row["user_id"],
+        "name" => $row["name"],
+        "mail" => $row["mail"],
+        "phone" => $row["phone"],
+        "head" => $row["head"],
+        "sign" => $row["sign"],
+        "level" => $row["level"],
+        "status" => $row["status"]
+    );
+
+    if($success){
+        return $userInfo;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 通过ID获取书籍信息
+ * @param $bookId 书籍ID
+ * @param $conn   数据库连接
+ * @return array|bool 如果存在返回书籍信息数组，如果不存在返回false
+ */
+function getBookInfoById($bookId, $conn){
+    $sql = "SELECT * FROM `book` WHERE `book_id` = '$bookId'";
+    $result = mysql_query($sql, $conn);
+    $row = mysql_fetch_array($result);
+    $success = @mysql_num_rows($result);
+
+    $bookInfo = array(
+        "book_id" => $row["book_id"],
+        "isbn" => $row["isbn13"],
+        "title" => $row["title"],
+        "subtitle" => $row["subtitle"],
+        "pubdate" => $row["pubdate"],
+        "author" => $row["author"],
+        "translator" => $row["translator"],
+        "publisher" => $row["publisher"],
+        "image" => $row["image"],
+        "summary" => $row["summary"],
+        "pages" => $row["pages"],
+        "provider" => $row["provider"],
+        "status" => $row["status"]
+    );
+
+    if($success){
+        return $bookInfo;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 批准借出书籍
+ * @param $bookId   书籍ID
+ * @param $borrowId 借阅ID
+ * @param $conn     数据库连接
+ * @return bool 返回操作成功与否
+ */
+function loanBook($bookId, $borrowId, $conn){
+    $todayDate = date("Y-m-d");
+    //改写Borrow表，type改为1表示借书成功，更新借书时间
+    $borrow_sql = "UPDATE `borrow` SET `type` = '1' , `date` = '$todayDate' WHERE `borrow_id` = '$borrowId'";
+    mysql_query($borrow_sql, $conn);
+    $borrow_success = mysql_affected_rows();
+    //改写book表，将对应的book的状态置为0表示已借出，更新借书时间，增加借书次数
+    $book_sql = "UPDATE `book` SET `status` = '0' , `borrow_date` = '$todayDate' , `borrow_count` = `borrow_count`+1 WHERE `book_id` = '$bookId'";
+    mysql_query($book_sql, $conn);
+    $book_success = mysql_affected_rows();
+    if($borrow_success && $book_success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 确认还回书籍
+ * @param $bookId   书籍ID
+ * @param $borrowId 借阅ID
+ * @param $conn     数据库连接
+ * @return bool 返回操作成功与否
+ */
+function returnBook($bookId, $borrowId, $conn){
+    $todayDate = date("Y-m-d");
+    //改写Borrow表，type改为2表示已还回，更新还回时间
+    $borrow_sql = "UPDATE `borrow` SET `type` = '2' , `date` = '$todayDate' WHERE `borrow_id` = '$borrowId'";
+    mysql_query($borrow_sql, $conn);
+    $borrow_success = mysql_affected_rows();
+    //改写book表，将对应的book的状态置为1表示在馆可借，空置借书时间
+    $book_sql = "UPDATE `book` SET `status` = '1' , `borrow_date` = NULL WHERE `book_id` = '$bookId'";
+    mysql_query($book_sql, $conn);
+    $book_success = mysql_affected_rows();
+    if($borrow_success && $book_success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 批准续借
+ * @param $bookId   书籍ID
+ * @param $borrowId 借阅ID
+ * @param $conn     数据库连接
+ * @return bool 返回操作成功与否
+ */
+function renewBook($bookId, $borrowId, $conn){
+    $todayDate = date("Y-m-d");
+    //改写Borrow表，renew修改为1表示已经续借
+    $borrow_sql = "UPDATE `borrow` SET `renew` = '1' WHERE `borrow_id` = '$borrowId'";
+    mysql_query($borrow_sql, $conn);
+    $borrow_success = mysql_affected_rows();
+    if($borrow_success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+

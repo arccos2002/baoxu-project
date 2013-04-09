@@ -52,16 +52,12 @@ function addPerfix(){
  * @name getScrollTop
  * @return {Number} 返回距离
  */
-function getScrollTop()
-{
-	var scrollTop=0;
-	if(document.documentElement&&document.documentElement.scrollTop)
-	{
-		scrollTop=document.documentElement.scrollTop;
-	}
-	else if(document.body)
-	{
-		scrollTop=document.body.scrollTop;
+function getScrollTop(){
+	var scrollTop = 0;
+	if(document.documentElement && document.documentElement.scrollTop){
+		scrollTop = document.documentElement.scrollTop;
+	}else if(document.body){
+		scrollTop = document.body.scrollTop;
 	}
 	return scrollTop;
 }

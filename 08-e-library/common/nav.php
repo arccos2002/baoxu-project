@@ -10,9 +10,7 @@ include "function.php";
         <div class = "container">
             <button data-target = ".nav-collapse" data-toggle = "collapse" class = "btn btn-navbar collapsed"
                     type = "button">
-                <span class = "icon-bar"></span>
-                <span class = "icon-bar"></span>
-                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span> <span class = "icon-bar"></span> <span class = "icon-bar"></span>
             </button>
             <a href = "../home" class = "brand bx-logo">Just Read</a>
 
@@ -32,6 +30,9 @@ include "function.php";
                             <li class = "nav-header">用户管理</li>
                             <li><a href = "../admin/user_add.php">添加用户</a></li>
                             <li><a href = "../admin/user_list.php">用户列表</a></li>
+                            <li class = "divider"></li>
+                            <li class = "nav-header">借阅管理</li>
+                            <li><a href = "../admin/borrow_list.php?type=apply">借阅列表</a></li>
                         </ul>
                     </li>
                     <li><a href = "../about/">关于</a></li>
