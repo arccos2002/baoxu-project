@@ -40,6 +40,9 @@ function bindEvent(){
 			case "et_spider_book_btn":
 				getBookInfoByISBN();
 				break;
+			case "et_apply_book_btn":
+				applyBook(target);
+				break;
 		}
 	});
 }
@@ -206,6 +209,31 @@ function checkBookIsbn13(isbn){
 		dataType:"json",
 		success:function(json){
 			return json["exists"];
+		}
+	});
+}
+
+
+function applyBook(e){
+	var applyBookInfo = $("#js-apply-book-info");
+	var bookId = e.getAttribute("data-book-id");
+	$.getJSON("../common/do_apply_book.php?bookId=" + bookId, function(json){
+		switch(json["apply"]){
+			case 0:
+				applyBookInfo.removeClass("text-success");
+				applyBookInfo.addClass("text-error");
+				applyBookInfo.text("写入数据库失败，请联系系统管理员");
+				break;
+			case 1:
+				applyBookInfo.removeClass("text-error");
+				applyBookInfo.addClass("text-success");
+				applyBookInfo.text("申请成功，请找图书管理员审核");
+				break;
+			case 2:
+				applyBookInfo.removeClass("text-success");
+				applyBookInfo.addClass("text-error");
+				applyBookInfo.text("已经申请了，请不要重复申请");
+				break;
 		}
 	});
 }

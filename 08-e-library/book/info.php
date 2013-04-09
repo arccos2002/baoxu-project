@@ -13,6 +13,8 @@
         .bx-book-img img{ height: 210px; }
 
         .bx-apply-book{ padding-top: 8px; }
+
+        #js-apply-book-info{ padding-left: 15px; }
     </style>
 </head>
 <body>
@@ -28,12 +30,14 @@
 
 <!--读取数据库，获取书籍信息-->
 <?php
-$sql = "SELECT * FROM `book` WHERE `book_id` = " . $_GET["bookId"];
+$bookId = $_GET["bookId"];
+$sql = "SELECT * FROM `book` WHERE `book_id` = '$bookId'";
 $result = mysql_query($sql, $conn);
 $success = mysql_num_rows($result);
 
 if($success){
     while($row = mysql_fetch_array($result)){
+        $bookId = $row["book_id"];
         $bookName = $row["title"];
         $bookAuthor = $row["author"];
         $bookPublisher = $row["publisher"];
@@ -88,7 +92,10 @@ if($success){
                 <p>应还日期：<strong><?php echo @$bookExpireDate ?></strong></p>
                 <p>提供者：<strong><?php echo @$bookProvider ?></strong></p>
                 <p class = "bx-apply-book">
-                    <button class = "btn btn-primary" type = "button">申请借阅</button>
+                    <button class = "btn btn-primary" data-event-tag = "et_apply_book_btn" data-book-id = "<?php echo $bookId ?>" type = "button">
+                        申请借阅
+                    </button>
+                    <span id = "js-apply-book-info"></span>
                 </p>
             </div>
         </div>

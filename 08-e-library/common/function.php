@@ -46,9 +46,8 @@ function getDataFromCookie($type, $cookie){
         } elseif($type = "admin"){
             return $userAdmin;
         }
-    } else{
-        return "";
     }
+    return "";
 }
 
 /**
@@ -105,7 +104,7 @@ function checkMailExist($mail, $conn){
 }
 
 /**
- * 验证用户名和密码时候匹配
+ * 验证用户名和密码是否匹配
  * @param $mail     用户登录邮箱
  * @param $password 用户密码
  * @param $conn     数据库连接
@@ -150,6 +149,43 @@ function checkIsbnExist($isbn, $conn){
     $sql = "SELECT * FROM `book` WHERE `isbn13` = '$isbn'";
     $result = mysql_query($sql, $conn);
     $success = @mysql_num_rows($result);
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 检查一个用户是否对一本书已经提交了借书申请
+ * @param $userId 用户ID
+ * @param $bookId 书籍ID
+ * @param $conn   数据库连接
+ * @return bool 如果已经提交申请返回true，否则返回false
+ */
+function checkApplyBook($userId, $bookId, $conn){
+    $sql = "SELECT * FROM `borrow` WHERE `user_id` = '$userId' AND `book_id` = '$bookId' AND `type` = '0'";
+    $result = mysql_query($sql, $conn);
+    $success = @mysql_num_rows($result);
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 提交借书申请，写入borrow表，type为0，表示是申请状态
+ * @param $userId 用户ID
+ * @param $bookId 书籍ID
+ * @param $conn   数据库连接
+ * @return bool 写入成功返回true，写入失败返回false
+ */
+function applyBook($userId, $bookId, $conn){
+    $todayDate = date("Y-m-d");
+    $sql = "INSERT INTO `borrow` (`borrow_id`, `user_id`, `book_id`, `type`, `renew`, `date`) VALUES (NULL, '$userId', '$bookId', '0', '0', '$todayDate');";
+    mysql_query($sql, $conn);
+    $success = mysql_affected_rows();
     if($success){
         return true;
     } else{
