@@ -7,7 +7,7 @@
  */
 
 //域名
-define("HOST", "localhost");
+define("HOST", "ubuntuserver");
 //项目根目录
 define("DOCROOT", "/baoxu-project/08-e-library/");
 
