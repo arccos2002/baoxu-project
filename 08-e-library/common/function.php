@@ -7,7 +7,7 @@
 
 /**
  * 给用户下发COOKIE的时候，对ID进行加密
- * @param $id 需要MD5加密的字符串
+ * @param int $id 需要MD5加密的字符串
  * @return string 加密后的字符串32位
  */
 function encodeCookie($id){
@@ -17,8 +17,8 @@ function encodeCookie($id){
 
 /**
  * 验证COOKIE从存储的用户ID是否合法：前32位是后面数字的MD5
- * @param String $id  被加密的字符串（除32位MD5之后的）
- * @param String $md5 加密后的字符串（前32位MD5）
+ * @param string $id  被加密的字符串（除32位MD5之后的）
+ * @param string $md5 加密后的字符串（前32位MD5）
  * @return bool 是否通过验证
  */
 function verifyCookie($id, $md5){
@@ -31,8 +31,8 @@ function verifyCookie($id, $md5){
 
 /**
  * 从COOKIE中取得用户ID与管理员识别码
- * @param String $type   要取的数据类型，用户ID："id"；管理员识别："admin"
- * @param String $cookie 从哪里取数据
+ * @param string $type   要取的数据类型，用户ID："id"；管理员识别："admin"
+ * @param string $cookie 从哪里取数据
  * @return string 返回对应的数据
  */
 function getDataFromCookie($type, $cookie){
@@ -52,10 +52,10 @@ function getDataFromCookie($type, $cookie){
 
 /**
  * 发送邮箱地址验证邮件
- * @param $address     收件人地址
- * @param $name        收件人称呼
- * @param $title       邮件标题
- * @param $mailContent 邮件内容
+ * @param string $address     收件人地址
+ * @param string $name        收件人称呼
+ * @param string $title       邮件标题
+ * @param string $mailContent 邮件内容
  * @return bool 邮件是否发送成功
  */
 function sendMail($address, $name, $title, $mailContent){
@@ -87,9 +87,9 @@ function sendMail($address, $name, $title, $mailContent){
 }
 
 /**
- * 验证数据库时候有这个mail地址
- * @param $mail 需要查询的mail地址
- * @param $conn 数据库连接
+ * 验证数据库是否有这个mail地址
+ * @param string   $mail 需要查询的mail地址
+ * @param resource $conn 数据库连接
  * @return bool 返回结果，存在true，不存在false
  */
 function checkMailExist($mail, $conn){
@@ -105,9 +105,9 @@ function checkMailExist($mail, $conn){
 
 /**
  * 验证用户名和密码是否匹配
- * @param $mail     用户登录邮箱
- * @param $password 用户密码
- * @param $conn     数据库连接
+ * @param string   $mail     用户登录邮箱
+ * @param string   $password 用户密码
+ * @param resource $conn     数据库连接
  * @return bool 返回值，匹配返回true，不匹配返回false
  */
 function checkUserPassword($mail, $password, $conn){
@@ -123,8 +123,8 @@ function checkUserPassword($mail, $password, $conn){
 
 /**
  * 用户登录时候，更新用户的最后登录时间
- * @param $userId 登录用户ID
- * @param $conn   数据库连接
+ * @param int      $userId 登录用户ID
+ * @param resource $conn   数据库连接
  * @return bool 更新成功返回true，失败返回false
  */
 function updateLoginDate($userId, $conn){
@@ -141,8 +141,8 @@ function updateLoginDate($userId, $conn){
 
 /**
  * 检查ISBN号在数据库中是否已经存在
- * @param $isbn 需要查询的ISBN号
- * @param $conn 数据库连接
+ * @param int      $isbn 需要查询的ISBN号
+ * @param resource $conn 数据库连接
  * @return bool 存在则返回true，不存在false
  */
 function checkIsbnExist($isbn, $conn){
@@ -158,9 +158,9 @@ function checkIsbnExist($isbn, $conn){
 
 /**
  * 检查一个用户是否对一本书已经提交了借书申请
- * @param $userId 用户ID
- * @param $bookId 书籍ID
- * @param $conn   数据库连接
+ * @param int      $userId 用户ID
+ * @param int      $bookId 书籍ID
+ * @param resource $conn   数据库连接
  * @return bool 如果已经提交申请返回true，否则返回false
  */
 function checkApplyBook($userId, $bookId, $conn){
@@ -176,9 +176,9 @@ function checkApplyBook($userId, $bookId, $conn){
 
 /**
  * 提交借书申请，写入borrow表，type为0，表示是申请状态
- * @param $userId 用户ID
- * @param $bookId 书籍ID
- * @param $conn   数据库连接
+ * @param int      $userId 用户ID
+ * @param int      $bookId 书籍ID
+ * @param resource $conn   数据库连接
  * @return bool 写入成功返回true，写入失败返回false
  */
 function applyBook($userId, $bookId, $conn){
@@ -195,8 +195,8 @@ function applyBook($userId, $bookId, $conn){
 
 /**
  * 根据ID获取用户信息
- * @param $userId 用户ID
- * @param $conn   数据库连接
+ * @param int      $userId 用户ID
+ * @param resource $conn   数据库连接
  * @return array|bool 如果存在，返回用户信息数据，不存在返回false
  */
 function getUserInfoById($userId, $conn){
@@ -205,15 +205,38 @@ function getUserInfoById($userId, $conn){
     $row = mysql_fetch_array($result);
     $success = @mysql_num_rows($result);
 
+    //解释用户帐号状态
+    if($row["status"] == 1){
+        $userStatus = "正常";
+    } elseif($row["status"] == 2){
+        $userStatus = "冻结";
+    } elseif($row["status"] == 0){
+        $userStatus = "未激活";
+    } else{
+        $userStatus = "状态错误";
+    }
+
+    //如果用户头像为空，设置头像为默认头像
+    if($row["head"]){
+        $userHead = $row["head"];
+    } else{
+        $userHead = "default.png";
+    }
+
     $userInfo = array(
         "user_id" => $row["user_id"],
         "name" => $row["name"],
         "mail" => $row["mail"],
+        "password" => $row["password"],
+        "admin" => $row["admin"],
         "phone" => $row["phone"],
-        "head" => $row["head"],
+        "head" => $userHead,
         "sign" => $row["sign"],
         "level" => $row["level"],
-        "status" => $row["status"]
+        "regist_time" => $row["regist_time"],
+        "last_login" => $row["last_login"],
+        "status" => $row["status"],
+        "status_str" => $userStatus
     );
 
     if($success){
@@ -225,8 +248,8 @@ function getUserInfoById($userId, $conn){
 
 /**
  * 通过ID获取书籍信息
- * @param $bookId 书籍ID
- * @param $conn   数据库连接
+ * @param int      $bookId 书籍ID
+ * @param resource $conn   数据库连接
  * @return array|bool 如果存在返回书籍信息数组，如果不存在返回false
  */
 function getBookInfoById($bookId, $conn){
@@ -260,9 +283,9 @@ function getBookInfoById($bookId, $conn){
 
 /**
  * 批准借出书籍
- * @param $bookId   书籍ID
- * @param $borrowId 借阅ID
- * @param $conn     数据库连接
+ * @param int      $bookId   书籍ID
+ * @param int      $borrowId 借阅ID
+ * @param resource $conn     数据库连接
  * @return bool 返回操作成功与否
  */
 function loanBook($bookId, $borrowId, $conn){
@@ -284,9 +307,9 @@ function loanBook($bookId, $borrowId, $conn){
 
 /**
  * 确认还回书籍
- * @param $bookId   书籍ID
- * @param $borrowId 借阅ID
- * @param $conn     数据库连接
+ * @param int      $bookId   书籍ID
+ * @param int      $borrowId 借阅ID
+ * @param resource $conn     数据库连接
  * @return bool 返回操作成功与否
  */
 function returnBook($bookId, $borrowId, $conn){
@@ -308,9 +331,9 @@ function returnBook($bookId, $borrowId, $conn){
 
 /**
  * 批准续借
- * @param $bookId   书籍ID
- * @param $borrowId 借阅ID
- * @param $conn     数据库连接
+ * @param int      $bookId   书籍ID
+ * @param int      $borrowId 借阅ID
+ * @param resource $conn     数据库连接
  * @return bool 返回操作成功与否
  */
 function renewBook($bookId, $borrowId, $conn){
@@ -326,4 +349,37 @@ function renewBook($bookId, $borrowId, $conn){
     }
 }
 
+/**
+ * 更新用户基本信息，只更新三项名称，手机号，签名
+ * @param int      $userId     用户ID
+ * @param array    $updateInfo 要更新的信息
+ * @param resource $conn       数据库连接
+ * @return bool 更新成功返回true，失败返回false
+ */
+function updateUserBasicInfo($userId, $updateInfo, $conn){
+    $userName = $updateInfo["name"];
+    $userPhone = $updateInfo["phone"];
+    $userSign = $updateInfo["sign"];
+    $sql = "UPDATE `user` SET `name` = '$userName' , `phone` = '$userPhone' , `sign` = '$userSign' WHERE `user_id` = '$userId'";
+    mysql_query($sql, $conn);
+    $success = mysql_affected_rows();
 
+    //return $sql;
+
+    if($success){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+/**
+ * 跳转到指定的URL
+ * @param string $url 要跳转到的URL
+ */
+function jumpToUrl($url){
+    /*跳转*/
+    echo "<script language='javascript' type='text/javascript'>";
+    echo "window.location.href='$url'";
+    echo "</script>";
+}

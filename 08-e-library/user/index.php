@@ -18,54 +18,33 @@
 
 <!--读取数据库，获取用户信息-->
 <?php
-$sql = "SELECT * FROM `user` WHERE `user_id` = " . getDataFromCookie("id", $_COOKIE["userCode"]);
-$result = mysql_query($sql, $conn);
-$success = mysql_num_rows($result);
-
-if($success){
-    while($row = mysql_fetch_array($result)){
-        $userId = $row["user_id"];
-        $userName = $row["name"];
-        $userMail = $row["mail"];
-        $userAdmin = $row["admin"];
-        $userPhone = $row["phone"];
-        $userHead = "user_img/" . $row["head"];
-        $userSign = $row["sign"];
-        $userLevel = $row["level"];
-        $userRegistTime = $row["regist_time"];
-        $userLastLogin = $row["last_login"];
-        //解释用户状态
-        if($row["status"] == 1){
-            $userStatus = "正常";
-        } elseif($row["status"] == 2){
-            $userStatus = "冻结";
-        } elseif($row["status"] == 0){
-            $userStatus = "未激活";
-        } else{
-            $userStatus = "状态错误";
-        }
-    }
-} else{
-    $userName = "没有找到该用户的信息";
-    $userHead = "../img/book_default_img";
+$userId = getDataFromCookie("id", $_COOKIE["userCode"]);
+$userInfo = getUserInfoById($userId, $conn);
+//如果返回用户信息为空
+if(!$userInfo){
+    echo '<div class = "container text-center bx-dialog-info">
+    <p><i class = "icon-remove"></i>&nbsp;&nbsp;该用户不存在，请重试！</p></div>';
+    include "../common/foot.php";
+    exit;
 }
 ?>
 
-
 <!--书籍主要信息-->
 <div class = "container">
-    <div class = "page-header"><h2><?php echo $userName ?></h2></div>
+    <div class = "page-header"><h2><?php echo $userInfo["name"] ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-user-head-img"><img src = "<?php echo $userHead ?>" class = "img-polaroid"></div>
+            <div class = "f-fl bx-user-head-img">
+                <img src = "<?php echo "user_img/" . $userInfo["head"] ?>" class = "img-polaroid">
+            </div>
             <div>
-                <p>邮箱：<strong><?php echo $userMail ?></strong></p>
-                <p>手机：<strong><?php echo $userPhone ?></strong></p>
-                <p>签名档：<strong><?php echo $userSign ?></strong></p>
-                <p>状态：<strong><?php echo $userStatus ?></strong></p>
-                <p>等级：<strong><?php echo $userLevel ?>级</strong></p>
+                <p>邮箱：<strong><?php echo $userInfo["mail"] ?></strong></p>
+                <p>手机：<strong><?php echo $userInfo["phone"] ?></strong></p>
+                <p>签名档：<strong><?php echo $userInfo["sign"] ?></strong></p>
+                <p>状态：<strong><?php echo $userInfo["status_str"] ?></strong></p>
+                <p>等级：<strong><?php echo $userInfo["level"] ?>级</strong></p>
                 <p>
-                    <button class = "btn btn-info btn-small" type = "button">修改资料</button>
+                    <a class = "btn btn-info btn-small" href = "edit.php">修改资料</a>
                 </p>
             </div>
         </div>
@@ -124,8 +103,8 @@ if($success){
 <!--书籍其他信息-->
 <div class = "container">
     <h4>其他</h4>
-    <p>注册时间：<strong><?php echo $userRegistTime ?></strong></p>
-    <p>最近登录：<strong><?php echo $userLastLogin ?></strong></p>
+    <p>注册时间：<strong><?php echo $userInfo["regist_time"] ?></strong></p>
+    <p>最近登录：<strong><?php echo $userInfo["last_login"] ?></strong></p>
 </div>
 
 <!--引入页尾文件-->

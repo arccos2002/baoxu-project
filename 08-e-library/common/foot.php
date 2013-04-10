@@ -11,9 +11,10 @@
 <script src="../js/html5shiv.js"></script>
 <![endif]-->
 
+<!--需要的JS文件-->
 <script src = "../js/jquery-1.9.1.min.js"></script>
 <script src = "../js/bootstrap.min.js"></script>
-<script src = "../js/globle.js"></script>
+<script src = "../js/global.js"></script>
 <script src = "../js/function.js"></script>
 
 </body>

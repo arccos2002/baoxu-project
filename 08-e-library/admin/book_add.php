@@ -7,8 +7,8 @@
     <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
-    <style type="text/css">
-        #spider_book_img{height: 100px;}
+    <style type = "text/css">
+        #spider_book_img{ height: 100px; }
     </style>
 </head>
 <body>
@@ -22,7 +22,7 @@
 <!--首页内容主体-->
 <div class = "container text-center">
     <div class = "input-append input-prepend">
-        <span class = "add-on">ISBN:</span>
+        <span class = "add-on">ISBN:</span> <label for = "appendedInput" class = "f-dn"></label>
         <input class = "span4" id = "appendedInput" type = "text" placeholder = "13位的ISBN码">
         <span class = "add-on btn" data-event-tag = "et_spider_book_btn">&nbsp;&nbsp;抓&nbsp;取!&nbsp;&nbsp;</span>
     </div>
@@ -122,15 +122,15 @@
         <div class = "control-group">
             <label class = "control-label" for = "isbn13">ISBN13</label>
             <div class = "controls">
-                <input type = "text" id = "isbn13" name = "isbn13" class = "span5" onblur="checkBookIsbn13(this);">
-                <span id="js-book-isbn-exist" class="text-error add-on f-dn">该书已经存在，不能重复添加。</span>
+                <input type = "text" id = "isbn13" name = "isbn13" class = "span5" onblur = "checkBookIsbn13(this);">
+                <span id = "js-book-isbn-exist" class = "text-error add-on f-dn">该书已经存在，不能重复添加。</span>
             </div>
         </div>
 
         <div class = "control-group">
             <label class = "control-label" for = "provider">捐赠者</label>
             <div class = "controls">
-                <input type = "text" id = "provider" required="required" name = "provider" class = "span5" value = "">
+                <input type = "text" id = "provider" required = "required" name = "provider" class = "span5" value = "">
             </div>
         </div>
 

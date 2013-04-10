@@ -26,7 +26,7 @@ $success = mysql_num_rows($result);
 <!--页面主体-->
 <div class = "container">
     <div class = "input-append f-fr">
-        <label for="appendedInputButton" class="f-dn"></label>
+        <label for = "appendedInputButton" class = "f-dn"></label>
         <input class = "span3" id = "appendedInputButton" placeholder = "书名" type = "text">
         <button class = "btn" type = "button">搜索</button>
     </div>

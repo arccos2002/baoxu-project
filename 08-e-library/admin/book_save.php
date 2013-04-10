@@ -25,7 +25,5 @@ $result = mysql_query($saveBookSql, $conn);
 if(!$result){
     die('Error: ' . mysql_error());
 } else{
-    echo "<script language='javascript' type='text/javascript'>";
-    echo "window.location.href='success.php'";
-    echo "</script>";
+    jumpToUrl("success.php");
 }

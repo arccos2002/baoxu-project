@@ -22,7 +22,7 @@
 <!--内容主体-->
 <div class = "container">
     <div class = "page-header"><h2>用户注册</h2></div>
-    <form class = "form-horizontal" name = "userRegister" id = "userRegister" onsubmit = "return verifyRegistForm(this)" action = "../admin/user_save.php" enctype = "multipart/form-data" method = "post">
+    <form class = "form-horizontal" name = "userRegister" id = "userRegister" action = "../admin/user_save.php" enctype = "multipart/form-data" method = "post">
         <div class = "control-group">
             <label class = "control-label" for = "name">姓名</label>
             <div class = "controls">
