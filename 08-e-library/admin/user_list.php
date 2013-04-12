@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset = "utf-8" />
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>注册用户列表—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
     <link rel = "stylesheet" href = "../css/global.css">
@@ -34,11 +35,11 @@ $success = mysql_num_rows($result);
     <table class = "table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            <th>ID</th>
+            <th class = "hidden-phone">ID</th>
             <th>姓名</th>
-            <th>邮箱</th>
+            <th class = "hidden-phone">邮箱</th>
             <th>手机号</th>
-            <th>等级</th>
+            <th class = "hidden-phone">等级</th>
             <th>状态</th>
             <th>管理</th>
         </tr>
@@ -72,11 +73,11 @@ $success = mysql_num_rows($result);
 
                 //填充表格
                 echo '<tr>';
-                echo '<td><a href = "user_info.php?userId=' . $userId . '">' . $userId . '</a></td>';
-                echo '<td>' . $userName . '</td>';
-                echo '<td>' . $userMail . '</td>';
+                echo '<td class="hidden-phone"><a href = "user_info.php?userId=' . $userId . '">' . $userId . '</a></td>';
+                echo '<td><a href = "user_info.php?userId=' . $userId . '">' . $userName . '</a></td>';
+                echo '<td class="hidden-phone">' . $userMail . '</td>';
                 echo '<td>' . $userPhone . '</td>';
-                echo '<td>' . $userLevel . '</td>';
+                echo '<td class="hidden-phone">' . $userLevel . '</td>';
                 echo '<td>' . $userStatus . '</td>';
                 echo '<td>' . "管理" . '</td>';
                 echo '</tr>';

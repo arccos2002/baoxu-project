@@ -2,16 +2,13 @@
 <html>
 <head>
     <meta charset = "utf-8" />
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>书籍详情—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
     <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">
     <link rel = "stylesheet" href = "../css/function.css">
     <style type = "text/css">
-        .bx-book-img{ margin: 0 22px 15px 0; }
-
-        .bx-book-img img{ height: 210px; }
-
         .bx-apply-book{ padding-top: 8px; }
 
         #js-apply-book-info{ padding-left: 15px; }
@@ -83,8 +80,9 @@ if($success){
     <div class = "page-header"><h2><?php echo $bookName ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-book-img"><img src = "<?php echo @$bookImg ?>" class = "img-polaroid"></div>
-            <div>
+            <div class = "span2"><img style="max-height: 220px;" src = "<?php echo @$bookImg ?>" class = "img-polaroid"></div>
+            <div class="span6">
+                <h4 class="visible-phone">基本信息</h4>
                 <p>作者：<strong><?php echo @$bookAuthor ?></strong></p>
                 <p>出版社：<strong><?php echo @$bookPublisher ?></strong></p>
                 <p>出版时间：<strong><?php echo @$bookPubdate ?></strong></p>

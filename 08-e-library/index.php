@@ -107,9 +107,7 @@ if($_POST){
             setcookie("userName", $row["name"], time() + 3600, "/");
 
             /*跳转*/
-            echo "<script language='javascript' type='text/javascript'>";
-            echo "window.location.href='home/'";
-            echo "</script>";
+            jumpToUrl("home/");
         }
     } else{
         //提示登陆失败

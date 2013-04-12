@@ -71,4 +71,11 @@ ul.bx-tag li{
 /*用户头像显示*/
 .bx-user-head-img{ margin-right: 15px; }
 
-.bx-user-head-img img{ height: 170px; }
+.bx-user-head-img img{
+}
+
+/*所有的td都是可以截断字的*/
+td{
+	word-break: break-all;
+	word-wrap: break-word;
+}

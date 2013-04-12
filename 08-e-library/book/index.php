@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset = "utf-8" />
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>书籍列表—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
     <link rel = "stylesheet" href = "../css/global.css">
@@ -30,15 +31,17 @@ $success = mysql_num_rows($result);
         <input class = "span3" id = "appendedInputButton" placeholder = "书名" type = "text">
         <button class = "btn" type = "button">搜索</button>
     </div>
+</div>
 
+<div class = "container">
     <table class = "table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            <th>ID</th>
+            <th class="hidden-phone">ID</th>
             <th>书名</th>
             <th>作者</th>
-            <th>状态</th>
-            <th>应还日期</th>
+            <th class="hidden-phone">状态</th>
+            <th class="hidden-phone">应还日期</th>
         </tr>
         </thead>
         <tbody>
@@ -82,11 +85,11 @@ $success = mysql_num_rows($result);
 
                 //填充表格
                 echo '<tr>';
-                echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["book_id"] . '</a></td>';
+                echo '<td class="hidden-phone"><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["book_id"] . '</a></td>';
                 echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["title"] . '</a></td>';
                 echo '<td>' . $row["author"] . '</td>';
-                echo '<td>' . $bookStatus . '</td>';
-                echo '<td>' . $bookExpireDate . '</td>';
+                echo '<td class="hidden-phone">' . $bookStatus . '</td>';
+                echo '<td class="hidden-phone">' . $bookExpireDate . '</td>';
                 echo '</tr>';
             }
         } else{

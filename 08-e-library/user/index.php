@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset = "utf-8" />
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>个人中心—Just Read</title>
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
     <link rel = "stylesheet" href = "../css/global.css">
@@ -34,10 +35,10 @@ if(!$userInfo){
     <div class = "page-header"><h2><?php echo $userInfo["name"] ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-user-head-img">
+            <div class = "f-fl span2">
                 <img src = "<?php echo "user_img/" . $userInfo["head"] ?>" class = "img-polaroid">
             </div>
-            <div>
+            <div class="span7">
                 <p>邮箱：<strong><?php echo $userInfo["mail"] ?></strong></p>
                 <p>手机：<strong><?php echo $userInfo["phone"] ?></strong></p>
                 <p>签名档：<strong><?php echo $userInfo["sign"] ?></strong></p>
@@ -69,7 +70,7 @@ if(!$userInfo){
 </div>
 
 <!--书籍摘要信息-->
-<div class = "container">
+<div class = "container hidden-phone">
     <h4>借阅历史</h4>
 
     <div class = "row">
