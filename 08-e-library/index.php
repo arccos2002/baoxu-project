@@ -24,8 +24,8 @@
             border-radius: 5px 5px 5px 5px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             margin: 30px auto 20px;
-            max-width: 300px;
-            padding: 19px 29px 29px;
+            max-width: 270px;
+            padding: 19px 20px 29px;
         }
 
         .form-signin .form-signin-heading, .form-signin{
@@ -37,21 +37,7 @@
             height: auto;
             margin-bottom: 15px;
             padding: 7px 9px;
-        }
-
-        .bx-login-email, .bx-login-password-input{
-            width: 94%;
-        }
-
-        .bx-login-email-input{
-            width: 130px;
-        }
-
-        .bx-login-add{
-            font-size: 16px !important;
-            height: auto !important;
-            margin-bottom: 15px !important;
-            padding: 7px 4px !important;
+            width: 95%;
         }
 
         .bx-register-btn{
@@ -65,13 +51,10 @@
     <div class = "text-center bx-login-logo">Just Read</div>
     <form class = "form-signin" method = "post" action = "">
         <h2 class = "form-signin-heading">登录</h2>
-        <div class = "input-append bx-login-email">
-            <label for = "email" class = "f-dn"></label>
-            <input class = "bx-login-email-input" id = "email" name = "email" type = "text" placeholder = "mail" required = "required">
-            <span class = "add-on bx-login-add">@corp.netease.com</span>
-        </div>
+        <label for = "email" class = "f-dn"></label>
+        <input id = "email" name = "email" type = "text" placeholder = "Corp邮箱前缀" required = "required">
         <label for = "password" class = "f-dn"></label>
-        <input class = "bx-login-password-input" id = "password" name = "password" type = "password" placeholder = "password" required = "required">
+        <input id = "password" name = "password" type = "password" placeholder = "密码" required = "required">
         <p id = "js_login_error_info" class = "text-error f-dn">登录失败，请确认用户名与密码。</p>
         <button class = "btn btn-large btn-primary" type = "submit">登录</button>
         <a class = "f-fr bx-register-btn" href = "user/register.php">注册</a>

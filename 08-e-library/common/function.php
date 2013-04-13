@@ -258,6 +258,39 @@ function getBookInfoById($bookId, $conn){
     $row = mysql_fetch_array($result);
     $success = @mysql_num_rows($result);
 
+    //解释书籍状态
+    if(!$row["status"]){
+        //状态字符串
+        $status_str = "在馆可借";
+        //到期日期
+        $bookExpireDate = "-";
+        //离到期还剩天数
+        $bookBackDay = "-";
+    } else{
+        //借出日的时间戳
+        $borrowDateStamp = strtotime($row["borrow_date"]);
+        //当前的时间戳
+        $nowDateStamp = strtotime(date("Y-m-d"));
+        //如果没有续借
+        if(!$row["renew_status"]){
+            $status_str = "借出未还";
+            //到期那天的时间戳
+            $bookExpireStamp = BORROW_DAY * 24 * 60 * 60 + $borrowDateStamp;
+            //到期日期
+            $bookExpireDate = date("Y-m-d", $bookExpireStamp);
+            //离到期日期还剩的天数
+            $bookBackDay = BORROW_DAY - ($nowDateStamp - $borrowDateStamp) / (60 * 60 * 24) - 1;
+        } else{
+            $status_str = "续借未还";
+            //到期那天的时间戳，算上续借的天数
+            $bookExpireStamp = (BORROW_DAY + RENEW_DAY) * 24 * 60 * 60 + $borrowDateStamp;
+            //到期日期
+            $bookExpireDate = date("Y-m-d", $bookExpireStamp);
+            //离到期日期还剩的天数
+            $bookBackDay = BORROW_DAY + RENEW_DAY - ($nowDateStamp - $borrowDateStamp) / (60 * 60 * 24) - 1;
+        }
+    }
+
     $bookInfo = array(
         "book_id" => $row["book_id"],
         "isbn" => $row["isbn13"],
@@ -271,7 +304,14 @@ function getBookInfoById($bookId, $conn){
         "summary" => $row["summary"],
         "pages" => $row["pages"],
         "provider" => $row["provider"],
-        "status" => $row["status"]
+        "status" => $row["status"],
+        "borrow_date" => $row["borrow_date"],
+        "renew_status" => $row["renew_status"],
+        "borrow_count" => $row["borrow_count"],
+        "status_str" => $status_str,
+        "expire_date" => $bookExpireDate,
+        "back_day" => $bookBackDay,
+        "tags" => explode(",", $row["tags"])
     );
 
     if($success){
@@ -290,12 +330,12 @@ function getBookInfoById($bookId, $conn){
  */
 function loanBook($bookId, $borrowId, $conn){
     $todayDate = date("Y-m-d");
-    //改写Borrow表，type改为1表示借书成功，更新借书时间
+    //改写borrow表，type改为1表示借书成功，更新借书时间
     $borrow_sql = "UPDATE `borrow` SET `type` = '1' , `date` = '$todayDate' WHERE `borrow_id` = '$borrowId'";
     mysql_query($borrow_sql, $conn);
     $borrow_success = mysql_affected_rows();
-    //改写book表，将对应的book的状态置为0表示已借出，更新借书时间，增加借书次数
-    $book_sql = "UPDATE `book` SET `status` = '0' , `borrow_date` = '$todayDate' , `borrow_count` = `borrow_count`+1 WHERE `book_id` = '$bookId'";
+    //改写book表，将对应的book的状态置为0表示已借出，更新借书时间，增加借书次数，设置续借状态为未续借
+    $book_sql = "UPDATE `book` SET `status` = '0' , `borrow_date` = '$todayDate' , `borrow_count` = `borrow_count`+1 , `renew_status` = '0' WHERE `book_id` = '$bookId'";
     mysql_query($book_sql, $conn);
     $book_success = mysql_affected_rows();
     if($borrow_success && $book_success){
@@ -318,8 +358,8 @@ function returnBook($bookId, $borrowId, $conn){
     $borrow_sql = "UPDATE `borrow` SET `type` = '2' , `date` = '$todayDate' WHERE `borrow_id` = '$borrowId'";
     mysql_query($borrow_sql, $conn);
     $borrow_success = mysql_affected_rows();
-    //改写book表，将对应的book的状态置为1表示在馆可借，空置借书时间
-    $book_sql = "UPDATE `book` SET `status` = '1' , `borrow_date` = NULL WHERE `book_id` = '$bookId'";
+    //改写book表，将对应的book的状态置为1表示在馆可借，空置借书时间，续借状态置为0未续借
+    $book_sql = "UPDATE `book` SET `status` = '1' , `borrow_date` = NULL , `renew_status` = '0' WHERE `book_id` = '$bookId'";
     mysql_query($book_sql, $conn);
     $book_success = mysql_affected_rows();
     if($borrow_success && $book_success){
@@ -342,7 +382,11 @@ function renewBook($bookId, $borrowId, $conn){
     $borrow_sql = "UPDATE `borrow` SET `renew` = '1' WHERE `borrow_id` = '$borrowId'";
     mysql_query($borrow_sql, $conn);
     $borrow_success = mysql_affected_rows();
-    if($borrow_success){
+    //改写book表，将对应的book的续借状态置为1为在续借
+    $book_sql = "UPDATE `book` SET `status` = '0' , `renew_status` = '1' WHERE `book_id` = '$bookId'";
+    mysql_query($book_sql, $conn);
+    $book_success = mysql_affected_rows();
+    if($borrow_success && $book_success){
         return true;
     } else{
         return false;
@@ -363,8 +407,6 @@ function updateUserBasicInfo($userId, $updateInfo, $conn){
     $sql = "UPDATE `user` SET `name` = '$userName' , `phone` = '$userPhone' , `sign` = '$userSign' WHERE `user_id` = '$userId'";
     mysql_query($sql, $conn);
     $success = mysql_affected_rows();
-
-    //return $sql;
 
     if($success){
         return true;

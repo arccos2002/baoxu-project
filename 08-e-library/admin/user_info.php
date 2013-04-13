@@ -38,8 +38,9 @@ if(!$userInfo){
     <div class = "page-header"><h2><?php echo $userInfo["name"] ?></h2></div>
     <div class = "row">
         <div class = "span9">
-            <div class = "f-fl bx-user-head-img"><img src = "<?php echo "../user/user_img/".$userInfo["head"] ?>" class = "img-polaroid"></div>
-            <div>
+            <div class = "f-fl span2"><img src = "<?php echo "../user/user_img/".$userInfo["head"] ?>" class = "img-polaroid"></div>
+            <div class="span6">
+                <h4 class="visible-phone">基本信息</h4>
                 <p>邮箱：<strong><?php echo $userInfo["mail"] ?></strong></p>
                 <p>手机：<strong><?php echo $userInfo["phone"] ?></strong></p>
                 <p>签名档：<strong><?php echo $userInfo["sign"] ?></strong></p>

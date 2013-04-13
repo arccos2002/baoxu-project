@@ -37,11 +37,11 @@ $success = mysql_num_rows($result);
     <table class = "table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            <th class="hidden-phone">ID</th>
             <th>书名</th>
+            <th class = "hidden-phone">编号</th>
             <th>作者</th>
-            <th class="hidden-phone">状态</th>
-            <th class="hidden-phone">应还日期</th>
+            <th class = "hidden-phone">状态</th>
+            <th class = "hidden-phone">应还日期</th>
         </tr>
         </thead>
         <tbody>
@@ -85,8 +85,8 @@ $success = mysql_num_rows($result);
 
                 //填充表格
                 echo '<tr>';
-                echo '<td class="hidden-phone"><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["book_id"] . '</a></td>';
                 echo '<td><a href = "info.php?bookId=' . $row["book_id"] . '">' . $row["title"] . '</a></td>';
+                echo '<td class="hidden-phone">' . $row["book_id"] . '</td>';
                 echo '<td>' . $row["author"] . '</td>';
                 echo '<td class="hidden-phone">' . $bookStatus . '</td>';
                 echo '<td class="hidden-phone">' . $bookExpireDate . '</td>';

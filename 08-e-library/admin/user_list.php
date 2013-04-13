@@ -35,8 +35,8 @@ $success = mysql_num_rows($result);
     <table class = "table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            <th class = "hidden-phone">ID</th>
             <th>姓名</th>
+            <th class = "hidden-phone">编号</th>
             <th class = "hidden-phone">邮箱</th>
             <th>手机号</th>
             <th class = "hidden-phone">等级</th>
@@ -73,8 +73,8 @@ $success = mysql_num_rows($result);
 
                 //填充表格
                 echo '<tr>';
-                echo '<td class="hidden-phone"><a href = "user_info.php?userId=' . $userId . '">' . $userId . '</a></td>';
                 echo '<td><a href = "user_info.php?userId=' . $userId . '">' . $userName . '</a></td>';
+                echo '<td class="hidden-phone">' . $userId . '</td>';
                 echo '<td class="hidden-phone">' . $userMail . '</td>';
                 echo '<td>' . $userPhone . '</td>';
                 echo '<td class="hidden-phone">' . $userLevel . '</td>';
