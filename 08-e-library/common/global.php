@@ -33,6 +33,8 @@ define("BORROW_DAY", 30);
 //用户可续借的天数
 define("RENEW_DAY", 10);
 
+//列表页每页显示的条数
+define("PAGE_SIZE", 20);
 
 //PHP异常日志处理类
 function exceptionHandler(){

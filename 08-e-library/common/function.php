@@ -425,3 +425,12 @@ function jumpToUrl($url){
     echo "window.location.href='$url'";
     echo "</script>";
 }
+
+
+function getListCount($type, $conn){
+    $sql = "SELECT COUNT(*) AS count from `$type`";
+    $result = mysql_query($sql, $conn);
+    $row = mysql_fetch_row($result);
+    $count = $row[0];
+    return $count;
+}

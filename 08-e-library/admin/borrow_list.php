@@ -23,8 +23,8 @@
 <!--读取数据库，获取用户列表-->
 <?php
 //判断url中的参数，如果没有参数
-if(!$_GET || !$_GET["type"]){
-    $sql = "SELECT * FROM `borrow`";
+if(!array_key_exists("type", $_GET)){
+    $sql = "SELECT * FROM `borrow` ORDER BY `borrow_id` DESC";
     //分类导航
     $subNav = '<a class = "btn" href = "?type=apply">申请中</a>
             <a class = "btn" href = "?type=borrow">借阅中</a>

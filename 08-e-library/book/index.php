@@ -19,7 +19,37 @@
 
 <!--读取数据库，获取数目列表-->
 <?php
-$sql = "SELECT * FROM `book`";
+$bookCount = getListCount("book", $conn);
+$bookPageCount = ceil($bookCount / PAGE_SIZE);
+
+//判断GET中是否有page参数
+if(!array_key_exists("page", $_GET)){
+    $nowPage = 1;
+} else{
+    if($_GET["page"] <= 0){
+        $nowPage = 1;
+    } else{
+        $nowPage = $_GET["page"];
+    }
+}
+
+if($nowPage == 1){
+    if($bookPageCount == 1){
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li class="active"><span>Next &raquo;</span></li>';
+    } else{
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li><a href="?page=' . ($nowPage + 1) . '">Next &raquo;</a></li>';
+    }
+} elseif($nowPage == $bookPageCount){
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '">&laquo; Prev</a></li>
+                <li class="active"><span>Next &raquo;</span></li>';
+} else{
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '">&laquo; Prev</a></li>
+                <li><a href="?page=' . ($nowPage + 1) . '">Next &raquo;</a></li>';
+}
+
+$sql = "SELECT * FROM `book` ORDER BY `book_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
 $result = mysql_query($sql, $conn);
 $success = mysql_num_rows($result);
 ?>
@@ -98,8 +128,14 @@ $success = mysql_num_rows($result);
             echo '</tr>';
         }
         ?>
-
     </table>
+
+    <!--导航条-->
+    <div class = "pagination">
+        <ul>
+            <?php echo $pageNav ?>
+        </ul>
+    </div>
 </div>
 
 <!--引入页尾文件-->
