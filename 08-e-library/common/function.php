@@ -445,3 +445,39 @@ function getListCount($type, $conn, $whereArray){
     $count = $row[0];
     return $count;
 }
+
+/**
+ * 查询用户借阅历史的书籍ID列表
+ * @param number   $userId   用户ID
+ * @param number   $maxCount 需要的数量
+ * @param resource $conn     数据库连接
+ * @return array 返回用户借阅历史的数目ID数组
+ */
+function getUserBorrowHistory($userId, $maxCount, $conn){
+    //查询用户的借阅历史
+    $sql = "SELECT * FROM `borrow` WHERE `user_id` = '$userId' AND `type` IN (1,2) ORDER BY `borrow_id` DESC";
+    $result = mysql_query($sql, $conn);
+    //查询到的行数
+    $success = mysql_num_rows($result);
+
+    //借阅历史数目的ID数组
+    $borrowHistoryIds = array();
+
+    if(!$success){
+        //没有借阅历史的时候
+        $borrowHistoryIds = array();
+    } elseif($success > $maxCount){
+        //借阅数量大于指定，只显示指定个数
+        for($i = 1; $i <= $maxCount; $i++){
+            $row = mysql_fetch_array($result);
+            array_push($borrowHistoryIds, $row["book_id"]);
+        }
+    } else{
+        //不足指定个数，全部返回
+        while($row = mysql_fetch_array($result)){
+            array_push($borrowHistoryIds, $row["book_id"]);
+        }
+    }
+
+    return $borrowHistoryIds;
+}

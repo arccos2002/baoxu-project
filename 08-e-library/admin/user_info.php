@@ -64,44 +64,29 @@ if(!$userInfo){
     </div>
 </div>
 
-<div class = "container">
+<div class = "container f-pt10">
     <h4>社交帐号</h4>
     <p class = "muted">暂不支持</p>
 </div>
 
-<!--书籍摘要信息-->
-<div class = "container">
+<!--用户借阅历史信息-->
+<div class = "container hidden-phone">
     <h4>借阅历史</h4>
-
     <div class = "row">
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787121141638.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787115275790.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787121141638.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787115275790.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
-        <div class = "span2">
-            <a href = "#"><img src = "../book/book_img/9787121105777.jpg" class = "img-polaroid bx-read-history-img"></a>
-            <p><a href = "#">132465432154</a></p>
-        </div>
+        <?php
+        //打印HTML
+        $borrowHistoryIds = getUserBorrowHistory($userId, 6, $conn);
+        foreach($borrowHistoryIds as $bookId){
+            $bookInfo = getBookInfoById($bookId, $conn);
+            echo '<div class = "span2">';
+            echo '<a href = "../book/info.php?bookId=' . $bookInfo["book_id"] . '"><img src = "../book/book_img/' . $bookInfo["image"] . '" class = "img-polaroid bx-read-history-img"></a>';
+            echo '<p><a href = "../book/info.php?bookId=' . $bookInfo["book_id"] . '">' . $bookInfo["title"] . '</a></p></div>';
+        }
+        ?>
     </div>
 </div>
 
-<!--书籍其他信息-->
+<!--其他信息-->
 <div class = "container">
     <h4>其他</h4>
     <p>注册时间：<strong><?php echo $userInfo["regist_time"] ?></strong></p>
