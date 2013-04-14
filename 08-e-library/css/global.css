@@ -79,3 +79,35 @@ td{
 	word-break: break-all;
 	word-wrap: break-word;
 }
+
+i.icon-douban-disabled{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 5px;
+	background: url("../img/icon-douban-disabled.png") no-repeat center;
+}
+
+i.icon-douban-active{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 5px;
+	background: url("../img/icon-douban-active.png") no-repeat center;
+}
+
+i.icon-sina-disabled{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 5px;
+	background: url("../img/icon-sina-disabled.png") no-repeat center;
+}
+
+i.icon-sina-active{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 5px;
+	background: url("../img/icon-sina-active.png") no-repeat center;
+}

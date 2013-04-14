@@ -68,7 +68,10 @@ if(!$userInfo){
 <!--社交帐号信息-->
 <div class = "container f-pt10">
     <h4>社交帐号</h4>
-    <p class = "muted">暂不支持</p>
+    <ul class="inline">
+        <li><i class = "icon-douban-disabled"></i><a href = "#" title = "暂未支持">绑定豆瓣帐号</a></li>
+        <li><i class = "icon-sina-disabled"></i><a href = "#" title = "暂未支持">绑定新浪微博</a></li>
+    </ul>
 </div>
 
 <!--用户借阅历史信息-->
