@@ -22,9 +22,26 @@
 
 <!--读取数据库，获取用户列表-->
 <?php
-//判断url中的参数，如果没有参数
+
+//判断GET中是否有page参数
+if(!array_key_exists("page", $_GET)){
+    $nowPage = 1;
+} else{
+    if($_GET["page"] <= 0){
+        $nowPage = 1;
+    } else{
+        $nowPage = $_GET["page"];
+    }
+}
+
+//判断GET中是否有type参数
 if(!array_key_exists("type", $_GET)){
-    $sql = "SELECT * FROM `borrow` ORDER BY `borrow_id` DESC";
+    $nowType = "all";
+    //记录条数
+    $borrowCount = getListCount("borrow", $conn, array());
+
+    //查全部书籍列表
+    $sql = "SELECT * FROM `borrow` ORDER BY `borrow_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
     //分类导航
     $subNav = '<a class = "btn" href = "?type=apply">申请中</a>
             <a class = "btn" href = "?type=borrow">借阅中</a>
@@ -33,11 +50,13 @@ if(!array_key_exists("type", $_GET)){
     //管理菜单
     $manageMenu = "";
 } else{
-    //有参数的话做如下判断
-    switch($_GET["type"]){
+    $nowType = $_GET["type"];
+    switch($nowType){
         case "apply":
+            //申请状态记录条数
+            $borrowCount = getListCount("borrow", $conn, array("type", 0));
             //选择所有申请状态的数据
-            $sql = "SELECT * FROM `borrow` WHERE `type` = '0'";
+            $sql = "SELECT * FROM `borrow` WHERE `type` = '0' ORDER BY `borrow_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
             //分类导航
             $subNav = '<a class = "btn btn-primary" href = "?type=apply">申请中</a>
             <a class = "btn" href = "?type=borrow">借阅中</a>
@@ -45,8 +64,10 @@ if(!array_key_exists("type", $_GET)){
             <a class = "btn" href = "?type=">全部</i></a>';
             break;
         case "borrow":
+            //借阅状态记录条数
+            $borrowCount = getListCount("borrow", $conn, array("type", 1));
             //选择所有借阅状态的数据
-            $sql = "SELECT * FROM `borrow` WHERE `type` = '1'";
+            $sql = "SELECT * FROM `borrow` WHERE `type` = '1' ORDER BY `borrow_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
             //分类导航
             $subNav = '<a class = "btn" href = "?type=apply">申请中</a>
             <a class = "btn btn-primary" href = "?type=borrow">借阅中</a>
@@ -54,8 +75,10 @@ if(!array_key_exists("type", $_GET)){
             <a class = "btn" href = "?type=">全部</i></a>';
             break;
         case "return":
+            //归还状态记录条数
+            $borrowCount = getListCount("borrow", $conn, array("type", 2));
             //选择所有归还状态的数据
-            $sql = "SELECT * FROM `borrow` WHERE `type` = '2'";
+            $sql = "SELECT * FROM `borrow` WHERE `type` = '2' ORDER BY `borrow_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
             //分类导航
             $subNav = '<a class = "btn" href = "?type=apply">申请中</a>
             <a class = "btn" href = "?type=borrow">借阅中</a>
@@ -63,8 +86,10 @@ if(!array_key_exists("type", $_GET)){
             <a class = "btn" href = "?type=">全部</i></a>';
             break;
         default:
+            //全部记录条数
+            $borrowCount = getListCount("borrow", $conn, array());
             //默认选取全部数据
-            $sql = "SELECT * FROM `borrow`";
+            $sql = "SELECT * FROM `borrow` ORDER BY `borrow_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
             //分类导航
             $subNav = '<a class = "btn" href = "?type=apply">申请中</a>
             <a class = "btn" href = "?type=borrow">借阅中</a>
@@ -72,6 +97,28 @@ if(!array_key_exists("type", $_GET)){
             <a class = "btn btn-primary" href = "?type=">全部</i></a>';
             break;
     }
+}
+
+//总页数
+$borrowPageCount = ceil($borrowCount / PAGE_SIZE);
+
+//设置分页导航
+if($nowPage == 1){
+    if($borrowPageCount == 1){
+        //如果是第一页，且只有一页
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li class="active"><span>Next &raquo;</span></li>';
+    } else{
+        //第一页，但不止一页
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li><a href="?page=' . ($nowPage + 1) . '&type=' . $nowType . '">Next &raquo;</a></li>';
+    }
+} elseif($nowPage == $borrowPageCount){
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '&type=' . $nowType . '">&laquo; Prev</a></li>
+                <li class="active"><span>Next &raquo;</span></li>';
+} else{
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '&type=' . $nowType . '">&laquo; Prev</a></li>
+                <li><a href="?page=' . ($nowPage + 1) . '&type=' . $nowType . '">Next &raquo;</a></li>';
 }
 
 //执行sql语句
@@ -173,12 +220,11 @@ $success = mysql_num_rows($result);
                         $manageMenu = "-";
                 }
 
-
                 //填充表格
                 echo '<tr>';
                 echo '<td>' . $borrowId . '</td>';
-                echo '<td>' . $userName . '</td>';
-                echo '<td>' . $bookTitle . '</td>';
+                echo '<td><a href="user_info.php?userId=' . $userId . '">' . $userName . '</a></td>';
+                echo '<td><a href="../book/info.php?bookId=' . $bookId . '">' . $bookTitle . '</a></td>';
                 echo '<td>' . $borrowType . '</td>';
                 echo '<td>' . $borrowRenew . '</td>';
                 echo '<td>' . $actionDate . '</td>';
@@ -190,8 +236,14 @@ $success = mysql_num_rows($result);
             echo '没有项目！';
         }
         ?>
-
     </table>
+
+    <!--导航条-->
+    <div class = "pagination">
+        <ul>
+            <?php echo $pageNav ?>
+        </ul>
+    </div>
 </div>
 
 <!--引入页尾文件-->

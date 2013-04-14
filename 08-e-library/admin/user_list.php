@@ -19,7 +19,40 @@
 
 <!--读取数据库，获取用户列表-->
 <?php
-$sql = "SELECT * FROM `user`";
+$userCount = getListCount("user", $conn, array());
+$userPageCount = ceil($userCount / PAGE_SIZE);
+
+//判断GET中是否有page参数
+if(!array_key_exists("page", $_GET)){
+    $nowPage = 1;
+} else{
+    if($_GET["page"] <= 0){
+        $nowPage = 1;
+    } else{
+        $nowPage = $_GET["page"];
+    }
+}
+
+if($nowPage == 1){
+    //当前是第一页而且总共只有一页的时候，禁用翻页按钮
+    if($userPageCount == 1){
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li class="active"><span>Next &raquo;</span></li>';
+    } else{
+        //当前是第一页，上一页按钮失效
+        $pageNav = '<li class="active"><span>&laquo; Prev</span></li>
+                    <li><a href="?page=' . ($nowPage + 1) . '">Next &raquo;</a></li>';
+    }
+} elseif($nowPage == $userPageCount){
+    //如果当前是最后一页，下一页按钮失效
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '">&laquo; Prev</a></li>
+                <li class="active"><span>Next &raquo;</span></li>';
+} else{
+    $pageNav = '<li><a href="?page=' . ($nowPage - 1) . '">&laquo; Prev</a></li>
+                <li><a href="?page=' . ($nowPage + 1) . '">Next &raquo;</a></li>';
+}
+
+$sql = "SELECT * FROM `user` ORDER BY `user_id` DESC LIMIT " . ($nowPage - 1) * PAGE_SIZE . "," . PAGE_SIZE;
 $result = mysql_query($sql, $conn);
 $success = mysql_num_rows($result);
 ?>
@@ -83,11 +116,18 @@ $success = mysql_num_rows($result);
                 echo '</tr>';
             }
         } else{
-            echo '没有书！';
+            echo '没有了！';
         }
         ?>
 
     </table>
+
+    <!--导航条-->
+    <div class = "pagination">
+        <ul>
+            <?php echo $pageNav ?>
+        </ul>
+    </div>
 </div>
 
 <!--引入页尾文件-->

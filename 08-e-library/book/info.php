@@ -43,7 +43,8 @@ if(!$bookInfo){
     <div class = "row">
         <div class = "span9">
             <div class = "span2">
-                <img style = "max-height: 220px;" src = "<?php echo 'book_img/'.$bookInfo["image"] ?>" class = "img-polaroid"></div>
+                <img style = "max-height: 220px;" src = "<?php echo 'book_img/' . $bookInfo["image"] ?>" class = "img-polaroid">
+            </div>
             <div class = "span6">
                 <h4 class = "visible-phone">基本信息</h4>
                 <p>作者：<strong><?php echo $bookInfo["author"] ?></strong></p>

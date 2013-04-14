@@ -23,7 +23,7 @@ $updateInfo = array(
 if(updateUserBasicInfo($userId, $updateInfo, $conn)){
     /*写入数据库成功则跳转*/
     jumpToUrl("../user/");
-}else{
+} else{
     echo "未更新数据...";
     jumpToUrl("../user/");
 }

@@ -25,7 +25,6 @@ include "function.php";
                         <ul class = "dropdown-menu">
                             <li class = "nav-header">书籍管理</li>
                             <li><a href = "../admin/book_add.php">添加书籍</a></li>
-                            <li><a href = "../admin/book_list.php">书籍列表</a></li>
                             <li class = "divider"></li>
                             <li class = "nav-header">用户管理</li>
                             <li><a href = "../admin/user_list.php">用户列表</a></li>

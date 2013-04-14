@@ -2,7 +2,7 @@
 <div class = "container">
     <hr>
     <footer>
-        <p class = "text-right f-fs1" ><a href = "http://baoxu.net" target="_blank">Baoxu</a> @ 2013</p>
+        <p class = "text-right f-fs1"><a href = "http://baoxu.net" target = "_blank">Baoxu</a> @ 2013</p>
     </footer>
 </div>
 

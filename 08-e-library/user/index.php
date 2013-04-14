@@ -38,8 +38,8 @@ if(!$userInfo){
             <div class = "f-fl span2">
                 <img src = "<?php echo "user_img/" . $userInfo["head"] ?>" class = "img-polaroid">
             </div>
-            <div class="span6">
-                <h4 class="visible-phone">基本信息</h4>
+            <div class = "span6">
+                <h4 class = "visible-phone">基本信息</h4>
                 <p>邮箱：<strong><?php echo $userInfo["mail"] ?></strong></p>
                 <p>手机：<strong><?php echo $userInfo["phone"] ?></strong></p>
                 <p>签名档：<strong><?php echo $userInfo["sign"] ?></strong></p>

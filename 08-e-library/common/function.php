@@ -426,9 +426,20 @@ function jumpToUrl($url){
     echo "</script>";
 }
 
-
-function getListCount($type, $conn){
-    $sql = "SELECT COUNT(*) AS count from `$type`";
+/**
+ * 得到某个表的记录总数
+ * @param string   $type       查询的数据表名
+ * @param resource $conn       数据库连接
+ * @param array    $whereArray WHERE中包含的参数
+ * @return mixed 返回记录条数
+ */
+function getListCount($type, $conn, $whereArray){
+    if($whereArray){
+        $where = "WHERE `" . $whereArray[0] . "`=" . $whereArray[1];
+    } else{
+        $where = "";
+    }
+    $sql = "SELECT COUNT(*) from `$type`" . $where;
     $result = mysql_query($sql, $conn);
     $row = mysql_fetch_row($result);
     $count = $row[0];

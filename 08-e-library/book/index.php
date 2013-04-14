@@ -19,7 +19,7 @@
 
 <!--读取数据库，获取数目列表-->
 <?php
-$bookCount = getListCount("book", $conn);
+$bookCount = getListCount("book", $conn, array());
 $bookPageCount = ceil($bookCount / PAGE_SIZE);
 
 //判断GET中是否有page参数
