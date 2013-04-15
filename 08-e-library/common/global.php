@@ -25,7 +25,7 @@ define("DB_NAME", "library");
 
 
 //PHP错误日志的目录
-//需要服务器主机配置环境变量 eLibrary_log_dir ,注意环境变量结尾没有斜杠
+//需要服务器主机配置环境变量 eLibrary_log_dir,注意环境变量结尾必须有斜杠
 define("PHP_LOG_DIR", $_SERVER["eLibrary_log_dir"]);
 
 //用户可借阅的天数
@@ -40,7 +40,7 @@ define("PAGE_SIZE", 20);
 function exceptionHandler(){
 
     //自定义日志记录的路径与文件名
-    $log_file = PHP_LOG_DIR . '\\' . date('Y-m-d') . '_baoxulog.txt';
+    $log_file = PHP_LOG_DIR . date('Y-m-d') . '_baoxulog.txt';
 
     error_reporting(E_ALL ^ E_NOTICE);
     date_default_timezone_set('Etc/GMT-8'); //设置时区

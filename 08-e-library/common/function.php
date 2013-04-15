@@ -259,14 +259,14 @@ function getBookInfoById($bookId, $conn){
     $success = @mysql_num_rows($result);
 
     //解释书籍状态
-    if(!$row["status"]){
+    if($row["status"] == 1){
         //状态字符串
         $status_str = "在馆可借";
         //到期日期
         $bookExpireDate = "-";
         //离到期还剩天数
         $bookBackDay = "-";
-    } else{
+    } elseif($row["status"] == 0){
         //借出日的时间戳
         $borrowDateStamp = strtotime($row["borrow_date"]);
         //当前的时间戳
