@@ -26,7 +26,7 @@ $sucess = mysql_affected_rows();
 
 <div class = "container text-center bx-dialog-info">
     <?php if($sucess){
-    echo '<p><i class = "icon-ok"></i>&nbsp;&nbsp;恭喜，邮箱验证通过，帐号已经激活，请继续登录！</p>';
+    echo '<p><i class = "icon-ok"></i>&nbsp;&nbsp;恭喜，邮箱验证通过，帐号已经激活，请继续<a href="../">登录</a>～</p>';
 } else{
     echo '<p><i class = "icon-remove"></i>&nbsp;&nbsp;抱歉，该验证码已经失效，请联系管理员！</p>';
 }

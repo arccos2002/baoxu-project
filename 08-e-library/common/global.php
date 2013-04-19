@@ -40,7 +40,7 @@ define("PAGE_SIZE", 20);
 function exceptionHandler(){
 
     //自定义日志记录的路径与文件名
-    $log_file = PHP_LOG_DIR . date('Y-m-d') . '_baoxulog.txt';
+    $log_file = PHP_LOG_DIR . date('Ymd') . '_elib.log';
 
     error_reporting(E_ALL ^ E_NOTICE);
     date_default_timezone_set('Etc/GMT-8'); //设置时区

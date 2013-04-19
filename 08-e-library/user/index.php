@@ -46,7 +46,7 @@ if(!$userInfo){
                 <p>状态：<strong><?php echo $userInfo["status_str"] ?></strong></p>
                 <p>等级：<strong><?php echo $userInfo["level"] ?>级</strong></p>
                 <p>
-                    <a class = "btn btn-info btn-small" href = "edit.php">修改资料</a>
+                    <a class = "btn btn-info btn-small" href = "edit_info.php">修改资料</a>
                 </p>
             </div>
         </div>
