@@ -4,6 +4,7 @@
     <meta charset = "utf-8" />
     <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>登录-Just Read</title>
+    <link rel = "shortcut icon" href = "favicon.ico">
     <script src = "js/jquery-1.9.1.min.js"></script>
     <script src = "js/bootstrap.min.js"></script>
     <link rel = "stylesheet" href = "css/bootstrap.min.css">

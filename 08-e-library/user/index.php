@@ -4,6 +4,7 @@
     <meta charset = "utf-8" />
     <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <title>个人中心—Just Read</title>
+    <link rel = "shortcut icon" href = "../favicon.ico">
     <link rel = "stylesheet" href = "../css/bootstrap.min.css">
     <link rel = "stylesheet" href = "../css/global.css">
     <link rel = "stylesheet" href = "../css/bootstrap-responsive.min.css">

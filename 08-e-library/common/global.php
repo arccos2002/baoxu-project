@@ -64,7 +64,7 @@ function exceptionHandler(){
                 $user_defined_errType = 'E_PARSE';
                 break;
             case 8:
-                $user_defined_errType = 'E_NOTICE)';
+                $user_defined_errType = 'E_NOTICE';
                 break;
             case 16:
                 $user_defined_errType = 'E_CORE_ERROR';
