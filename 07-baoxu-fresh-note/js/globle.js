@@ -5,8 +5,6 @@
  */
 
 
-var obj = document.createElement('div'), pfx = ['webkit', 'moz', 'o', 'ms'];
-
 /**
  * 添加页面加载后事件
  * @name addLoadEvent
@@ -37,46 +35,18 @@ function baoxuLog(log_class, log_text){
 
 
 /**
- * 为各个浏览器添加Prefix
- * @name addPerfix
- */
-function addPerfix(){
-	for(var i in pfx){
-		if(obj.style){
-
-		}
-	}
-}
-
-
-/**
  * 获取页面当前距离顶部的距离
  * @name getScrollTop
  * @return {Number} 返回距离
  */
-function getScrollTop()
-{
-	var scrollTop=0;
-	if(document.documentElement&&document.documentElement.scrollTop)
-	{
-		scrollTop=document.documentElement.scrollTop;
-	}
-	else if(document.body)
-	{
-		scrollTop=document.body.scrollTop;
+function getScrollTop(){
+	var scrollTop = 0;
+	if(document.documentElement && document.documentElement.scrollTop){
+		scrollTop = document.documentElement.scrollTop;
+	}else if(document.body){
+		scrollTop = document.body.scrollTop;
 	}
 	return scrollTop;
-}
-
-
-/**
- * 自定义的日志函数
- * @name addProperty
- * @param {String} log_class 日志记录的分类
- * @param {String} log_text 日志记录的语句
- */
-function addProperty(log_class, log_text){
-	console.log(log_class + " : " + log_text);
 }
 
 

@@ -6,22 +6,3 @@
  * Time:   下午3:41
  */
 
-.nnn{
-	width: 250px;
-	height: 250px;
-	border: 1px solid #666;
-	padding: 5px;
-	position: relative;
-	overflow: hidden;
-}
-
-.mmm{
-	width: 250px;
-	height: 1000px;
-	border: 1px solid #666;
-	padding: 5px;
-	position: relative;
-	overflow: hidden;
-	-webkit-transition-property: height;
-	-webkit-transition-duration: 0.5s;
-}

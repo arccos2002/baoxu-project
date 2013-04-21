@@ -1,1 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh"><head profile="http://www.w3.org/2000/08/w3c-synd/#"><meta http-equiv="content-language" content="zh-cn" /><meta http-equiv="content-type" content="text/html;charset=gb2312" /><title>51css</title><style type="text/css">/*<![CDATA[*/a,label {	display:block;	width:25px;	height:25px;	overflow:hidden	}a {	background:url("http://bbs.blueidea.com/http://www.52css.com/attachments/2007/5/19/20070519_82a5f3ae0299b6163a2cLk3uyVuFSv9J.gif") no-repeat	}a:hover {	background:url("http://bbs.blueidea.com/http://www.52css.com/attachments/2007/5/19/20070519_be7c34d5508e4167e06crax6MCxxJrE7.gif") no-repeat	}a#b {	background:url("http://bbs.blueidea.com/http://www.52css.com/attachments/2007/5/19/20070519_15613fd58c27b7022bb2fCqNnqRCmtIn.gif") no-repeat	}/*]]>*/</style></head><body><label for="cc">		<a href="#b" id="a" onclick="cc.checked=true"></a>		<a href="#a" id="b" onclick="cc.checked=false"></a></label>		<input type="checkbox" id="cc" /></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <meta name = "viewport" content = "target-densitydpi=device-dpi,width=device-width, initial-scale=0.66667, user-scalable=no" />
+    <title>Fresh Note</title>
+    <link type = "text/css" rel = "stylesheet" href = "css/style.css" />
+    <style>
+        .nnn{
+            width: 250px;
+            height: 250px;
+            border: 1px solid #666;
+            padding: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mmm{
+            width: 250px;
+            height: 1000px;
+            border: 1px solid #666;
+            padding: 5px;
+            position: relative;
+            overflow: hidden;
+            -webkit-transition-property: height;
+            -webkit-transition-duration: 0.5s;
+        }
+    </style>
+
+</head>
+<body>
+<!--头部区域-->
+<header></header>
+<!--正文列表区域-->
+<article style = "margin: 0 auto; text-align: center;">
+
+    <div id = "test_xiala" style = "background: #333; height: 0px; width: 300px; -webkit-transition-property: height;
+	-webkit-transition-duration: 0s;"></div>
+
+    <div id = "test_out" class = "nnn" data-event-tag = "et_test_click">
+        <div id = "test"
+             style = "background: #222; width: 250px; height: 250px; -webkit-transition: 0s; -webkit-transform: translate(0px, 0px);"
+             data-event-tag = "et_test_touch"></div>
+        <div style = "margin-top:10px;background: #222; width: 250px; height: 800px; -webkit-transition: 0s; -webkit-transform: translate(0px, 0px);"
+             data-event-tag = "et_test_touch"></div>
+    </div>
+
+</article>
+<!--底部区域-->
+<footer></footer>
+
+<script type = "text/javascript" src = "js/globle.js"></script>
+<script type = "text/javascript" src = "js/function.js"></script>
+</body>
+<!--
+Author: Baoxu
+Date:   13-3-20
+Time:   下午3:39
+-->
+</html>
