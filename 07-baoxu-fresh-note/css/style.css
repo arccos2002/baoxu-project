@@ -6,29 +6,6 @@
  * Time:   下午3:41
  */
 
-/*安装后的引导页样式*/
-.bx-install-cont a{
-	margin: 0;
-	padding: 0;
-	display: block;
-	height: 1px;
-	width: 1px;
-}
-
-.bx-install-page-1, .bx-install-page-2, .bx-install-page-3{
-	width: 100%;
-	background-size: cover;
-	background-position: center;
-}
-
-.bx-install-page-1{
-	background-image: url("../page/install/img/1.jpg");
-}
-
-.bx-install-page-2{
-	background-image: url("../page/install/img/2.jpg");
-}
-
-.bx-install-page-3{
-	background-image: url("../page/install/img/3.jpg");
+.bx-index-block-header{
+	height: 60px;
 }
