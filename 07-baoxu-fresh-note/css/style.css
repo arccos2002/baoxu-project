@@ -6,11 +6,12 @@
  * Time:   下午3:41
  */
 
+/*公共样式区域*/
 .bx-page{
 	background: url("../img/main-bg.png") repeat top center;
 }
 
-.bx-index-block-header{
+.bx-header{
 	margin: 0 auto;
 	height: 160px;
 	position: absolute;
@@ -19,7 +20,7 @@
 	background: url("../img/page-header-bg.png") repeat-x left top;
 }
 
-.bx-index-block-header-logo{
+.bx-logo{
 	margin: 50px auto 0 auto !important;
 	width: 265px;
 	height: 70px;
@@ -27,16 +28,29 @@
 	display: block;
 }
 
-.bx-block-to-list-btn{
+/*切换块状显示和列表显示的按钮*/
+.bx-block-to-list-btn,
+.bx-list-to-block-btn{
 	width: 70px;
 	height: 50px;
 	float: right;
 	margin: -40px 5px 0 0 !important;
 	display: inline-block;
 	border: none;
-	background: url("../img/block-to-list-btn.png") no-repeat center;
+	background: url("../img/toggle-list-block-btn.png") no-repeat top;
 }
 
+.bx-block-to-list-btn{
+	background-position: 0 0;
+}
+
+.bx-list-to-block-btn{
+	background-position: 0 -50px;
+}
+
+/*********************************************/
+/***********  块状显示主内容区  *****************/
+/*********************************************/
 .bx-index-block-main{
 	width: 100%;
 	margin-top: 180px;
@@ -62,6 +76,7 @@
 	height: 240px;
 }
 
+/*块状显示单个食物的块*/
 .bx-block-one-food{
 	background: #fff;
 	height: 180px;
@@ -87,33 +102,34 @@
 	border-radius: 24px;
 }
 
-.bx-food-type-coke i.bx-food-type-img,
-.bx-food-type-fruit i.bx-food-type-img,
-.bx-food-type-meat i.bx-food-type-img,
-.bx-food-type-grice i.bx-food-type-img,
-.bx-food-type-greens i.bx-food-type-img{
+/*食物的种类影响食物的图片*/
+.bx-type-coke i.bx-food-type-img,
+.bx-type-fruit i.bx-food-type-img,
+.bx-type-meat i.bx-food-type-img,
+.bx-type-grice i.bx-food-type-img,
+.bx-type-greens i.bx-food-type-img{
 	height: 100%;
 	width: 100%;
 	display: block;
 }
 
-.bx-food-type-coke i.bx-food-type-img{
+.bx-type-coke i.bx-food-type-img{
 	background: url("../img/type-coke.png") no-repeat center;
 }
 
-.bx-food-type-fruit i.bx-food-type-img{
+.bx-type-fruit i.bx-food-type-img{
 	background: url("../img/type-fruit.png") no-repeat center;
 }
 
-.bx-food-type-meat i.bx-food-type-img{
+.bx-type-meat i.bx-food-type-img{
 	background: url("../img/type-meat.png") no-repeat center;
 }
 
-.bx-food-type-grice i.bx-food-type-img{
+.bx-type-grice i.bx-food-type-img{
 	background: url("../img/type-greens.png") no-repeat center;
 }
 
-.bx-food-type-greens i.bx-food-type-img{
+.bx-type-greens i.bx-food-type-img{
 	background: url("../img/type-greens.png") no-repeat center;
 }
 
@@ -139,15 +155,15 @@
 	line-height: 28px;
 }
 
-.bx-block-fresh-good .bx-block-one-food-day{
+.bx-fresh-good .bx-block-one-food-day{
 	background: url("../img/block-fresh-good-tag.png") no-repeat top right;
 }
 
-.bx-block-fresh-normal .bx-block-one-food-day{
+.bx-fresh-normal .bx-block-one-food-day{
 	background: url("../img/block-fresh-normal-tag.png") no-repeat top right;
 }
 
-.bx-block-fresh-bad .bx-block-one-food-day{
+.bx-fresh-bad .bx-block-one-food-day{
 	background: url("../img/block-fresh-bad-tag.png") no-repeat top right;
 }
 
@@ -161,11 +177,11 @@
 	background: url("../img/block-one-food-banner.png") no-repeat center;
 }
 
-.bx-food-type-coke i.bx-food-type-text,
-.bx-food-type-fruit i.bx-food-type-text,
-.bx-food-type-meat i.bx-food-type-text,
-.bx-food-type-grice i.bx-food-type-text,
-.bx-food-type-greens i.bx-food-type-text{
+.bx-type-coke i.bx-food-type-text,
+.bx-type-fruit i.bx-food-type-text,
+.bx-type-meat i.bx-food-type-text,
+.bx-type-grice i.bx-food-type-text,
+.bx-type-greens i.bx-food-type-text{
 	height: 20px;
 	width: 60px;
 	display: block;
@@ -177,26 +193,27 @@
 	font-family: "华文细黑";
 }
 
-.bx-food-type-coke i.bx-food-type-text::before{
+.bx-type-coke i.bx-food-type-text::before{
 	content: "饮料";
 }
 
-.bx-food-type-fruit i.bx-food-type-text::before{
+.bx-type-fruit i.bx-food-type-text::before{
 	content: "水果";
 }
 
-.bx-food-type-meat i.bx-food-type-text::before{
+.bx-type-meat i.bx-food-type-text::before{
 	content: "肉类";
 }
 
-.bx-food-type-greens i.bx-food-type-text::before{
+.bx-type-greens i.bx-food-type-text::before{
 	content: "蔬菜";
 }
 
-.bx-food-type-grice i.bx-food-type-text::before{
+.bx-type-grice i.bx-food-type-text::before{
 	content: "主食";
 }
 
+/*在块状横条上显示的指示表情*/
 .bx-food-status-emoji{
 	display: inline-block;
 	height: 20px;
@@ -204,14 +221,124 @@
 	background: url("../img/block-status-emoji.png") no-repeat top left;
 }
 
-.bx-block-fresh-good i.bx-food-status-emoji{
+.bx-fresh-good i.bx-food-status-emoji{
 	background-position: 0 -40px;
 }
 
-.bx-block-fresh-normal i.bx-food-status-emoji{
+.bx-fresh-normal i.bx-food-status-emoji{
 	background-position: 0 -20px;
 }
 
-.bx-block-fresh-bad i.bx-food-status-emoji{
+.bx-fresh-bad i.bx-food-status-emoji{
 	background-position: 0 0;
+}
+
+
+/*********************************************/
+/***********  列表显示主内容区  *****************/
+/*********************************************/
+.bx-index-list-main{
+	width: 100%;
+	margin-top: 180px;
+	display: block;
+	overflow: hidden;
+}
+
+.bx-index-list-main ul{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.bx-index-list-main ul li{
+	list-style: none;
+	width: 100%;
+	height: 120px;
+	background: url("../img/list-food-line.png") no-repeat center;
+}
+
+.bx-list-one-food{
+}
+
+.bx-list-food-info{
+	width: 220px;
+	height: 75px;
+	display: block;
+	float: left;
+	background: url("../img/list-food-info-bg.png") no-repeat top left;
+}
+
+/*奇数行*/
+.bx-index-list-main ul li:nth-child(odd) .bx-list-food-info{
+	margin: 7px 0 0 250px;
+}
+/*偶数行*/
+.bx-index-list-main ul li:nth-child(even) .bx-list-food-info{
+	margin: 7px 0 0 10px;
+	background-position: 0 -75px;
+}
+
+.bx-list-food-type{
+	height: 65px;
+	width: 65px;
+	background: #333;
+	display: block;
+	float: left;
+}
+
+.bx-index-list-main ul li:nth-child(odd) .bx-list-food-type{
+	margin: 0 0 0 -310px;
+}
+
+.bx-index-list-main ul li:nth-child(even) .bx-list-food-type{
+	margin: 0 0 0 30px;
+	background-position: 0 -65px;
+}
+
+
+.bx-list-food-day{
+	float: left;
+	display: inline-block;
+	margin: 10px 0 0 25px;
+	font-family: Impact;
+	color: #fff;
+	font-size: 45px;
+	padding-top: 5px;
+	text-align: center;
+	line-height: 45px;
+}
+
+.bx-list-food-day-det{
+	float: left;
+	display: inline-block;
+	margin: 10px 0 0 10px;
+}
+
+.bx-list-food-day-str{
+	font-family: "华文细黑";
+	margin: 0 0 3px 0;
+	font-size: 18px;
+	display: block;
+}
+
+.bx-list-food-day-pub{
+	margin: 0;
+	display: block;
+	font-size: 14px;
+	color: #B9B9B9;
+}
+
+.bx-fresh-bad .bx-list-food-day,
+.bx-fresh-bad .bx-list-food-day-str{
+	color: #c00;
+}
+
+.bx-fresh-normal .bx-list-food-day,
+.bx-fresh-normal .bx-list-food-day-str{
+	color: #FFD54F;
+}
+
+.bx-fresh-good .bx-list-food-day,
+.bx-fresh-good .bx-list-food-day-str{
+	color: #7EC10F;
 }

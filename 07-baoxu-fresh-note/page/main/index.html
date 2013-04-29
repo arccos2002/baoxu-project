@@ -19,8 +19,8 @@
 <body>
 <div data-role = "page" class = "bx-page">
 	<!--头部栏-->
-	<div data-role = "header" class = "bx-index-block-header">
-		<h3 class = "bx-index-block-header-logo"></h3>
+	<div data-role = "header" class = "bx-header">
+		<h3 class = "bx-logo"></h3>
 		<div class = "bx-block-to-list-btn"></div>
 	</div>
 	<!--主显示区，块状样式-->
@@ -30,7 +30,7 @@
 				<!--一个四块食物的表-->
 				<div class = "ui-grid-a">
 					<!--其中一块-->
-					<div class = "ui-block-a bx-block-fresh-bad bx-food-type-coke">
+					<div class = "ui-block-a bx-fresh-bad bx-type-coke">
 						<div class = "bx-block-one-food">
 							<div class = "bx-block-one-food-inout">
 								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
@@ -45,7 +45,7 @@
 					</div>
 
 					<!--其中一块-->
-					<div class = "ui-block-b bx-block-fresh-normal bx-food-type-fruit">
+					<div class = "ui-block-b bx-fresh-normal bx-type-fruit">
 						<div class = "bx-block-one-food">
 							<div class = "bx-block-one-food-inout">
 								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
@@ -60,7 +60,7 @@
 					</div>
 
 					<!--其中一块-->
-					<div class = "ui-block-a bx-block-fresh-good bx-food-type-meat">
+					<div class = "ui-block-a bx-fresh-good bx-type-meat">
 						<div class = "bx-block-one-food">
 							<div class = "bx-block-one-food-inout">
 								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
@@ -75,7 +75,7 @@
 					</div>
 
 					<!--其中一块-->
-					<div class = "ui-block-b bx-block-fresh-good bx-food-type-greens">
+					<div class = "ui-block-b bx-fresh-good bx-type-greens">
 						<div class = "bx-block-one-food">
 							<div class = "bx-block-one-food-inout">
 								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
@@ -102,7 +102,7 @@
 	</div>
 
 	<!--隐藏的A元素，用于预加载数据-->
-	<a href = "index-list.html" data-prefetch = "" class = "f-dn"></a>
+	<a href = "index.html" data-prefetch class = "f-dn"></a>
 	<!--在PAGE内部的执行脚本-->
 	<script>
 		var blockToListBtn = $(".bx-block-to-list-btn");
