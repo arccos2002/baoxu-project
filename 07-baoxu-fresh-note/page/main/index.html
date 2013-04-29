@@ -1,38 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset = "utf-8" />
-    <meta name = "viewport" content = "target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,user-scalable=no" />
-    <meta name = "apple-mobile-web-app-capable" content = "yes" />
-    <meta name = "apple-mobile-web-app-status-bar-style" content = "black" />
-    <title>Fresh Note</title>
-    <link rel = "stylesheet" href = "../../css/jquery.mobile.css" />
-    <link rel = "stylesheet" href = "../../css/style.css" />
-    <script src = "../../js/jquery.js"></script>
-    <script src = "../../js/function.js"></script>
-    <script src = "../../js/jquery.mobile.js"></script>
-    <!-- My Css -->
-    <style>
-    </style>
+	<meta charset = "utf-8" />
+	<meta name = "viewport" content = "target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name = "apple-mobile-web-app-capable" content = "yes" />
+	<meta name = "apple-mobile-web-app-status-bar-style" content = "black" />
+	<title>Fresh Note</title>
+	<link rel = "stylesheet" href = "../../css/jquery.mobile.css" />
+	<link rel = "stylesheet" href = "../../css/function.css" />
+	<link rel = "stylesheet" href = "../../css/style.css" />
+	<script src = "../../js/jquery.js"></script>
+	<script src = "../../js/function.js"></script>
+	<script src = "../../js/jquery.mobile.js"></script>
+	<!-- My Css -->
+	<style>
+	</style>
 </head>
 <body>
-<div data-role = "page">
-    <div data-role = "header" data-position = "fixed" class="bx-index-block-header">
-        <a data-role = "button" href = "#" class = "ui-btn-left">Button</a>
-        <a data-role = "button" href = "#" class = "ui-btn-right">Button</a>
-        <h3>Fresh Note</h3>
-    </div>
-    <div class = "ui-grid-b">
-        <div class = "ui-block-a">Block A</div>
-        <div class = "ui-block-b">Block B</div>
-        <div class = "ui-block-c">Block C</div>
-        <div class = "ui-block-a">Block A</div>
-        <div class = "ui-block-b">Block B</div>
-        <div class = "ui-block-c">Block C</div>
-        <div class = "ui-block-a">Block A</div>
-        <div class = "ui-block-b">Block B</div>
-        <div class = "ui-block-c">Block C</div>
-    </div>
+<div data-role = "page" class = "bx-page">
+	<!--头部栏-->
+	<div data-role = "header" class = "bx-index-block-header">
+		<h3 class = "bx-index-block-header-logo"></h3>
+		<div class = "bx-block-to-list-btn"></div>
+	</div>
+	<!--主显示区，块状样式-->
+	<div class = "bx-index-block-main">
+		<ul>
+			<li>
+				<!--一个四块食物的表-->
+				<div class = "ui-grid-a">
+					<!--其中一块-->
+					<div class = "ui-block-a bx-block-fresh-bad bx-food-type-coke">
+						<div class = "bx-block-one-food">
+							<div class = "bx-block-one-food-inout">
+								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+							</div>
+						</div>
+						<div class = "bx-block-one-food-day">
+							<span>5</span>
+						</div>
+						<div class = "bx-block-one-food-banner">
+							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+						</div>
+					</div>
+
+					<!--其中一块-->
+					<div class = "ui-block-b bx-block-fresh-normal bx-food-type-fruit">
+						<div class = "bx-block-one-food">
+							<div class = "bx-block-one-food-inout">
+								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+							</div>
+						</div>
+						<div class = "bx-block-one-food-day">
+							<span>5</span>
+						</div>
+						<div class = "bx-block-one-food-banner">
+							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+						</div>
+					</div>
+
+					<!--其中一块-->
+					<div class = "ui-block-a bx-block-fresh-good bx-food-type-meat">
+						<div class = "bx-block-one-food">
+							<div class = "bx-block-one-food-inout">
+								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+							</div>
+						</div>
+						<div class = "bx-block-one-food-day">
+							<span>5</span>
+						</div>
+						<div class = "bx-block-one-food-banner">
+							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+						</div>
+					</div>
+
+					<!--其中一块-->
+					<div class = "ui-block-b bx-block-fresh-good bx-food-type-greens">
+						<div class = "bx-block-one-food">
+							<div class = "bx-block-one-food-inout">
+								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+							</div>
+						</div>
+						<div class = "bx-block-one-food-day">
+							<span>5</span>
+						</div>
+						<div class = "bx-block-one-food-banner">
+							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class = "ui-grid-a">
+					<div class = "ui-block-a">Block A</div>
+					<div class = "ui-block-b">Block B</div>
+					<div class = "ui-block-a">Block A</div>
+					<div class = "ui-block-b">Block B</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!--隐藏的A元素，用于预加载数据-->
+	<a href = "index-list.html" data-prefetch = "" class = "f-dn"></a>
+	<!--在PAGE内部的执行脚本-->
+	<script>
+		var blockToListBtn = $(".bx-block-to-list-btn");
+		blockToListBtn.on("click", function(){
+			$.mobile.changePage("index-list.html", {transition:"flip", changeHash:false});
+		});
+	</script>
 </div>
 </body>
 <!--

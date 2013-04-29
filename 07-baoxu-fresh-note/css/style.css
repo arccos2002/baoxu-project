@@ -6,6 +6,212 @@
  * Time:   下午3:41
  */
 
+.bx-page{
+	background: url("../img/main-bg.png") repeat top center;
+}
+
 .bx-index-block-header{
-	height: 60px;
+	margin: 0 auto;
+	height: 160px;
+	position: absolute;
+	width: 100%;
+	border: none;
+	background: url("../img/page-header-bg.png") repeat-x left top;
+}
+
+.bx-index-block-header-logo{
+	margin: 50px auto 0 auto !important;
+	width: 265px;
+	height: 70px;
+	background: url("../img/page-header-logo.png") no-repeat center;
+	display: block;
+}
+
+.bx-block-to-list-btn{
+	width: 70px;
+	height: 50px;
+	float: right;
+	margin: -40px 5px 0 0 !important;
+	display: inline-block;
+	border: none;
+	background: url("../img/block-to-list-btn.png") no-repeat center;
+}
+
+.bx-index-block-main{
+	width: 100%;
+	margin-top: 180px;
+	display: block;
+	overflow: hidden;
+}
+
+.bx-index-block-main ul{
+	width: 300%;
+	margin: 0;
+	padding: 0;
+}
+
+.bx-index-block-main ul li{
+	list-style: none;
+	width: 33.3333333333%;
+	float: left;
+}
+
+.bx-index-block-main .ui-grid-a>div{
+	display: block;
+	padding: 15px;
+	height: 240px;
+}
+
+.bx-block-one-food{
+	background: #fff;
+	height: 180px;
+	width: 180px;
+	padding: 15px;
+	border-radius: 24px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+}
+
+.bx-block-one-food-inout{
+	width: 164px;
+	height: 164px;
+	padding: 8px;
+	display: block;
+	border-radius: 26px;
+	background: #EDEBE9;
+}
+
+.bx-block-one-food-inin{
+	width: 160px;
+	height: 160px;
+	border: #FBFBFA 2px solid;
+	border-radius: 24px;
+}
+
+.bx-food-type-coke i.bx-food-type-img,
+.bx-food-type-fruit i.bx-food-type-img,
+.bx-food-type-meat i.bx-food-type-img,
+.bx-food-type-grice i.bx-food-type-img,
+.bx-food-type-greens i.bx-food-type-img{
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+
+.bx-food-type-coke i.bx-food-type-img{
+	background: url("../img/type-coke.png") no-repeat center;
+}
+
+.bx-food-type-fruit i.bx-food-type-img{
+	background: url("../img/type-fruit.png") no-repeat center;
+}
+
+.bx-food-type-meat i.bx-food-type-img{
+	background: url("../img/type-meat.png") no-repeat center;
+}
+
+.bx-food-type-grice i.bx-food-type-img{
+	background: url("../img/type-greens.png") no-repeat center;
+}
+
+.bx-food-type-greens i.bx-food-type-img{
+	background: url("../img/type-greens.png") no-repeat center;
+}
+
+/*指示该食物还剩几天的右上角标*/
+.bx-block-one-food-day{
+	width: 100px;
+	height: 100px;
+	margin-top: -210px;
+	margin-left: 110px;
+	padding: 0;
+}
+
+.bx-block-one-food-day span{
+	margin: 0;
+	float: right;
+	font-family: Impact;
+	color: #fff;
+	font-size: 28px;
+	display: inline-block;
+	padding-top: 5px;
+	width: 60px;
+	text-align: center;
+	line-height: 28px;
+}
+
+.bx-block-fresh-good .bx-block-one-food-day{
+	background: url("../img/block-fresh-good-tag.png") no-repeat top right;
+}
+
+.bx-block-fresh-normal .bx-block-one-food-day{
+	background: url("../img/block-fresh-normal-tag.png") no-repeat top right;
+}
+
+.bx-block-fresh-bad .bx-block-one-food-day{
+	background: url("../img/block-fresh-bad-tag.png") no-repeat top right;
+}
+
+/*指示该食物分类和状态的横条*/
+.bx-block-one-food-banner{
+	width: 165px;
+	height: 50px;
+	padding: 30px 0 0 25px;
+	margin: 10px 0 0 10px;
+	display: block;
+	background: url("../img/block-one-food-banner.png") no-repeat center;
+}
+
+.bx-food-type-coke i.bx-food-type-text,
+.bx-food-type-fruit i.bx-food-type-text,
+.bx-food-type-meat i.bx-food-type-text,
+.bx-food-type-grice i.bx-food-type-text,
+.bx-food-type-greens i.bx-food-type-text{
+	height: 20px;
+	width: 60px;
+	display: block;
+	float: left;
+	font-style: normal;
+	line-height: 18px;
+	font-size: 18px;
+	color: #62C42C;
+	font-family: "华文细黑";
+}
+
+.bx-food-type-coke i.bx-food-type-text::before{
+	content: "饮料";
+}
+
+.bx-food-type-fruit i.bx-food-type-text::before{
+	content: "水果";
+}
+
+.bx-food-type-meat i.bx-food-type-text::before{
+	content: "肉类";
+}
+
+.bx-food-type-greens i.bx-food-type-text::before{
+	content: "蔬菜";
+}
+
+.bx-food-type-grice i.bx-food-type-text::before{
+	content: "主食";
+}
+
+.bx-food-status-emoji{
+	display: inline-block;
+	height: 20px;
+	width: 80px;
+	background: url("../img/block-status-emoji.png") no-repeat top left;
+}
+
+.bx-block-fresh-good i.bx-food-status-emoji{
+	background-position: 0 -40px;
+}
+
+.bx-block-fresh-normal i.bx-food-status-emoji{
+	background-position: 0 -20px;
+}
+
+.bx-block-fresh-bad i.bx-food-status-emoji{
+	background-position: 0 0;
 }
