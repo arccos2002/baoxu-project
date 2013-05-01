@@ -20,8 +20,9 @@
 <div data-role = "page" class = "bx-page">
 	<!--头部栏-->
 	<div data-role = "header" class = "bx-header">
+		<div class = "ui-btn-left bx-food-add-btn"></div>
 		<h3 class = "bx-logo"></h3>
-		<div class = "bx-block-to-list-btn"></div>
+		<div class = "ui-btn-right bx-block-to-list-btn"></div>
 	</div>
 	<!--主显示区，块状样式-->
 	<div class = "bx-index-block-main">
@@ -37,7 +38,7 @@
 							</div>
 						</div>
 						<div class = "bx-block-one-food-day">
-							<span>5</span>
+							<span>1</span>
 						</div>
 						<div class = "bx-block-one-food-banner">
 							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
@@ -52,7 +53,7 @@
 							</div>
 						</div>
 						<div class = "bx-block-one-food-day">
-							<span>5</span>
+							<span>3</span>
 						</div>
 						<div class = "bx-block-one-food-banner">
 							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
@@ -75,7 +76,7 @@
 					</div>
 
 					<!--其中一块-->
-					<div class = "ui-block-b bx-fresh-good bx-type-greens">
+					<div class = "ui-block-b bx-fresh-good bx-type-rice">
 						<div class = "bx-block-one-food">
 							<div class = "bx-block-one-food-inout">
 								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
@@ -108,6 +109,10 @@
 		var blockToListBtn = $(".bx-block-to-list-btn");
 		blockToListBtn.on("click", function(){
 			$.mobile.changePage("index-list.html", {transition:"flip", changeHash:false});
+		});
+
+		$(".bx-block-one-food").on("click", function(){
+			$.mobile.changePage("detail.html", {transition:"slide", changeHash:true});
 		});
 	</script>
 </div>

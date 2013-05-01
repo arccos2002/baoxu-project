@@ -6,6 +6,22 @@
  * Time:   下午3:41
  */
 
+/*LOGO的特殊字体*/
+@font-face{
+	font-family: xiangSu;
+	src: url('ZPIXEX2_EX.TTF');
+}
+
+@font-face{
+	font-family: xiHei;
+	src: url('STXIHEI.TTF');
+}
+
+@font-face{
+	font-family: shuZi;
+	src: url('IMPACT.TTF');
+}
+
 /*公共样式区域*/
 .bx-page{
 	background: url("../img/main-bg.png") repeat top center;
@@ -13,31 +29,41 @@
 
 .bx-header{
 	margin: 0 auto;
-	height: 160px;
+	height: 100px;
 	position: absolute;
 	width: 100%;
 	border: none;
-	background: url("../img/page-header-bg.png") repeat-x left top;
+	background: url("../img/page-header-bg.png") repeat-x left bottom;
+}
+
+.bx-food-add-btn{
+	width: 80px;
+	height: 60px;
+	background: url("../img/food-add-btn.png") no-repeat center;
+	display: inline-block;
+	margin: 25px 0 0 8px !important;
 }
 
 .bx-logo{
-	margin: 50px auto 0 auto !important;
 	width: 265px;
 	height: 70px;
 	background: url("../img/page-header-logo.png") no-repeat center;
 	display: block;
+	margin: 10px auto 0 auto !important;
 }
 
 /*切换块状显示和列表显示的按钮*/
 .bx-block-to-list-btn,
-.bx-list-to-block-btn{
+.bx-list-to-block-btn,
+.bx-back-btn,
+.bx-set-btn{
 	width: 70px;
 	height: 50px;
 	float: right;
-	margin: -40px 5px 0 0 !important;
 	display: inline-block;
 	border: none;
 	background: url("../img/toggle-list-block-btn.png") no-repeat top;
+	margin: 35px 5px 0 0 !important;
 }
 
 .bx-block-to-list-btn{
@@ -48,12 +74,25 @@
 	background-position: 0 -50px;
 }
 
+.bx-back-btn{
+	margin-right: 0 !important;
+	margin-left: 8px !important;
+	background: url("../img/back-btn.png") no-repeat top;
+}
+
+.bx-set-btn{
+	background: url("../img/app-set-btn.png") no-repeat top;
+}
+
 /*********************************************/
 /***********  块状显示主内容区  *****************/
 /*********************************************/
-.bx-index-block-main{
+.bx-index-block-main,
+.bx-index-list-main,
+.bx-detail-main,
+.bx-setting-main{
 	width: 100%;
-	margin-top: 180px;
+	margin-top: 120px;
 	display: block;
 	overflow: hidden;
 }
@@ -106,10 +145,11 @@
 .bx-type-coke i.bx-food-type-img,
 .bx-type-fruit i.bx-food-type-img,
 .bx-type-meat i.bx-food-type-img,
-.bx-type-grice i.bx-food-type-img,
+.bx-type-rice i.bx-food-type-img,
 .bx-type-greens i.bx-food-type-img{
-	height: 100%;
-	width: 100%;
+	height: 140px;
+	width: 160px;
+	margin: 20px 0 0 0;
 	display: block;
 }
 
@@ -125,8 +165,8 @@
 	background: url("../img/type-meat.png") no-repeat center;
 }
 
-.bx-type-grice i.bx-food-type-img{
-	background: url("../img/type-greens.png") no-repeat center;
+.bx-type-rice i.bx-food-type-img{
+	background: url("../img/type-rice.png") no-repeat center;
 }
 
 .bx-type-greens i.bx-food-type-img{
@@ -145,7 +185,7 @@
 .bx-block-one-food-day span{
 	margin: 0;
 	float: right;
-	font-family: Impact;
+	font-family: shuZi;
 	color: #fff;
 	font-size: 28px;
 	display: inline-block;
@@ -180,7 +220,7 @@
 .bx-type-coke i.bx-food-type-text,
 .bx-type-fruit i.bx-food-type-text,
 .bx-type-meat i.bx-food-type-text,
-.bx-type-grice i.bx-food-type-text,
+.bx-type-rice i.bx-food-type-text,
 .bx-type-greens i.bx-food-type-text{
 	height: 20px;
 	width: 60px;
@@ -190,7 +230,7 @@
 	line-height: 18px;
 	font-size: 18px;
 	color: #62C42C;
-	font-family: "华文细黑";
+	font-family: xiangSu;
 }
 
 .bx-type-coke i.bx-food-type-text::before{
@@ -209,7 +249,7 @@
 	content: "蔬菜";
 }
 
-.bx-type-grice i.bx-food-type-text::before{
+.bx-type-rice i.bx-food-type-text::before{
 	content: "主食";
 }
 
@@ -233,15 +273,18 @@
 	background-position: 0 0;
 }
 
-
 /*********************************************/
 /***********  列表显示主内容区  *****************/
 /*********************************************/
 .bx-index-list-main{
+	/*在第一部分设置*/
+}
+
+.bx-list-food-head{
 	width: 100%;
-	margin-top: 180px;
-	display: block;
-	overflow: hidden;
+	height: 60px;
+	margin: 20px 0 0 0;
+	background: url("../img/list-food-head.png") no-repeat top;
 }
 
 .bx-index-list-main ul{
@@ -272,6 +315,7 @@
 .bx-index-list-main ul li:nth-child(odd) .bx-list-food-info{
 	margin: 7px 0 0 250px;
 }
+
 /*偶数行*/
 .bx-index-list-main ul li:nth-child(even) .bx-list-food-info{
 	margin: 7px 0 0 10px;
@@ -281,7 +325,7 @@
 .bx-list-food-type{
 	height: 65px;
 	width: 65px;
-	background: #333;
+	background: url("../img/list-food-type.png");
 	display: block;
 	float: left;
 }
@@ -295,12 +339,31 @@
 	background-position: 0 -65px;
 }
 
+.bx-type-coke .bx-list-food-type{
+	background-position: 0 0;
+}
+
+.bx-type-fruit .bx-list-food-type{
+	background-position: -65px 0;
+}
+
+.bx-type-greens .bx-list-food-type{
+	background-position: -130px 0;
+}
+
+.bx-type-meat .bx-list-food-type{
+	background-position: -195px 0;
+}
+
+.bx-type-rice .bx-list-food-type{
+	background-position: -270px 0;
+}
 
 .bx-list-food-day{
 	float: left;
 	display: inline-block;
 	margin: 10px 0 0 25px;
-	font-family: Impact;
+	font-family: shuZi;
 	color: #fff;
 	font-size: 45px;
 	padding-top: 5px;
@@ -311,11 +374,12 @@
 .bx-list-food-day-det{
 	float: left;
 	display: inline-block;
-	margin: 10px 0 0 10px;
+	margin: 10px 0 0 8px;
+	padding: 6px 0 0 0;
 }
 
 .bx-list-food-day-str{
-	font-family: "华文细黑";
+	font-family: xiangSu;
 	margin: 0 0 3px 0;
 	font-size: 18px;
 	display: block;
@@ -341,4 +405,201 @@
 .bx-fresh-good .bx-list-food-day,
 .bx-fresh-good .bx-list-food-day-str{
 	color: #7EC10F;
+}
+
+/*********************************************/
+/***********   详情页主内容区  *****************/
+/*********************************************/
+.bx-detail-main{
+	/*在第一部分设置*/
+}
+
+.bx-detail-round-out{
+	width: 380px;
+	height: 330px;
+	padding-top: 50px;
+	margin: 0 auto;
+	background: #E7EEF3;
+	border-radius: 200px;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.bx-detail-round-loop{
+	width: 260px;
+	height: 260px;
+	margin: 0 auto;
+	background: #E7EEF3;
+	border: 10px solid;
+	border-radius: 50%;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.bx-fresh-good .bx-detail-round-loop{
+	border-color: #7fc20f;
+}
+
+.bx-fresh-normal .bx-detail-round-loop{
+	border-color: #ffd64e;
+}
+
+.bx-fresh-bad .bx-detail-round-loop{
+	border-color: #cc0000;
+}
+
+.bx-detail-round-loop p{
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	color: #7C7A71;
+}
+
+.bx-detail-time-sheng,
+.bx-detail-time-tian{
+	font-family: xiangSu;
+	font-size: 45px;
+	font-weight: 300;
+	line-height: 45px;
+}
+
+.bx-detail-time-ji{
+	font-family: shuZi;
+	font-size: 120px;
+	line-height: 120px;
+	margin: 10px auto !important;
+}
+
+.bx-detail-time-sheng{
+	margin: 15px 0 0 0 !important;
+}
+
+.bx-detail-info{
+	margin: 25px auto 0 auto;
+	width: 280px;
+	font-size: 25px;
+	font-family: xiangSu;
+	color: #959594;
+}
+
+.bx-detail-info tr td{
+	line-height: 50px;
+}
+
+.bx-detail-info tr td:first-child{
+	text-align: left;
+	width: 120px;
+}
+
+.bx-detail-info tr td:last-child{
+	text-align: right;
+	width: 160px;
+}
+
+.bx-detail-divider{
+	height: 0;
+	width: 100%;
+	border-top: 1px solid rgba(255, 255, 255, 0.8);
+	box-shadow: 0 -1px 2px 1px rgba(0, 0, 0, 0.1);
+	margin: 20px auto 30px auto;
+}
+
+.bx-detail-eat-finish{
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.bx-detail-eat-finish-tog{
+	width: 93px;
+	margin: 0 auto;
+}
+
+.bx-detail-eat-finish i{
+	display: inline-block;
+	font-style: normal;
+	font-family: xiangSu;
+	line-height: 23px;
+	vertical-align: top;
+	padding: 5px 0 0 0;
+	font-size: 23px;
+	color: #6F6E65;
+}
+
+.bx-detail-eat-finish i:first-child{
+	padding-right: 20px;
+}
+
+.bx-detail-eat-finish i:last-child{
+	padding-left: 20px;
+}
+
+.bx-detail-del-food{
+	text-align: center;
+	width: 270px;
+	height: 45px;
+	border-radius: 10px;
+	background: #D94639;
+	display: block;
+	margin: 25px auto 10px auto;
+	padding-top: 8px;
+	color: #fff;
+	font-size: 23px;
+	line-height: 25px;
+	font-family: xiangSu;
+}
+
+.bx-detail-del-food img{
+	vertical-align: bottom;
+	margin-right: 10px;
+}
+
+/*********************************************/
+/***********   设置页主内容区  *****************/
+/*********************************************/
+.bx-setting-main{
+	/*在第一部分设置*/
+	font-family: xiHei;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.bx-setting-head{
+	line-height: 25px;
+	margin: 0;
+	padding: 10px 0 20px 40px;
+}
+
+.bx-setting-list{
+	width: 440px;
+	margin: 0 auto 40px auto;
+	line-height: 25px;
+}
+
+.bx-setting-list a{
+	font-family: xiHei;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.bx-setting-list span{
+	font-family: xiHei;
+	font-weight: bold;
+	font-size: 20px !important;
+	border: none;
+	color: #2C547E;
+}
+
+.bx-setting-switch{
+	line-height: 0;
+}
+
+.bx-setting-switch-out{
+	font-size: 15px !important;
+	padding: 0 !important;
+	margin-top: -35px !important;
+	height: 0px !important;
+}
+
+.bx-setting-switch span{
+	font-size: 15px !important;
+	padding: 0 !important;
 }

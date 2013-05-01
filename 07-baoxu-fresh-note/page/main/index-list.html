@@ -20,58 +20,72 @@
 <div data-role = "page" class = "bx-page">
 	<!--头部栏-->
 	<div data-role = "header" class = "bx-header">
+		<div class = "ui-btn-left bx-food-add-btn"></div>
 		<h3 class = "bx-logo"></h3>
-		<div class = "bx-list-to-block-btn"></div>
+		<div class = "ui-btn-right bx-list-to-block-btn"></div>
 	</div>
 	<!--主显示区，块状样式-->
 	<div class = "bx-index-list-main">
+		<div class = "bx-list-food-head"></div>
 		<ul>
 			<li>
-				<div class="bx-list-one-food bx-fresh-bad bx-type-coke">
-					<div class="bx-list-food-info">
-						<p class="bx-list-food-day">5</p>
-						<div class="bx-list-food-day-det">
-							<p class="bx-list-food-day-str">保质期6天</p>
-							<p class="bx-list-food-day-pub">生产日期：2013-4-5</p>
+				<div class = "bx-list-one-food bx-fresh-bad bx-type-coke">
+					<div class = "bx-list-food-info">
+						<p class = "bx-list-food-day">1</p>
+						<div class = "bx-list-food-day-det">
+							<p class = "bx-list-food-day-str">保质期6天</p>
+							<p class = "bx-list-food-day-pub">生产日期：2013-4-5</p>
 						</div>
 					</div>
-					<div class="bx-list-food-type"></div>
+					<div class = "bx-list-food-type"></div>
 				</div>
 			</li>
 			<li>
-				<div class="bx-list-one-food bx-fresh-normal bx-type-coke">
-					<div class="bx-list-food-info">
-						<p class="bx-list-food-day">5</p>
-						<div class="bx-list-food-day-det">
-							<p class="bx-list-food-day-str">保质期6天</p>
-							<p class="bx-list-food-day-pub">生产日期：2013-4-5</p>
+				<div class = "bx-list-one-food bx-fresh-normal bx-type-fruit">
+					<div class = "bx-list-food-info">
+						<p class = "bx-list-food-day">3</p>
+						<div class = "bx-list-food-day-det">
+							<p class = "bx-list-food-day-str">保质期6天</p>
+							<p class = "bx-list-food-day-pub">生产日期：2013-4-5</p>
 						</div>
 					</div>
-					<div class="bx-list-food-type"></div>
+					<div class = "bx-list-food-type"></div>
 				</div>
 			</li>
 			<li>
-				<div class="bx-list-one-food bx-fresh-good bx-type-coke">
-					<div class="bx-list-food-info">
-						<p class="bx-list-food-day">5</p>
-						<div class="bx-list-food-day-det">
-							<p class="bx-list-food-day-str">保质期6天</p>
-							<p class="bx-list-food-day-pub">生产日期：2013-4-5</p>
+				<div class = "bx-list-one-food bx-fresh-good bx-type-greens">
+					<div class = "bx-list-food-info">
+						<p class = "bx-list-food-day">5</p>
+						<div class = "bx-list-food-day-det">
+							<p class = "bx-list-food-day-str">保质期6天</p>
+							<p class = "bx-list-food-day-pub">生产日期：2013-4-5</p>
 						</div>
 					</div>
-					<div class="bx-list-food-type"></div>
+					<div class = "bx-list-food-type"></div>
 				</div>
 			</li>
 			<li>
-				<div class="bx-list-one-food bx-fresh-good bx-type-coke">
-					<div class="bx-list-food-info">
-						<p class="bx-list-food-day">5</p>
-						<div class="bx-list-food-day-det">
-							<p class="bx-list-food-day-str">保质期6天</p>
-							<p class="bx-list-food-day-pub">生产日期：2013-4-5</p>
+				<div class = "bx-list-one-food bx-fresh-good bx-type-meat">
+					<div class = "bx-list-food-info">
+						<p class = "bx-list-food-day">5</p>
+						<div class = "bx-list-food-day-det">
+							<p class = "bx-list-food-day-str">保质期6天</p>
+							<p class = "bx-list-food-day-pub">生产日期：2013-4-5</p>
 						</div>
 					</div>
-					<div class="bx-list-food-type"></div>
+					<div class = "bx-list-food-type"></div>
+				</div>
+			</li>
+			<li>
+				<div class = "bx-list-one-food bx-fresh-good bx-type-rice">
+					<div class = "bx-list-food-info">
+						<p class = "bx-list-food-day">5</p>
+						<div class = "bx-list-food-day-det">
+							<p class = "bx-list-food-day-str">保质期6天</p>
+							<p class = "bx-list-food-day-pub">生产日期：2013-4-5</p>
+						</div>
+					</div>
+					<div class = "bx-list-food-type"></div>
 				</div>
 			</li>
 		</ul>
@@ -83,7 +97,7 @@
 	<script>
 		var blockToListBtn = $(".bx-list-to-block-btn");
 		blockToListBtn.on("click", function(){
-			$.mobile.changePage("index.html", {transition:"flip", changeHash:false});
+			$.mobile.changePage("index.html", {transition:"flip", changeHash:false, reverse:"true"});
 		});
 	</script>
 </div>
