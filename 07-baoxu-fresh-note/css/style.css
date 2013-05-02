@@ -36,6 +36,12 @@
 	background: url("../img/page-header-bg.png") repeat-x left bottom;
 }
 
+.bx-index-block-header{
+	width: 100%;
+	height: 60px;
+	background: url("../img/page-header-bg.png") repeat-x left top;
+}
+
 .bx-food-add-btn{
 	width: 80px;
 	height: 60px;
@@ -97,13 +103,44 @@
 	overflow: hidden;
 }
 
-.bx-index-block-main ul{
-	width: 300%;
-	margin: 0;
+.bx-index-block-main cite{
+	height: 210px !important;
+	width: 210px !important;
+	background: transparent;
+	display: block;
+	position: relative;
+	margin: -190px 0 0 0;
+	border-radius: 24px;
+}
+
+.bx-index-block-main ul:last-child{
+	margin: 0 auto;
+	text-align: center;
+	width: 480px;
 	padding: 0;
 }
 
-.bx-index-block-main ul li{
+.bx-index-block-main ul:last-child li{
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	display: inline-block;
+	background: #a8a099;
+	margin: 30px 5px;
+}
+
+.bx-index-block-main ul:last-child li.current{
+	background: #4ED6DD;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.bx-index-block-main ul:first-child{
+	width: 300%;
+	margin: 30px 0 0 0;
+	padding: 0;
+}
+
+.bx-index-block-main ul:first-child li{
 	list-style: none;
 	width: 33.3333333333%;
 	float: left;

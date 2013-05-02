@@ -18,103 +18,491 @@
 </head>
 <body>
 <div data-role = "page" class = "bx-page">
-	<!--头部栏-->
-	<div data-role = "header" class = "bx-header">
-		<div class = "ui-btn-left bx-food-add-btn"></div>
-		<h3 class = "bx-logo"></h3>
-		<div class = "ui-btn-right bx-block-to-list-btn"></div>
-	</div>
-	<!--主显示区，块状样式-->
-	<div class = "bx-index-block-main">
-		<ul>
-			<li>
-				<!--一个四块食物的表-->
-				<div class = "ui-grid-a">
-					<!--其中一块-->
-					<div class = "ui-block-a bx-fresh-bad bx-type-coke">
-						<div class = "bx-block-one-food">
-							<div class = "bx-block-one-food-inout">
-								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
-							</div>
-						</div>
-						<div class = "bx-block-one-food-day">
-							<span>1</span>
-						</div>
-						<div class = "bx-block-one-food-banner">
-							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
-						</div>
-					</div>
-
-					<!--其中一块-->
-					<div class = "ui-block-b bx-fresh-normal bx-type-fruit">
-						<div class = "bx-block-one-food">
-							<div class = "bx-block-one-food-inout">
-								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
-							</div>
-						</div>
-						<div class = "bx-block-one-food-day">
-							<span>3</span>
-						</div>
-						<div class = "bx-block-one-food-banner">
-							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
-						</div>
-					</div>
-
-					<!--其中一块-->
-					<div class = "ui-block-a bx-fresh-good bx-type-meat">
-						<div class = "bx-block-one-food">
-							<div class = "bx-block-one-food-inout">
-								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
-							</div>
-						</div>
-						<div class = "bx-block-one-food-day">
-							<span>5</span>
-						</div>
-						<div class = "bx-block-one-food-banner">
-							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
-						</div>
-					</div>
-
-					<!--其中一块-->
-					<div class = "ui-block-b bx-fresh-good bx-type-rice">
-						<div class = "bx-block-one-food">
-							<div class = "bx-block-one-food-inout">
-								<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
-							</div>
-						</div>
-						<div class = "bx-block-one-food-day">
-							<span>5</span>
-						</div>
-						<div class = "bx-block-one-food-banner">
-							<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
-						</div>
-					</div>
+<!--头部栏-->
+<div data-role = "header" class = "bx-header">
+	<div class = "ui-btn-left bx-food-add-btn"></div>
+	<h3 class = "bx-logo"></h3>
+	<div class = "ui-btn-right bx-block-to-list-btn"></div>
+</div>
+<!--主显示区，块状样式-->
+<div class = "bx-index-block-main">
+<ul id = "bx-js-food-block-list" data-now-page = "1">
+<li>
+	<!--一个四块食物的表-->
+	<div class = "ui-grid-a">
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-bad bx-type-greens">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
 				</div>
-			</li>
-			<li>
-				<div class = "ui-grid-a">
-					<div class = "ui-block-a">Block A</div>
-					<div class = "ui-block-b">Block B</div>
-					<div class = "ui-block-a">Block A</div>
-					<div class = "ui-block-b">Block B</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>1</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-b bx-fresh-bad bx-type-fruit">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
 				</div>
-			</li>
-		</ul>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>1</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-bad bx-type-meat">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>2</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-b bx-fresh-normal bx-type-rice">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>3</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
 	</div>
+</li>
 
-	<!--隐藏的A元素，用于预加载数据-->
-	<a href = "index.html" data-prefetch class = "f-dn"></a>
-	<!--在PAGE内部的执行脚本-->
-	<script>
-		var blockToListBtn = $(".bx-block-to-list-btn");
-		blockToListBtn.on("click", function(){
-			$.mobile.changePage("index-list.html", {transition:"flip", changeHash:false});
-		});
+<li>
+	<!--一个四块食物的表-->
+	<div class = "ui-grid-a">
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-normal bx-type-meat">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>3</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
 
-		$(".bx-block-one-food").on("click", function(){
-			$.mobile.changePage("detail.html", {transition:"slide", changeHash:true});
-		});
-	</script>
+		<!--其中一块-->
+		<div class = "ui-block-b bx-fresh-normal bx-type-greens">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>4</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-normal bx-type-fruit">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>4</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-b bx-fresh-good bx-type-coke">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>5</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+	</div>
+</li>
+
+<li>
+	<!--一个四块食物的表-->
+	<div class = "ui-grid-a">
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-good bx-type-rice">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>5</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-b bx-fresh-good bx-type-fruit">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>6</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+		<!--其中一块-->
+		<div class = "ui-block-a bx-fresh-good bx-type-meat">
+			<div class = "bx-block-one-food">
+				<div class = "bx-block-one-food-inout">
+					<div class = "bx-block-one-food-inin"><i class = "bx-food-type-img"></i></div>
+				</div>
+			</div>
+			<div class = "bx-block-one-food-day">
+				<span>6</span>
+			</div>
+			<div class = "bx-block-one-food-banner">
+				<i class = "bx-food-type-text"></i> <i class = "bx-food-status-emoji"></i>
+			</div>
+			<!--透明点击域-->
+			<cite></cite>
+		</div>
+
+	</div>
+</li>
+</ul>
+
+<ul id = "bx-js-food-block-list-nav">
+	<li class = "current"></li>
+	<li></li>
+	<li></li>
+</ul>
+</div>
+
+<!--隐藏的A元素，用于预加载数据-->
+<a href = "index-list.html" data-prefetch class = "f-dn"></a>
+
+<!--在PAGE内部的执行脚本-->
+<script>
+//点击显示样式转换按钮
+$(".bx-block-to-list-btn").on("click", function(){
+	$.mobile.changePage("index-list.html", {transition:"flip", changeHash:false});
+});
+
+//点击每一个食物块
+$("cite").on("click", function(){
+	$.mobile.changePage("detail.html", {transition:"slide", changeHash:true});
+});
+
+
+//触摸过程中的一个变量集
+var TouchOBJ = {
+			startX:0, //触摸开始的X坐标
+			startY:0, //触摸开始的Y坐标
+			startT:0, //触摸开始的时间戳
+			disX:0, //触摸在X轴上的变化值
+			disY:0, //触摸在Y轴上的变化值
+			disT:0, //此次触摸距离开始触摸的时间长度
+			scroll:0, //此次触摸属于上下滚动还是左右拖动，上下为1，左右为-1
+			direcX:0, //触摸在X轴移动的方向，向右为1，向左为-1
+			direcY:0 //触摸在Y轴移动的方向，向下为1，向上为-1
+		},
+
+//触摸设置参数集
+		TouchSET = {
+			criTime:50, //设置临界时间，如果用户触摸屏幕的操作是在这个时间之内的话，元素一次性滑动到位
+			criDistX:100, //设置X轴临界距离，如果用户触摸操作超过这个距离，元素要继续滑动到位
+			criDistY:80 //设置Y轴临界距离，如果用户下拉页面超过这个距离，添加模块要继续显示出来
+		},
+
+//元素变换移动的过程中的参数
+		TransARG = {
+			translation:"",
+			transform:""
+		},
+
+//需要动的对象
+		TheEle = document.getElementById("bx-js-food-block-list"), //目标移动元素
+		EleNum = TheEle.getElementsByTagName("li").length;//包含几页，就是几个li
+
+//处理触摸滑动事件,全局触摸开始事件的代理委派
+EventUtil.addHandler(document, "touchstart", function(event){
+	event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget(event);
+	var event_tag = target.dataset["eventTag"] ? target.dataset["eventTag"] : target.getAttribute("data-event-tag");
+	event["nowPageStr"] = TheEle.dataset["nowPage"] ? TheEle.dataset["nowPage"] : TheEle.getAttribute("data-now-page");
+	event["nowPage"] = parseInt(event["nowPageStr"]);
+
+	switch(event_tag){
+		case "et_test_touch":
+			onTouchStart(event);
+			break;
+		default:
+			onTouchStart(event);
+			break;
+	}
+});
+
+//全局触摸滑动事件的代理委派
+EventUtil.addHandler(document, "touchmove", function(event){
+	event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget(event);
+	var event_tag = target.dataset["eventTag"] ? target.dataset["eventTag"] : target.getAttribute("data-event-tag");
+	event["nowPageStr"] = TheEle.dataset["nowPage"] ? TheEle.dataset["nowPage"] : TheEle.getAttribute("data-now-page");
+	event["nowPage"] = parseInt(event["nowPageStr"]);
+
+	switch(event_tag){
+		case "et_test_touch":
+			onTouchMove(event);
+			break;
+		default :
+			onTouchMove(event);
+			break;
+	}
+});
+
+//全局触摸结束事件的代理委派
+EventUtil.addHandler(document, "touchend", function(event){
+	event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget(event);
+	var event_tag = target.dataset["eventTag"] ? target.dataset["eventTag"] : target.getAttribute("data-event-tag");
+	event["nowPageStr"] = TheEle.dataset["nowPage"] ? TheEle.dataset["nowPage"] : TheEle.getAttribute("data-now-page");
+	event["nowPage"] = parseInt(event["nowPageStr"]);
+
+	switch(event_tag){
+		case "et_test_touch":
+			onTouchEnd(event);
+			break;
+		default :
+			onTouchEnd(event);
+			break;
+	}
+});
+
+
+/*****************************************************************/
+/**                     Touch事件处理模块                         **/
+/*****************************************************************/
+/**
+ * 触摸开始执行的事件
+ * @name onTouchStart
+ * @param {Object} e 传入触摸事件关联的对象
+ */
+function onTouchStart(e){
+	//记录触摸开始的坐标与时间戳
+	TouchOBJ.startX = e["touches"][0].pageX;
+	TouchOBJ.startY = e["touches"][0].pageY;
+	TouchOBJ.startT = Number(new Date());
+	//log
+	console.log("触摸事件开始");
+}
+
+/**
+ * 手指移动的过程中执行的事件
+ * @name onTouchMove
+ * @param {Object} e 传入触摸事件关联的对象
+ */
+function onTouchMove(e){
+	//当次触摸发生时，X轴，Y轴，时间的变化值
+	TouchOBJ.disX = e["touches"][0].pageX - TouchOBJ.startX;
+	TouchOBJ.disY = e["touches"][0].pageY - TouchOBJ.startY;
+	TouchOBJ.disT = Number(new Date()) - TouchOBJ.startT;
+	//判断是上下滚动还是左右拖拽
+	if(!TouchOBJ.scroll){
+		if((TouchOBJ.disX && !TouchOBJ.disY) || (TouchOBJ.disX / TouchOBJ.disY > 2)){
+			TouchOBJ.scroll = -1;
+		}else if((!TouchOBJ.disX && TouchOBJ.disY) || (TouchOBJ.disY / TouchOBJ.disX > 2)){
+			TouchOBJ.scroll = 1;
+		}
+	}
+	//判断左右上下拖拽的方向
+	TouchOBJ.direcX = (TouchOBJ.disX > 0) ? 1 : -1;
+	TouchOBJ.direcY = (TouchOBJ.disY > 0) ? 1 : -1;
+
+	if(TouchOBJ.scroll == -1){
+		//如果是左右拖拽，需要阻止系统默认的滚动事件
+		event.preventDefault();
+		//在此实现跟随手指的功能
+		followFinger(e, 1);
+		//log
+		console.log("Touch Move事件执行中，时间:" + TouchOBJ.disT + " X距离:" + TouchOBJ.disX + " Y距离:" + TouchOBJ.disY);
+	}
+}
+
+/**
+ * 手指离开的时候执行的事件
+ * @name onTouchEnd
+ * @param {Object} e 传入触摸事件关联的对象
+ */
+function onTouchEnd(e){
+	//如果scroll标志位为-1，说明是横向拖拽
+	if(TouchOBJ.scroll == -1){
+		//如果用户的触摸时间小于500毫秒，或者用户拖动的距离已经超过定义的临界距离，直接完成元素的左右滑动
+		if(TouchOBJ.disT < TouchSET.criTime || Math.abs(TouchOBJ.disX) > TouchSET.criDistX){
+			//log
+			console.log("因为时间短，或者距离超过临界值，所以一步移动到位");
+			//在此实现操作到位应该执行的功能
+			finishMove(e);
+			//在此实现食物块移回原位的功能
+			//moveBack(e, 1);
+		}else{
+			//log
+			console.log("因为时间长而且没有移到临界位置，所以移回原位");
+			//在此实现食物块移回原位的功能
+			moveBack(e, 1);
+		}
+	}
+
+	//重置标志位
+	TouchOBJ.scroll = 0;
+	//log
+	console.log("触摸事件结束");
+}
+
+
+/*****************************************************************/
+/**                    元素移动事件处理模块                        **/
+/*****************************************************************/
+/**
+ * 手指在屏幕滑动的过程中让元素跟随手指
+ * @name followFinger
+ * @param {Object} e 传入触摸事件关联的对象
+ * @param {Number} type 跟随手指事件的种类，1-对单个食物块左右滑动的跟随，2-对页面下拉新建的跟随
+ */
+function followFinger(e, type){
+	switch(type){
+		//单个食物块左右滑动的跟随
+		case 1:
+			TheEle.style.webkitTransition = "0s";
+			TheEle.style.webkitTransform = "translate3d(" + ((e.nowPage - 1) * -480 + TouchOBJ.disX) + "px, 0px, 0px)";
+			console.log(e.nowPage);
+			console.log((e.nowPage - 1) * 480 + TouchOBJ.disX);
+			break;
+		default :
+			console.log("调用跟随手指函数的type参数有错误，跟随功能取消！");
+			break;
+	}
+
+}
+
+/**
+ * 元素被释放之后弹回原位
+ * @name moveBack
+ * @param {Object} e 传入触摸事件关联的对象
+ * @param {Number} type 传入触摸事件关联的对象
+ */
+function moveBack(e, type){
+	//被触摸的元素
+	var targetElm = document.getElementById("bx-js-food-block-list");
+	switch(type){
+		//单个食物块左右滑动的跟随
+		case 1:
+			targetElm.style.webkitTransition = "0.3s";
+			targetElm.style.webkitTransform = "translate3d(" + (e.nowPage - 1) * -480 + "px, 0px, 0px)";
+			break;
+		//对页面下拉新建的跟随
+		case 2:
+			console.log("页面移回顶部");
+			break;
+		default :
+			console.log("调用moveBack函数的type参数有错误，跟随功能取消！");
+			break;
+	}
+}
+
+/**
+ * 元素被释放之后弹回原位
+ * @name finishMove
+ * @param {Object} e 传入触摸事件关联的对象
+ */
+function finishMove(e){
+	if(TouchOBJ.direcX == 1){
+		if(e.nowPage == 1){
+			console.log("在第一页向右拉，需要弹回去");
+			moveBack(e, 1);
+		}else{
+			console.log("在非第一页向右拉，完成移动");
+			TheEle.style.webkitTransition = "0.3s";
+			TheEle.style.webkitTransform = "translate3d(" + (e.nowPage - 2) * -480 + "px, 0px, 0px)";
+			TheEle.setAttribute("data-now-page", String(e.nowPage - 1));
+
+			$("ul#bx-js-food-block-list-nav li:eq(" + (e.nowPage - 2) + ")").toggleClass("current");
+			$("ul#bx-js-food-block-list-nav li:eq(" + (e.nowPage - 1) + ")").toggleClass("current");
+		}
+	}
+	if(TouchOBJ.direcX == -1){
+		if(e.nowPage == EleNum){
+			moveBack(e, 1);
+		}else{
+			TheEle.style.webkitTransition = "0.3s";
+			TheEle.style.webkitTransform = "translate3d(" + e.nowPage * -480 + "px, 0px, 0px)";
+			TheEle.setAttribute("data-now-page", e.nowPage + 1);
+
+			$("ul#bx-js-food-block-list-nav li:eq(" + (e.nowPage) + ")").toggleClass("current");
+			$("ul#bx-js-food-block-list-nav li:eq(" + (e.nowPage - 1) + ")").toggleClass("current");
+		}
+	}
+}
+</script>
 </div>
 </body>
 <!--
