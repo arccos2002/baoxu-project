@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8" />
+	<meta name = "viewport" content = "target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name = "apple-mobile-web-app-capable" content = "yes" />
+	<meta name = "apple-mobile-web-app-status-bar-style" content = "black" />
+	<title>Fresh Note</title>
+	<link rel = "stylesheet" href = "../../css/jquery.mobile.css" />
+	<link rel = "stylesheet" href = "../../css/function.css" />
+	<link rel = "stylesheet" href = "../../css/style.css" />
+	<script src = "../../js/jquery.js"></script>
+	<script src = "../../js/function.js"></script>
+	<script src = "../../js/jquery.mobile.js"></script>
+	<!-- My Css -->
+	<style>
+	</style>
+</head>
+<body>
+<div data-role = "page" class = "bx-page">
+	<!--头部栏-->
+	<div data-role = "header" class = "bx-header">
+		<div class = "ui-btn-left bx-back-btn" data-rel = "back" data-direction = "reverse"></div>
+		<h3 class = "bx-logo"></h3>
+	</div>
+	<!--主显示区，块状样式-->
+	<div class = "bx-add-second-main">
+		<div class = "bx-add-edit-info">
+
+			<div class = "bx-add-2nd-type">
+				<img src = "../../img/type-coke.png">
+			</div>
+
+			<div class = "bx-add-edit-name" data-role = "fieldcontain">
+				<label for = "food-name">食物名称:</label> <input type = "text" id = "food-name" size = "10" width = "200">
+			</div>
+			<div class = "bx-add-edit-pubdate" data-role = "fieldcontain">
+				<label for = "food-pubdate">生产时间:</label> <input type = "text" id = "food-pubdate">
+			</div>
+			<div class = "bx-add-edit-qd" data-role = "fieldcontain">
+				<label for = "food-qd">保&nbsp;&nbsp;质&nbsp;&nbsp;期:</label> <input type = "text" id = "food-qd">
+			</div>
+
+			<div class = "bx-add-finish-btn"></div>
+		</div>
+	</div>
+
+	<!--隐藏的A元素，用于预加载数据-->
+	<a href = "index.html" data-prefetch class = "f-dn"></a>
+
+	<!--在PAGE内部的执行脚本-->
+	<script>
+		//后退按钮
+		$(".bx-back-btn").on("click", function(){
+			window.history.back();
+		});
+
+		//完成按钮
+		$(".bx-add-finish-btn").on("click", function(){
+			$.mobile.changePage("index.html", {transition:"slide", changeHash:false});
+		});
+
+	</script>
+</div>
+</body>
+<!--
+Author: Baoxu
+Date:   13-4-22
+Time:   上午9:59
+-->
+</html>

@@ -55,16 +55,26 @@
 			</select> <i>吃完了</i>
 		</div>
 
-		<div class = "bx-detail-del-food"><img src = "../../img/food-del-icon.png">删除</div>
+		<div class = "bx-detail-del-food" data-rel = "dialog"><img src = "../../img/food-del-icon.png">删除</div>
 	</div>
 
 	<!--隐藏的A元素，用于预加载数据-->
 	<a href = "setting.html" data-prefetch class = "f-dn"></a>
+	<a href = "delete.html" data-prefetch data-rel = "dialog" class = "f-dn"></a>
+
 	<!--在PAGE内部的执行脚本-->
 	<script>
+		//点击设置按钮
 		$(".bx-set-btn").on("click", function(){
 			$.mobile.changePage("setting.html", {transition:"slide", changeHash:true});
 		});
+
+		//点击删除按钮
+		$(".bx-detail-del-food").on("click", function(){
+			$.mobile.changePage("delete.html", {transition:"slidedown", changeHash:true, role:"dialog"});
+		});
+
+		//点击返回按钮
 		$(".bx-back-btn").on("click", function(){
 			window.history.back();
 		});

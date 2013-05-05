@@ -96,7 +96,9 @@
 .bx-index-block-main,
 .bx-index-list-main,
 .bx-detail-main,
-.bx-setting-main{
+.bx-setting-main,
+.bx-add-first-main,
+.bx-add-second-main{
 	width: 100%;
 	margin-top: 120px;
 	display: block;
@@ -126,7 +128,7 @@
 	border-radius: 4px;
 	display: inline-block;
 	background: #a8a099;
-	margin: 30px 5px;
+	margin: 80px 5px 20px 5px !important;
 }
 
 .bx-index-block-main ul:last-child li.current{
@@ -136,7 +138,7 @@
 
 .bx-index-block-main ul:first-child{
 	width: 300%;
-	margin: 30px 0 0 0;
+	margin: 60px 0 0 0;
 	padding: 0;
 }
 
@@ -373,7 +375,6 @@
 
 .bx-index-list-main ul li:nth-child(even) .bx-list-food-type{
 	margin: 0 0 0 30px;
-	background-position: 0 -65px;
 }
 
 .bx-type-coke .bx-list-food-type{
@@ -633,10 +634,182 @@
 	font-size: 15px !important;
 	padding: 0 !important;
 	margin-top: -35px !important;
-	height: 0px !important;
+	height: 0 !important;
 }
 
 .bx-setting-switch span{
 	font-size: 15px !important;
 	padding: 0 !important;
+}
+
+/*********************************************/
+/***********   添加页主内容区  *****************/
+/*********************************************/
+.bx-add-choose-type-cont,
+.bx-add-edit-info{
+	width: 400px;
+	height: 450px;
+	margin: 0 0 0 40px;
+	padding: 30px 0 0 5px;
+	background: url("../img/add-main-bg.png") no-repeat center;
+}
+
+.bx-add-choose-type{
+	width: 70px;
+	height: 70px;
+	border: 5px solid #fff;
+	border-radius: 55px;
+	display: block;
+	padding: 15px;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+	background: url("../img/add-type-bottom-bg.png") #E9E9E9 no-repeat bottom;
+}
+
+.bx-add-choose-type img{
+	width: 65px;
+	height: 65px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.bx-add-choose-type-coke{
+	margin: 0 0 0 15px;
+	float: left;
+}
+
+.bx-add-choose-type-fruit{
+	margin: 0 35px 0 0;
+	float: right;
+}
+
+.bx-add-choose-type-greens{
+	clear: both;
+	margin: 0 0 0 140px;
+}
+
+.bx-add-choose-type-meat{
+	margin: 0 0 0 15px;
+	float: left;
+}
+
+.bx-add-choose-type-rice{
+	margin: 0 35px 0 0;
+	float: right;
+}
+
+.bx-add-2nd-type{
+	width: 70px;
+	height: 70px;
+	border: 5px solid #fff;
+	border-radius: 55px;
+	display: block;
+	padding: 15px;
+	margin: 0 0 40px 135px;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+	background: url("../img/add-type-bottom-bg.png") #E9E9E9 no-repeat bottom;
+}
+
+.bx-add-2nd-type img{
+	width: 65px;
+	height: 65px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.bx-add-edit-name,
+.bx-add-edit-pubdate,
+.bx-add-edit-qd{
+	width: 295px;
+	margin-left: 40px;
+}
+
+.bx-add-choose-str{
+	font-family: xiangSu;
+	font-size: 17px;
+	line-height: 20px;
+	display: block;
+	color: #a4a296;
+	margin: 140px 0 0 170px;
+}
+
+.bx-add-edit-info label{
+	font-family: xiangSu;
+	font-size: 20px;
+	line-height: 35px;
+	color: #8d8d8d;
+}
+
+.bx-add-finish-btn{
+	width: 120px;
+	height: 40px;
+	margin: 30px 0 0 130px;
+	background: url("../img/add-finish-btn.png") center no-repeat;
+}
+
+/*********************************************/
+/******************* 删除页 *******************/
+/*********************************************/
+.bx-delete-header{
+	margin: 0 auto;
+	height: 80px;
+	position: absolute;
+	width: 100%;
+	border: none;
+	background: url("../img/page-header-bg.png") repeat-x left bottom;
+}
+
+.bx-delete-header h3{
+	color: #444;
+	font-size: 35px !important;
+	font-family: xiangSu !important;
+	line-height: 50px !important;
+	padding-top: 0 !important;
+	display: block;
+}
+
+.bx-delete-main{
+	width: 100%;
+	margin-top: -20px;
+	padding-top: 60px;
+	display: block;
+	overflow: hidden;
+	background: url("../img/main-bg.png") repeat top center;
+}
+
+.bx-delete-confirm-btn{
+	margin: 0 auto;
+	width: 80%;
+}
+
+.bx-delete-food{
+	width: 70px;
+	height: 70px;
+	border: 5px solid #fff;
+	border-radius: 55px;
+	display: block;
+	padding: 15px;
+	margin: 0 auto 40px auto;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+	background: url("../img/add-type-bottom-bg.png") #E9E9E9 no-repeat bottom;
+}
+
+.bx-delete-food img{
+	width: 65px;
+	height: 65px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.bx-delete-main a{
+	display: block;
+	margin: 20px auto !important;
+	font-family: xiHei;
+	line-height: 30px;
+}
+
+.bx-delete-main .ui-btn-text{
+	font-size: 25px !important;
 }

@@ -164,12 +164,28 @@
 	</div>
 
 	<!--隐藏的A元素，用于预加载数据-->
-	<a href = "index.html" data-prefetch class = "f-dn"></a>
+	<a href = "index.html" data-prefetch class = "f-dn"></a> <a href = "add-1st.html" data-prefetch class = "f-dn"></a>
+	<a href = "detail.html" data-prefetch class = "f-dn"></a>
+
 	<!--在PAGE内部的执行脚本-->
 	<script>
-		var blockToListBtn = $(".bx-list-to-block-btn");
-		blockToListBtn.on("click", function(){
+		//点击转向块状样式的按钮
+		$(".bx-list-to-block-btn").on("click", function(){
 			$.mobile.changePage("index.html", {transition:"flip", changeHash:false, reverse:"true"});
+		});
+
+		//点击添加按钮
+		$(".bx-food-add-btn").on("click", function(){
+			$.mobile.changePage("add-1st.html", {transition:"slide", changeHash:true});
+		});
+
+		//点击每一个食物块进详情页
+		$(".bx-list-food-type").on("click", function(){
+			$.mobile.changePage("detail.html", {transition:"slide", changeHash:true});
+		});
+
+		$(".bx-list-food-info").on("click", function(){
+			$.mobile.changePage("detail.html", {transition:"slide", changeHash:true});
 		});
 	</script>
 </div>
