@@ -106,8 +106,4 @@ CREATE TABLE `user` (
   UNIQUE KEY `mail` (`mail`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1261 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息表';
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1001', '边纯', 'bianchun@corp.netease.com', '92a79a580316dbb0a9ea9a3390866f9a', '1', '18610435256', 'bianchun.jpg', '江湖人称纯纯姐', '0', '2013-04-08', '2013-04-09', '1', '');
-INSERT INTO `user` VALUES ('1000', '陈保需', 'bxchen@corp.netease.com', '202cb962ac59075b964b07152d234b70', '1', '12356789000', 'bxchen.jpg', '好的', '0', '2013-04-09', '2013-04-09', '1', null);
+
